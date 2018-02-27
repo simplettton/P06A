@@ -84,6 +84,9 @@
     [self.MQTTView addTapBlock:^(id obj) {
         [self performSegueWithIdentifier:@"ShowMQTTController" sender:nil];
     }];
+    [self.treatmentRecordView addTapBlock:^(id obj) {
+        [self performSegueWithIdentifier:@"ShowServerRecordController" sender:nil];
+    }];
     
 }
 

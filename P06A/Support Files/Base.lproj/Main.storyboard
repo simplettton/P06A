@@ -457,7 +457,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="&gt;">
-                                            <color key="titleColor" red="0.65057700870000001" green="0.49628585580000001" blue="0.1523624361" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.19889441129999999" green="0.61299383640000005" blue="0.90780276059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="nextPage:" destination="hRE-5X-9Po" eventType="touchUpInside" id="OhY-SR-Uo9"/>
@@ -467,33 +467,33 @@
                                         <rect key="frame" x="163" y="12" width="50" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.65057700872421265" green="0.49628585577011108" blue="0.15236243605613708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.19889441132545471" green="0.61299383640289307" blue="0.9078027606010437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBt-Sh-egh" userLabel="separateLine1">
                                         <rect key="frame" x="159" y="12" width="1" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.65057700870000001" green="0.49628585580000001" blue="0.1523624361" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.19889441129999999" green="0.61299383640000005" blue="0.90780276059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XEh-c1-xzy" userLabel="separateLine2">
                                         <rect key="frame" x="215" y="12" width="1" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.65057700870000001" green="0.49628585580000001" blue="0.1523624361" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.19889441129999999" green="0.61299383640000005" blue="0.90780276059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uag-p7-wiK">
                                         <rect key="frame" x="121" y="12" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="0.65057700870000001" green="0.49628585580000001" blue="0.1523624361" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.19889441129999999" green="0.61299383640000005" blue="0.90780276059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="previousPage:" destination="hRE-5X-9Po" eventType="touchUpInside" id="mjB-K7-vMd"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.99923020601272583" green="0.88117855787277222" blue="0.54130864143371582" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.99916011095046997" green="0.78659564256668091" blue="0.17038050293922424" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.54614502191543579" green="0.78488141298294067" blue="0.95235127210617065" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.19885626435279846" green="0.61300593614578247" blue="0.9043501615524292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="eGt-P6-BVF"/>
                                 </constraints>
@@ -556,6 +556,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRU-Ot-tCE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1349.5999999999999" y="38.23088455772114"/>
+        </scene>
+        <!--Server Record View Controller-->
+        <scene sceneID="tZT-7S-fNv">
+            <objects>
+                <viewController id="R1x-wo-oOy" customClass="ServerRecordViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LNw-1L-rUv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="M7A-ka-vyk"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LH6-3Q-O3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="524" y="-1447"/>
         </scene>
         <!--Guide Bind Device View Controller-->
         <scene sceneID="Nta-Fv-6rQ">
@@ -1331,6 +1346,7 @@
                         <segue destination="I9S-du-EK0" kind="show" identifier="GuideBindDevice" id="py2-HY-2an"/>
                         <segue destination="8uA-dB-Rl6" kind="show" identifier="ShowMQTTController" id="4IK-Uq-ey6"/>
                         <segue destination="KjE-zK-OyW" kind="show" identifier="ShowBondDeviceController" id="KQr-yb-sI2"/>
+                        <segue destination="R1x-wo-oOy" kind="show" identifier="ShowServerRecordController" id="zvz-fS-UGS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k5E-WM-OX5" sceneMemberID="firstResponder"/>

@@ -79,7 +79,7 @@
 
 -(void)initAll{
     self.readBuf = [[NSMutableData alloc]init];
-    self.pageView.layer.borderColor = [UIColor colorWithRed:255.0f/255.0f green:201.0f/255.0f blue:43.0f/255.0f alpha:1].CGColor;
+    self.pageView.layer.borderColor = [UIColor colorWithRed:51.0f/255.0f green:156.0f/255.0f blue:231.0f/255.0f alpha:1].CGColor;
     self.headView.layer.borderColor = [UIColor colorWithRed:224.0f/255.0f green:224.0f/255.0f blue:224.0f/255.0f alpha:1].CGColor;
 //    self.tableView.layer.borderColor = [UIColor colorWithRed:255.0f/255.0f green:201.0f/255.0f blue:43.0f/255.0f alpha:1].CGColor;
     self.pageView.layer.borderWidth = 1.0f;
