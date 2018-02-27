@@ -7,7 +7,25 @@
 		<key>P06A.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0469FEA51FFE0C75002E25C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0469FEBD1FFE0C75002E25C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0469FEC81FFE0C75002E25C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

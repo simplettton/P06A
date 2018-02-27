@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ModeChooseView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvz-Wl-XVj" userLabel="backView">
+                    <rect key="frame" x="64.5" y="199.5" width="246" height="228"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="di4-Oz-8g1">
+                            <rect key="frame" x="22" y="180" width="202" height="30"/>
+                            <color key="backgroundColor" red="0.1988361478" green="0.61676031350000005" blue="0.90434902910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Ylz-Oa-tt3"/>
+                            </constraints>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="cancel:" destination="iN0-l3-epB" eventType="touchUpInside" id="KjI-j6-jm8"/>
+                            </connections>
+                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cEQ-vb-fPb">
+                            <rect key="frame" x="44.5" y="37" width="157" height="114"/>
+                            <subviews>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIb-PN-e9X">
+                                    <rect key="frame" x="0.0" y="0.0" width="157" height="28"/>
+                                    <state key="normal" title="    持续吸引模式" image="keep_grey">
+                                        <color key="titleColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected" image="keep_green">
+                                        <color key="titleColor" red="0.4431372549" green="0.84313725490000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="highlighted" image="keep_green">
+                                        <color key="titleColor" red="0.4431372549" green="0.84313725490000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapOneMode:" destination="iN0-l3-epB" eventType="touchUpInside" id="VGc-kD-f66"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45G-ZE-Yrb">
+                                    <rect key="frame" x="0.0" y="43" width="157" height="28"/>
+                                    <state key="normal" title="    间歇吸引模式" image="interval_grey">
+                                        <color key="titleColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected" image="interval_green">
+                                        <color key="titleColor" red="0.4431372549" green="0.84313725490000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="highlighted" image="interval_green">
+                                        <color key="titleColor" red="0.4431372549" green="0.84313725490000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapOneMode:" destination="iN0-l3-epB" eventType="touchUpInside" id="VP6-CG-LAu"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3M-ad-aTQ">
+                                    <rect key="frame" x="0.0" y="86" width="157" height="28"/>
+                                    <state key="normal" title="    动态吸引模式" image="dynamic_grey">
+                                        <color key="titleColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected" image="dynamic_green">
+                                        <color key="titleColor" red="0.4431372549" green="0.84313725490000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="highlighted" image="dynamic_green">
+                                        <color key="titleColor" red="0.4431372549" green="0.84313725490000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapOneMode:" destination="iN0-l3-epB" eventType="touchUpInside" id="oAx-S6-1Ib"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="di4-Oz-8g1" secondAttribute="trailing" constant="22" id="7He-4D-4vV"/>
+                        <constraint firstAttribute="height" constant="228" id="GZL-di-7qV"/>
+                        <constraint firstItem="cEQ-vb-fPb" firstAttribute="centerX" secondItem="cvz-Wl-XVj" secondAttribute="centerX" id="Mew-wP-JbW"/>
+                        <constraint firstItem="cEQ-vb-fPb" firstAttribute="top" secondItem="cvz-Wl-XVj" secondAttribute="top" constant="37" id="OTv-jE-X39"/>
+                        <constraint firstItem="di4-Oz-8g1" firstAttribute="top" secondItem="cEQ-vb-fPb" secondAttribute="bottom" constant="29" id="RZ3-v8-ZNI"/>
+                        <constraint firstAttribute="width" constant="246" id="RjY-iK-n4A"/>
+                        <constraint firstItem="di4-Oz-8g1" firstAttribute="leading" secondItem="cvz-Wl-XVj" secondAttribute="leading" constant="22" id="d5E-gn-tAj"/>
+                        <constraint firstAttribute="bottom" secondItem="di4-Oz-8g1" secondAttribute="bottom" constant="18" id="wfc-rk-aMK"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="cvz-Wl-XVj" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="V5k-aW-KAY"/>
+                <constraint firstItem="cvz-Wl-XVj" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="-30" id="WoS-T1-NBR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="backgroundView" destination="cvz-Wl-XVj" id="8CC-sJ-KFM"/>
+                <outlet property="cancelButton" destination="di4-Oz-8g1" id="G2G-Bc-Cfi"/>
+            </connections>
+            <point key="canvasLocation" x="48.5" y="59.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dynamic_green" width="28" height="28"/>
+        <image name="dynamic_grey" width="28" height="28"/>
+        <image name="interval_green" width="28" height="28"/>
+        <image name="interval_grey" width="28" height="28"/>
+        <image name="keep_green" width="28" height="28"/>
+        <image name="keep_grey" width="28" height="28"/>
+    </resources>
+</document>
