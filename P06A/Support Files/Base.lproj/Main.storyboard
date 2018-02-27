@@ -457,7 +457,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="&gt;">
-                                            <color key="titleColor" red="0.19889441129999999" green="0.61299383640000005" blue="0.90780276059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.65066391229999998" green="0.49613499639999997" blue="0.32431864739999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="nextPage:" destination="hRE-5X-9Po" eventType="touchUpInside" id="OhY-SR-Uo9"/>
@@ -467,32 +467,32 @@
                                         <rect key="frame" x="163" y="12" width="50" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.19889441132545471" green="0.61299383640289307" blue="0.9078027606010437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.65066391229999998" green="0.49613499639999997" blue="0.32431864739999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBt-Sh-egh" userLabel="separateLine1">
                                         <rect key="frame" x="159" y="12" width="1" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.19889441129999999" green="0.61299383640000005" blue="0.90780276059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.65066391229629517" green="0.49613499641418457" blue="0.32431864738464355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XEh-c1-xzy" userLabel="separateLine2">
                                         <rect key="frame" x="215" y="12" width="1" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.19889441129999999" green="0.61299383640000005" blue="0.90780276059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.65066391229999998" green="0.49613499639999997" blue="0.32431864739999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uag-p7-wiK">
                                         <rect key="frame" x="121" y="12" width="30" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="&lt;">
-                                            <color key="titleColor" red="0.19889441129999999" green="0.61299383640000005" blue="0.90780276059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.65066391229999998" green="0.49613499639999997" blue="0.32431864739999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="previousPage:" destination="hRE-5X-9Po" eventType="touchUpInside" id="mjB-K7-vMd"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.54614502191543579" green="0.78488141298294067" blue="0.95235127210617065" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99923020601272583" green="0.88117855787277222" blue="0.54130864143371582" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.19885626435279846" green="0.61300593614578247" blue="0.9043501615524292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="eGt-P6-BVF"/>
@@ -570,7 +570,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LH6-3Q-O3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="524" y="-1447"/>
+            <point key="canvasLocation" x="524" y="-1473"/>
         </scene>
         <!--Guide Bind Device View Controller-->
         <scene sceneID="Nta-Fv-6rQ">
@@ -639,7 +639,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDZ-XT-9iQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1277.5999999999999" y="-1457.7211394302849"/>
+            <point key="canvasLocation" x="1350" y="-1459"/>
         </scene>
         <!--SearchBLE View Controller-->
         <scene sceneID="gfv-o1-Rzz">
@@ -773,7 +773,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3G-gX-Ogr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="-1436"/>
+            <point key="canvasLocation" x="2634" y="-1458"/>
         </scene>
         <!--Choose Identity View Controller-->
         <scene sceneID="b04-ry-CB8">
@@ -895,7 +895,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EgT-q9-yJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3312.8000000000002" y="-1473.0134932533733"/>
+            <point key="canvasLocation" x="3486" y="-1473"/>
         </scene>
         <!--Communication View Controller-->
         <scene sceneID="OtK-g5-wnn">
@@ -1936,7 +1936,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f0z-In-C0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4092" y="-1473.0134932533733"/>
+            <point key="canvasLocation" x="4190" y="-1460"/>
         </scene>
         <!--个人信息-->
         <scene sceneID="xhO-j0-MLu">
@@ -2271,7 +2271,7 @@
         <image name="wifi" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KQr-yb-sI2"/>
+        <segue reference="T7Z-E0-iNV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
