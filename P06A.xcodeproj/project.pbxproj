@@ -455,6 +455,26 @@
 			path = LeftDrawer;
 			sourceTree = "<group>";
 		};
+		0453055C2046955100BC06BA /* TimeSetCell */ = {
+			isa = PBXGroup;
+			children = (
+				04892F6E202463C500100545 /* TimeSetCell.h */,
+				04892F6F202463C500100545 /* TimeSetCell.m */,
+				04892F70202463C500100545 /* TimeSetCell.xib */,
+			);
+			path = TimeSetCell;
+			sourceTree = "<group>";
+		};
+		0453055D2046957800BC06BA /* TreatmentRecordCell */ = {
+			isa = PBXGroup;
+			children = (
+				04530557204659C500BC06BA /* TreatmentRecordCell.h */,
+				04530558204659C500BC06BA /* TreatmentRecordCell.m */,
+				04530559204659C500BC06BA /* TreatmentRecordCell.xib */,
+			);
+			path = TreatmentRecordCell;
+			sourceTree = "<group>";
+		};
 		0469FE9D1FFE0C75002E25C3 = {
 			isa = PBXGroup;
 			children = (
@@ -531,12 +551,8 @@
 				043CA1902027E93200713A3C /* UIViewController+BackButtonHandler.m */,
 				0451F0D02019CAEB0001A9D4 /* UIImage+ImageWithColor.h */,
 				0451F0CF2019CAEB0001A9D4 /* UIImage+ImageWithColor.m */,
-				04892F6E202463C500100545 /* TimeSetCell.h */,
-				04892F6F202463C500100545 /* TimeSetCell.m */,
-				04892F70202463C500100545 /* TimeSetCell.xib */,
-				04530557204659C500BC06BA /* TreatmentRecordCell.h */,
-				04530558204659C500BC06BA /* TreatmentRecordCell.m */,
-				04530559204659C500BC06BA /* TreatmentRecordCell.xib */,
+				0453055C2046955100BC06BA /* TimeSetCell */,
+				0453055D2046957800BC06BA /* TreatmentRecordCell */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
