@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ServerRecordViewController : UIViewController
+#import <AFNetworking.h>
+#import <AFHTTPSessionManager.h>
+@interface ServerRecordViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @end

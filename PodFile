@@ -4,6 +4,7 @@ target 'P06A' do
    pod 'SVProgressHUD'
    pod 'MBProgressHUD'
    pod 'MMDrawerController'
+   pod 'AFNetworking'
    pod 'MQTTClient'
    pod 'UMengUShare/Social/Sina'
    pod 'UMengUShare/Social/QQ'
