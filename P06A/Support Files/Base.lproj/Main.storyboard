@@ -562,6 +562,43 @@
             </objects>
             <point key="canvasLocation" x="1349.5999999999999" y="38.23088455772114"/>
         </scene>
+        <!--Record Repord View Controller-->
+        <scene sceneID="heg-Xf-OVA">
+            <objects>
+                <viewController id="wWO-BL-0qT" customClass="RecordRepordViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BLM-jQ-AtO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6S4-YO-JbS">
+                                <rect key="frame" x="0.0" y="64" width="375" height="502"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wBX-5h-kK0">
+                                <rect key="frame" x="328" y="574" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="保存">
+                                    <color key="titleColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="save:" destination="wWO-BL-0qT" eventType="touchUpInside" id="I03-nD-1DR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="vLJ-az-rfy"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="6S4-YO-JbS" id="N5A-GZ-wB1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Spp-ke-SE6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1349.5999999999999" y="-2182.7586206896553"/>
+        </scene>
         <!--Server Record View Controller-->
         <scene sceneID="tZT-7S-fNv">
             <objects>
@@ -685,7 +722,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01:40:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-lI-Int">
-                                                    <rect key="frame" x="313" y="6" width="58" height="17"/>
+                                                    <rect key="frame" x="304" y="6" width="67" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -731,11 +768,12 @@
                         <outlet property="lastDateLabel" destination="sY0-57-LGn" id="OdP-Pt-Vrb"/>
                         <outlet property="recordSumLabel" destination="1Ql-TR-s2d" id="MJx-Mh-CHX"/>
                         <outlet property="tableView" destination="tsa-m9-94S" id="yRA-5E-1wX"/>
+                        <segue destination="wWO-BL-0qT" kind="show" identifier="ShowServerReport" id="GkA-lS-Vd2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LH6-3Q-O3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="524" y="-1504.4977511244379"/>
+            <point key="canvasLocation" x="524" y="-1459"/>
         </scene>
         <!--Guide Bind Device View Controller-->
         <scene sceneID="Nta-Fv-6rQ">

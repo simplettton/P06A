@@ -312,6 +312,7 @@ NSString *const MQTTPassWord = @"password";
             //实时治疗信息包
             case 0x91:
                 self.currentPressure = dataByte[3];
+                NSLog(@"currentpress = %ld",(long)self.currentPressure);
                 
                 //图标数据添加 刷新图表
                 [self.array addObject:[NSNumber numberWithUnsignedInteger:self.currentPressure]];

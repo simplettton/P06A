@@ -7,6 +7,7 @@
 //
 
 #import "ServerRecordViewController.h"
+#import "RecordRepordViewController.h"
 #import "NetWorkTool.h"
 #import "TreatmentRecordCell.h"
 #define HTTPServerURLSting @"http://192.168.2.127/yun/fuya/index.php"
@@ -170,7 +171,7 @@
                           NSArray *dataDic = [jsonDict objectForKey:@"body"];
                           
                           for(NSDictionary *dic in dataDic){
-                              accumulateTime += [[dic objectForKey:@"dur"]intValue];
+                              accumulateTime += [[dic objectForKey:@"dur"]intValue]/60;
                               [datas addObject:dic];
                           }
                           dispatch_async(dispatch_get_main_queue(), ^{
@@ -266,6 +267,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self performSegueWithIdentifier:@"ShowServerReport" sender:datas[indexPath.row]];
 }
 
 #pragma mark - privateMethod
@@ -287,7 +289,12 @@
 }
 
 
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"ShowServerReport"]) {
+        RecordRepordViewController *vc = (RecordRepordViewController *)segue.destinationViewController;
+        vc.dic = sender;
+    }
+}
 
 
 @end
