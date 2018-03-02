@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import "UserHomeViewController.h"
+#import "WXApi.h"
 
 //为MMDrawerController框架中
 #import "MMDrawerController.h"
@@ -148,6 +149,7 @@ static NSString * const KFilePath               = @"KFilePath";
         BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
         return result;
     }
+
     return YES;
 }
 

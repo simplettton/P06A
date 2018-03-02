@@ -41,6 +41,10 @@
 }
 
 -(void)initAll{
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]init];
+    backButton.title = @"";
+    self.navigationItem.backBarButtonItem = backButton;
+    
     datas = [[NSMutableArray alloc]initWithCapacity:20];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
