@@ -10,6 +10,9 @@
 
 @implementation UIWebView (ConverToPDF)
 - (NSData *)converToPDF{
+    CGFloat A4PageWidth = 595.2;
+    
+    CGFloat A4PageHeight = 841.8;
     
     UIViewPrintFormatter *fmt = [self viewPrintFormatter];
     
@@ -23,11 +26,11 @@
     
     page.origin.y=0;
     
-    page.size.width=600;
+    page.size.width=A4PageWidth;
     
-    page.size.height=768;
+    page.size.height=A4PageHeight;
     
-    CGRect printable=CGRectInset( page, 50, 50 );
+    CGRect printable=CGRectInset( page, 10, 10 );
     
     [render setValue:[NSValue valueWithCGRect:page] forKey:@"paperRect"];
     

@@ -80,6 +80,9 @@
 		04892F71202463C500100545 /* TimeSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04892F6F202463C500100545 /* TimeSetCell.m */; };
 		04892F72202463C500100545 /* TimeSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04892F70202463C500100545 /* TimeSetCell.xib */; };
 		048E92A22043EBD2009F8532 /* RecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E92A12043EBD2009F8532 /* RecordTableViewCell.m */; };
+		049B57CD204E46EC0072F7A4 /* ReportComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57CC204E46EC0072F7A4 /* ReportComposer.m */; };
+		049B57E2204E91C70072F7A4 /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 049B57E1204E91C70072F7A4 /* report.html */; };
+		049B57E5204E9ACA0072F7A4 /* CustomPrintPageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */; };
 		049ED9BF202079BD006D9A37 /* ChooseIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */; };
 		04DAE84C2009B0A500BF4127 /* BatteryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DAE84B2009B0A500BF4127 /* BatteryView.xib */; };
 		04E1B1DB200C56B3007FC2DB /* LeftDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1B1DA200C56B3007FC2DB /* LeftDrawerViewController.m */; };
@@ -245,6 +248,11 @@
 		04892F70202463C500100545 /* TimeSetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSetCell.xib; sourceTree = "<group>"; };
 		048E92A02043EBD2009F8532 /* RecordTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordTableViewCell.h; sourceTree = "<group>"; };
 		048E92A12043EBD2009F8532 /* RecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewCell.m; sourceTree = "<group>"; };
+		049B57CB204E46EC0072F7A4 /* ReportComposer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportComposer.h; sourceTree = "<group>"; };
+		049B57CC204E46EC0072F7A4 /* ReportComposer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportComposer.m; sourceTree = "<group>"; };
+		049B57E1204E91C70072F7A4 /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
+		049B57E3204E9ACA0072F7A4 /* CustomPrintPageRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPrintPageRenderer.h; sourceTree = "<group>"; };
+		049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPrintPageRenderer.m; sourceTree = "<group>"; };
 		049ED9BD202079BD006D9A37 /* ChooseIdentityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentityViewController.h; sourceTree = "<group>"; };
 		049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseIdentityViewController.m; sourceTree = "<group>"; };
 		04DAE84B2009B0A500BF4127 /* BatteryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BatteryView.xib; sourceTree = "<group>"; };
@@ -319,10 +327,7 @@
 				04349F502028292F001FFEC5 /* BLERecordViewController.m */,
 				045930F2204511A6003F6BDC /* ServerRecordViewController.h */,
 				045930F3204511A6003F6BDC /* ServerRecordViewController.m */,
-				048E92A02043EBD2009F8532 /* RecordTableViewCell.h */,
-				048E92A12043EBD2009F8532 /* RecordTableViewCell.m */,
-				047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */,
-				047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */,
+				049B57CE204E46FA0072F7A4 /* Report */,
 				04118BB81FFE2BD90054BC15 /* UserHomeViewController.h */,
 				04118BB91FFE2BD90054BC15 /* UserHomeViewController.m */,
 				04672BB42005F128007D8410 /* BLECommunicationViewController.h */,
@@ -587,6 +592,22 @@
 			path = "Support Files";
 			sourceTree = "<group>";
 		};
+		049B57CE204E46FA0072F7A4 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				049B57E1204E91C70072F7A4 /* report.html */,
+				048E92A02043EBD2009F8532 /* RecordTableViewCell.h */,
+				048E92A12043EBD2009F8532 /* RecordTableViewCell.m */,
+				047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */,
+				047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */,
+				049B57CB204E46EC0072F7A4 /* ReportComposer.h */,
+				049B57CC204E46EC0072F7A4 /* ReportComposer.m */,
+				049B57E3204E9ACA0072F7A4 /* CustomPrintPageRenderer.h */,
+				049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
 		89898D7476BA94320D070DE4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,6 +747,7 @@
 				0469FEB31FFE0C75002E25C3 /* Assets.xcassets in Resources */,
 				0469FEB11FFE0C75002E25C3 /* Main.storyboard in Resources */,
 				0453055B204659C500BC06BA /* TreatmentRecordCell.xib in Resources */,
+				049B57E2204E91C70072F7A4 /* report.html in Resources */,
 				04892F72202463C500100545 /* TimeSetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -845,6 +867,7 @@
 				043A3908202AD66000835BDD /* AALabels.m in Sources */,
 				043A3918202AD66000835BDD /* AAYAxis.m in Sources */,
 				04150EF82011971C007EAC85 /* GuideBindDeviceViewController.m in Sources */,
+				049B57E5204E9ACA0072F7A4 /* CustomPrintPageRenderer.m in Sources */,
 				04118BB31FFE23860054BC15 /* UpgradeOnlineViewController.m in Sources */,
 				040D1E96200F3A9B0010FF47 /* LoginViewController.m in Sources */,
 				04150EFB2011C9DD007EAC85 /* SearchBLEViewController.m in Sources */,
@@ -865,6 +888,7 @@
 				0453324620293D8E00B63C58 /* MQTTCommunicationViewController.m in Sources */,
 				043A3906202AD66000835BDD /* AADataLabels.m in Sources */,
 				043A3903202AD66000835BDD /* AABar.m in Sources */,
+				049B57CD204E46EC0072F7A4 /* ReportComposer.m in Sources */,
 				043A3901202AD66000835BDD /* AAArea.m in Sources */,
 				043A390A202AD66000835BDD /* AALine.m in Sources */,
 				043A3909202AD66000835BDD /* AALegend.m in Sources */,

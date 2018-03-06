@@ -8,11 +8,13 @@
 
 #import "RecordRepordViewController.h"
 #import "UIWebView+ConverToPDF.h"
+#import "ReportComposer.h"
 
 #import "WXApi.h"
 #import "WXApiObject.h"
 
-@interface RecordRepordViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface RecordRepordViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIWebViewDelegate>
+@property (strong,nonatomic)NSString *HTMLContent;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 - (IBAction)save:(id)sender;
 - (IBAction)uploadPicture:(id)sender;
@@ -36,11 +38,28 @@
     
     
     [self.webView setBackgroundColor:[UIColor clearColor]];
+    self.webView.scalesPageToFit = YES;
     [self.webView setOpaque:NO];
-    [self.webView loadHTMLString:@"<p style=\"text-align:left;\"><br /></p><p style=\"text-align:center;\"><span style=\"font-size:16px;\">便携负压-</span><span style=\"font-size:16px;\">治疗报告 &nbsp; &nbsp;<span style=\"color:#999999;font-size:10px;\">2017-12-08 15</span><span style=\"color:#999999;font-size:10px;\">：</span><span style=\"color:#999999;font-size:10px;\">07</span></span></p><hr /><p><br /></p><p><br /></p>" baseURL:nil];
+    self.webView.delegate = self;
+    
+    ReportComposer *reportComposer = [[ReportComposer alloc]init];
+    NSString *HTMLContent = [reportComposer renderReportWith:self.dic];
+    
+    
+    NSURL *pdfURL = [reportComposer exportHTMLContentToPDF:HTMLContent];
+    NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
+    [self.webView setScalesPageToFit:YES];
+    [self.webView loadRequest:request];
+    
+//    self.HTMLContent = HTMLContent;
+//    [self.webView loadHTMLString:HTMLContent baseURL:nil];
+    
 }
 
 
+- (IBAction)save:(id)sender {
+    [self savePDF];
+}
 //点击保存进行调用上面的方法
 - (void)savePDF
 {
@@ -56,11 +75,8 @@
     NSURL *pdfURL = [NSURL fileURLWithPath:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
     [self.webView setScalesPageToFit:YES];
-    [self.webView loadRequest:request];
-}
 
-- (IBAction)save:(id)sender {
-    [self savePDF];
+    [self.webView loadRequest:request];
 }
 
 - (IBAction)uploadPicture:(id)sender {
@@ -119,10 +135,37 @@
     [WXApi sendReq:req];
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-//    UIImage *result = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//
-//    NSData *imageData = UIImagePNGRepresentation(result);
+    UIImage *result = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+    NSData *imageData = UIImagePNGRepresentation(result);
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.dic];
+    [dic setValue:imageData forKey:@"imageData"];
+    
+    
+    ReportComposer *reportComposer = [[ReportComposer alloc]init];
+    NSString *HTMLContent = [reportComposer renderReportWith:dic];
+    self.HTMLContent = HTMLContent;
+    [self dismissViewControllerAnimated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.webView loadHTMLString:HTMLContent baseURL:nil];
+    });
+
 }
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    if(webView.isLoading){
+        NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
+        BOOL complete = [readyState isEqualToString:@"complete"];
+        if (complete){
+           
+        }
+        return;
+    }
+    NSLog(@"finish");
+//     [self savePDF];
+
+}
+
+#pragma mark - delegate
 
 @end
