@@ -44,16 +44,27 @@
     
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *HTMLContent = [reportComposer renderReportWith:self.dic];
+    [self previewPDFWithHTMLContent:HTMLContent];
     
     
+    
+
+//    NSURL *pdfURL = [reportComposer exportHTMLContentToPDF:HTMLContent];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
+//    [self.webView setScalesPageToFit:YES];
+//    [self.webView loadRequest:request];
+//
+//    self.HTMLContent = HTMLContent;
+//    [self.webView loadHTMLString:HTMLContent baseURL:nil];
+    
+}
+
+-(void)previewPDFWithHTMLContent:(NSString *)HTMLContent{
+    ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSURL *pdfURL = [reportComposer exportHTMLContentToPDF:HTMLContent];
     NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
     [self.webView setScalesPageToFit:YES];
     [self.webView loadRequest:request];
-    
-//    self.HTMLContent = HTMLContent;
-//    [self.webView loadHTMLString:HTMLContent baseURL:nil];
-    
 }
 
 
@@ -63,16 +74,18 @@
 //点击保存进行调用上面的方法
 - (void)savePDF
 {
-    NSData *data = [_webView converToPDF];
-    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
-    BOOL result = [data writeToFile:path atomically:YES];
-    if (result) {
-        NSLog(@"保存成功");
-    }else{
-        NSLog(@"保存失败");
-    }
-    //从本地获取路径进行显示PDF
-    NSURL *pdfURL = [NSURL fileURLWithPath:path];
+    ReportComposer *composer = [[ReportComposer alloc]init];
+    NSURL *pdfURL = [composer exportHTMLContentToPDF:self.HTMLContent];
+//    NSData *data = [_webView converToPDF];
+//    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
+//    BOOL result = [data writeToFile:path atomically:YES];
+//    if (result) {
+//        NSLog(@"保存成功");
+//    }else{
+//        NSLog(@"保存失败");
+//    }
+//    //从本地获取路径进行显示PDF
+//    NSURL *pdfURL = [NSURL fileURLWithPath:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
     [self.webView setScalesPageToFit:YES];
 
@@ -119,6 +132,8 @@
 - (void)share {
     WXFileObject *fileObject = [WXFileObject object];
     fileObject.fileData = [self.webView converToPDF];
+    
+    
     fileObject.fileExtension = @"pdf";
     
     
@@ -145,10 +160,13 @@
     
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *HTMLContent = [reportComposer renderReportWith:dic];
+
     self.HTMLContent = HTMLContent;
     [self dismissViewControllerAnimated:YES completion:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.webView loadHTMLString:HTMLContent baseURL:nil];
+        
+//        [self previewPDFWithHTMLContent:HTMLContent];
     });
 
 }
