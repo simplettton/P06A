@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a31-8y-gL3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a31-8y-gL3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -570,24 +570,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6S4-YO-JbS">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6S4-YO-JbS">
+                                <rect key="frame" x="8" y="72" width="359" height="492"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wBX-5h-kK0">
-                                <rect key="frame" x="328" y="631" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="保存">
-                                    <color key="titleColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="save:" destination="wWO-BL-0qT" eventType="touchUpInside" id="I03-nD-1DR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljH-Ro-qIT">
-                                <rect key="frame" x="228" y="631" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljH-Ro-qIT">
+                                <rect key="frame" x="267" y="585" width="92" height="30"/>
                                 <state key="normal" title="上传治疗照片">
                                     <color key="titleColor" red="0.06911732256" green="0.374253273" blue="0.58759063479999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -597,6 +585,14 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ljH-Ro-qIT" firstAttribute="top" secondItem="6S4-YO-JbS" secondAttribute="bottom" constant="21" id="535-7g-7bM"/>
+                            <constraint firstItem="6S4-YO-JbS" firstAttribute="top" secondItem="vLJ-az-rfy" secondAttribute="top" constant="8" id="A5m-IX-dzK"/>
+                            <constraint firstItem="vLJ-az-rfy" firstAttribute="trailing" secondItem="ljH-Ro-qIT" secondAttribute="trailing" constant="16" id="MdG-Xs-o5G"/>
+                            <constraint firstItem="6S4-YO-JbS" firstAttribute="leading" secondItem="vLJ-az-rfy" secondAttribute="leading" constant="8" id="icd-uD-HSo"/>
+                            <constraint firstItem="ljH-Ro-qIT" firstAttribute="bottom" secondItem="vLJ-az-rfy" secondAttribute="bottom" constant="-8" id="jwC-ZA-4bn"/>
+                            <constraint firstItem="6S4-YO-JbS" firstAttribute="trailing" secondItem="vLJ-az-rfy" secondAttribute="trailing" constant="-8" id="l5Z-4H-TD3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vLJ-az-rfy"/>
                     </view>
                     <toolbarItems/>
@@ -2485,7 +2481,7 @@
         <image name="wifi" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="T7Z-E0-iNV"/>
+        <segue reference="KQr-yb-sI2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

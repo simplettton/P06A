@@ -75,6 +75,7 @@
 
 -(NSString *) exportHTMLContentToPDF:(NSString *)HTMLContent completed:(completeBlock)completion{
     
+    
     CustomPrintPageRenderer *printPageRenderer = [[CustomPrintPageRenderer alloc]init];
     
     UIMarkupTextPrintFormatter *fmt = [[UIMarkupTextPrintFormatter alloc]initWithMarkupText:HTMLContent];
@@ -84,6 +85,7 @@
     NSData *data = [self drawPDFUsingPrintRenderer:printPageRenderer];
     
     NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
+    
     BOOL result = [data writeToFile:path atomically:YES];
     if (result) {
         NSLog(@"保存成功");
@@ -93,8 +95,6 @@
     }else{
         NSLog(@"保存失败");
     }
-//    //从本地获取路径进行显示PDF
-//    NSURL *pdfURL = [NSURL fileURLWithPath:path];
     
     return path;
     

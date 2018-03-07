@@ -15,7 +15,7 @@
     
     CGFloat A4PageHeight = 841.8;
     
-    CGRect pageFrame = CGRectMake(0, 0, A4PageWidth, A4PageWidth);
+    CGRect pageFrame = CGRectMake(0, 0, A4PageWidth, A4PageHeight);
     
      CGRect printable=CGRectInset(pageFrame, 10, 10 );
     

@@ -42,16 +42,21 @@
     [self.webView setOpaque:NO];
     self.webView.delegate = self;
     
+//    self.webView.layer.borderWidth = 1;
+//    self.webView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+//
+    
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *HTMLContent = [reportComposer renderReportWith:self.dic];
     
-    [self previewPDFWithHTMLContent:HTMLContent];
+    
+//    [self previewPDFWithHTMLContent:HTMLContent];
 
 //    [self.webView setScalesPageToFit:YES];
 //    [self.webView loadRequest:request];
 
-//    self.HTMLContent = HTMLContent;
-//    [self.webView loadHTMLString:HTMLContent baseURL:nil];
+    self.HTMLContent = HTMLContent;
+    [self.webView loadHTMLString:HTMLContent baseURL:nil];
     
 }
 
@@ -130,13 +135,15 @@
     
     WXFileObject *fileObject = [WXFileObject object];
     
-//    fileObject.fileData = [self.webView converToPDF];
+    fileObject.fileData = [self.webView converToPDF];
     
-    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
+//    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
+//    
+//    NSLog(@"sharepath = %@",path);
+//    
+//    NSData *fileData = [NSData dataWithContentsOfFile:path];
     
-    NSData *fileData = [NSData dataWithContentsOfFile:path];
-    
-    fileObject.fileData = fileData;
+//    fileObject.fileData = fileData;
     
     fileObject.fileExtension = @"pdf";
     
@@ -176,16 +183,14 @@
 //            [self.webView loadRequest:request];
     }];
 
-//    [self.webView setScalesPageToFit:YES];
+    [self.webView setScalesPageToFit:YES];
 
     [self dismissViewControllerAnimated:YES completion:nil];
-//
     [self.webView loadHTMLString:HTMLContent baseURL:nil];
     
     
-    [self performSelector:@selector(savePDF) withObject:nil afterDelay:0.05];
+//    [self performSelector:@selector(savePDF) withObject:nil afterDelay:0.08];
     
-//    [self savePDF];
     
 }
 

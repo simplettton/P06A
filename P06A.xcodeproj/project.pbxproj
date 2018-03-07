@@ -74,6 +74,7 @@
 		0469FECE1FFE0C75002E25C3 /* P06AUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469FECD1FFE0C75002E25C3 /* P06AUITests.m */; };
 		04769EFC20085C440061E2FA /* ModeChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04769EFB20085C440061E2FA /* ModeChooseView.m */; };
 		04769EFE20085C570061E2FA /* ModeChooseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04769EFD20085C570061E2FA /* ModeChooseView.xib */; };
+		0478C2C8204FCB4A0000135D /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 0478C2C7204FCB4A0000135D /* report.html */; };
 		047D489C2047AB7D00DF7DF1 /* RecordRepordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */; };
 		047D48A12047F30D00DF7DF1 /* UIWebView+ConverToPDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D48A02047F30D00DF7DF1 /* UIWebView+ConverToPDF.m */; };
 		04892F6D202403BB00100545 /* SetTreatmentParameterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04892F6C202403BB00100545 /* SetTreatmentParameterController.m */; };
@@ -81,7 +82,6 @@
 		04892F72202463C500100545 /* TimeSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04892F70202463C500100545 /* TimeSetCell.xib */; };
 		048E92A22043EBD2009F8532 /* RecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E92A12043EBD2009F8532 /* RecordTableViewCell.m */; };
 		049B57CD204E46EC0072F7A4 /* ReportComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57CC204E46EC0072F7A4 /* ReportComposer.m */; };
-		049B57E2204E91C70072F7A4 /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 049B57E1204E91C70072F7A4 /* report.html */; };
 		049B57E5204E9ACA0072F7A4 /* CustomPrintPageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */; };
 		049ED9BF202079BD006D9A37 /* ChooseIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */; };
 		04DAE84C2009B0A500BF4127 /* BatteryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DAE84B2009B0A500BF4127 /* BatteryView.xib */; };
@@ -237,6 +237,7 @@
 		04769EFA20085C440061E2FA /* ModeChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModeChooseView.h; sourceTree = "<group>"; };
 		04769EFB20085C440061E2FA /* ModeChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModeChooseView.m; sourceTree = "<group>"; };
 		04769EFD20085C570061E2FA /* ModeChooseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeChooseView.xib; sourceTree = "<group>"; };
+		0478C2C7204FCB4A0000135D /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
 		047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordRepordViewController.h; sourceTree = "<group>"; };
 		047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordRepordViewController.m; sourceTree = "<group>"; };
 		047D489F2047F30D00DF7DF1 /* UIWebView+ConverToPDF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ConverToPDF.h"; sourceTree = "<group>"; };
@@ -250,7 +251,6 @@
 		048E92A12043EBD2009F8532 /* RecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewCell.m; sourceTree = "<group>"; };
 		049B57CB204E46EC0072F7A4 /* ReportComposer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportComposer.h; sourceTree = "<group>"; };
 		049B57CC204E46EC0072F7A4 /* ReportComposer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportComposer.m; sourceTree = "<group>"; };
-		049B57E1204E91C70072F7A4 /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
 		049B57E3204E9ACA0072F7A4 /* CustomPrintPageRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPrintPageRenderer.h; sourceTree = "<group>"; };
 		049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPrintPageRenderer.m; sourceTree = "<group>"; };
 		049ED9BD202079BD006D9A37 /* ChooseIdentityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentityViewController.h; sourceTree = "<group>"; };
@@ -595,7 +595,7 @@
 		049B57CE204E46FA0072F7A4 /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				049B57E1204E91C70072F7A4 /* report.html */,
+				0478C2C7204FCB4A0000135D /* report.html */,
 				048E92A02043EBD2009F8532 /* RecordTableViewCell.h */,
 				048E92A12043EBD2009F8532 /* RecordTableViewCell.m */,
 				047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */,
@@ -747,7 +747,7 @@
 				0469FEB31FFE0C75002E25C3 /* Assets.xcassets in Resources */,
 				0469FEB11FFE0C75002E25C3 /* Main.storyboard in Resources */,
 				0453055B204659C500BC06BA /* TreatmentRecordCell.xib in Resources */,
-				049B57E2204E91C70072F7A4 /* report.html in Resources */,
+				0478C2C8204FCB4A0000135D /* report.html in Resources */,
 				04892F72202463C500100545 /* TimeSetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
