@@ -42,19 +42,14 @@
     [self.webView setOpaque:NO];
     self.webView.delegate = self;
     
-
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *HTMLContent = [reportComposer renderReportWith:self.dic];
+    
     [self previewPDFWithHTMLContent:HTMLContent];
-    
-    
-    
 
-//    NSURL *pdfURL = [reportComposer exportHTMLContentToPDF:HTMLContent];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
 //    [self.webView setScalesPageToFit:YES];
 //    [self.webView loadRequest:request];
-//
+
 //    self.HTMLContent = HTMLContent;
 //    [self.webView loadHTMLString:HTMLContent baseURL:nil];
     
@@ -62,7 +57,9 @@
 
 -(void)previewPDFWithHTMLContent:(NSString *)HTMLContent{
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
-    NSURL *pdfURL = [reportComposer exportHTMLContentToPDF:HTMLContent];
+    NSString *path = [reportComposer exportHTMLContentToPDF:HTMLContent completed:nil];
+    NSURL *pdfURL = [NSURL fileURLWithPath:path];
+//    NSURL *pdfURL = [reportComposer exportHTMLContentToPDF:HTMLContent];
     NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
     [self.webView setScalesPageToFit:YES];
     [self.webView loadRequest:request];
@@ -75,18 +72,17 @@
 //点击保存进行调用上面的方法
 - (void)savePDF
 {
-    ReportComposer *composer = [[ReportComposer alloc]init];
-    NSURL *pdfURL = [composer exportHTMLContentToPDF:self.HTMLContent];
-//    NSData *data = [_webView converToPDF];
-//    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
-//    BOOL result = [data writeToFile:path atomically:YES];
-//    if (result) {
-//        NSLog(@"保存成功");
-//    }else{
-//        NSLog(@"保存失败");
-//    }
-//    //从本地获取路径进行显示PDF
-//    NSURL *pdfURL = [NSURL fileURLWithPath:path];
+
+    NSData *data = [_webView converToPDF];
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
+    BOOL result = [data writeToFile:path atomically:YES];
+    if (result) {
+        NSLog(@"保存成功");
+    }else{
+        NSLog(@"保存失败");
+    }
+    //从本地获取路径进行显示PDF
+    NSURL *pdfURL = [NSURL fileURLWithPath:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
     [self.webView setScalesPageToFit:YES];
 
@@ -131,12 +127,18 @@
 }
 
 - (void)share {
-    WXFileObject *fileObject = [WXFileObject object];
-    fileObject.fileData = [self.webView converToPDF];
     
+    WXFileObject *fileObject = [WXFileObject object];
+    
+//    fileObject.fileData = [self.webView converToPDF];
+    
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
+    
+    NSData *fileData = [NSData dataWithContentsOfFile:path];
+    
+    fileObject.fileData = fileData;
     
     fileObject.fileExtension = @"pdf";
-    
     
     WXMediaMessage *message = [WXMediaMessage message];
     message.mediaObject = fileObject;
@@ -150,10 +152,12 @@
     
     [WXApi sendReq:req];
 }
+
+#pragma mark - delegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage *result = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
     NSData *imageData = UIImagePNGRepresentation(result);
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.dic];
     [dic setValue:imageData forKey:@"imageData"];
@@ -161,30 +165,28 @@
     
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *HTMLContent = [reportComposer renderReportWith:dic];
-
+    
     self.HTMLContent = HTMLContent;
-    [self dismissViewControllerAnimated:YES completion:nil];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.webView loadHTMLString:HTMLContent baseURL:nil];
+    [reportComposer exportHTMLContentToPDF:HTMLContent completed:^{
         
-//        [self previewPDFWithHTMLContent:HTMLContent];
-    });
+//            NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
+//            NSURL *pdfURL = [NSURL fileURLWithPath:path];
+//            NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
+//            [self.webView setScalesPageToFit:YES];
+//            [self.webView loadRequest:request];
+    }];
 
+//    [self.webView setScalesPageToFit:YES];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+//
+    [self.webView loadHTMLString:HTMLContent baseURL:nil];
+    
+    
+    [self performSelector:@selector(savePDF) withObject:nil afterDelay:0.05];
+    
+//    [self savePDF];
+    
 }
--(void)webViewDidFinishLoad:(UIWebView *)webView{
-    if(webView.isLoading){
-        NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
-        BOOL complete = [readyState isEqualToString:@"complete"];
-        if (complete){
-           
-        }
-        return;
-    }
-    NSLog(@"finish");
-//     [self savePDF];
-
-}
-
-#pragma mark - delegate
 
 @end

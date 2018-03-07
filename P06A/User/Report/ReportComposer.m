@@ -73,7 +73,7 @@
     return HTMLContent;
 }
 
--(NSURL *) exportHTMLContentToPDF:(NSString *)HTMLContent{
+-(NSString *) exportHTMLContentToPDF:(NSString *)HTMLContent completed:(completeBlock)completion{
     
     CustomPrintPageRenderer *printPageRenderer = [[CustomPrintPageRenderer alloc]init];
     
@@ -87,13 +87,16 @@
     BOOL result = [data writeToFile:path atomically:YES];
     if (result) {
         NSLog(@"保存成功");
+        if (completion) {
+            completion();
+        }
     }else{
         NSLog(@"保存失败");
     }
-    //从本地获取路径进行显示PDF
-    NSURL *pdfURL = [NSURL fileURLWithPath:path];
+//    //从本地获取路径进行显示PDF
+//    NSURL *pdfURL = [NSURL fileURLWithPath:path];
     
-    return pdfURL;
+    return path;
     
 }
 

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+typedef void (^completeBlock)(void);
 @interface ReportComposer : NSObject
 -(NSString *)renderReportWith:(NSDictionary *)dic;
--(NSURL *) exportHTMLContentToPDF:(NSString *)HTMLContent;
+-(NSString *) exportHTMLContentToPDF:(NSString *)HTMLContent completed:(completeBlock)completion;
 @end
