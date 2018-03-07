@@ -42,6 +42,7 @@
     [self.webView setOpaque:NO];
     self.webView.delegate = self;
     
+
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *HTMLContent = [reportComposer renderReportWith:self.dic];
     
