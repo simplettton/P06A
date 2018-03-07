@@ -75,6 +75,7 @@
 		04769EFC20085C440061E2FA /* ModeChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04769EFB20085C440061E2FA /* ModeChooseView.m */; };
 		04769EFE20085C570061E2FA /* ModeChooseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04769EFD20085C570061E2FA /* ModeChooseView.xib */; };
 		0478C2C8204FCB4A0000135D /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 0478C2C7204FCB4A0000135D /* report.html */; };
+		0478C2CB204FE6F10000135D /* EditTreatAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */; };
 		047D489C2047AB7D00DF7DF1 /* RecordRepordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */; };
 		047D48A12047F30D00DF7DF1 /* UIWebView+ConverToPDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D48A02047F30D00DF7DF1 /* UIWebView+ConverToPDF.m */; };
 		04892F6D202403BB00100545 /* SetTreatmentParameterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04892F6C202403BB00100545 /* SetTreatmentParameterController.m */; };
@@ -238,6 +239,8 @@
 		04769EFB20085C440061E2FA /* ModeChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModeChooseView.m; sourceTree = "<group>"; };
 		04769EFD20085C570061E2FA /* ModeChooseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeChooseView.xib; sourceTree = "<group>"; };
 		0478C2C7204FCB4A0000135D /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
+		0478C2C9204FE6F00000135D /* EditTreatAreaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditTreatAreaViewController.h; sourceTree = "<group>"; };
+		0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditTreatAreaViewController.m; sourceTree = "<group>"; };
 		047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordRepordViewController.h; sourceTree = "<group>"; };
 		047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordRepordViewController.m; sourceTree = "<group>"; };
 		047D489F2047F30D00DF7DF1 /* UIWebView+ConverToPDF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ConverToPDF.h"; sourceTree = "<group>"; };
@@ -464,6 +467,8 @@
 				0451F0CA2019BF300001A9D4 /* PersonalInfomationViewController.m */,
 				0451F0CD2019C1220001A9D4 /* EditTableViewController.h */,
 				0451F0CC2019C1220001A9D4 /* EditTableViewController.m */,
+				0478C2C9204FE6F00000135D /* EditTreatAreaViewController.h */,
+				0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */,
 			);
 			path = LeftDrawer;
 			sourceTree = "<group>";
@@ -884,6 +889,7 @@
 				045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */,
 				043A3916202AD66000835BDD /* AATooltip.m in Sources */,
 				043A390B202AD66000835BDD /* AAMarker.m in Sources */,
+				0478C2CB204FE6F10000135D /* EditTreatAreaViewController.m in Sources */,
 				04118BB71FFE28A30054BC15 /* AdminHomeViewController.m in Sources */,
 				0453324620293D8E00B63C58 /* MQTTCommunicationViewController.m in Sources */,
 				043A3906202AD66000835BDD /* AADataLabels.m in Sources */,
