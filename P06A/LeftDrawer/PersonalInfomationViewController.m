@@ -156,7 +156,7 @@
     else if(indexPath.section == 1 && indexPath.row == 0){
         [self performSegueWithIdentifier:@"EditTreatArea" sender:nil];
     }
-    else if (( indexPath.section == 0 && indexPath.row != 0)||(indexPath.section == 1)){
+    else if (( indexPath.section == 0 && indexPath.row != 0)||(indexPath.section == 1 && indexPath.row ==1)){
          [self performSegueWithIdentifier:@"EditInfomation" sender:indexPath];
     }
 }

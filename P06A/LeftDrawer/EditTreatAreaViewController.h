@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditTreatAreaViewController : UIViewController
+@interface EditTreatAreaViewController : UITableViewController
 
 @end
