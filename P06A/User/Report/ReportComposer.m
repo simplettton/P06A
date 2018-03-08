@@ -62,7 +62,9 @@
     
     
     //虚拟数据
-    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#TREAT_AREA#" withString:@"手臂"];
+    NSString *treatArea = [dic objectForKey:@"treatArea"];
+    
+    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#TREAT_AREA#" withString:treatArea == nil?@"手臂":treatArea];
     
     HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#NAME#" withString:@"JASPER"];
     

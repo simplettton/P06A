@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditTreatAreaViewController : UITableViewController
-
+@interface EditTreatAreaViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,copy)void(^returnBlock)(NSInteger,NSString *);
+@property (nonatomic,strong)NSString *treatArea;
+@property (nonatomic,assign)NSInteger selectedRow;
 @end

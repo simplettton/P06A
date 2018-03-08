@@ -8,6 +8,7 @@
 
 #import "PersonalInfomationViewController.h"
 #import "EditTableViewController.h"
+#import "EditTreatAreaViewController.h"
 #import "BaseHeader.h"
 @interface PersonalInfomationViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
@@ -28,7 +29,7 @@
     self.tableView.sectionHeaderHeight  = 0;
     self.tableView.sectionFooterHeight = 20;
     self.tableView.contentInset = UIEdgeInsetsMake(20 - 35, 0, 0, 0);
-    keys = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"age",@"phoneNumber",@"address", nil];
+    keys = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"AGE",@"PHONE_NUMBER",@"TREAT_AREA",@"ADDRESS", nil];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     [self setRoundHeadPortrait:self.headImageView];
@@ -154,7 +155,7 @@
         [self presentViewController:alertController animated:YES completion:nil];
     }
     else if(indexPath.section == 1 && indexPath.row == 0){
-        [self performSegueWithIdentifier:@"EditTreatArea" sender:nil];
+        [self performSegueWithIdentifier:@"EditTreatArea" sender:indexPath];
     }
     else if (( indexPath.section == 0 && indexPath.row != 0)||(indexPath.section == 1 && indexPath.row ==1)){
          [self performSegueWithIdentifier:@"EditInfomation" sender:indexPath];
@@ -204,6 +205,28 @@
                 label.text = newValue;
             }
         };
+    }else if ([segue.identifier isEqualToString:@"EditTreatArea"]){
+        EditTreatAreaViewController *vc = (EditTreatAreaViewController *)segue.destinationViewController;
+        NSIndexPath *index = (NSIndexPath *)sender;
+        UITableViewCell *cell = [self.cells objectAtIndex:index.row + index.section *5];
+        
+        UILabel *valueLabel = [cell viewWithTag:2];
+        vc.selectedRow = index.section *5 + index.row;
+        vc.treatArea = valueLabel.text;
+        vc.returnBlock = ^(NSInteger changedRow, NSString *newValue)
+        {
+            UITableViewCell *cell = [self.cells objectAtIndex:changedRow];
+            UIView * valueView = [cell viewWithTag:2];
+            if([valueView isKindOfClass:[UILabel class]])
+            {
+                UILabel *label = (UILabel *)valueView;
+                
+                label.text = newValue;
+            }
+        };
+        
+        
+        
     }
 }
 #pragma mark - private method

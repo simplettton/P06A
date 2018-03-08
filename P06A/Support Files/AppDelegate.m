@@ -159,8 +159,11 @@ static NSString * const KFilePath               = @"KFilePath";
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *centerNavi;
     NSString *centerIndentifierString = [[NSUserDefaults standardUserDefaults]objectForKey:@"Identity"];
+    
+    if (centerIndentifierString) {
+        centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:centerIndentifierString];
+    }
 
-    centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:centerIndentifierString];
     UIViewController *leftViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"menu"];
     //使用MMDrawerController
     self.drawerController = [[MMDrawerController alloc]initWithCenterViewController:centerNavi leftDrawerViewController:leftViewController];

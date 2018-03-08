@@ -32,7 +32,8 @@
     self.title = [NSString stringWithFormat:@"设置%@",self.editKey];
     self.contentTextField.text = self.editValue;
     
-    items = [NSArray arrayWithObjects:@"headPhoto",@"name",@"USER_SEX",@"age",@"phoneNumber",@"address", nil];
+//    items = [NSArray arrayWithObjects:@"headPhoto",@"name",@"USER_SEX",@"age",@"phoneNumber",@"address", nil];
+    items = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"AGE",@"PHONE_NUMBER",@"TREAT_AREA",@"ADDRESS", nil];
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -44,7 +45,8 @@
 {
     return 1;
 }
-- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event
+{
     
     [self.view endEditing:YES];
     

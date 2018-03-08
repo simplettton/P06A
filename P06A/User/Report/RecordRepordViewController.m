@@ -7,6 +7,7 @@
 //
 
 #import "RecordRepordViewController.h"
+#import "EditTreatAreaViewController.h"
 #import "UIWebView+ConverToPDF.h"
 #import "ReportComposer.h"
 
@@ -32,9 +33,13 @@
                                    action:@selector(share)
     ];
     
+    //编辑治疗部位
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTreatArea)];
+    
     
     shareButton.tintColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = shareButton;
+    
+    self.navigationItem.rightBarButtonItems = @[editButton,shareButton];
     
     
     [self.webView setBackgroundColor:[UIColor clearColor]];
@@ -137,16 +142,8 @@
     
     fileObject.fileData = [self.webView converToPDF];
     
-//    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
-//    
-//    NSLog(@"sharepath = %@",path);
-//    
-//    NSData *fileData = [NSData dataWithContentsOfFile:path];
-    
-//    fileObject.fileData = fileData;
-    
     fileObject.fileExtension = @"pdf";
-    
+
     WXMediaMessage *message = [WXMediaMessage message];
     message.mediaObject = fileObject;
     message.title = @"治疗报告.pdf";
@@ -156,8 +153,11 @@
     req.message = message;
     req.scene = WXSceneSession;// 指定发送到会话
     
-    
     [WXApi sendReq:req];
+}
+
+-(void)editTreatArea{
+    [self performSegueWithIdentifier:@"ReportEditTreatArea" sender:nil];
 }
 
 #pragma mark - delegate
@@ -189,9 +189,34 @@
     [self.webView loadHTMLString:HTMLContent baseURL:nil];
     
     
-//    [self performSelector:@selector(savePDF) withObject:nil afterDelay:0.08];
-    
     
 }
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([segue.identifier isEqualToString:@"ReportEditTreatArea"]) {
+        EditTreatAreaViewController *vc = (EditTreatAreaViewController *)segue.destinationViewController;
+        
+        NSString *treatArea = [self.dic objectForKey:@"treatArea"];
+        
+        //默认治疗类型手臂
+        if (treatArea) {
+            vc.treatArea = treatArea;
+        }else{
+            vc.treatArea = @"手部";
+        }
+        
+        
+        vc.returnBlock = ^(NSInteger number, NSString *treatAreaString) {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.dic];
+            [dic setObject:treatAreaString forKey:@"treatArea"];
+            ReportComposer *reportComposer = [[ReportComposer alloc]init];
+            NSString *HTMLContent = [reportComposer renderReportWith:dic];
+            
+            self.HTMLContent = HTMLContent;
+            [self.webView setScalesPageToFit:YES];
+            [self.webView loadHTMLString:HTMLContent baseURL:nil];
+            
+        };
+    }
+}
 @end
