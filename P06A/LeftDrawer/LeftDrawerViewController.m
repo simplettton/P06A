@@ -14,7 +14,7 @@
 
 @interface LeftDrawerViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (strong ,nonatomic)NSArray *functionArray;
 @end
 
 @implementation LeftDrawerViewController
@@ -29,6 +29,7 @@
     self.tableView.scrollEnabled = NO;
     
     [self.headerView.myInformationButton addTarget:self action:@selector(buttonClickListener:) forControlEvents:UIControlEventTouchUpInside];
+    self.functionArray = @[@"",@"我的设备",@"设置",@"",@"",@"联系我们",@"帮助",@"",@"退出登录"];
 }
 
 #pragma mark -- UITableViewDataSource
@@ -56,14 +57,21 @@
     if(!cell){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+
     UILabel *textLabel = [cell viewWithTag:2];
-    if (indexPath.row==8){
-        textLabel.text = @"退出登录";
-        [textLabel setTextColor:UIColorFromHex(0x65B8F3)];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        
+
+    textLabel.text = [self.functionArray objectAtIndex:indexPath.row];
+    
+    if ([textLabel.text isEqualToString:@""]) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
+//    if (indexPath.row==8){
+//        textLabel.text = @"退出登录";
+////        [textLabel setTextColor:UIColorFromHex(0x65B8F3)];
+//        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+//    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
