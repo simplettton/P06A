@@ -87,6 +87,7 @@
 		049ED9BF202079BD006D9A37 /* ChooseIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */; };
 		04DAE84C2009B0A500BF4127 /* BatteryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DAE84B2009B0A500BF4127 /* BatteryView.xib */; };
 		04E1B1DB200C56B3007FC2DB /* LeftDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1B1DA200C56B3007FC2DB /* LeftDrawerViewController.m */; };
+		04ED0EA62052318B00638850 /* MyDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ED0EA52052318B00638850 /* MyDeviceTableViewController.m */; };
 		B950FFB58DAF7D05F342B0A7 /* libPods-P06A.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B91FA2BEDD806EC10A0D366A /* libPods-P06A.a */; };
 /* End PBXBuildFile section */
 
@@ -261,6 +262,8 @@
 		04DAE84B2009B0A500BF4127 /* BatteryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BatteryView.xib; sourceTree = "<group>"; };
 		04E1B1D9200C56B3007FC2DB /* LeftDrawerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftDrawerViewController.h; sourceTree = "<group>"; };
 		04E1B1DA200C56B3007FC2DB /* LeftDrawerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftDrawerViewController.m; sourceTree = "<group>"; };
+		04ED0EA42052318B00638850 /* MyDeviceTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyDeviceTableViewController.h; sourceTree = "<group>"; };
+		04ED0EA52052318B00638850 /* MyDeviceTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyDeviceTableViewController.m; sourceTree = "<group>"; };
 		613985788A67E8DBDCBA9A7C /* Pods-P06A.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P06A.release.xcconfig"; path = "Pods/Target Support Files/Pods-P06A/Pods-P06A.release.xcconfig"; sourceTree = "<group>"; };
 		B91FA2BEDD806EC10A0D366A /* libPods-P06A.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-P06A.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F002325A7AB1683275D2322D /* Pods-P06A.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P06A.debug.xcconfig"; path = "Pods/Target Support Files/Pods-P06A/Pods-P06A.debug.xcconfig"; sourceTree = "<group>"; };
@@ -326,11 +329,11 @@
 		04118BBB1FFE2BDE0054BC15 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				049B57CE204E46FA0072F7A4 /* Report */,
 				04349F4F2028292F001FFEC5 /* BLERecordViewController.h */,
 				04349F502028292F001FFEC5 /* BLERecordViewController.m */,
 				045930F2204511A6003F6BDC /* ServerRecordViewController.h */,
 				045930F3204511A6003F6BDC /* ServerRecordViewController.m */,
-				049B57CE204E46FA0072F7A4 /* Report */,
 				04118BB81FFE2BD90054BC15 /* UserHomeViewController.h */,
 				04118BB91FFE2BD90054BC15 /* UserHomeViewController.m */,
 				04672BB42005F128007D8410 /* BLECommunicationViewController.h */,
@@ -343,6 +346,8 @@
 				04150EF72011971C007EAC85 /* GuideBindDeviceViewController.m */,
 				04150EF92011C9DD007EAC85 /* SearchBLEViewController.h */,
 				04150EFA2011C9DD007EAC85 /* SearchBLEViewController.m */,
+				04ED0EA42052318B00638850 /* MyDeviceTableViewController.h */,
+				04ED0EA52052318B00638850 /* MyDeviceTableViewController.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -850,6 +855,7 @@
 				04892F6D202403BB00100545 /* SetTreatmentParameterController.m in Sources */,
 				04769EFC20085C440061E2FA /* ModeChooseView.m in Sources */,
 				043A38F9202AD66000835BDD /* AAOptionsConstructor.m in Sources */,
+				04ED0EA62052318B00638850 /* MyDeviceTableViewController.m in Sources */,
 				04040DE120034759009D3509 /* Pack.m in Sources */,
 				043A3913202AD66000835BDD /* AAStyle.m in Sources */,
 				043A3900202AD66000835BDD /* AAAnimation.m in Sources */,

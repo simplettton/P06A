@@ -128,10 +128,11 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         if ([userDefault objectForKey:@"MacString"]) {
 
-            label.text = [NSString stringWithFormat:@"BLE-%@",[userDefault objectForKey:@"MacString"]];
+            label.text = [NSString stringWithFormat:@"mac:%@",[userDefault objectForKey:@"MacString"]];
         }else{
-            label.text = [NSString stringWithFormat:@"BLE"];
+            label.text = [NSString stringWithFormat:@"无"];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{      //其他设备
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"OtherDeviceCell"];
@@ -241,5 +242,16 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
     }else {
         return 44.0;
     }
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    if ([userDefault objectForKey:@"MacString"]) {
+        [self performSegueWithIdentifier:@"ShowMyDevice" sender:nil];
+
+    }else{
+        
+    }
+
 }
 @end

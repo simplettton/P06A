@@ -118,6 +118,7 @@
         [SVProgressHUD setMinimumSize:CGSizeZero];
         [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
         [SVProgressHUD showInfoWithStatus:@"下位机无响应"];
+//        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -850,10 +851,18 @@
         [self writeWithCmdid:CMDID_PRESSURE_SET dataString:dataString];
     }];
 }
+- (IBAction)tapRecordButton:(id)sender {
+    if (self.isConnected) {
+    [self performSegueWithIdentifier:@"ShowBLERecord" sender:nil];
+    }
+
+}
 
 
 - (IBAction)start:(id)sender {
-    [self writeWithCmdid:CMDID_POWER_CONTROL dataString:@"0100"];
+    if (self.isConnected) {
+        [self writeWithCmdid:CMDID_POWER_CONTROL dataString:@"0100"];
+    }
 }
 
 

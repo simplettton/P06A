@@ -7,6 +7,7 @@
 //
 
 #import "LeftDrawerViewController.h"
+#import "MyDeviceTableViewController.h"
 #import "UIViewController+MMDrawerController.h"
 #import "LoginViewController.h"
 #import "PersonalInfomationViewController.h"
@@ -29,7 +30,7 @@
     self.tableView.scrollEnabled = NO;
     
     [self.headerView.myInformationButton addTarget:self action:@selector(buttonClickListener:) forControlEvents:UIControlEventTouchUpInside];
-    self.functionArray = @[@"",@"我的设备",@"设置",@"",@"",@"联系我们",@"帮助",@"",@"退出登录"];
+    self.functionArray = @[@"",@"我的设备",@"设置",@"联系我们",@"帮助",@"",@"",@"",@"退出登录"];
 }
 
 #pragma mark -- UITableViewDataSource
@@ -78,6 +79,16 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     __block UIViewController *showVC;
+    NSInteger myDeviceIndex = [self.functionArray indexOfObject:@"我的设备"];
+    if (indexPath.row == myDeviceIndex) {
+        MyDeviceTableViewController *myDeviceVC = (MyDeviceTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"MyDeviceViewController"];
+
+        showVC = myDeviceVC;
+        
+        UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+        
+        [nav pushViewController:showVC animated:YES];
+    }
     if (indexPath.row==8) {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"您确定要退出登录吗？"
                                                                        message:nil
@@ -108,8 +119,8 @@
     }
     if (showVC)
     {
-        UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
-        [nav pushViewController:showVC animated:NO];
+//        UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+//        [nav pushViewController:showVC animated:NO];
         [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished)
          {
              [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
