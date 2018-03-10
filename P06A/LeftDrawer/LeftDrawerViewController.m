@@ -16,6 +16,7 @@
 @interface LeftDrawerViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong ,nonatomic)NSArray *functionArray;
+@property (strong ,nonatomic)NSArray *imageNameArray;
 @end
 
 @implementation LeftDrawerViewController
@@ -31,6 +32,7 @@
     
     [self.headerView.myInformationButton addTarget:self action:@selector(buttonClickListener:) forControlEvents:UIControlEventTouchUpInside];
     self.functionArray = @[@"",@"我的设备",@"设置",@"联系我们",@"帮助",@"",@"",@"",@"退出登录"];
+    self.imageNameArray = @[@"",@"star",@"setting",@"service",@"help",@"",@"",@"",@""];
 }
 
 #pragma mark -- UITableViewDataSource
@@ -61,18 +63,20 @@
 
 
     UILabel *textLabel = [cell viewWithTag:2];
-
+    UIImageView *imageView = [cell viewWithTag:1];
+    imageView.image = [UIImage imageNamed:[self.imageNameArray objectAtIndex:indexPath.row]];
+    
     textLabel.text = [self.functionArray objectAtIndex:indexPath.row];
     
     if ([textLabel.text isEqualToString:@""]) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-//    if (indexPath.row==8){
-//        textLabel.text = @"退出登录";
-////        [textLabel setTextColor:UIColorFromHex(0x65B8F3)];
-//        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-//    }
+    if (indexPath.row==8){
+        textLabel.text = @"退出登录";
+        [textLabel setTextColor:UIColorFromHex(0x65B8F3)];
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
