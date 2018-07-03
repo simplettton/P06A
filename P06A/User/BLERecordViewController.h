@@ -10,7 +10,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "BabyBluetooth.h"
 #import "RecordTableViewCell.h"
-@interface BLERecordViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+@interface BLERecordViewController : UIViewController<UITableViewDelegate,UITableViewDataSource> {
 @public
     BabyBluetooth *baby;
 }

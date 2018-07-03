@@ -39,9 +39,6 @@
     [self initAll];
     NSLog(@"loginViewController-> viewDidLoad");
 
-    
-
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -72,8 +69,7 @@
     self.loginView.layer.cornerRadius = 5;
     self.loginButton.layer.cornerRadius = 5;
     
-//    self.loginBackgroundView.layer.borderColor = [UIColor colorWithRed:20.0/255.0 green:184.0/255.0 blue:182.0/255.0 alpha:1].CGColor;
-        self.loginBackgroundView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    self.loginBackgroundView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     self.loginBackgroundView.layer.borderWidth = 1;
     self.loginBackgroundView.layer.cornerRadius = 5;
     self.identityImageView.layer.cornerRadius = 5;
@@ -105,16 +101,27 @@
     [self.userNameTextField endEditing:YES];
     [self.passwordTextField endEditing:YES];
     
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     UINavigationController *centerNavi;
     if ([self.userNameTextField.text isEqualToString:@"admin"]) {
-        [self saveUserName];
+
+        [userDefault setObject:self.userNameTextField.text forKey:@"USER_NAME"];
+        [userDefault setObject:@"admin" forKey:@"ROLE"];
+        [userDefault setBool:YES forKey:@"IsLogined"];
+        [userDefault synchronize];
         centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"doctor"];
+        
     }else if([self.userNameTextField.text isEqualToString:@"user"]){
-//        [self saveUserName];
+
+        [userDefault setObject:self.userNameTextField.text forKey:@"USER_NAME"];
+        [userDefault setObject:@"user" forKey:@"ROLE"];
+        [userDefault setBool:YES forKey:@"IsLogined"];
+        [userDefault synchronize];
         centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];
+
     }
 
     //切换到另一个账户
@@ -150,11 +157,6 @@
     
 }
 
--(void)saveUserName {
-    [[NSUserDefaults standardUserDefaults]setObject:self.userNameTextField.text forKey:@"USER_NAME"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-}
-
 - (IBAction)loginWithSina:(id)sender
 {
 
@@ -168,7 +170,6 @@
 - (IBAction)loginWithWeChat:(id)sender
 {
     [self getAuthWithUserInfoFromWechat];
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [SVProgressHUD showWithStatus:@"正在登录中..."];
 
 }
@@ -204,7 +205,6 @@
             [SVProgressHUD showSuccessWithStatus:string];
             
             
-            
             //保存第三方信息
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
@@ -216,11 +216,12 @@
             [userDefaults setObject:imageData forKey:@"USER_ICON"];
             [userDefaults setObject:resp.name forKey:@"USER_NAME"];
             [userDefaults setObject:resp.unionGender forKey:@"USER_SEX"];
+            [userDefaults setObject:@"user" forKey:@"ROLE"];
             [userDefaults synchronize];
             
             UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             UINavigationController *centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];
-                
+            [userDefaults setBool:YES forKey:@"IsLogined"];
             //初始化drawercontroller
 
 

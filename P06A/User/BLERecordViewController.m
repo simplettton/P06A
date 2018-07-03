@@ -39,6 +39,7 @@
     self.title = @"治疗记录";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.tableHeaderView = [[UIView alloc]init];
     self.tableView.tableFooterView = [[UIView alloc]init];
     [self initAll];
     
@@ -79,10 +80,7 @@
 
 -(void)initAll{
     self.readBuf = [[NSMutableData alloc]init];
-//    self.pageView.layer.borderColor = [UIColor colorWithRed:255.0f/255.0f green:201.0f/255.0f blue:43.0f/255.0f alpha:1].CGColor;
     self.headView.layer.borderColor = [UIColor colorWithRed:224.0f/255.0f green:224.0f/255.0f blue:224.0f/255.0f alpha:1].CGColor;
-//    self.tableView.layer.borderColor = [UIColor colorWithRed:255.0f/255.0f green:201.0f/255.0f blue:43.0f/255.0f alpha:1].CGColor;
-//    self.pageView.layer.borderWidth = 1.0f;
     self.headView.layer.borderWidth = 1.0f;
     currentPage = 0;
 }
@@ -265,8 +263,6 @@
     datas = [[NSMutableArray alloc]initWithCapacity:20];
     NSString *dataString = [NSString stringWithFormat:currentPage< 0x0f ? @"0%lx" :@"%lx",(long)currentPage];
     [self writeWithCmdid:CMDID_PAGE_RECORD dataString:dataString];
-
-    
 }
 
 #pragma mark - privite

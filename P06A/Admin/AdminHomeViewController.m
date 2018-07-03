@@ -33,6 +33,7 @@
     
     self.buttomConstraint.constant = self.view.bounds.size.height / 667.0 * 133;
 }
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;

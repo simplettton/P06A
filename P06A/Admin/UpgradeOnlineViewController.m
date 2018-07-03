@@ -16,10 +16,9 @@
 #import "Pack.h"
 #import "Unpack.h"
 
+#import "NetWorkTool.h"
 
 #define FILEPATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
-
-
 #define SERVICE_UUID            @"00001000-0000-1000-8000-00805f9b34fb"
 #define TX_CHARACTERISTIC_UUID  @"00001001-0000-1000-8000-00805f9b34fb"
 #define RX_CHARACTERISTIC_UUID  @"00001002-0000-1000-8000-00805f9b34fb"
@@ -57,7 +56,9 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *fileNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fileLengthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fileUpdateTimeLabel;
 @property (weak, nonatomic) IBOutlet UIView *fileView;
+@property (weak, nonatomic) IBOutlet UIView *noFileView;
 
 
 @property (nonatomic, strong) NSString *documentPath;
@@ -102,10 +103,9 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     [self babyDelegate];
     
     [self setUpRefresh];
-    [self configFileView];
     if (!self.binData)
     {
-        self.fileView.hidden = YES;
+        self.noFileView.hidden = NO;
     }
     self.sendTimes = 0;
     self.beginByte = 0;
@@ -125,12 +125,16 @@ typedef NS_ENUM(NSInteger,KCmdids) {
             [[NSFileManager defaultManager] fileExistsAtPath:[FILEPATH stringByAppendingPathComponent:fileName] isDirectory:&isDirectory];
             if (!isDirectory)
             {
+                NSError *error = nil;
+                NSDictionary *fileAttrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[FILEPATH stringByAppendingPathComponent:fileName] error:&error];
+                NSDate *fileModifiedDate = [fileAttrs objectForKey:NSFileModificationDate];
+                
                 NSLog(@"File path is: %@", self.documentPath);
                 NSData * resultdata = [[NSData alloc] initWithContentsOfFile:self.documentPath];
                 self.binData = resultdata;
-                self.fileView.hidden = NO;
+                self.noFileView.hidden = YES;
                 
-                [self configFileView];
+                [self configFileViewWithDate:fileModifiedDate];
             }
         }
     }
@@ -176,9 +180,13 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 }
 
 
--(void)configFileView {
+-(void)configFileViewWithDate:(NSDate *)date {
+    
     self.fileNameLabel.text = [NSString stringWithFormat:@"%@",(self.fileName!=nil)?self.fileName:@"App.bin"];
+    NSString *size = [self transformedValue:[NSNumber numberWithLong:[self.binData length]]];
+    self.fileLengthLabel.text = self.binData?size:@"0B";
     self.fileLengthLabel.text = [NSString stringWithFormat:@"%luk",(unsigned long)(self.binData?[self.binData length]/1024:0)];
+    self.fileUpdateTimeLabel.text = [self stringFromTimeIntervalString:[NSString stringWithFormat:@"%f",[date timeIntervalSince1970]] dateFormat:@"yyyy-MM-dd HH:mm:ss"];
 }
 
 
@@ -186,14 +194,14 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 - (void)babyDelegate {
     __weak typeof(self) weakSelf = self;
     [baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
-        if (central.state == CBManagerStatePoweredOn) {
+        if (central.state == CBCentralManagerStatePoweredOn) {
             weakSelf.HUD = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
             weakSelf.HUD.label.text = @"扫描设备中";
             // 隐藏时候从父控件中移除
             weakSelf.HUD.removeFromSuperViewOnHide = YES;
             [weakSelf.HUD showAnimated:YES];
             
-        }else if(central.state == CBManagerStatePoweredOff) {
+        }else if(central.state == CBCentralManagerStatePoweredOff) {
             [SVProgressHUD showInfoWithStatus:@"请打开蓝牙以连接设备"];
             [SVProgressHUD dismissWithDelay:1.5];
             
@@ -276,24 +284,25 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     NSData * resultdata = [[NSData alloc] initWithContentsOfFile:self.documentPath];
     self.binData = resultdata;
     self.fileView.hidden = NO;
+    self.noFileView.hidden = YES;
     
     //显示状态
     self.fileName = notification.userInfo[kFileName];
     NSString *statusString = [NSString stringWithFormat:@"成功打开文件%@",self.fileName];
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     
-    [self configFileView];
+    [self configFileViewWithDate:[NSDate date]];
     [SVProgressHUD showSuccessWithStatus:statusString];
     
 }
 
-
 #pragma mark - receiveData
 - (void)setNotify:(CBCharacteristic *)characteristic {
     __weak typeof(self)weakSelf = self;
+    __weak typeof(baby)weakBaby = baby;
     [weakSelf.peripheral setNotifyValue:YES forCharacteristic:characteristic];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [baby notify:weakSelf.peripheral
+        [weakBaby notify:weakSelf.peripheral
       characteristic:characteristic
                block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
                    NSLog(@"----------------------------------------------");
@@ -514,7 +523,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         else  {     addressLabel.text = mac;                                }
     
     nameLabel.text = [NSString stringWithFormat:@"%@",peripheralName];
-    RSSILabel.text = [NSString stringWithFormat:@"RSSI:%@",RSSI];
+    RSSILabel.text = [NSString stringWithFormat:@"%@",RSSI];
 
 
     return cell;
@@ -595,6 +604,22 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 }
 
 
+#pragma mark -downLoad
+
+- (IBAction)downLoad:(id)sender {
+    [[NetWorkTool sharedNetWorkTool]DownLoadFile:@"http://api.lifotronic.com:3086/Api/AppendVM/DownloadFile?key=p06aupdate" params:nil success:^(HttpResponse *responseObject) {
+        
+        NSString *tempFilePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"app.bin"];
+        self.fileName = @"app.bin";
+        self.binData = [[NSData alloc] initWithContentsOfFile:tempFilePath];
+        self.noFileView.hidden = YES;
+        [self configFileViewWithDate:[NSDate date]];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark - upgrate
 
 - (void)upgrate {
@@ -633,6 +658,22 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 }
 
 #pragma mark - Private Method
+//fize size transform
+- (id)transformedValue:(id)value
+{
+    
+    double convertedValue = [value doubleValue];
+    int multiplyFactor = 0;
+    
+    NSArray *tokens = [NSArray arrayWithObjects:@"bytes",@"KB",@"MB",@"GB",@"TB",@"PB", @"EB", @"ZB", @"YB",nil];
+    
+    while (convertedValue > 1024) {
+        convertedValue /= 1024;
+        multiplyFactor++;
+    }
+    
+    return [NSString stringWithFormat:@"%4.2f %@",convertedValue, [tokens objectAtIndex:multiplyFactor]];
+}
 -(uint32_t)getCRC32WithData:(NSData *)pdata
 {
     NSLog(@"length = %lu",(unsigned long)[pdata length]);
@@ -701,6 +742,23 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         [self.HUD hideAnimated:YES afterDelay:1.5];
     }
 }
+//时间戳字符串转化为日期或时间
+- (NSString *)stringFromTimeIntervalString:(NSString *)timeString dateFormat:(NSString*)dateFormat
+{
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone: [NSTimeZone timeZoneWithName:@"Asia/Beijing"]];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:dateFormat];
+    
+    // 毫秒值转化为秒
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]];
+    NSString* dateString = [formatter stringFromDate:date];
+    
+    return dateString;
+}
+
 -(void)pushNotification {
     
     // 1.创建通知内容

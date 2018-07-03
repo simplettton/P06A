@@ -11,6 +11,7 @@
 #import "UIViewController+MMDrawerController.h"
 #import "LoginViewController.h"
 #import "PersonalInfomationViewController.h"
+#import "ContactUSTableViewController.h"
 #import "BaseHeader.h"
 
 @interface LeftDrawerViewController ()
@@ -55,7 +56,7 @@
     }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     if(!cell){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
@@ -84,6 +85,7 @@
     UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     __block UIViewController *showVC;
     NSInteger myDeviceIndex = [self.functionArray indexOfObject:@"我的设备"];
+    NSInteger contactUSIndex = [self.functionArray indexOfObject:@"联系我们"];
     if (indexPath.row == myDeviceIndex) {
         MyDeviceTableViewController *myDeviceVC = (MyDeviceTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"MyDeviceViewController"];
 
@@ -92,15 +94,24 @@
         UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
         
         [nav pushViewController:showVC animated:YES];
+    }else if (indexPath.row == contactUSIndex){
+        ContactUSTableViewController *contactUSVC = (ContactUSTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"ContactUSTableViewController"];
+        showVC = contactUSVC;
+        UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+        
+        [nav pushViewController:showVC animated:YES];
     }
+
     if (indexPath.row==8) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"您确定要退出登录吗？"
-                                                                       message:nil
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:@"退出后不会删除任何历史数据，下次登录依然可以使用本账号。"
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction* logoutAction = [UIAlertAction actionWithTitle:@"立即退出"
                                                                style:UIAlertActionStyleDestructive
                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                                 
+                                                                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsLogined"];
                                                                  LoginViewController *loginVC = (LoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"LoginViewController"];
                                                                  showVC = loginVC;
                                                                  

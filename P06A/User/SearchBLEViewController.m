@@ -32,8 +32,7 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"设备绑定";
-    
-    
+
     peripheralDataArray = [[NSMutableArray alloc]init];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
@@ -56,21 +55,6 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
 #pragma mark - babyDelegate
 -(void)babyDelegate {
     __weak typeof(self) weakSelf = self;
-    [baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
-        if (central.state == CBManagerStatePoweredOff) {
-            if (weakSelf.view) {
-                weakSelf.HUD = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                weakSelf.HUD.mode = MBProgressHUDModeText;
-                weakSelf.HUD.label.text = @"该设备尚未打开蓝牙,请在设置中打开";
-                [weakSelf.HUD showAnimated:YES];
-            }
-        }else if(central.state == CBManagerStatePoweredOn) {
-            if(weakSelf.HUD){
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-            }
-
-        }
-    }];
     
     [baby setBlockOnDiscoverToPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         [weakSelf insertTableView:peripheral advertisementData:advertisementData RSSI:RSSI];
@@ -100,6 +84,8 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
         [item setValue:peripheral forKey:@"peripheral"];
         [item setValue:RSSI forKey:@"RSSI"];
         [item setValue:advertisementData forKey:@"advertisementData"];
+        NSLog(@"peripheral = %@",peripheral.name);
+        NSLog(@"advertisementData = %@",advertisementData);
         [peripheralDataArray addObject:item];
         
         [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -128,11 +114,12 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         if ([userDefault objectForKey:@"MacString"]) {
 
-            label.text = [NSString stringWithFormat:@"mac:%@",[userDefault objectForKey:@"MacString"]];
+            label.text = [NSString stringWithFormat:@"蓝牙地址：%@",[userDefault objectForKey:@"MacString"]];
         }else{
             label.text = [NSString stringWithFormat:@"无"];
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle
+        = UITableViewCellSelectionStyleNone;
         return cell;
     }else{      //其他设备
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"OtherDeviceCell"];
@@ -191,7 +178,7 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
         CBPeripheral *peripheral = [item objectForKey:@"peripheral"];
         NSDictionary *advertisementData = [item objectForKey:@"advertisementData"];
         NSData *data = (NSData *)[advertisementData objectForKey:@"kCBAdvDataManufacturerData"];
-        if ( !data) {
+        if (!data) {
             self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             self.HUD.mode = MBProgressHUDModeText;
             self.HUD.label.text = @"无法获取该设备的mac地址";

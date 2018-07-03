@@ -330,11 +330,12 @@ NSString *const MQTTPassWord = @"password";
                 Byte alertIndex = dataByte[3];
                 
                 switch (alertIndex) {
-                    case 0x00:  alertMessege = @"设备废液瓶满";  break;
-                    case 0x01:  alertMessege = @"设备压力过高";  break;
+                    case 0x00:  alertMessege = @"无异常报警";    break;
+                    case 0x01:  alertMessege = @"设备废液瓶满";  break;
                     case 0x02:  alertMessege = @"设备压力过低";  break;
-                    case 0x03:  alertMessege = @"设备使用到期";  break;
+                    case 0x03:  alertMessege = @"设备压力过高";  break;
                     case 0x04:  alertMessege = @"设备电量异常";  break;
+                    case 0x05:  alertMessege = @"设备使用到期";  break;
                     default:
                         break;
                 }

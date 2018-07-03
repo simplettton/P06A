@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '4737946814BD6F2426EBEE095E12EEC7'
-               BlueprintName = 'MQTTClient'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libMQTTClient.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "86D3C4D1E551E7CD0674F4CAB5859C11"
+               BlueprintName = "MQTTClient"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libMQTTClient.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

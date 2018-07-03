@@ -236,7 +236,7 @@ typedef NS_ENUM(NSInteger,KCmdids)
         Byte cmdid = bytes[0];
         Byte dataByte = bytes[1];
         
-        NSString *dataString = [NSString stringWithFormat:@"%d",dataByte];
+//        NSString *dataString = [NSString stringWithFormat:@"%d",dataByte];
         
         //命令数值对应keys中索引是-7的关系
         switch (cmdid) {

@@ -11,6 +11,7 @@
 #import "UIViewController+MMDrawerController.h"
 #import "UIView+Tap.h"
 #import "LeftDrawerViewController.h"
+#import "AppDelegate.h"
 
 @interface UserHomeViewController ()
 @property (weak, nonatomic) IBOutlet UIView *BLEView;
@@ -70,13 +71,19 @@
     //蓝牙连接断开
     BabyBluetooth *baby = [BabyBluetooth shareBabyBluetooth];
     [baby cancelAllPeripheralsConnection];
+    [baby cancelScan];
     [SVProgressHUD dismiss];
     
 }
 
 -(void)addTapToViews {
     [self.BLEView addTapBlock:^(id obj) {
-        [self performSegueWithIdentifier:@"ShowBLEController" sender:nil];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (appDelegate.isBLEPoweredOff) {
+            [SVProgressHUD showErrorWithStatus:@"未打开蓝牙无法连接设备"];
+        }else{
+            [self performSegueWithIdentifier:@"ShowBLEController" sender:nil];
+        }
     }];
     [self.bindDeviceView addTapBlock:^(id obj) {
         [self performSegueWithIdentifier:@"ShowBondDeviceController" sender:nil];
@@ -86,6 +93,9 @@
     }];
     [self.treatmentRecordView addTapBlock:^(id obj) {
         [self performSegueWithIdentifier:@"ShowServerRecordController" sender:nil];
+    }];
+    [self.moreView addTapBlock:^(id obj) {
+        [self performSegueWithIdentifier:@"ShowMap" sender:nil];
     }];
     
 }

@@ -7,6 +7,7 @@
 //
 
 #import "BLECommunicationViewController.h"
+#import "AppDelegate.h"
 
 @interface BLECommunicationViewController ()<CALayerDelegate>{
     BabyBluetooth *baby;
@@ -69,32 +70,30 @@
     //检测有没有绑定蓝牙设备
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (![userDefaults objectForKey:@"MacString"]) {
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
-                                                                               message:@"当前没有配对设备，请前往设置"
-                                                                        preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
+                                                                       message:@"当前没有配对设备，请前往设置"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
         
-                UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault
-                                                                      handler:^(UIAlertAction * _Nonnull action) {
-
-                                                                          [self.navigationController popToRootViewControllerAnimated:YES];
-                                                                      }];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                                  
+                                                                  [self.navigationController popToRootViewControllerAnimated:YES];
+                                                              }];
         
-                [alert addAction:cancelAction];
-                [alert addAction:defaultAction];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self presentViewController:alert animated:YES completion:nil];
-                });
+        [alert addAction:cancelAction];
+        [alert addAction:defaultAction];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:alert animated:YES completion:nil];
+        });
     }else{
         //配置svprogressHUD
-        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-        [SVProgressHUD setMinimumSize:CGSizeMake(200, 100)];
-        [SVProgressHUD setCornerRadius:5];
-        [SVProgressHUD showWithStatus:@"Connecting"];
+        [SVProgressHUD showWithStatus:@"正在连接设备..."];
         [self performSelector:@selector(handleConnectTimeOut) withObject:nil afterDelay:5];
     }
     
     [self configureButtonUI];
+    
     
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
@@ -107,10 +106,7 @@
     }
     //创建数据缓存区
     self.readBuf = [[NSMutableData alloc] init];
-    
-}
-- (IBAction)test:(id)sender {
-    [self askForDuration];
+  
 }
 
 -(void)handleConnectTimeOut{
@@ -118,38 +114,44 @@
         [SVProgressHUD setMinimumSize:CGSizeZero];
         [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
         [SVProgressHUD showInfoWithStatus:@"下位机无响应"];
-//        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    
     [self addObserver:self
-               forKeyPath:@"peripheral"
-                  options:NSKeyValueObservingOptionNew
-                  context:nil];
+           forKeyPath:@"peripheral"
+              options:NSKeyValueObservingOptionNew
+              context:nil];
     [self addObserver:self
            forKeyPath:@"sendCharacteristic"
               options:NSKeyValueObservingOptionNew
               context:nil];
-    if (self.sendCharacteristic) {
-        [self askForDeviceState];
-    }
-    if (self.receiveCharacteristic) {
-
-        [self setNotify:self.receiveCharacteristic];
-
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleBLEPowerOff) name:@"BLEPoweredOffNotification" object:nil];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.isBLEPoweredOff) {
+        [self handleBLEPowerOff];
+    }else{
+        if (self.sendCharacteristic) {
+            [self askForDeviceState];
+        }
+        if (self.receiveCharacteristic) {
+            [self setNotify:self.receiveCharacteristic];
+        }
     }
 }
-
+-(void)handleBLEPowerOff{
+    [SVProgressHUD showErrorWithStatus:@"蓝牙未打开无法连接设备"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
-//    [baby cancelAllPeripheralsConnection];
     [self removeObserver:self forKeyPath:@"peripheral" context:nil];
     [self removeObserver:self forKeyPath:@"sendCharacteristic" context:nil];
     [self stopTimer];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"BLEPoweredOffNotification" object:nil];
     
 }
 
@@ -357,25 +359,26 @@
 - (void)babyDelegate {
     __weak typeof(self) weakSelf = self;
     __weak typeof(baby) weakBaby = baby;
-    [baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
-        if (central.state == CBManagerStatePoweredOn) {
-            if (weakSelf.HUD) {
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-            }
-            weakSelf.blueToothPowerOn = YES;
-            weakBaby.scanForPeripherals().begin();
-            [weakSelf performSelector:@selector(connectPeripheral) withObject:nil afterDelay:1.0];
-
-        }else if(central.state == CBManagerStatePoweredOff) {
-            if (weakSelf.view) {
-                weakSelf.blueToothPowerOn = NO;
+//    [baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
+//        if (central.state == CBCentralManagerStatePoweredOn) {
+//            if (weakSelf.HUD) {
+//                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+//            }
+//            weakSelf.blueToothPowerOn = YES;
+//            weakBaby.scanForPeripherals().begin();
+//            [weakSelf performSelector:@selector(connectPeripheral) withObject:nil afterDelay:1.0];
+//
+//        }else if(central.state == CBCentralManagerStatePoweredOff) {
+//            if (weakSelf.view) {
+//                weakSelf.blueToothPowerOn = NO;
 //                weakSelf.HUD = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
 //                weakSelf.HUD.mode = MBProgressHUDModeText;
 //                weakSelf.HUD.label.text = @"设备尚未打开蓝牙,请在设置中打开";
 //                [weakSelf.HUD showAnimated:YES];
-            }
-        }
-    }];
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
+//            }
+//        }
+//    }];
     
     [baby setBlockOnDiscoverToPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
 
@@ -569,12 +572,12 @@
 
                 
                 //治疗经过时间
-                int hour = startTime / 3600;
-                int min = startTime / 60 % 60;
-                int second = startTime % 60;
-                NSString *hourString = [NSString stringWithFormat:hour>9?@"%d":@"0%d",hour];
-                NSString *minString = [NSString stringWithFormat:min>9?@"%d":@"0%d",min];
-                NSString *secondString = [NSString stringWithFormat:second>9?@"%d":@"0%d",second];
+                long hour = startTime / 3600;
+                long min = startTime / 60 % 60;
+//                long second = startTime % 60;
+                NSString *hourString = [NSString stringWithFormat:hour>9?@"%ld":@"0%ld",hour];
+                NSString *minString = [NSString stringWithFormat:min>9?@"%ld":@"0%ld",min];
+//                NSString *secondString = [NSString stringWithFormat:second>9?@"%ld":@"0%ld",second];
                 self.timeDisplay.text = [NSString stringWithFormat:@"%@:%@",hourString,minString];
                 
             }
@@ -604,12 +607,12 @@
                     [self stopTimer];
                     
                     //治疗经过时间
-                    int hour = startTime / 3600;
-                    int min = startTime / 60 % 60;
-                    int second = startTime % 60;
-                    NSString *hourString = [NSString stringWithFormat:hour>9?@"%d":@"0%d",hour];
-                    NSString *minString = [NSString stringWithFormat:min>9?@"%d":@"0%d",min];
-                    NSString *secondString = [NSString stringWithFormat:second>9?@"%d":@"0%d",second];
+                    long hour = startTime / 3600;
+                    long min = startTime / 60 % 60;
+//                    long second = startTime % 60;
+                    NSString *hourString = [NSString stringWithFormat:hour>9?@"%ld":@"0%ld",hour];
+                    NSString *minString = [NSString stringWithFormat:min>9?@"%ld":@"0%ld",min];
+//                    NSString *secondString = [NSString stringWithFormat:second>9?@"%ld":@"0%d",second];
                     self.timeDisplay.text = [NSString stringWithFormat:@"%@:%@",hourString,minString];
                 }
                 
@@ -709,11 +712,12 @@
                 self.runningState = RUNNING_STATE_POWER_OFF;
                 NSString *alertMessege = [[NSString alloc]init];
                 switch (dataByte) {
-                    case 0x00:  alertMessege = @"设备废液瓶满";  break;
-                    case 0x01:  alertMessege = @"设备压力过高";  break;
+                    case 0x00:  alertMessege = @"无异常报警";    break;
+                    case 0x01:  alertMessege = @"设备废液瓶满";  break;
                     case 0x02:  alertMessege = @"设备压力过低";  break;
-                    case 0x03:  alertMessege = @"设备使用到期";  break;
+                    case 0x03:  alertMessege = @"设备压力过高";  break;
                     case 0x04:  alertMessege = @"设备电量异常";  break;
+                    case 0x05:  alertMessege = @"设备使用到期";  break;
                     default:
                         break;
                 }
@@ -723,16 +727,11 @@
                 //清零记时
                 startTime = 0;
                 [self stopTimer];
-                
-                
             }
                 break;
-                
-
             default:
                 break;
         }
-        
         [self updateUI];
     }
 }
@@ -762,8 +761,6 @@
 -(void)askForDuration {
     [self writeWithCmdid:CMDID_TREAT_TIME dataString:nil];
 }
-
-
 
 #pragma mark - connect
 -(void)connectPeripheral {
@@ -934,12 +931,8 @@
 }
 
 -(void)showConnectAlert {
-    
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
-    [SVProgressHUD setMinimumSize:CGSizeZero];
-    [SVProgressHUD setCornerRadius:14];
+
     [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"设备连接成功"]];
-    [SVProgressHUD dismissWithDelay:1.4];
 }
 
 
@@ -993,17 +986,15 @@
     dispatch_source_set_event_handler(_timer, ^{
         dispatch_async(dispatch_get_main_queue(),
                        ^{
+                            long hour = time / 3600;
+                            long min = time / 60 % 60;
+//                            long second = time % 60;
+                            NSString *hourString = [NSString stringWithFormat:hour>9?@"%ld":@"0%ld",hour];
+                            NSString *minString = [NSString stringWithFormat:min>9?@"%ld":@"0%ld",min];
+//                            NSString *secondString = [NSString stringWithFormat:second>9?@"%ld":@"0%ld",second];
+                            self.timeDisplay.text = [NSString stringWithFormat:@"%@:%@",hourString,minString];
                            
-                           
-                               int hour = time / 3600;
-                               int min = time / 60 % 60;
-                               int second = time % 60;
-                               NSString *hourString = [NSString stringWithFormat:hour>9?@"%d":@"0%d",hour];
-                               NSString *minString = [NSString stringWithFormat:min>9?@"%d":@"0%d",min];
-                               NSString *secondString = [NSString stringWithFormat:second>9?@"%d":@"0%d",second];
-                               self.timeDisplay.text = [NSString stringWithFormat:@"%@:%@",hourString,minString];
-                           
-                               time++;
+                            time++;
 
                        });
     });

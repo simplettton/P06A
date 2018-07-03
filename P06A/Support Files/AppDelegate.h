@@ -13,7 +13,7 @@
 #import "UIViewController+MMDrawerController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
+@property (assign, nonatomic) BOOL isBLEPoweredOff;
 @property (strong, nonatomic) UIWindow *window;
 /**
  *  MMDrawerController属性

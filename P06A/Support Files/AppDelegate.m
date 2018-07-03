@@ -10,11 +10,14 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import "UserHomeViewController.h"
 #import "WXApi.h"
-
+#import "BabyBluetooth.h"
+#import <SVProgressHUD.h>
 //为MMDrawerController框架中
 #import "MMDrawerController.h"
 #import "UIViewController+MMDrawerController.h"
 #import <UserNotifications/UserNotifications.h>
+//地图框架
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
 
 static NSString * const USHARE_APPKEY           = @"5a2a0fdeb27b0a4989000164";
@@ -22,50 +25,68 @@ static NSString * const KOpenFileNotification   = @"KOpenFileNotification";
 static NSString * const KFileName               = @"KFileName";
 static NSString * const KFilePath               = @"KFilePath";
 
-
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
 @end
-@implementation AppDelegate
-
+@implementation AppDelegate{
+    BabyBluetooth *baby;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    if ([self isUserLogin]) {
-        [self initDrawer];
-        //  初始化窗口、设置根控制器、显示窗口
-        self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        [UIView transitionWithView:self.window
-                          duration:0.25
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            self.window.rootViewController = self.drawerController;
-                        }
-                        completion:nil];
 
-        [self.window makeKeyAndVisible];
-    }
-//
-//    //iOS 10 before
-//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
-//    [application registerUserNotificationSettings:settings];
-    
+    [self initRootViewController];
     //iOS 10
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        if (!error) {
-            NSLog(@"request authorization succeeded!");
-        }
-    }];
+    if (@available(iOS 10.0, *)) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"request authorization succeeded!");
+            }
+        }];
+    } else {
     
+        //iOS 10 before
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
     
     [[UMSocialManager defaultManager] openLog:YES];
-    
     [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_APPKEY];
     
     [self configUSharePlatforms];
-
+    [self configureSVProgress];
+    
+    baby = [BabyBluetooth shareBabyBluetooth];
+    [self babyDelegate];
+    
+    //map
+    [AMapServices sharedServices].apiKey = @"d2f6c6fcd2af91698e24eaa8079396a9";
     return YES;
+}
+-(void)configureSVProgress{
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+    [SVProgressHUD setCornerRadius:5];
+    [SVProgressHUD setRingRadius:14.0];
+    [SVProgressHUD setMinimumSize:CGSizeMake(100, 40)];
+    [SVProgressHUD setImageViewSize:CGSizeMake(0, 0)];
+    [SVProgressHUD setMaximumDismissTimeInterval:1];
+    [SVProgressHUD setBackgroundColor:UIColorFromRGBAndAlpha(0XF9F9F9, 1)];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+}
+-(void)babyDelegate{
+    
+    __weak typeof(self) weakSelf = self;
+    [baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
+        if (central.state == CBCentralManagerStatePoweredOff){
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"BLEPoweredOffNotification" object:nil];
+            NSLog(@"蓝牙关了");
+            weakSelf.isBLEPoweredOff = YES;
+        }else if(central.state == CBCentralManagerStatePoweredOn) {
+            weakSelf.isBLEPoweredOff = NO;
+            NSLog(@"蓝牙开了");
+            
+        }
+    }];
 }
 
 -(void)configUSharePlatforms {
@@ -110,13 +131,6 @@ static NSString * const KFilePath               = @"KFilePath";
 }
 
 
--(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
-    
-    completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
-    
-}
-
-
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
     
     //文件url
@@ -153,17 +167,47 @@ static NSString * const KFilePath               = @"KFilePath";
     return YES;
 }
 
-
+-(void)initRootViewController{
+    
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    if ([self isUserLogin]) {
+        [self initDrawer];
+        //  初始化窗口、设置根控制器、显示窗口
+        self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        [UIView transitionWithView:self.window
+                          duration:0.25
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            self.window.rootViewController = self.drawerController;
+                        }
+                        completion:nil];
+        
+        [self.window makeKeyAndVisible];
+    }else{
+        UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        [UIView transitionWithView:self.window
+                          duration:0.25
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            self.window.rootViewController = controller;
+                        }
+                        completion:nil];
+        
+        [self.window makeKeyAndVisible];
+    }
+}
 -(void)initDrawer {
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController *centerNavi;
-    NSString *centerIndentifierString = [[NSUserDefaults standardUserDefaults]objectForKey:@"Identity"];
-    
-    if (centerIndentifierString) {
-        centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:centerIndentifierString];
+    UINavigationController *centerNavi = [[UINavigationController alloc]init];
+   NSString *role = [UserDefault objectForKey:@"ROLE"];
+    if ([role isEqualToString:@"admin"]) {
+        centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"doctor"];
+    }else if([role isEqualToString:@"user"]){
+        centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];
     }
-
     UIViewController *leftViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"menu"];
     //使用MMDrawerController
     self.drawerController = [[MMDrawerController alloc]initWithCenterViewController:centerNavi leftDrawerViewController:leftViewController];
@@ -181,9 +225,9 @@ static NSString * const KFilePath               = @"KFilePath";
 #pragma mark -- 是否登录
 -(BOOL)isUserLogin
 {
-    NSString *userId =  [[NSUserDefaults standardUserDefaults]objectForKey:@"USER_NAME"];
+    BOOL isLogined=  [[NSUserDefaults standardUserDefaults]objectForKey:@"IsLogined"];
     
-    if (userId != nil)
+    if (isLogined)
     {
         //已经登录
         return YES;

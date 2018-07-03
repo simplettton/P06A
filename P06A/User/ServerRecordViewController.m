@@ -38,14 +38,6 @@
 //    [self getDataWithPage:4];
     self.title = @"治疗记录";
     [self initAll];
-    
-//    //测试报告
-//    NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:20];
-//    [dic setObject:@"1" forKey:@"mode"];
-//    [dic setObject:@"200" forKey:@"press"];
-//    [dic setObject:@"" forKey:@"dur"];
-//    [dic setObject:@"" forKey:@"date"];
-//    [self performSegueWithIdentifier:@"ShowServerReport" sender:dic];
 }
 
 -(void)initAll{

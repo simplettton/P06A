@@ -19,21 +19,21 @@
     [super viewDidLoad];
     self.title = @"治疗部位";
     self.tableView.tableFooterView = [[UIView alloc]init];
-//    self.treatAreaArray = @[@"hand",@"lowerArm",@"upperArm",@"foot",@"leg",@"thign",@"abdomen",@"back",@"others"];
     self.treatAreaArray = @[@"手部",@"小臂",@"大臂",@"足部",@"小腿",@"大腿",@"腹部",@"背部",@"其他"];
     
     NSInteger index = [self.treatAreaArray indexOfObject:self.treatArea];
-    
+
     UITableViewCell *cell = [[self.tableView visibleCells]objectAtIndex:index];
     
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
+    
+    for (UITableViewCell *cell in [self.tableView visibleCells]) {
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+        cell.selectedBackgroundView.backgroundColor =UIColorFromHex(0xebebeb);
+    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-
 
     for (UITableViewCell *cell in self.tableView.visibleCells) {
         if (cell) {
@@ -46,7 +46,6 @@
             }
         }
     }
-    
     self.selectedTreatArea = self.treatAreaArray[indexPath.row];
     
 }

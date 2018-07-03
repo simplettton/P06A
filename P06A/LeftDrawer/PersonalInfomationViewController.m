@@ -16,6 +16,7 @@
 }
 @property (strong,nonatomic) IBOutletCollection(UITableViewCell)NSArray *cells;
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
+@property (weak, nonatomic) IBOutlet UILabel *treatAreaLabel;
 
 @end
 
@@ -64,8 +65,8 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.title = @"个人信息";
     
-    self.navigationController.navigationBar.barTintColor = UIColorFromHex(0X65B8F3);
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+//    self.navigationController.navigationBar.barTintColor = UIColorFromHex(0X65B8F3);
+//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     [[self.navigationController navigationBar]setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromHex(0XFFFFFF)}];
     self.navigationItem.rightBarButtonItem.tintColor = UIColorFromHex(0xFFFFFF);
     self.navigationItem.leftBarButtonItem.tintColor = UIColorFromHex(0xFFFFFF);
@@ -207,22 +208,25 @@
         };
     }else if ([segue.identifier isEqualToString:@"EditTreatArea"]){
         EditTreatAreaViewController *vc = (EditTreatAreaViewController *)segue.destinationViewController;
-        NSIndexPath *index = (NSIndexPath *)sender;
-        UITableViewCell *cell = [self.cells objectAtIndex:index.row + index.section *5];
+//        NSIndexPath *index = (NSIndexPath *)sender;
+//        UITableViewCell *cell = [self.cells objectAtIndex:index.row + index.section *5];
+//
+//        UILabel *valueLabel = [cell viewWithTag:2];
+//        vc.selectedRow = index.section *5 + index.row;
         
-        UILabel *valueLabel = [cell viewWithTag:2];
-        vc.selectedRow = index.section *5 + index.row;
-        vc.treatArea = valueLabel.text;
+          vc.treatArea = self.treatAreaLabel.text;
+        
         vc.returnBlock = ^(NSInteger changedRow, NSString *newValue)
         {
-            UITableViewCell *cell = [self.cells objectAtIndex:changedRow];
-            UIView * valueView = [cell viewWithTag:2];
-            if([valueView isKindOfClass:[UILabel class]])
-            {
-                UILabel *label = (UILabel *)valueView;
-                
-                label.text = newValue;
-            }
+//            UITableViewCell *cell = [self.cells objectAtIndex:changedRow];
+//            UIView * valueView = [cell viewWithTag:2];
+//            if([valueView isKindOfClass:[UILabel class]])
+//            {
+//                UILabel *label = (UILabel *)valueView;
+//
+//                label.text = newValue;
+//            }
+            self.treatAreaLabel.text = newValue;
         };
         
         
