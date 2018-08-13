@@ -8,26 +8,32 @@
 
 #import "MQTTCommunicationViewController.h"
 #import "AAGlobalMacro.h"
-NSString *const HOST = @"218.17.22.131";
-NSString *const PORT = @"3080";
+NSString *const HOST = @"218.17.22.130";
+NSString *const PORT = @"21613";
 NSString *const MQTTUserName = @"admin";
 NSString *const MQTTPassWord = @"password";
 
 
 @interface MQTTCommunicationViewController ()
 
+//MQTT
+
 @property (strong, nonatomic) MQTTSessionManager *manager;
-@property (strong, nonatomic) NSString *base;
+@property (strong, nonatomic) NSMutableDictionary *subscriptions;
+@property (strong, nonatomic) NSString *sendTopic;
+//定时询问实时信息
+@property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic,strong) NSString* isConnectedString;
 @property (nonatomic,assign) BOOL isFirstReceivedMessage;
+
+//12s刷新图表的timer
+@property (strong, nonatomic) NSTimer *refreshTimer;
 
 @property (weak, nonatomic) IBOutlet UIView *batteryView;
 @property (weak, nonatomic) IBOutlet UILabel *currentPressureLabel;
 @property (weak, nonatomic) IBOutlet UIButton *statusButton;
 @property (weak, nonatomic) IBOutlet UIView *pressureView;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-
-
 
 @property (weak, nonatomic) IBOutlet UILabel *modeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pressureSetLabel;
@@ -42,23 +48,28 @@ NSString *const MQTTPassWord = @"password";
 @property (nonatomic,assign) NSInteger treatMode;
 @property (nonatomic,assign) NSInteger pressureSet;
 @property (nonatomic,assign) NSInteger currentPressure;
+
 @property (nonatomic,assign) NSInteger upTime;
 @property (nonatomic,assign) NSInteger downTime;
+@property (nonatomic,assign) NSInteger workTime;
+@property (nonatomic,assign) NSInteger restTime;
+
 @property (nonatomic,assign) NSInteger runningState;
 @property (nonatomic,assign) NSInteger treatmentTime;
 @property (nonatomic,assign) NSInteger alertIndex;
 
 @property (nonatomic,strong)AAChartView *aaChartView;
-@property (nonatomic,strong)NSMutableArray *array;
+@property (nonatomic,strong)NSMutableArray
+*array;
 @end
 
 @implementation MQTTCommunicationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    //订阅设备id
-    self.base = @"P06A17A00001";
+    
+    //发布数据主题
+    self.sendTopic = @"P06A/todev/1b00080002434d5632303320e906f405";
     
     [self initAll];
     [self connect];
@@ -85,6 +96,7 @@ NSString *const MQTTPassWord = @"password";
         [self.array addObject:[NSNumber numberWithInteger:0]];
     }
     self.isConnectedString = [[NSString alloc]init];
+    self.subscriptions = [[NSMutableDictionary alloc]init];
     
     //电池初始状态
     for (int i = 1; i < 5; i++) {
@@ -93,12 +105,7 @@ NSString *const MQTTPassWord = @"password";
     }
     //status
     self.statusButton.layer.cornerRadius = 15;
-//    self.statusButton.layer.borderWidth = 2;
-//    self.statusButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    
     self.pressureView.layer.cornerRadius = 15;
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -108,33 +115,29 @@ NSString *const MQTTPassWord = @"password";
                    forKeyPath:@"state"
                       options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                       context:nil];
-    
-//    [self.isConnectedString addObserver:self forKeyPath:@"isConnectedString" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
+    
+    [self closeTimer];
+    [self closeRealTime];
+    
     [self.manager removeObserver:self forKeyPath:@"state" context:nil];
-//    [self.isConnectedString removeObserver:self forKeyPath:@"isConnectedString" context:nil];
+    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-//    if ([keyPath isEqualToString:@"isConnectedString"]) {
-//        if ([self.isConnectedString isEqualToString:@"YES"]) {
-//            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
-//            [SVProgressHUD setMinimumSize:CGSizeZero];
-//            [SVProgressHUD setCornerRadius:14];
-//            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"设备连接成功"]];
-//            [SVProgressHUD dismissWithDelay:0.9];
-//
-//        }
-//    }
+
     switch (self.manager.state) {
 
         case MQTTSessionManagerStateClosed:
             NSLog(@"----------------------------------------closed");
             [SVProgressHUD showErrorWithStatus:@"断开连接"];
+            [self closeRealTime];
+            [self closeTimer];
+            
             break;
         case MQTTSessionManagerStateClosing:
             NSLog(@"----------------------------------------closing");
@@ -145,14 +148,13 @@ NSString *const MQTTPassWord = @"password";
         case MQTTSessionManagerStateConnected:
             NSLog(@"-------------------------------------connected");
             
-            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
-            [SVProgressHUD setMinimumSize:CGSizeZero];
-            [SVProgressHUD setCornerRadius:14];
+            [SVProgressHUD setMinimumSize:CGSizeMake(100, 40)];
             [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"设备连接成功"]];
-            [SVProgressHUD dismissWithDelay:0.9];
             
             //询问设备状态包
-            [self sendDataWithCmdid:0x97 dataString:nil];
+            [self sendDataWithCmdid:0x90 dataString:nil];
+            [self startRealTime];
+            [self startTimer];
             
             break;
         case MQTTSessionManagerStateStarting:
@@ -221,18 +223,23 @@ NSString *const MQTTPassWord = @"password";
     if (!self.manager) {
         self.manager = [[MQTTSessionManager alloc] init];
         self.manager.delegate = self;
+        
         //订阅主题
-        self.manager.subscriptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:MQTTQosLevelExactlyOnce]
-                                                                 forKey:[NSString stringWithFormat:@"%@1", self.base]];
+//        self.manager.subscriptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:MQTTQosLevelExactlyOnce]
+//                                                                 forKey:[NSString stringWithFormat:@"%@", self.base]];
+        [self subcribe:@"1b00080002434d5632303320e906f405"];
+        [self subcribe:@"toapp/1b00080002434d5632303320e906f405"];
+        [self subcribe:@"phone/1b00080002434d5632303320e906f405"];
+        
         //连接服务器
-        [self.manager connectTo:@"218.17.22.131"
-                           port:3080
+        [self.manager connectTo:@"218.17.22.130"
+                           port:21613
                             tls:false
                       keepalive:60
                           clean:true
                            auth:true
                            user:@"admin"
-                           pass:@"password"
+                           pass:@"pwd321"
                            will:nil
                       willTopic:nil
                         willMsg:nil
@@ -242,9 +249,7 @@ NSString *const MQTTPassWord = @"password";
                  securityPolicy:nil
                    certificates:nil
                   protocolLevel:MQTTProtocolVersion31
-                 connectHandler:^(NSError *error) {
-                     
-                 }];
+                 connectHandler:nil];
         
     }else{
         [self.manager connectToLast:^(NSError *error) {
@@ -252,6 +257,14 @@ NSString *const MQTTPassWord = @"password";
         }];
     }
 
+}
+#pragma mark - subcription
+-(void)subcribe:(NSString *)topic{
+    NSString *newTopic = [NSString stringWithFormat:@"P06A/%@",topic];
+    if (![self.manager.subscriptions.allKeys containsObject:newTopic]){
+        [self.subscriptions setObject:[NSNumber numberWithInt:MQTTQosLevelExactlyOnce] forKey:newTopic];
+        self.manager.subscriptions = [self.subscriptions copy];
+    }
 }
 
 #pragma mark - sendData
@@ -261,64 +274,86 @@ NSString *const MQTTPassWord = @"password";
     [self.manager sendData:[Pack packetWithCmdid:cmdid
                                      dataEnabled:YES
                                             data:[self convertHexStrToData:dataString]]
-                     topic:self.base
+                     topic:self.sendTopic
                        qos:MQTTQosLevelExactlyOnce
                     retain:FALSE];
+}
+-(void)startRefreshChartTimer{
+    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(addPointTochart) userInfo:nil repeats:YES];
+}
+
+//定时获取实时信息timer
+-(void)startTimer{
+    //5min发送一次请求实时信息
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:300
+                                                  target:self
+                                                selector:@selector(startRealTime)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
+
+-(void)closeTimer{
+    [self.timer invalidate];
+    self.timer = nil;
+
+    [self.refreshTimer invalidate];
+    self.refreshTimer = nil;
+}
+
+-(void)startRealTime{
+    [self sendDataWithCmdid:0x91 dataString:@"0100"];
+}
+-(void)closeRealTime{
+    [self sendDataWithCmdid:0x91 dataString:@"0000"];
 }
 
 #pragma mark - receiveData
 
 - (void)handleMessage:(NSData *)data onTopic:(NSString *)topic retained:(BOOL)retained {
-    NSLog(@"--------------------------");
+    NSLog(@"----------------------topic:%@--------------------------",topic);
     
     //收到消息代表连接成功
     self.isConnectedString = @"YES";
-    
-//    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
-//    [SVProgressHUD setMinimumSize:CGSizeZero];
-//    [SVProgressHUD setCornerRadius:14];
-//    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"设备连接成功"]];
-//    [SVProgressHUD dismissWithDelay:0.9];
-    
-    
-    NSData *completeData = [Unpack unpackData:data];
+
+ 
+    NSData *completeData = [Unpack unpackMqttData:data];
     if (completeData) {
         Byte *dataByte = (Byte *)[completeData bytes];
         Byte cmdid = dataByte[0];
         switch (cmdid) {
             //设备状态包
             case 0x90:
-                self.runningState = dataByte[3];
+                self.runningState = dataByte[1];
                 
-                self.pressureSet = dataByte[4];
+                self.pressureSet = dataByte[2];
                 
-                self.treatMode = dataByte[5];
+                self.treatMode = dataByte[3];
 
-                self.upTime = dataByte [6];
+                self.upTime = dataByte [4];
                 
-                self.downTime = dataByte[7];
+                self.downTime = dataByte[5];
                 
-                self.isLocked = dataByte[9];
+                self.workTime = dataByte[6];
                 
+                self.restTime = dataByte[7];
+
                 Byte batteryLevel = dataByte[8];
                 if (batteryLevel == 0x06) {
                     self.batteryLevel = batteryLevel;
                 }else{
                     self.batteryLevel = 16 - (16>>batteryLevel);
                 }
+                self.isLocked = dataByte[9];
                 
                 break;
             
             //实时治疗信息包
             case 0x91:
-                self.currentPressure = dataByte[3];
-                NSLog(@"currentpress = %ld",(long)self.currentPressure);
-                
-                //图标数据添加 刷新图表
-                [self.array addObject:[NSNumber numberWithUnsignedInteger:self.currentPressure]];
-                [self refreshChart];
-                
-                Byte timeBytes [] = {dataByte[4],dataByte[5],dataByte[6],dataByte[7]};
+                self.currentPressure = dataByte[1];
+
+                [self startRefreshChartTimer];
+
+                Byte timeBytes [] = {dataByte[2],dataByte[3],dataByte[4],dataByte[5]};
                 self.treatmentTime = [self lBytesToInt:timeBytes withLength:4];
                 NSLog(@"self.treatmentTime = %ld",self.treatmentTime);
                 break;
@@ -327,7 +362,7 @@ NSString *const MQTTPassWord = @"password";
             case 0x95:
             {
                 NSString *alertMessege = [[NSString alloc]init];
-                Byte alertIndex = dataByte[3];
+                Byte alertIndex = dataByte[1];
                 
                 switch (alertIndex) {
                     case 0x00:  alertMessege = @"无异常报警";    break;
@@ -350,6 +385,11 @@ NSString *const MQTTPassWord = @"password";
         }
         [self updateUI];
     }
+}
+-(void)addPointTochart{
+    //图标数据添加 刷新图表
+    [self.array addObject:[NSNumber numberWithUnsignedInteger:self.currentPressure]];
+    [self refreshChart];
 }
 
 -(void)updateUI {
@@ -387,8 +427,8 @@ NSString *const MQTTPassWord = @"password";
         case 1:
             
             self.modeLabel.text = @"间歇吸引模式";
-            self.upTimeLabel.text = [NSString stringWithFormat:@"工作时间:%ldmin",self.upTime];
-            self.downTimeLabel.text = [NSString stringWithFormat:@"休息时间:%ldmin",self.downTime];
+            self.upTimeLabel.text = [NSString stringWithFormat:@"工作时间:%ldmin",self.workTime];
+            self.downTimeLabel.text = [NSString stringWithFormat:@"休息时间:%ldmin",self.restTime];
             
             break;
         case 2:

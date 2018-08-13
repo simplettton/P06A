@@ -12,13 +12,9 @@
 +(NSData *)unpackData:(NSData *)pdata
 {
     UInt32 nheadPos = 0;
+
     Byte *dataBytes = (Byte *)[pdata bytes];
-    for (int i = 0; i<[pdata length]; i++) {
-        NSLog(@"byte[%d] = %X",i,dataBytes[i]);
-    }
-    
-    NSInteger lengthOfData = [pdata length];
-    //寻找头部
+    NSInteger lengthOfData = [pdata length];    //寻找头部
     BOOL hasHead = NO;
     for (UInt32 i = 0; i<lengthOfData; i++)
     {
@@ -75,7 +71,6 @@
         }
         
         //验证包长度
-        
         UInt32 packLength = ls[0];
         if (lengthOfLs != packLength +2)
         {
@@ -102,6 +97,119 @@
             resultData[i] = ls[i+1];
         }
         NSData *dataWithCmdId = [NSData dataWithBytes:resultData length:packLength];
+        
+        
+        //打印解析后的数据
+        Byte *dataWithCmdIdBytes = (Byte *)[dataWithCmdId bytes];
+        NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+        for (int i = 0; i<[dataWithCmdId length]; i++) {
+            [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
+        }
+        NSString *string = [dataArray componentsJoinedByString:@"---"];
+        NSLog(@"receive----------%@",string);
+
+        return dataWithCmdId;
+    }
+    return nil;
+}
++(NSData *)unpackMqttData:(NSData *)pdata{
+    UInt32 nheadPos = 0;
+    
+    Byte *dataBytes = (Byte *)[pdata bytes];
+    NSInteger lengthOfData = [pdata length];    //寻找头部
+    BOOL hasHead = NO;
+    for (UInt32 i = 0; i<lengthOfData; i++)
+    {
+        if (dataBytes[i]==0xaa)
+        {
+            if (i>0&&dataBytes[i-1]==0xcc)
+                continue;
+            hasHead = YES;
+            //获取头部索引
+            nheadPos = i;
+            break;
+        }
+    }
+    //找不到头部，返回错误
+    if (!hasHead)
+    {
+        NSLog(@"error:cannot find head");
+        return nil;
+    }
+    //寻找尾部（从包头开始）
+    UInt32 nTailPos = 0;
+    for (UInt32 i = nheadPos +1 ; i<lengthOfData; i++)
+    {
+        if (dataBytes[i]==0x55)
+        {
+            nTailPos = i;
+            break;
+        }
+        if (dataBytes[i]==0xaa)
+        {
+            nTailPos = i - 1;
+        }
+    }
+    //包不完整
+    if (nTailPos<1)
+    {
+        NSLog(@"error:pack length error");
+    }else{
+        //对一个包进行反转义（除开包头包尾）
+        UInt32 lengthOfTransData = nTailPos - nheadPos +1;
+        uint8_t *ls = malloc(sizeof(*ls)*lengthOfTransData);
+        UInt32 lengthOfLs = 0;
+        for (UInt32 i = nheadPos+1; i<nTailPos; i++)
+        {
+            UInt8 curChar = dataBytes[i];
+            if (curChar == 0xcc)
+            {
+                ls[lengthOfLs++] = dataBytes[++i]-2;
+            }
+            else
+            {
+                ls[lengthOfLs++] = dataBytes[i];
+            }
+        }
+        
+        //验证包长度
+        UInt32 packLength = ls[0];
+        if (lengthOfLs != packLength +2)
+        {
+            //        ls = NULL;
+            nheadPos = nTailPos +1;
+            NSLog(@"error:pack length error");
+        }
+        //获取尾部索引
+        //    *pIndexOfTail = nTailPos;
+        
+        //验证校验码
+        NSData *crcData = [NSData dataWithBytes:ls length:packLength+1];
+        UInt8 CRC8 = [self getCRC8WithData:crcData];
+        if (CRC8 != ls[lengthOfLs -1]) {
+            //        ls = NULL;
+            NSLog(@"error:pack checkCrc error");
+        }
+        
+        
+        uint8_t *resultData = malloc(sizeof(*ls)*100);
+        
+        for (UInt32 i = 0; i<packLength; i++)
+        {
+            resultData[i] = ls[i+1];
+        }
+        NSData *dataWithCmdId = [NSData dataWithBytes:resultData length:packLength];
+        
+        
+        //打印解析后的数据
+        Byte *dataWithCmdIdBytes = (Byte *)[dataWithCmdId bytes];
+        NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+        for (int i = 0; i<[dataWithCmdId length]; i++) {
+            [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
+        }
+        NSString *string = [dataArray componentsJoinedByString:@"---"];
+        NSLog(@"receive----------%@",string);
+        
         return dataWithCmdId;
     }
     return nil;

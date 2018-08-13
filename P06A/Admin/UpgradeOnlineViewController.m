@@ -603,7 +603,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     [self.tableView reloadData];
 }
 
-
 #pragma mark -downLoad
 
 - (IBAction)downLoad:(id)sender {

@@ -44,21 +44,21 @@ static NSString * const KFilePath               = @"KFilePath";
             }
         }];
     } else {
-    
+
         //iOS 10 before
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
         [application registerUserNotificationSettings:settings];
     }
-    
+
     [[UMSocialManager defaultManager] openLog:YES];
     [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_APPKEY];
-    
+
     [self configUSharePlatforms];
     [self configureSVProgress];
-    
+
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
-    
+
     //map
     [AMapServices sharedServices].apiKey = @"d2f6c6fcd2af91698e24eaa8079396a9";
     return YES;
@@ -169,33 +169,37 @@ static NSString * const KFilePath               = @"KFilePath";
 
 -(void)initRootViewController{
     
-    
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    if ([self isUserLogin]) {
-        [self initDrawer];
-        //  初始化窗口、设置根控制器、显示窗口
-        self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        [UIView transitionWithView:self.window
-                          duration:0.25
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            self.window.rootViewController = self.drawerController;
-                        }
-                        completion:nil];
-        
-        [self.window makeKeyAndVisible];
-    }else{
-        UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        [UIView transitionWithView:self.window
-                          duration:0.25
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            self.window.rootViewController = controller;
-                        }
-                        completion:nil];
-        
-        [self.window makeKeyAndVisible];
+    
+    //选择了角色
+    if ([UserDefault objectForKey:@"Identity"]) {
+        if ([self isUserLogin]) {
+            [self initDrawer];
+            //  初始化窗口、设置根控制器、显示窗口
+            self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+            [UIView transitionWithView:self.window
+                              duration:0.25
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                self.window.rootViewController = self.drawerController;
+                            }
+                            completion:nil];
+            
+            [self.window makeKeyAndVisible];
+        }else{
+            UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            UINavigationController* navigationController = [[UINavigationController alloc]initWithRootViewController:controller];
+            self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+            [UIView transitionWithView:self.window
+                              duration:0.25
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                self.window.rootViewController = navigationController;
+                            }
+                            completion:nil];
+            
+            [self.window makeKeyAndVisible];
+        }
     }
 }
 -(void)initDrawer {
@@ -221,11 +225,10 @@ static NSString * const KFilePath               = @"KFilePath";
     
 }
 
-
 #pragma mark -- 是否登录
 -(BOOL)isUserLogin
 {
-    BOOL isLogined=  [[NSUserDefaults standardUserDefaults]objectForKey:@"IsLogined"];
+    BOOL isLogined=  [UserDefault boolForKey:@"IsLogined"];
     
     if (isLogined)
     {

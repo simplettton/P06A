@@ -76,6 +76,8 @@
 		0469FECE1FFE0C75002E25C3 /* P06AUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469FECD1FFE0C75002E25C3 /* P06AUITests.m */; };
 		04769EFC20085C440061E2FA /* ModeChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04769EFB20085C440061E2FA /* ModeChooseView.m */; };
 		04769EFE20085C570061E2FA /* ModeChooseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04769EFD20085C570061E2FA /* ModeChooseView.xib */; };
+		04787BE52110186F00992FA3 /* PhoneLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04787BE42110186F00992FA3 /* PhoneLoginViewController.m */; };
+		04787BE82110188300992FA3 /* PasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04787BE72110188300992FA3 /* PasswordLoginViewController.m */; };
 		0478C2C8204FCB4A0000135D /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 0478C2C7204FCB4A0000135D /* report.html */; };
 		0478C2CB204FE6F10000135D /* EditTreatAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */; };
 		047D489C2047AB7D00DF7DF1 /* RecordRepordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */; };
@@ -86,6 +88,7 @@
 		048E92A22043EBD2009F8532 /* RecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E92A12043EBD2009F8532 /* RecordTableViewCell.m */; };
 		049B57CD204E46EC0072F7A4 /* ReportComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57CC204E46EC0072F7A4 /* ReportComposer.m */; };
 		049B57E5204E9ACA0072F7A4 /* CustomPrintPageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */; };
+		049C3D4920EC7E810079F662 /* LoginWithPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C3D4820EC7E810079F662 /* LoginWithPhoneViewController.m */; };
 		049ED9BF202079BD006D9A37 /* ChooseIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */; };
 		04DA58B020E4DE7700E78816 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DA58AF20E4DE7700E78816 /* MapViewController.m */; };
 		04DAE84C2009B0A500BF4127 /* BatteryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DAE84B2009B0A500BF4127 /* BatteryView.xib */; };
@@ -246,6 +249,10 @@
 		04769EFA20085C440061E2FA /* ModeChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModeChooseView.h; sourceTree = "<group>"; };
 		04769EFB20085C440061E2FA /* ModeChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModeChooseView.m; sourceTree = "<group>"; };
 		04769EFD20085C570061E2FA /* ModeChooseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeChooseView.xib; sourceTree = "<group>"; };
+		04787BE32110186F00992FA3 /* PhoneLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneLoginViewController.h; sourceTree = "<group>"; };
+		04787BE42110186F00992FA3 /* PhoneLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneLoginViewController.m; sourceTree = "<group>"; };
+		04787BE62110188300992FA3 /* PasswordLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasswordLoginViewController.h; sourceTree = "<group>"; };
+		04787BE72110188300992FA3 /* PasswordLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasswordLoginViewController.m; sourceTree = "<group>"; };
 		0478C2C7204FCB4A0000135D /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
 		0478C2C9204FE6F00000135D /* EditTreatAreaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditTreatAreaViewController.h; sourceTree = "<group>"; };
 		0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditTreatAreaViewController.m; sourceTree = "<group>"; };
@@ -264,6 +271,8 @@
 		049B57CC204E46EC0072F7A4 /* ReportComposer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReportComposer.m; sourceTree = "<group>"; };
 		049B57E3204E9ACA0072F7A4 /* CustomPrintPageRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPrintPageRenderer.h; sourceTree = "<group>"; };
 		049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPrintPageRenderer.m; sourceTree = "<group>"; };
+		049C3D4720EC7E810079F662 /* LoginWithPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginWithPhoneViewController.h; sourceTree = "<group>"; };
+		049C3D4820EC7E810079F662 /* LoginWithPhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginWithPhoneViewController.m; sourceTree = "<group>"; };
 		049ED9BD202079BD006D9A37 /* ChooseIdentityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentityViewController.h; sourceTree = "<group>"; };
 		049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseIdentityViewController.m; sourceTree = "<group>"; };
 		04DA58AE20E4DE7700E78816 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
@@ -320,6 +329,12 @@
 			children = (
 				040D1E94200F3A9B0010FF47 /* LoginViewController.h */,
 				040D1E95200F3A9B0010FF47 /* LoginViewController.m */,
+				049C3D4720EC7E810079F662 /* LoginWithPhoneViewController.h */,
+				049C3D4820EC7E810079F662 /* LoginWithPhoneViewController.m */,
+				04787BE32110186F00992FA3 /* PhoneLoginViewController.h */,
+				04787BE42110186F00992FA3 /* PhoneLoginViewController.m */,
+				04787BE62110188300992FA3 /* PasswordLoginViewController.h */,
+				04787BE72110188300992FA3 /* PasswordLoginViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -881,6 +896,7 @@
 				0451F0CB2019BF310001A9D4 /* PersonalInfomationViewController.m in Sources */,
 				047D489C2047AB7D00DF7DF1 /* RecordRepordViewController.m in Sources */,
 				041D426B1FFF232300EEA43C /* UIView+Tap.m in Sources */,
+				04787BE52110186F00992FA3 /* PhoneLoginViewController.m in Sources */,
 				043A38F8202AD66000835BDD /* AAJsonConverter.m in Sources */,
 				04118BBA1FFE2BD90054BC15 /* UserHomeViewController.m in Sources */,
 				0453055A204659C500BC06BA /* TreatmentRecordCell.m in Sources */,
@@ -903,11 +919,13 @@
 				04672BB62005F128007D8410 /* BLECommunicationViewController.m in Sources */,
 				043CA1912027E93200713A3C /* UIViewController+BackButtonHandler.m in Sources */,
 				047D48A12047F30D00DF7DF1 /* UIWebView+ConverToPDF.m in Sources */,
+				049C3D4920EC7E810079F662 /* LoginWithPhoneViewController.m in Sources */,
 				04349F512028292F001FFEC5 /* BLERecordViewController.m in Sources */,
 				042B90BA20EB5AF600579CB5 /* HttpResponse.m in Sources */,
 				043A38F6202AD66000835BDD /* AAChartModel.m in Sources */,
 				045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */,
 				043A3916202AD66000835BDD /* AATooltip.m in Sources */,
+				04787BE82110188300992FA3 /* PasswordLoginViewController.m in Sources */,
 				043A390B202AD66000835BDD /* AAMarker.m in Sources */,
 				0478C2CB204FE6F10000135D /* EditTreatAreaViewController.m in Sources */,
 				04118BB71FFE28A30054BC15 /* AdminHomeViewController.m in Sources */,

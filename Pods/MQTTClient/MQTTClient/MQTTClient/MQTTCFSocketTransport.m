@@ -62,7 +62,7 @@
 }
 
 - (void)open {
-    DDLogVerbose(@"[MQTTCFSocketTransport] open");
+//    DDLogVerbose(@"[MQTTCFSocketTransport] open");
     self.state = MQTTTransportOpening;
 
     NSError* connectError;
@@ -136,7 +136,7 @@
 }
 
 - (void)internalClose {
-    DDLogVerbose(@"[MQTTCFSocketTransport] close");
+//    DDLogVerbose(@"[MQTTCFSocketTransport] close");
     self.state = MQTTTransportClosing;
 
     if (self.encoder) {

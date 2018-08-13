@@ -77,9 +77,13 @@ typedef void(^NewByteBlock)(NSInteger,NSInteger);
     
 
     Byte *byte = (Byte *)[packData bytes];
-    for (int i = 0; i< [packData length]; i ++) {
-        NSLog(@"send--------------------------------------bytes[%d] = %x",i,byte[i]);
+    NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+    for (int i = 0; i<[packData length]; i++) {
+        [dataArray addObject:[NSString stringWithFormat:@"%02X",byte[i]]];
     }
+
+    NSString *string = [dataArray componentsJoinedByString:@"---"];
+    NSLog(@"send----------%@",string);
     return packData;
 }
 #pragma mark - Private Method

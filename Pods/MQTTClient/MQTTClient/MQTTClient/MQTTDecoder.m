@@ -58,7 +58,7 @@
 - (void)openStream:(NSInputStream *)stream {
     [self.streams addObject:stream];
     stream.delegate = self;
-    DDLogVerbose(@"[MQTTDecoder] #streams=%lu", (unsigned long)self.streams.count);
+//    DDLogVerbose(@"[MQTTDecoder] #streams=%lu", (unsigned long)self.streams.count);
     if (self.streams.count == 1) {
         [stream open];
     }
@@ -103,11 +103,11 @@
     NSInputStream *stream = (NSInputStream *)sender;
     
     if (eventCode & NSStreamEventOpenCompleted) {
-        DDLogVerbose(@"[MQTTDecoder] NSStreamEventOpenCompleted");
+//        DDLogVerbose(@"[MQTTDecoder] NSStreamEventOpenCompleted");
     }
     
     if (eventCode & NSStreamEventHasBytesAvailable) {
-        DDLogVerbose(@"[MQTTDecoder] NSStreamEventHasBytesAvailable");
+//        DDLogVerbose(@"[MQTTDecoder] NSStreamEventHasBytesAvailable");
         
         if (self.state == MQTTDecoderStateDecodingHeader) {
             UInt8 buffer;
@@ -122,7 +122,7 @@
                 self.dataBuffer = [[NSMutableData alloc] init];
                 [self.dataBuffer appendBytes:&buffer length:1];
                 self.offset = 1;
-                DDLogVerbose(@"[MQTTDecoder] fixedHeader=0x%02x", buffer);
+//                DDLogVerbose(@"[MQTTDecoder] fixedHeader=0x%02x", buffer);
             }
         }
         while (self.state == MQTTDecoderStateDecodingLength) {
@@ -136,7 +136,7 @@
             } else if (n == 0) {
                 break;
             }
-            DDLogVerbose(@"[MQTTDecoder] digit=0x%02x 0x%02x %d %d", digit, digit & 0x7f, (unsigned int)self.length, (unsigned int)self.lengthMultiplier);
+//            DDLogVerbose(@"[MQTTDecoder] digit=0x%02x 0x%02x %d %d", digit, digit & 0x7f, (unsigned int)self.length, (unsigned int)self.lengthMultiplier);
             [self.dataBuffer appendBytes:&digit length:1];
             self.offset++;
             self.length += ((digit & 0x7f) * self.lengthMultiplier);
@@ -146,7 +146,7 @@
                 self.lengthMultiplier *= 128;
             }
         }
-        DDLogVerbose(@"[MQTTDecoder] remainingLength=%d", (unsigned int)self.length);
+//        DDLogVerbose(@"[MQTTDecoder] remainingLength=%d", (unsigned int)self.length);
 
         if (self.state == MQTTDecoderStateDecodingData) {
             if (self.length > 0) {
@@ -161,29 +161,29 @@
                     self.state = MQTTDecoderStateConnectionError;
                     [self.delegate decoder:self handleEvent:MQTTDecoderEventConnectionError error:stream.streamError];
                 } else {
-                    DDLogVerbose(@"[MQTTDecoder] read %ld %ld", (long)toRead, (long)n);
+//                    DDLogVerbose(@"[MQTTDecoder] read %ld %ld", (long)toRead, (long)n);
                     [self.dataBuffer appendBytes:buffer length:n];
                 }
             }
             if (self.dataBuffer.length == self.length + self.offset) {
-                DDLogVerbose(@"[MQTTDecoder] received (%lu)=%@...", (unsigned long)self.dataBuffer.length,
-                                    [self.dataBuffer subdataWithRange:NSMakeRange(0, MIN(256, self.dataBuffer.length))]);
+//                DDLogVerbose(@"[MQTTDecoder] received (%lu)=%@...", (unsigned long)self.dataBuffer.length,
+//                                    [self.dataBuffer subdataWithRange:NSMakeRange(0, MIN(256, self.dataBuffer.length))]);
                 [self.delegate decoder:self didReceiveMessage:self.dataBuffer];
                 self.dataBuffer = nil;
                 self.state = MQTTDecoderStateDecodingHeader;
             } else {
-                DDLogError(@"[MQTTDecoder] oops received (%lu)=%@...", (unsigned long)self.dataBuffer.length,
-                             [self.dataBuffer subdataWithRange:NSMakeRange(0, MIN(256, self.dataBuffer.length))]);
+//                DDLogError(@"[MQTTDecoder] oops received (%lu)=%@...", (unsigned long)self.dataBuffer.length,
+//                             [self.dataBuffer subdataWithRange:NSMakeRange(0, MIN(256, self.dataBuffer.length))]);
             }
         }
     }
     
     if (eventCode & NSStreamEventHasSpaceAvailable) {
-        DDLogVerbose(@"[MQTTDecoder] NSStreamEventHasSpaceAvailable");
+//        DDLogVerbose(@"[MQTTDecoder] NSStreamEventHasSpaceAvailable");
     }
     
     if (eventCode & NSStreamEventEndEncountered) {
-        DDLogVerbose(@"[MQTTDecoder] NSStreamEventEndEncountered");
+//        DDLogVerbose(@"[MQTTDecoder] NSStreamEventEndEncountered");
         
         if (self.streams) {
             [stream setDelegate:nil];
@@ -197,7 +197,7 @@
     }
     
     if (eventCode & NSStreamEventErrorOccurred) {
-        DDLogVerbose(@"[MQTTDecoder] NSStreamEventErrorOccurred");
+//        DDLogVerbose(@"[MQTTDecoder] NSStreamEventErrorOccurred");
         
         self.state = MQTTDecoderStateConnectionError;
         NSError *error = stream.streamError;

@@ -10,4 +10,5 @@
 
 @interface Unpack : NSObject
 +(NSData *)unpackData:(NSData *)pdata;
++(NSData *)unpackMqttData:(NSData *)pdata;
 @end

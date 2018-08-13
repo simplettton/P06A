@@ -183,8 +183,7 @@
     self.startButton.layer.cornerRadius = 15;
     self.startButton.layer.borderWidth = 2;
     self.startButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    
-    
+
     //圆角
     CGFloat radius = 15.0f;
     UIBezierPath *maskPath=[UIBezierPath bezierPathWithRoundedRect:self.stopButton.bounds byRoundingCorners:UIRectCornerTopRight|UIRectCornerBottomRight cornerRadii:CGSizeMake(radius, radius)];
@@ -216,7 +215,6 @@
         
         self.pressureDisplay.text = pressString == nil? @"125": pressString;
 
-        
         self.startButton.hidden = NO;
         self.pauseButton.hidden = YES;
         self.stopButton.hidden = YES;
@@ -236,7 +234,6 @@
             self.startButton.titleLabel.text = @"继续";
             [self.startButton setTitle:@"继续" forState:UIControlStateNormal];
             
-
         }
             break;
             
@@ -310,9 +307,8 @@
         self.pressureButton.enabled = YES;
     }
     
-
-
-    
+    //电量
+    [self updateBatteryUI];
     
 }
 
@@ -420,8 +416,6 @@
         weakSelf.isConnected = YES;
         NSLog(@"连接成功");
         [weakSelf performSelector:@selector(showConnectAlert) withObject:nil afterDelay:0.05];
-
-        
         [weakBaby cancelScan];
 
 
@@ -501,12 +495,11 @@
     [baby notify:weakSelf.peripheral
   characteristic:characteristic
            block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
-               NSLog(@"BLECommunication----------------------------------------------");
+//               NSLog(@"BLECommunication----------------------------------------------");
                NSData *data = characteristic.value;
                if (data) {
-
-                   //将数据存入缓存区
-                   [weakSelf.readBuf appendData:data];
+                   //将数据存入缓存
+                   [weakSelf.readBuf appendData:[self convertData:data]];
                    [weakSelf analyzeReceivedData];
                }
 
@@ -519,8 +512,7 @@
         NSData *head = [_readBuf subdataWithRange:NSMakeRange(0, 2)];//取得头部数据
         
         NSData *lengthData = [head subdataWithRange:NSMakeRange(1, 1)];//取得长度数据
-        
-        
+
         NSInteger length;
         
         length = *((Byte *)([lengthData bytes]));
@@ -558,6 +550,66 @@
         
         switch (cmdid)
         {
+            //治疗状态
+            case CMDID_DEVICE_STATE:
+            {
+                //开关机状态
+                self.runningState = bytes[1];
+                
+                //锁屏
+                self.isLocked = bytes[2];
+                
+                //电池电量
+                Byte batteryLevel = bytes[3];
+                
+                
+                //充电
+                if (batteryLevel == DATA_BETTERY_STATE_CHARGE) {
+                    self.batteryLevel = batteryLevel;
+                }else{
+                    //转成8421表示
+                    self.batteryLevel = 16 - (16>>batteryLevel);
+                }
+                self.treatMode = bytes[4];
+                
+                //电压
+                NSString *keepPress = [NSString stringWithFormat:@"%d",bytes[5]];
+                NSString *intervalPress = [NSString stringWithFormat:@"%d",bytes[6]];
+                NSString *dynamicPress = [NSString stringWithFormat:@"%d",bytes[7]];
+                
+                
+                NSArray *values = @[keepPress,intervalPress,dynamicPress];
+                NSArray *keys = @[@"KeepPress",@"IntervalPress",@"DynamicPress"];
+                
+                NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+                
+                for (NSString* key in keys) {
+                    NSInteger index = [keys indexOfObject:key];
+                    [userDefaultes setObject:values[index] forKey:key];
+                    [userDefaultes synchronize];
+                }
+                
+                NSString *pressure = values[self.treatMode];
+                self.pressure = [NSString stringWithFormat:@"%@",pressure];
+                
+                //治疗时间
+                NSArray *timeKeys = @[@"WorkTime",@"IntervalTime",@"UpTime",@"DownTime"];
+
+                NSString *WorkTime = [NSString stringWithFormat:@"%d",bytes[8]];
+                NSString *IntervalTime = [NSString stringWithFormat:@"%d",bytes[9]];
+                NSString *UpTime = [NSString stringWithFormat:@"%d",bytes[10]];
+                NSString *DownTime = [NSString stringWithFormat:@"%d",bytes[11]];
+                
+                NSArray *timeValues = @[WorkTime,IntervalTime,UpTime,DownTime];
+                
+                for (NSString* key in timeKeys) {
+                    NSInteger index = [timeKeys indexOfObject:key];
+                    [userDefaultes setObject:timeValues[index] forKey:key];
+                    [userDefaultes synchronize];
+                }
+            }
+                break;
+                
             //治疗经过时间
             case CMDID_TREAT_TIME:
             {
@@ -568,16 +620,12 @@
                 Byte timeBytes [] = {bytes[1],bytes[2],bytes[3],bytes[4]};
                 
                 startTime = [self lBytesToInt:timeBytes withLength:4];
-                NSLog(@"startTime = %ld",(long)startTime);
 
-                
                 //治疗经过时间
                 long hour = startTime / 3600;
                 long min = startTime / 60 % 60;
-//                long second = startTime % 60;
                 NSString *hourString = [NSString stringWithFormat:hour>9?@"%ld":@"0%ld",hour];
                 NSString *minString = [NSString stringWithFormat:min>9?@"%ld":@"0%ld",min];
-//                NSString *secondString = [NSString stringWithFormat:second>9?@"%ld":@"0%ld",second];
                 self.timeDisplay.text = [NSString stringWithFormat:@"%@:%@",hourString,minString];
                 
             }
@@ -609,10 +657,8 @@
                     //治疗经过时间
                     long hour = startTime / 3600;
                     long min = startTime / 60 % 60;
-//                    long second = startTime % 60;
                     NSString *hourString = [NSString stringWithFormat:hour>9?@"%ld":@"0%ld",hour];
                     NSString *minString = [NSString stringWithFormat:min>9?@"%ld":@"0%ld",min];
-//                    NSString *secondString = [NSString stringWithFormat:second>9?@"%ld":@"0%d",second];
                     self.timeDisplay.text = [NSString stringWithFormat:@"%@:%@",hourString,minString];
                 }
                 
@@ -640,7 +686,6 @@
 
                 NSString *pressure = values[self.treatMode];
                 self.pressure = [NSString stringWithFormat:@"%@",pressure];
-                [self updateBatteryUI ];
                 
             }
                 break;
@@ -649,7 +694,6 @@
             //电压实时值
             case CMDID_PRESSURE_GET:
                 self.pressure = [NSString stringWithFormat:@"%d",bytes[1]];
-//                [self updatePressureUI];
                 
                 break;
                 
@@ -677,7 +721,6 @@
             {
                 
                 self.treatMode = bytes[1];
-//                [self updateModeUI];
                 
             }
                 break;
@@ -687,7 +730,6 @@
             {
                 
                 self.isLocked = bytes[1];
-//                [self updateLockUI];
                 
             }
                 break;
@@ -753,14 +795,22 @@
                            type:CBCharacteristicWriteWithResponse];
 }
 
+
 -(void)askForDeviceState {
+
+    [self.peripheral writeValue:[Pack packetWithCmdid:CMDID_DEVICE_STATE
+                                          dataEnabled:NO
+                                                 data:nil]
+              forCharacteristic:self.sendCharacteristic
+                           type:CBCharacteristicWriteWithResponse];
     
-    [self writeWithCmdid:CMDID_DEVICE_STATE dataString:@"0032"];
 }
 
 -(void)askForDuration {
     [self writeWithCmdid:CMDID_TREAT_TIME dataString:nil];
 }
+
+ 
 
 #pragma mark - connect
 -(void)connectPeripheral {
@@ -1010,4 +1060,21 @@
     }
 }
 
+#pragma mark - 反转义函数
+-(NSData *)convertData:(NSData *)data{
+    Byte *dataBytes = (Byte *)[data bytes];
+    NSInteger length = [data length];
+    uint8_t *ls = malloc(length);
+    UInt32 lengthOfLs = 0;
+    for (int i = 0; i<[data length]; i++) {
+        if (dataBytes[i] == 0xcc) {
+            ls[lengthOfLs++] = dataBytes[++i]-1;
+        }
+        else{
+            ls[lengthOfLs++] = dataBytes[i];
+        }
+    }
+    NSData *convertData = [NSData dataWithBytes:ls length:lengthOfLs];
+    return convertData;
+}
 @end

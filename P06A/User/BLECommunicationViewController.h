@@ -43,7 +43,8 @@ typedef NS_ENUM(NSInteger,KCmdids)
     CMDID_TREAT_RECORD_SUM      = 0X0C,
     CMDID_PAGE_TREAT_RECORD     = 0X10,
     
-    CMDID_DEVICE_STATE          = 0XFA,
+    CMDID_DEVICE_STATE          = 0X12,
+    CMDID_DEVICE_TYPE           = 0XFA,
     CMDID_ALERT_INFORMATION     = 0X0B,
     
     

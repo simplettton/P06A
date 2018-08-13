@@ -32,10 +32,9 @@
     NSInteger accumulateTime;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad{
     [super viewDidLoad];
     [self startRequest];
-//    [self getDataWithPage:4];
     self.title = @"治疗记录";
     [self initAll];
 }
@@ -48,6 +47,41 @@
     datas = [[NSMutableArray alloc]initWithCapacity:20];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.tableFooterView = [[UIView alloc]init];
+    
+    self.accumulateTimeLabel.text = [NSString stringWithFormat:@"4"];
+    self.firstDateLabel.text = [self stringFromTimeIntervalString:@"1530428999" dateFormat:@"yyyy/MM/dd"];
+    self.lastDateLabel.text = [self stringFromTimeIntervalString:@"1533107399" dateFormat:@"yyyy/MM/dd"];
+    self.recordSumLabel.text = @"10";
+    
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithCapacity:20];
+    [dictionary setObject:@"0" forKey:@"mode"];
+    [dictionary setObject:@"50" forKey:@"press"];
+    [dictionary setObject:@"35" forKey:@"dur"];
+    [dictionary setObject:@"1532070599" forKey:@"date"];
+    [datas addObject:dictionary];
+    
+    NSMutableDictionary *dictionary1 = [[NSMutableDictionary alloc]initWithCapacity:20];
+    [dictionary1 setObject:@"1" forKey:@"mode"];
+    [dictionary1 setObject:@"50" forKey:@"press"];
+    [dictionary1 setObject:@"35" forKey:@"dur"];
+    [dictionary1 setObject:@"1532502599" forKey:@"date"];
+    [datas addObject:dictionary1];
+    
+    NSMutableDictionary *dictionary2 = [[NSMutableDictionary alloc]initWithCapacity:20];
+    [dictionary2 setObject:@"2" forKey:@"mode"];
+    [dictionary2 setObject:@"100" forKey:@"press"];
+    [dictionary2 setObject:@"20" forKey:@"dur"];
+    [dictionary2 setObject:@"1532761799" forKey:@"date"];
+    [datas addObject:dictionary2];
+    
+    NSMutableDictionary *dictionary3 = [[NSMutableDictionary alloc]initWithCapacity:20];
+    [dictionary3 setObject:@"2" forKey:@"mode"];
+    [dictionary3 setObject:@"80" forKey:@"press"];
+    [dictionary3 setObject:@"40" forKey:@"dur"];
+    [dictionary3 setObject:@"1532848199" forKey:@"date"];
+    [datas addObject:dictionary3];
+    
 }
 
 -(void)startRequest{
@@ -140,12 +174,6 @@
                                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                        NSLog(@"error==%@",error);
                                    }];
-                         
-                         
-                         
-                         
-                         
-                         
                      }
                  }
              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -201,6 +229,7 @@
         cell = [[TreatmentRecordCell init]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+
     //mode
     NSDictionary *dataDic = [datas objectAtIndex:indexPath.row];
     NSInteger mode = [[dataDic objectForKey:@"mode"]intValue];

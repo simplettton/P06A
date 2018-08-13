@@ -68,7 +68,6 @@
         self.nickNameLabel.text = @"游客";
     }
     self.nickNameLabel.textColor = [UIColor whiteColor];
-//    nickNameLabel.font   = [UIFont systemFontOfSize:28 * KScreenUnit];
     self.nickNameLabel.font = [UIFont systemFontOfSize:35*KScreenUnit];
     [self addSubview:self.nickNameLabel];
     

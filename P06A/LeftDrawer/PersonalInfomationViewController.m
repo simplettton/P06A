@@ -65,8 +65,8 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.title = @"个人信息";
     
-//    self.navigationController.navigationBar.barTintColor = UIColorFromHex(0X65B8F3);
-//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.barTintColor = UIColorFromHex(0X65B8F3);
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     [[self.navigationController navigationBar]setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromHex(0XFFFFFF)}];
     self.navigationItem.rightBarButtonItem.tintColor = UIColorFromHex(0xFFFFFF);
     self.navigationItem.leftBarButtonItem.tintColor = UIColorFromHex(0xFFFFFF);
@@ -93,6 +93,8 @@
     }
 }
 #pragma mark - Table view delegate
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

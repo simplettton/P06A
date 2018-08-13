@@ -10,7 +10,6 @@
 #import "EditTreatAreaViewController.h"
 #import "UIWebView+ConverToPDF.h"
 #import "ReportComposer.h"
-
 #import "WXApi.h"
 #import "WXApiObject.h"
 
@@ -34,13 +33,13 @@
     ];
     
     //编辑治疗部位
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTreatArea)];
+//    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTreatArea)];
     
     
     shareButton.tintColor = [UIColor whiteColor];
     
-    self.navigationItem.rightBarButtonItems = @[editButton,shareButton];
-    
+//    self.navigationItem.rightBarButtonItems = @[editButton,shareButton];
+    self.navigationItem.rightBarButtonItems = @[shareButton];
     
     [self.webView setBackgroundColor:[UIColor clearColor]];
     self.webView.scalesPageToFit = YES;

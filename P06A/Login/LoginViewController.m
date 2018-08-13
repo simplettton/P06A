@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *thirdPartyView;
 @property (weak, nonatomic) IBOutlet UIImageView *identityImageView;
 @property (weak, nonatomic) IBOutlet UIView *loginBackgroundView;
+@property (weak, nonatomic) IBOutlet UIButton *loginWithPhoneNumberButton;
 
 
 
@@ -62,17 +63,26 @@
 }
 
 -(void)initAll {
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeSelf:)];
-    self.navigationItem.leftBarButtonItem = barButton;
+//    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeSelf:)];
+//    self.navigationItem.leftBarButtonItem = barButton;
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] init];
+    backBtn.title = @"";
+    self.navigationItem.backBarButtonItem = backBtn;
+    
     self.loginView.layer.borderWidth = 1;
     self.loginView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     self.loginView.layer.cornerRadius = 5;
     self.loginButton.layer.cornerRadius = 5;
     
-    self.loginBackgroundView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
-    self.loginBackgroundView.layer.borderWidth = 1;
+//    self.loginBackgroundView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+//    self.loginBackgroundView.layer.borderWidth = 1;
     self.loginBackgroundView.layer.cornerRadius = 5;
     self.identityImageView.layer.cornerRadius = 5;
+    
+    self.loginWithPhoneNumberButton.layer.borderWidth = 1;
+    self.loginWithPhoneNumberButton.layer.borderColor = UIColorFromHex(0x14B8B6).CGColor;
+    self.loginWithPhoneNumberButton.layer.cornerRadius = 1;
+    self.loginWithPhoneNumberButton.clipsToBounds = YES;
     
     //保存的身份选择
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -231,5 +241,10 @@
 
         }
     }];
+}
+#pragma mark - loginWithPhone
+
+- (IBAction)loginWithPhoneNumber:(id)sender {
+    
 }
 @end

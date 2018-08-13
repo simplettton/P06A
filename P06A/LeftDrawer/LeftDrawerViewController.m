@@ -110,8 +110,9 @@
         UIAlertAction* logoutAction = [UIAlertAction actionWithTitle:@"立即退出"
                                                                style:UIAlertActionStyleDestructive
                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [UserDefault setBool:NO forKey:@"IsLogined"];
+                                                                 [UserDefault synchronize];
                                                                  
-                                                                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsLogined"];
                                                                  LoginViewController *loginVC = (LoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"LoginViewController"];
                                                                  showVC = loginVC;
                                                                  

@@ -607,12 +607,12 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
 
 
 - (void)keepAlive {
-    DDLogVerbose(@"[MQTTSession] keepAlive %@ @%.0f", self.clientId, [[NSDate date] timeIntervalSince1970]);
+//    DDLogVerbose(@"[MQTTSession] keepAlive %@ @%.0f", self.clientId, [[NSDate date] timeIntervalSince1970]);
     (void)[self encode:[MQTTMessage pingreqMessage]];
 }
 
 - (void)checkDup {
-    DDLogVerbose(@"[MQTTSession] checkDup %@ @%.0f", self.clientId, [[NSDate date] timeIntervalSince1970]);
+//    DDLogVerbose(@"[MQTTSession] checkDup %@ @%.0f", self.clientId, [[NSDate date] timeIntervalSince1970]);
     [self checkTxFlows];
 }
 
@@ -634,12 +634,12 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
         }
     }
     for (id<MQTTFlow> flow in flows) {
-        DDLogVerbose(@"[MQTTSession] %@ flow %@ %@ %@", self.clientId, flow.deadline, flow.commandType, flow.messageId);
+//        DDLogVerbose(@"[MQTTSession] %@ flow %@ %@ %@", self.clientId, flow.deadline, flow.commandType, flow.messageId);
         if ([flow.deadline compare:[NSDate date]] == NSOrderedAscending) {
             switch ((flow.commandType).intValue) {
                 case 0:
                     if (windowSize <= self.persistence.maxWindowSize) {
-                        DDLogVerbose(@"[MQTTSession] PUBLISH queued message %@", flow.messageId);
+//                        DDLogVerbose(@"[MQTTSession] PUBLISH queued message %@", flow.messageId);
                         message = [MQTTMessage publishMessageWithData:flow.data
                                                               onTopic:flow.topic
                                                                   qos:(flow.qosLevel).intValue
@@ -708,10 +708,10 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
                                  @"MQTTDecoderEventConnectionClosed",
                                  @"MQTTDecoderEventConnectionError"
                                  ];
-    DDLogVerbose(@"[MQTTSession] decoder handleEvent: %@ (%d) %@",
-                 events[eventCode % [events count]],
-                 eventCode,
-                 [error description]);
+//    DDLogVerbose(@"[MQTTSession] decoder handleEvent: %@ (%d) %@",
+//                 events[eventCode % [events count]],
+//                 eventCode,
+//                 [error description]);
 
     switch (eventCode) {
         case MQTTDecoderEventConnectionClosed:
@@ -1289,16 +1289,16 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
 }
 
 - (UInt16)nextMsgId {
-    DDLogVerbose(@"nextMsgId synchronizing");
+//    DDLogVerbose(@"nextMsgId synchronizing");
     @synchronized(self) {
-        DDLogVerbose(@"nextMsgId synchronized");
+//        DDLogVerbose(@"nextMsgId synchronized");
         self.txMsgId++;
         while (self.txMsgId == 0 || [self.persistence flowforClientId:self.clientId
                                                          incomingFlag:NO
                                                             messageId:self.txMsgId] != nil) {
             self.txMsgId++;
         }
-        DDLogVerbose(@"nextMsgId synchronized done");
+//        DDLogVerbose(@"nextMsgId synchronized done");
         return self.txMsgId;
     }
 }

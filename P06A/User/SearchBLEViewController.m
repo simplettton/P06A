@@ -199,6 +199,7 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:macString forKey:@"MacString"];
             [userDefaults setObject:peripheralName forKey:@"PeripheralName"];
+            [userDefaults synchronize];
             
             //提示框
             self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -215,7 +216,7 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
             //update 我的设备栏
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             UILabel *label = [cell viewWithTag:BondedDeviceLabelTag];
-            label.text = [NSString stringWithFormat:@"BLE-%@",macString];
+            label.text = [NSString stringWithFormat:@"蓝牙地址：%@",macString];
             
         }
     }else {

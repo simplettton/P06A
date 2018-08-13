@@ -244,7 +244,7 @@
                                             @(MQTTSessionEventProtocolError): @"protocoll error",
                                             @(MQTTSessionEventConnectionClosedByBroker): @"connection closed by broker"
                                             };
-    DDLogVerbose(@"[MQTTSessionManager] eventCode: %@ (%ld) %@", events[@(eventCode)], (long)eventCode, error);
+//    DDLogVerbose(@"[MQTTSessionManager] eventCode: %@ (%ld) %@", events[@(eventCode)], (long)eventCode, error);
 #endif
     switch (eventCode) {
         case MQTTSessionEventConnected:
@@ -400,7 +400,7 @@
         }
     }
     self.internalSubscriptions = newSubscriptions;
-    DDLogVerbose(@"MQTTSessionManager internalSubscriptions: %@", self.internalSubscriptions);
+//    DDLogVerbose(@"MQTTSessionManager internalSubscriptions: %@", self.internalSubscriptions);
 }
 
 @end
