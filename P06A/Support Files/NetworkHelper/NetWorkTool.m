@@ -49,25 +49,20 @@ static NetWorkTool *_instance;
     
     NSString *token = [userDefault objectForKey:@"Token"];
     
-    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
-    
-    id params;
-    
+
     //通用token data模板
     if( hasToken )
     {
-        [param setValue:token forKey:@"token"];
-
+//        [_instance.requestSerializer setValue:token forHTTPHeaderField:@"token"];
+        [_instance.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     }
-    [param setValue:parameters forKey:@"data"];
-    params = [param copy];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
 
     [self POST:address
-    parameters:params
+    parameters:parameters
       progress:^(NSProgress * _Nonnull uploadProgress) {
 
       }
@@ -82,7 +77,6 @@ static NetWorkTool *_instance;
            if (jsonDict != nil) {
 
                NSString *result = [jsonDict objectForKey:@"result"];
-               NSNumber *count = [jsonDict objectForKey:@"count"];
                
                id content;
                //返回null的content
@@ -105,7 +99,6 @@ static NetWorkTool *_instance;
                    responseObject.result = result;
                    responseObject.content = content;
                    responseObject.errorString = errorString;
-                   responseObject.count = count;
                    responseBlock(responseObject);
                }
 

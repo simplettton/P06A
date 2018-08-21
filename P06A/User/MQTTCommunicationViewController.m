@@ -153,7 +153,11 @@ NSString *const MQTTPassWord = @"password";
             
             //询问设备状态包
             [self sendDataWithCmdid:0x90 dataString:nil];
+
             [self startRealTime];
+            //询问多一次实时信息
+            [self performSelector:@selector(startRealTime) withObject:nil afterDelay:1];
+            
             [self startTimer];
             
             break;
@@ -196,7 +200,7 @@ NSString *const MQTTPassWord = @"password";
 }
 - (IBAction)test:(id)sender {
 
-    [self.array addObject:[NSNumber numberWithInt:4]];
+    [self.array addObject:[NSNumber numberWithInt:106]];
     NSArray *aaChartModelSeriesArray = @[@{@"name":@"pressure",
                                            @"type":@"line",
                                            @"data":self.array
@@ -310,7 +314,7 @@ NSString *const MQTTPassWord = @"password";
 #pragma mark - receiveData
 
 - (void)handleMessage:(NSData *)data onTopic:(NSString *)topic retained:(BOOL)retained {
-    NSLog(@"----------------------topic:%@--------------------------",topic);
+//    NSLog(@"----------------------topic:%@--------------------------",topic);
     
     //收到消息代表连接成功
     self.isConnectedString = @"YES";
@@ -351,11 +355,12 @@ NSString *const MQTTPassWord = @"password";
             case 0x91:
                 self.currentPressure = dataByte[1];
 
-                [self startRefreshChartTimer];
+//                [self startRefreshChartTimer];
+                [self addPointTochart];
 
                 Byte timeBytes [] = {dataByte[2],dataByte[3],dataByte[4],dataByte[5]};
                 self.treatmentTime = [self lBytesToInt:timeBytes withLength:4];
-                NSLog(@"self.treatmentTime = %ld",self.treatmentTime);
+//                NSLog(@"self.treatmentTime = %ld",self.treatmentTime);
                 break;
             
             //警告信息返回包

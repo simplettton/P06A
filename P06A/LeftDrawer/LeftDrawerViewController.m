@@ -12,7 +12,11 @@
 #import "LoginViewController.h"
 #import "PersonalInfomationViewController.h"
 #import "ContactUSTableViewController.h"
+#import "SettingViewController.h"
 #import "BaseHeader.h"
+
+#import "PhoneLoginViewController.h"
+#import "PasswordLoginViewController.h"
 
 @interface LeftDrawerViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -32,8 +36,8 @@
     self.tableView.scrollEnabled = NO;
     
     [self.headerView.myInformationButton addTarget:self action:@selector(buttonClickListener:) forControlEvents:UIControlEventTouchUpInside];
-    self.functionArray = @[@"",@"我的设备",@"设置",@"联系我们",@"帮助",@"",@"",@"",@"退出登录"];
-    self.imageNameArray = @[@"",@"star",@"setting",@"service",@"help",@"",@"",@"",@""];
+    self.functionArray = @[@"",@"设置",@"我的设备",@"联系我们",@"帮助",@"",@"",@"",@"退出登录"];
+    self.imageNameArray = @[@"",@"setting",@"star",@"service",@"help",@"",@"",@"",@""];
 }
 
 #pragma mark -- UITableViewDataSource
@@ -84,9 +88,11 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     __block UIViewController *showVC;
+    NSInteger settingIndex = [self.functionArray indexOfObject:@"设置"];
     NSInteger myDeviceIndex = [self.functionArray indexOfObject:@"我的设备"];
     NSInteger contactUSIndex = [self.functionArray indexOfObject:@"联系我们"];
     if (indexPath.row == myDeviceIndex) {
+        
         MyDeviceTableViewController *myDeviceVC = (MyDeviceTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"MyDeviceViewController"];
 
         showVC = myDeviceVC;
@@ -95,11 +101,19 @@
         
         [nav pushViewController:showVC animated:YES];
     }else if (indexPath.row == contactUSIndex){
+        
         ContactUSTableViewController *contactUSVC = (ContactUSTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"ContactUSTableViewController"];
         showVC = contactUSVC;
         UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
         
         [nav pushViewController:showVC animated:YES];
+    }else if(indexPath.row == settingIndex){
+        
+        SettingViewController *settingVC = (SettingViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"SettingViewController"];
+        showVC = settingVC;
+        UINavigationController *nav = (UINavigationController *)self.mm_drawerController.centerViewController;
+        [nav pushViewController:showVC animated:YES];
+        
     }
 
     if (indexPath.row==8) {
@@ -113,8 +127,17 @@
                                                                  [UserDefault setBool:NO forKey:@"IsLogined"];
                                                                  [UserDefault synchronize];
                                                                  
-                                                                 LoginViewController *loginVC = (LoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                                                                 showVC = loginVC;
+                                                                 NSString *userIdentity = [UserDefault objectForKey:@"Identity"];
+                                                                 
+                                                                 if ([userIdentity isEqualToString:@"patient"]) {
+                                                                     
+                                                                     showVC = (PhoneLoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"PhoneLoginViewController"];
+                                                                     
+                                                                 }else{
+                                                                     showVC = (PasswordLoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"PasswordLoginViewController"];
+                                                                     
+                                                                 }
+                                                                 
                                                                  
                                                                  UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
                                                                  [nav pushViewController:showVC animated:YES];
@@ -125,11 +148,11 @@
                                                                  
                                                                  
                                                              }];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"取消"
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消"
                                                                 style:UIAlertActionStyleCancel
                                                               handler:^(UIAlertAction * action) {}];
         
-        [alert addAction:defaultAction];
+        [alert addAction:cancelAction];
         [alert addAction:logoutAction];
         [self presentViewController:alert animated:YES completion:nil];
     }

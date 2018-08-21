@@ -17,8 +17,6 @@
 @property NSString *result;
 @property id content;
 @property NSString *errorString;
-@property NSNumber *count;
-@property NSData *dataStream;
 @end
 
 #endif /* HttpResponse_h */

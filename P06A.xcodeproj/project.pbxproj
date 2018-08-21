@@ -58,6 +58,7 @@
 		043CA1912027E93200713A3C /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 043CA1902027E93200713A3C /* UIViewController+BackButtonHandler.m */; };
 		044C526220255C4600923060 /* PressParameterSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C526120255C4600923060 /* PressParameterSetView.m */; };
 		044C526420255C6F00923060 /* PressParameterSetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044C526320255C6F00923060 /* PressParameterSetView.xib */; };
+		044E021A2124081C003B6C9D /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E02192124081C003B6C9D /* SettingViewController.m */; };
 		0451F0C72019BAB80001A9D4 /* LeftHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451F0C62019BAB80001A9D4 /* LeftHeaderView.m */; };
 		0451F0CB2019BF310001A9D4 /* PersonalInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451F0CA2019BF300001A9D4 /* PersonalInfomationViewController.m */; };
 		0451F0CE2019C1220001A9D4 /* EditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451F0CC2019C1220001A9D4 /* EditTableViewController.m */; };
@@ -65,7 +66,10 @@
 		0453055A204659C500BC06BA /* TreatmentRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04530558204659C500BC06BA /* TreatmentRecordCell.m */; };
 		0453055B204659C500BC06BA /* TreatmentRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04530559204659C500BC06BA /* TreatmentRecordCell.xib */; };
 		0453324620293D8E00B63C58 /* MQTTCommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453324520293D8E00B63C58 /* MQTTCommunicationViewController.m */; };
+		045798B121226961007EE5BE /* PhonenumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045798B021226961007EE5BE /* PhonenumViewController.m */; };
 		045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045930F3204511A6003F6BDC /* ServerRecordViewController.m */; };
+		0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC37212679090030E338 /* ChangePhoneNumViewController.m */; };
+		0464FC3B212681BE0030E338 /* EnterVerificationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC3A212681BE0030E338 /* EnterVerificationCodeViewController.m */; };
 		04672BB62005F128007D8410 /* BLECommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04672BB52005F128007D8410 /* BLECommunicationViewController.m */; };
 		0469FEAB1FFE0C75002E25C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469FEAA1FFE0C75002E25C3 /* AppDelegate.m */; };
 		0469FEB11FFE0C75002E25C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0469FEAF1FFE0C75002E25C3 /* Main.storyboard */; };
@@ -214,6 +218,8 @@
 		044C526020255C4600923060 /* PressParameterSetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PressParameterSetView.h; sourceTree = "<group>"; };
 		044C526120255C4600923060 /* PressParameterSetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PressParameterSetView.m; sourceTree = "<group>"; };
 		044C526320255C6F00923060 /* PressParameterSetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PressParameterSetView.xib; sourceTree = "<group>"; };
+		044E02182124081C003B6C9D /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		044E02192124081C003B6C9D /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		0451F0C52019BAB80001A9D4 /* LeftHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftHeaderView.h; sourceTree = "<group>"; };
 		0451F0C62019BAB80001A9D4 /* LeftHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftHeaderView.m; sourceTree = "<group>"; };
 		0451F0C92019BF300001A9D4 /* PersonalInfomationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfomationViewController.h; sourceTree = "<group>"; };
@@ -227,8 +233,14 @@
 		04530559204659C500BC06BA /* TreatmentRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TreatmentRecordCell.xib; sourceTree = "<group>"; };
 		0453324420293D8E00B63C58 /* MQTTCommunicationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MQTTCommunicationViewController.h; sourceTree = "<group>"; };
 		0453324520293D8E00B63C58 /* MQTTCommunicationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MQTTCommunicationViewController.m; sourceTree = "<group>"; };
+		045798AF21226961007EE5BE /* PhonenumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhonenumViewController.h; sourceTree = "<group>"; };
+		045798B021226961007EE5BE /* PhonenumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhonenumViewController.m; sourceTree = "<group>"; };
 		045930F2204511A6003F6BDC /* ServerRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerRecordViewController.h; sourceTree = "<group>"; };
 		045930F3204511A6003F6BDC /* ServerRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerRecordViewController.m; sourceTree = "<group>"; };
+		0464FC36212679090030E338 /* ChangePhoneNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePhoneNumViewController.h; sourceTree = "<group>"; };
+		0464FC37212679090030E338 /* ChangePhoneNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePhoneNumViewController.m; sourceTree = "<group>"; };
+		0464FC39212681BE0030E338 /* EnterVerificationCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterVerificationCodeViewController.h; sourceTree = "<group>"; };
+		0464FC3A212681BE0030E338 /* EnterVerificationCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterVerificationCodeViewController.m; sourceTree = "<group>"; };
 		04661DF32060A7D0002641D1 /* BaseHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseHeader.h; sourceTree = "<group>"; };
 		04672BB42005F128007D8410 /* BLECommunicationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLECommunicationViewController.h; sourceTree = "<group>"; };
 		04672BB52005F128007D8410 /* BLECommunicationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLECommunicationViewController.m; sourceTree = "<group>"; };
@@ -513,6 +525,14 @@
 				0451F0CC2019C1220001A9D4 /* EditTableViewController.m */,
 				0478C2C9204FE6F00000135D /* EditTreatAreaViewController.h */,
 				0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */,
+				045798AF21226961007EE5BE /* PhonenumViewController.h */,
+				045798B021226961007EE5BE /* PhonenumViewController.m */,
+				0464FC36212679090030E338 /* ChangePhoneNumViewController.h */,
+				0464FC37212679090030E338 /* ChangePhoneNumViewController.m */,
+				0464FC39212681BE0030E338 /* EnterVerificationCodeViewController.h */,
+				0464FC3A212681BE0030E338 /* EnterVerificationCodeViewController.m */,
+				044E02182124081C003B6C9D /* SettingViewController.h */,
+				044E02192124081C003B6C9D /* SettingViewController.m */,
 			);
 			path = LeftDrawer;
 			sourceTree = "<group>";
@@ -877,6 +897,7 @@
 				043A3917202AD66000835BDD /* AAXAxis.m in Sources */,
 				043A390C202AD66000835BDD /* AAOptions.m in Sources */,
 				043A38F7202AD66000835BDD /* AAChartView.m in Sources */,
+				0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */,
 				048E92A22043EBD2009F8532 /* RecordTableViewCell.m in Sources */,
 				043A3907202AD66000835BDD /* AAItemStyle.m in Sources */,
 				04892F6D202403BB00100545 /* SetTreatmentParameterController.m in Sources */,
@@ -905,17 +926,20 @@
 				043A3905202AD66000835BDD /* AAColumn.m in Sources */,
 				043A3908202AD66000835BDD /* AALabels.m in Sources */,
 				043A3918202AD66000835BDD /* AAYAxis.m in Sources */,
+				045798B121226961007EE5BE /* PhonenumViewController.m in Sources */,
 				04150EF82011971C007EAC85 /* GuideBindDeviceViewController.m in Sources */,
 				049B57E5204E9ACA0072F7A4 /* CustomPrintPageRenderer.m in Sources */,
 				04118BB31FFE23860054BC15 /* UpgradeOnlineViewController.m in Sources */,
 				04DA58B020E4DE7700E78816 /* MapViewController.m in Sources */,
 				040D1E96200F3A9B0010FF47 /* LoginViewController.m in Sources */,
 				04150EFB2011C9DD007EAC85 /* SearchBLEViewController.m in Sources */,
+				044E021A2124081C003B6C9D /* SettingViewController.m in Sources */,
 				043A390E202AD66000835BDD /* AAPie.m in Sources */,
 				0469FEAB1FFE0C75002E25C3 /* AppDelegate.m in Sources */,
 				043A3910202AD66000835BDD /* AAPlotOptions.m in Sources */,
 				043A3912202AD66000835BDD /* AASpline.m in Sources */,
 				043A3911202AD66000835BDD /* AASeries.m in Sources */,
+				0464FC3B212681BE0030E338 /* EnterVerificationCodeViewController.m in Sources */,
 				04672BB62005F128007D8410 /* BLECommunicationViewController.m in Sources */,
 				043CA1912027E93200713A3C /* UIViewController+BackButtonHandler.m in Sources */,
 				047D48A12047F30D00DF7DF1 /* UIWebView+ConverToPDF.m in Sources */,

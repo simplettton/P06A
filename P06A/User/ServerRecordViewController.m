@@ -34,7 +34,18 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self startRequest];
+    [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Users/UserInfo"]
+                                  params:nil
+                                hasToken:YES
+                                 success:^(HttpResponse *responseObject) {
+                                    if ([responseObject.result integerValue] == 1) {
+                                        NSLog(@"receive : %@",responseObject.content);
+                                    }else{
+                                        [SVProgressHUD showErrorWithStatus:responseObject.errorString];
+                                    }
+                                 } failure:nil];
+    
+//    [self startRequest];
     self.title = @"治疗记录";
     [self initAll];
 }
@@ -89,6 +100,9 @@
     
     NetWorkTool *netWorkTool = [NetWorkTool sharedNetWorkTool];
     
+    
+
+    
     NSDictionary *parameters = @{
                                     @"action":@"getonetreatsum",
                                     @"id":DeviceId
@@ -106,16 +120,16 @@
                      if ([state intValue] == 1) {
                          sum = [[jsonDict objectForKey:@"sum"]intValue];
                          numberOfPage = (sum +10-1)/10;
-                         
+
                          for (int i =0; i < numberOfPage; i++) {
                              [self getDataWithPage:i];
                          }
-                         
-                         
+
+
                          //更新总数UI
                          self.recordSumLabel.text = [jsonDict objectForKey:@"sum"];
 
-                         
+
                          //获取第一页
                          NetWorkTool *netWorkTool = [NetWorkTool sharedNetWorkTool];
                          NSDictionary *parameter = @{
@@ -123,7 +137,7 @@
                                                      @"page":@"0",
                                                      @"id":DeviceId
                                                      };
-            
+
                          [netWorkTool POST:HTTPServerURLSting
                                 parameters:parameter
                                   progress:nil
@@ -135,25 +149,25 @@
                                                NSArray *dataArray = [jsonDict objectForKey:@"body"];
                                                NSDictionary *firstDataDic = [dataArray objectAtIndex:0];
                                                NSString *timeStamp = [firstDataDic objectForKey:@"date"];
-                                               
+
                                                //upload lase treatment date
                                                self.lastDateLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"yyyy/MM/dd"];
                                            }
                                        }
-                                       
+
                                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                        NSLog(@"error==%@",error);
                                    }];
-                         
-                         
-                         
+
+
+
                      //获取最后一页
                          parameter = @{
                                          @"action":@"getalltreats",
                                          @"page":[NSString stringWithFormat:@"%ld",numberOfPage -1],
                                          @"id":DeviceId
                                        };
-                         
+
                          [netWorkTool POST:HTTPServerURLSting
                                 parameters:parameter
                                   progress:nil
@@ -165,12 +179,12 @@
                                                NSArray *dataArray = [jsonDict objectForKey:@"body"];
                                                NSDictionary *firstDataDic = [dataArray lastObject];
                                                NSString *timeStamp = [firstDataDic objectForKey:@"date"];
-                                               
+
                                                //upload lase treatment date
                                                self.firstDateLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"yyyy/MM/dd"];
                                            }
                                        }
-                                       
+
                                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                        NSLog(@"error==%@",error);
                                    }];

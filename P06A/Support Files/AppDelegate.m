@@ -19,6 +19,8 @@
 //地图框架
 #import <AMapFoundationKit/AMapFoundationKit.h>
 
+#import "PhoneLoginViewController.h"
+#import "PasswordLoginViewController.h"
 
 static NSString * const USHARE_APPKEY           = @"5a2a0fdeb27b0a4989000164";
 static NSString * const KOpenFileNotification   = @"KOpenFileNotification";
@@ -171,8 +173,9 @@ static NSString * const KFilePath               = @"KFilePath";
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    //选择了角色
+
     if ([UserDefault objectForKey:@"Identity"]) {
+        //登录了之后跳转到主界面
         if ([self isUserLogin]) {
             [self initDrawer];
             //  初始化窗口、设置根控制器、显示窗口
@@ -187,8 +190,16 @@ static NSString * const KFilePath               = @"KFilePath";
             
             [self.window makeKeyAndVisible];
         }else{
-            UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-            UINavigationController* navigationController = [[UINavigationController alloc]initWithRootViewController:controller];
+            NSString *userIdentity = [UserDefault objectForKey:@"Identity"];
+            UIViewController *loginVC;
+            if([userIdentity isEqualToString:@"patient"]){
+                loginVC = (PhoneLoginViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"PhoneLoginViewController"];
+            }else{
+                loginVC = (PasswordLoginViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordLoginViewController"];
+            }
+            
+            
+            UINavigationController* navigationController = [[UINavigationController alloc]initWithRootViewController:loginVC];
             self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
             [UIView transitionWithView:self.window
                               duration:0.25
@@ -208,7 +219,7 @@ static NSString * const KFilePath               = @"KFilePath";
     UINavigationController *centerNavi = [[UINavigationController alloc]init];
    NSString *role = [UserDefault objectForKey:@"ROLE"];
     if ([role isEqualToString:@"admin"]) {
-        centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"doctor"];
+        centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"admin"];
     }else if([role isEqualToString:@"user"]){
         centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];
     }

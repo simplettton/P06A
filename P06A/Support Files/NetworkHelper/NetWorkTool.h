@@ -11,7 +11,7 @@
 @interface NetWorkTool : AFHTTPSessionManager
 typedef  void (^HttpSuccessBlock) (id JSON);
 typedef  void (^HttpFailureBlock) (NSError *error);
-typedef void (^HttpResponseObject)(HttpResponse* responseObject);
+typedef  void (^HttpResponseObject)(HttpResponse* responseObject);
 
 +(instancetype)sharedNetWorkTool;
 

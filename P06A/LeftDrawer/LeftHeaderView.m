@@ -41,16 +41,15 @@
 }
 -(void)addView
 {
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     //加载头像
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(50 * KScreenUnit, 130 * KScreenUnit, 100 * KScreenUnit, 100 * KScreenUnit)];
 //    headerImageView.layer.cornerRadius = 50 * KScreenUnit;
     
     self.headerImageView.clipsToBounds  = YES;
     [self setRoundHeadPortrait:self.headerImageView];
-    if ([userDefault objectForKey:@"USER_ICON"])
+    if ([UserDefault objectForKey:@"USER_ICON"])
     {
-        self.headerImageView.image = [UIImage imageWithData:[userDefault objectForKey:@"USER_ICON"]];
+        self.headerImageView.image = [UIImage imageWithData:[UserDefault objectForKey:@"USER_ICON"]];
     }
     else
     {
@@ -61,8 +60,8 @@
     //加载昵称
     self.nickNameLabel  = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.headerImageView.frame)+ 40 * KScreenUnit , 150 * KScreenUnit, 300 * KScreenUnit,40 * KScreenUnit)];
 
-    if ([userDefault objectForKey:@"USER_NAME"]) {
-        self.nickNameLabel.text = [NSString stringWithFormat:@"%@",[userDefault objectForKey:@"USER_NAME"]];
+    if ([UserDefault objectForKey:@"USER_NAME"]) {
+        self.nickNameLabel.text = [NSString stringWithFormat:@"%@",[UserDefault objectForKey:@"USER_NAME"]];
     }else
     {
         self.nickNameLabel.text = @"游客";

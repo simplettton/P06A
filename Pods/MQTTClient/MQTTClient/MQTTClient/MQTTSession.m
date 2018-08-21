@@ -1641,7 +1641,7 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
                                       data:message.data];
                 }
             }
-            DDLogVerbose(@"[MQTTSession] mqttTransport send");
+//            DDLogVerbose(@"[MQTTSession] mqttTransport send");
             return [self.transport send:wireFormat];
         } else {
             DDLogError(@"[MQTTSession] trying to send message without wire format");
@@ -1655,7 +1655,7 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
 
 #pragma mark - MQTTTransport delegate
 - (void)mqttTransport:(id<MQTTTransport>)mqttTransport didReceiveMessage:(NSData *)message {
-    DDLogVerbose(@"[MQTTSession] mqttTransport didReceiveMessage");
+//    DDLogVerbose(@"[MQTTSession] mqttTransport didReceiveMessage");
 
     [self.decoder decodeMessage:message];
 

@@ -8,12 +8,7 @@
 
 #import "LoginViewController.h"
 #import "AppDelegate.h"
-#import "AppDelegate.h"
-
-#import <SVProgressHUD.h>
-
 #import <UMSocialCore/UMSocialCore.h>
-#import "SVProgressHUD.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
@@ -87,9 +82,9 @@
     //保存的身份选择
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *indentity = [userDefaults objectForKey:@"Identity"];
-    if ([indentity isEqualToString:@"doctor"]) {
+    if ([indentity isEqualToString:@"admin"]) {
         
-        NSLog(@"doctor");
+        NSLog(@"admin");
         self.thirdPartyView.hidden = YES;
         self.identityImageView.highlighted = YES;
         
@@ -120,19 +115,18 @@
 
         [userDefault setObject:self.userNameTextField.text forKey:@"USER_NAME"];
         [userDefault setObject:@"admin" forKey:@"ROLE"];
-        [userDefault setBool:YES forKey:@"IsLogined"];
-        [userDefault synchronize];
-        centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"doctor"];
+
+        centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"admin"];
         
     }else if([self.userNameTextField.text isEqualToString:@"user"]){
 
         [userDefault setObject:self.userNameTextField.text forKey:@"USER_NAME"];
         [userDefault setObject:@"user" forKey:@"ROLE"];
-        [userDefault setBool:YES forKey:@"IsLogined"];
-        [userDefault synchronize];
         centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];
 
     }
+    [userDefault setBool:YES forKey:@"IsLogined"];
+    [userDefault synchronize];
 
     //切换到另一个账户
     if (centerNavi) {
@@ -236,7 +230,6 @@
 
 
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-//                        [self initDrawerWithCenterViewController:centerNavi];
             [self performSelector:@selector(initDrawerWithCenterViewController:) withObject:centerNavi afterDelay:0.25];
 
         }

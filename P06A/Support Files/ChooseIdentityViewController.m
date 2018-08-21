@@ -30,13 +30,21 @@
 @implementation ChooseIdentityViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [self initAll];
 }
 
 -(void)initAll {
-    self.rightView.backgroundColor = HilightedColor;
-    self.rightImageView.highlighted = YES;
+    userIdentity = [UserDefault objectForKey:@"Identity"];
+    if ([userIdentity isEqualToString:@"patient"]) {
+        self.rightView.backgroundColor = HilightedColor;
+        self.rightImageView.highlighted = YES;
+    }else{
+        self.leftView.backgroundColor = HilightedColor;
+        self.leftImageView.highlighted = YES;
+    }
+
     
     self.leftView.userInteractionEnabled = YES;
     self.rightView.userInteractionEnabled = YES;
@@ -45,8 +53,6 @@
                                                                                action:@selector(chooseLeft:)]];
     [self.rightView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self
                                                                                 action:@selector(chooseRight:)]];
-    
-    
     
     self.doctorButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.doctorButton.layer.cornerRadius = 5.0f;
@@ -79,16 +85,23 @@
     self.rightImageView.highlighted = NO;
     
     //身份选择
-    userIdentity = @"doctor";
+    userIdentity = @"admin";
 }
 
 - (IBAction)enterNextPage:(id)sender {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+     //保存选择的身份
     if(!userIdentity){
         userIdentity = @"patient";
     }
-    [userDefaults setObject:userIdentity forKey:@"Identity"];
-    [userDefaults synchronize];
-    [self performSegueWithIdentifier:@"ShowLoginVc" sender:nil];
+    [UserDefault setObject:userIdentity forKey:@"Identity"];
+    [UserDefault synchronize];
+    
+    //根据不同身份进入不同的登录界面
+    if ([userIdentity isEqualToString:@"patient"]) {
+        [self performSegueWithIdentifier:@"ShowPatientLoginVC" sender:nil];
+    }else{
+        [self performSegueWithIdentifier:@"ShowAdminLoginVC" sender:nil];
+    }
 }
 @end

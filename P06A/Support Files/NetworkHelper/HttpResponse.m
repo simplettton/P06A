@@ -15,6 +15,6 @@
 @synthesize result;
 @synthesize content;
 @synthesize errorString;
-@synthesize count;
+
 @end
 

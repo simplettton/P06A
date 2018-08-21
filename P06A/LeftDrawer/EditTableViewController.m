@@ -32,8 +32,7 @@
     self.title = [NSString stringWithFormat:@"设置%@",self.editKey];
     self.contentTextField.text = self.editValue;
     
-//    items = [NSArray arrayWithObjects:@"headPhoto",@"name",@"USER_SEX",@"age",@"phoneNumber",@"address", nil];
-    items = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"AGE",@"PHONE_NUMBER",@"TREAT_AREA",@"ADDRESS", nil];
+    items = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"AGE",@"TREAT_AREA",@"PHONE_NUMBER",@"ADDRESS",nil];
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -53,10 +52,10 @@
 }
 - (IBAction)save:(id)sender
 {
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+
     NSString *newValue = self.contentTextField.text;
-    [userDefault setObject: newValue forKey:[items objectAtIndex:self.selectedRow]];
-    [userDefault synchronize];
+    [UserDefault setObject: newValue forKey:[items objectAtIndex:self.selectedRow]];
+    [UserDefault synchronize];
     [self.navigationController popViewControllerAnimated:YES];
     self.returnBlock(self.selectedRow, self.contentTextField.text);
 }

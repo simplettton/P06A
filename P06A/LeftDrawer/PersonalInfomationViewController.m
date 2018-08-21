@@ -9,6 +9,7 @@
 #import "PersonalInfomationViewController.h"
 #import "EditTableViewController.h"
 #import "EditTreatAreaViewController.h"
+#import "PhonenumViewController.h"
 #import "BaseHeader.h"
 @interface PersonalInfomationViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
@@ -30,8 +31,8 @@
     self.tableView.sectionHeaderHeight  = 0;
     self.tableView.sectionFooterHeight = 20;
     self.tableView.contentInset = UIEdgeInsetsMake(20 - 35, 0, 0, 0);
-    keys = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"AGE",@"PHONE_NUMBER",@"TREAT_AREA",@"ADDRESS", nil];
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    keys = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"AGE",@"TREAT_AREA",@"PHONE_NUMBER",@"ADDRESS", nil];
+
     
     [self setRoundHeadPortrait:self.headImageView];
     for (int i = 0;i<[keys count];i++)
@@ -42,17 +43,17 @@
         {
             UILabel *label = (UILabel *)valueView;
 
-            if ([userDefault objectForKey:keys[i]])
+            if ([UserDefault objectForKey:keys[i]])
             {
-                label.text = [userDefault objectForKey:keys[i]];
+                label.text = [UserDefault objectForKey:keys[i]];
             }
         }
         else if ([valueView isKindOfClass:[UIImageView class]])
         {
             UIImageView *headerImageView = (UIImageView *)valueView;
-            if ([userDefault objectForKey:keys[i]])
+            if ([UserDefault objectForKey:keys[i]])
             {
-                headerImageView.image = [UIImage imageWithData:[userDefault objectForKey:@"USER_ICON"]];
+                headerImageView.image = [UIImage imageWithData:[UserDefault objectForKey:@"USER_ICON"]];
             }
         }
     }
@@ -93,11 +94,11 @@
     }
 }
 #pragma mark - Table view delegate
-
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    //头像
     if (indexPath.section == 0 && indexPath.row == 0){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
@@ -134,8 +135,8 @@
         [self presentViewController:alert animated:YES completion:nil];
         
     }
+    //性别
     else if (indexPath.section == 0 && indexPath.row == 2){
-        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         UITableViewCell *cell = [self.cells objectAtIndex:2];
         UILabel * label = (UILabel *)[cell viewWithTag:2];
         
@@ -145,22 +146,27 @@
             NSLog(@"点击取消");
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [userDefault setObject:@"男" forKey:@"USER_SEX"];
-            [userDefault synchronize];
+            [UserDefault setObject:@"男" forKey:@"USER_SEX"];
+            [UserDefault synchronize];
             label.text = @"男";
             
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [userDefault setObject:@"女" forKey:@"USER_SEX"];
-            [userDefault synchronize];
+            [UserDefault setObject:@"女" forKey:@"USER_SEX"];
+            [UserDefault synchronize];
             label.text = @"女";
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
     }
-    else if(indexPath.section == 1 && indexPath.row == 0){
-        [self performSegueWithIdentifier:@"EditTreatArea" sender:indexPath];
+    else if(indexPath.section == 0 && indexPath.row == 4){
+        [self performSegueWithIdentifier:@"EditTreatArea" sender:nil];
     }
-    else if (( indexPath.section == 0 && indexPath.row != 0)||(indexPath.section == 1 && indexPath.row ==1)){
+    //手机号
+    else if (indexPath.section == 1 && indexPath.row == 0){
+        [self performSegueWithIdentifier:@"EditPhoneNumber" sender:indexPath];
+    }
+    //其他信息
+    else {
          [self performSegueWithIdentifier:@"EditInfomation" sender:indexPath];
     }
 }
@@ -171,8 +177,8 @@
     
     //保存新头像
     NSData *imageData = UIImagePNGRepresentation(newPhoto);
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:imageData forKey:@"USER_ICON"];
+
+    [UserDefault setObject:imageData forKey:@"USER_ICON"];
 }
 #pragma mark - prepareForSegue
 
@@ -210,28 +216,30 @@
         };
     }else if ([segue.identifier isEqualToString:@"EditTreatArea"]){
         EditTreatAreaViewController *vc = (EditTreatAreaViewController *)segue.destinationViewController;
-//        NSIndexPath *index = (NSIndexPath *)sender;
-//        UITableViewCell *cell = [self.cells objectAtIndex:index.row + index.section *5];
-//
-//        UILabel *valueLabel = [cell viewWithTag:2];
-//        vc.selectedRow = index.section *5 + index.row;
+
         
           vc.treatArea = self.treatAreaLabel.text;
         
         vc.returnBlock = ^(NSInteger changedRow, NSString *newValue)
         {
-//            UITableViewCell *cell = [self.cells objectAtIndex:changedRow];
-//            UIView * valueView = [cell viewWithTag:2];
-//            if([valueView isKindOfClass:[UILabel class]])
-//            {
-//                UILabel *label = (UILabel *)valueView;
-//
-//                label.text = newValue;
-//            }
+
             self.treatAreaLabel.text = newValue;
         };
+    }else if([segue.identifier isEqualToString:@"EditPhoneNumber"]){
         
+        PhonenumViewController *vc = (PhonenumViewController *)segue.destinationViewController;
         
+        NSIndexPath *index = (NSIndexPath *)sender;
+        UITableViewCell *cell;
+        if (index.section ==1)
+        {
+            cell = [self.cells objectAtIndex:index.row+index.section *5];
+        }else
+        {
+            cell = [self.cells objectAtIndex:index.row];
+        }
+        UILabel *valueLabel = [cell viewWithTag:2];
+        vc.phoneNumber = valueLabel.text;
         
     }
 }

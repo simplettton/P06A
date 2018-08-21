@@ -21,7 +21,7 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *string = [userDefault objectForKey:@"MacString"];
     self.macStringLabel.text = string;
-    self.serialNumLabel.text = @"";
+//    self.serialNumLabel.text = @"";
 }
 
 
@@ -31,9 +31,7 @@
 
     return 2;
 }
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
-}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1) {
