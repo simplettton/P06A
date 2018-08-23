@@ -444,7 +444,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WWl-CC-oQ8">
-                                <rect key="frame" x="0.0" y="108" width="375" height="515"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="73" id="96M-62-79W" customClass="RecordTableViewCell">
@@ -555,7 +555,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uab-sS-8d0">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="pressure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IK0-QE-6wN">
                                         <rect key="frame" x="270" y="12" width="67" height="21"/>
@@ -1295,21 +1295,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-it-d1M">
                                 <rect key="frame" x="0.0" y="571" width="375" height="96"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="E0f-GU-EF5">
-                                        <rect key="frame" x="17.5" y="28" width="340" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="E0f-GU-EF5">
+                                        <rect key="frame" x="67.5" y="34" width="240" height="28"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPI-Ix-rbX">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="eBo-Mf-42O"/>
-                                                </constraints>
-                                                <state key="normal" title="治疗记录" image="personal_record"/>
-                                                <connections>
-                                                    <action selector="tapRecordButton:" destination="kbr-qp-egE" eventType="touchUpInside" id="UGw-0q-KIY"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdm-M1-Tvo">
-                                                <rect key="frame" x="125" y="0.0" width="90" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="90" height="28"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                 <state key="normal" title="持续吸引" image="keep_green"/>
                                                 <connections>
@@ -1317,7 +1307,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bB6-cN-bqw">
-                                                <rect key="frame" x="250" y="0.0" width="90" height="40"/>
+                                                <rect key="frame" x="150" y="0.0" width="90" height="28"/>
                                                 <state key="normal" title="锁屏" image="lock"/>
                                                 <connections>
                                                     <action selector="lock:" destination="kbr-qp-egE" eventType="touchUpInside" id="40R-ez-xfw"/>
@@ -1326,11 +1316,10 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="bB6-cN-bqw" firstAttribute="width" secondItem="Jdm-M1-Tvo" secondAttribute="width" id="9iD-Vu-DND"/>
-                                            <constraint firstItem="Jdm-M1-Tvo" firstAttribute="width" secondItem="OPI-Ix-rbX" secondAttribute="width" id="il1-a9-SNJ"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.61568627450980395" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.42281365389999997" green="0.83174973730000001" blue="0.4153529406" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="E0f-GU-EF5" firstAttribute="centerY" secondItem="Vu7-it-d1M" secondAttribute="centerY" id="5Ex-xa-Pei"/>
                                     <constraint firstItem="E0f-GU-EF5" firstAttribute="centerX" secondItem="Vu7-it-d1M" secondAttribute="centerX" id="PSx-ab-vLl"/>
@@ -1340,6 +1329,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJG-WY-cGH" userLabel="backgroundView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="507"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="userHome" translatesAutoresizingMaskIntoConstraints="NO" id="Z4c-pA-y5I" userLabel="BackgroundView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="507"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yjf-3D-esR" userLabel="Pause Stop View">
                                         <rect key="frame" x="110" y="392" width="154" height="43"/>
                                         <subviews>
@@ -1429,17 +1422,17 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFd-98-zD8">
-                                        <rect key="frame" x="144" y="468" width="87" height="22"/>
+                                        <rect key="frame" x="187.5" y="468" width="0.0" height="0.0"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="uY1-aM-Ry5">
-                                                <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="uY1-aM-Ry5">
+                                                <rect key="frame" x="-187.5" y="-532" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="22" id="8gr-3U-HQL"/>
                                                     <constraint firstAttribute="height" constant="22" id="wFL-rd-5Dj"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vf-aR-0Qe">
-                                                <rect key="frame" x="22" y="0.0" width="65" height="22"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vf-aR-0Qe">
+                                                <rect key="frame" x="-187.5" y="-532" width="65" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="Mbj-w1-mKK"/>
                                                     <constraint firstAttribute="height" constant="22" id="l0d-e1-XAG"/>
@@ -1509,16 +1502,14 @@
                         <outlet property="pauseButton" destination="BYe-sL-Awn" id="Otr-bS-fOp"/>
                         <outlet property="pressureButton" destination="MDN-EU-8yU" id="f2o-5l-51b"/>
                         <outlet property="pressureDisplay" destination="xgK-d0-hDx" id="gEJ-SU-uZQ"/>
-                        <outlet property="recordButton" destination="OPI-Ix-rbX" id="DqV-FZ-7Ge"/>
                         <outlet property="startButton" destination="N5U-9K-gXT" id="aY7-bq-klX"/>
                         <outlet property="stopButton" destination="uSu-vj-El4" id="2Dq-zN-gx5"/>
                         <outlet property="timeDisplay" destination="6Vf-aR-0Qe" id="O69-i9-gdu"/>
-                        <segue destination="hRE-5X-9Po" kind="show" identifier="ShowBLERecord" id="sqC-jF-hd7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEM-QX-ihc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="155"/>
+            <point key="canvasLocation" x="749.60000000000002" y="154.27286356821591"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GD8-b2-oIt">
@@ -1942,7 +1933,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="poI-Yn-gpJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1497" y="155"/>
+            <point key="canvasLocation" x="1388" y="112"/>
         </scene>
         <!--Left Drawer View Controller-->
         <scene sceneID="MoB-rc-6iw">
@@ -3667,7 +3658,6 @@
         <image name="patient" width="110" height="110"/>
         <image name="patient_grey" width="110" height="110"/>
         <image name="patient_selected" width="110" height="110"/>
-        <image name="personal_record" width="28" height="28"/>
         <image name="pressure" width="28" height="28"/>
         <image name="qq" width="40" height="40"/>
         <image name="record" width="40" height="40"/>
@@ -3675,6 +3665,7 @@
         <image name="time" width="28" height="28"/>
         <image name="upgrade" width="40" height="37"/>
         <image name="user" width="30" height="29"/>
+        <image name="userHome" width="283" height="425"/>
         <image name="wechat" width="40" height="40"/>
         <image name="weibo" width="40" height="40"/>
         <image name="wifi" width="40" height="40"/>

@@ -13,5 +13,4 @@ typedef void (^SlectedReturn) (NSInteger);
 @property (nonatomic, copy) SlectedReturn returnEvent;
 
 +(void)alertControllerAboveIn:(UIViewController *)controller selectedReturn:(SlectedReturn)returnEvent;
-
 @end

@@ -14,6 +14,16 @@
     UInt32 nheadPos = 0;
 
     Byte *dataBytes = (Byte *)[pdata bytes];
+    
+    Byte *dataWithCmdIdBytes = (Byte *)[pdata bytes];
+    NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+    for (int i = 0; i<[pdata length]; i++) {
+        [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
+    }
+    NSString *string = [dataArray componentsJoinedByString:@"---"];
+    NSLog(@"receive----------%@",string);
+    
+    
     NSInteger lengthOfData = [pdata length];    //寻找头部
     BOOL hasHead = NO;
     for (UInt32 i = 0; i<lengthOfData; i++)
@@ -100,13 +110,13 @@
         
         
         //打印解析后的数据
-        Byte *dataWithCmdIdBytes = (Byte *)[dataWithCmdId bytes];
-        NSMutableArray *dataArray = [[NSMutableArray alloc]init];
-        for (int i = 0; i<[dataWithCmdId length]; i++) {
-            [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
-        }
-        NSString *string = [dataArray componentsJoinedByString:@"---"];
-        NSLog(@"receive----------%@",string);
+//        Byte *dataWithCmdIdBytes = (Byte *)[dataWithCmdId bytes];
+//        NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+//        for (int i = 0; i<[dataWithCmdId length]; i++) {
+//            [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
+//        }
+//        NSString *string = [dataArray componentsJoinedByString:@"---"];
+//        NSLog(@"receive---%@",string);
 
         return dataWithCmdId;
     }
@@ -202,13 +212,13 @@
         
         
         //打印解析后的数据
-        Byte *dataWithCmdIdBytes = (Byte *)[dataWithCmdId bytes];
-        NSMutableArray *dataArray = [[NSMutableArray alloc]init];
-        for (int i = 0; i<[dataWithCmdId length]; i++) {
-            [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
-        }
-        NSString *string = [dataArray componentsJoinedByString:@"---"];
-        NSLog(@"receive----------%@",string);
+//        Byte *dataWithCmdIdBytes = (Byte *)[dataWithCmdId bytes];
+//        NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+//        for (int i = 0; i<[dataWithCmdId length]; i++) {
+//            [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
+//        }
+//        NSString *string = [dataArray componentsJoinedByString:@"---"];
+//        NSLog(@"receive----------%@",string);
         
         return dataWithCmdId;
     }

@@ -59,6 +59,8 @@
 		044C526220255C4600923060 /* PressParameterSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C526120255C4600923060 /* PressParameterSetView.m */; };
 		044C526420255C6F00923060 /* PressParameterSetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044C526320255C6F00923060 /* PressParameterSetView.xib */; };
 		044E021A2124081C003B6C9D /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E02192124081C003B6C9D /* SettingViewController.m */; };
+		0451B12D212D4C7100B2B43A /* ParameterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0451B12C212D4C7100B2B43A /* ParameterView.xib */; };
+		0451B134212D5BC100B2B43A /* ParameterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451B133212D5BC100B2B43A /* ParameterView.m */; };
 		0451F0C72019BAB80001A9D4 /* LeftHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451F0C62019BAB80001A9D4 /* LeftHeaderView.m */; };
 		0451F0CB2019BF310001A9D4 /* PersonalInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451F0CA2019BF300001A9D4 /* PersonalInfomationViewController.m */; };
 		0451F0CE2019C1220001A9D4 /* EditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451F0CC2019C1220001A9D4 /* EditTableViewController.m */; };
@@ -220,6 +222,9 @@
 		044C526320255C6F00923060 /* PressParameterSetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PressParameterSetView.xib; sourceTree = "<group>"; };
 		044E02182124081C003B6C9D /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		044E02192124081C003B6C9D /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		0451B12C212D4C7100B2B43A /* ParameterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParameterView.xib; sourceTree = "<group>"; };
+		0451B132212D5BC100B2B43A /* ParameterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParameterView.h; sourceTree = "<group>"; };
+		0451B133212D5BC100B2B43A /* ParameterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParameterView.m; sourceTree = "<group>"; };
 		0451F0C52019BAB80001A9D4 /* LeftHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftHeaderView.h; sourceTree = "<group>"; };
 		0451F0C62019BAB80001A9D4 /* LeftHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftHeaderView.m; sourceTree = "<group>"; };
 		0451F0C92019BF300001A9D4 /* PersonalInfomationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfomationViewController.h; sourceTree = "<group>"; };
@@ -537,6 +542,16 @@
 			path = LeftDrawer;
 			sourceTree = "<group>";
 		};
+		0451B131212D4CB600B2B43A /* ParameterView */ = {
+			isa = PBXGroup;
+			children = (
+				0451B12C212D4C7100B2B43A /* ParameterView.xib */,
+				0451B132212D5BC100B2B43A /* ParameterView.h */,
+				0451B133212D5BC100B2B43A /* ParameterView.m */,
+			);
+			path = ParameterView;
+			sourceTree = "<group>";
+		};
 		0453055C2046955100BC06BA /* TimeSetCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -625,6 +640,7 @@
 		04769F0020085CAA0061E2FA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0451B131212D4CB600B2B43A /* ParameterView */,
 				044C526520255C7F00923060 /* PressParameterSetView */,
 				04769EFF20085C660061E2FA /* ModeChooseView */,
 				041D42691FFF232300EEA43C /* UIView+Tap.h */,
@@ -802,6 +818,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0451B12D212D4C7100B2B43A /* ParameterView.xib in Resources */,
 				043A38FF202AD66000835BDD /* AAHighchartsMore.js in Resources */,
 				04769EFE20085C570061E2FA /* ModeChooseView.xib in Resources */,
 				043A38FC202AD66000835BDD /* AAFunnel.js in Resources */,
@@ -897,6 +914,7 @@
 				043A3917202AD66000835BDD /* AAXAxis.m in Sources */,
 				043A390C202AD66000835BDD /* AAOptions.m in Sources */,
 				043A38F7202AD66000835BDD /* AAChartView.m in Sources */,
+				0451B134212D5BC100B2B43A /* ParameterView.m in Sources */,
 				0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */,
 				048E92A22043EBD2009F8532 /* RecordTableViewCell.m in Sources */,
 				043A3907202AD66000835BDD /* AAItemStyle.m in Sources */,

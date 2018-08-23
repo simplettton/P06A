@@ -6,6 +6,30 @@
 //  Copyright © 2018年 Shenzhen Lifotronic Technology Co.,Ltd. All rights reserved.
 //
 
+/* "CODE IS FAR AWAY FROM BUG WITH THE ANIMAL PROTECTING"
+ *          %%       %%
+ *         ##       ##
+ *       ┏-##┓　  ┏-##┓
+ *    ┏_┛ ┻---━┛_┻━━┓
+ *    ┃　　　        ┃
+ *    ┃　　 ━　      ┃
+ *    ┃ @^　  @^    ┃
+ *    ┃　　　　　　  ┃
+ *    ┃　　 ┻　　　 ┃
+ *    ┃_　　　　　 _┃
+ *     ┗━┓　　　┏━┛
+ *    　　┃　　　┃神兽保佑
+ *    　　┃　　　┃永无BUG！
+ *    　　┃　　　┗━━━┓----|
+ *    　　┃　　　　　　　  ┣┓}}}
+ *    　　┃　　　　　　　  ┏┛
+ *    　　┗┓&&&┓-┏&&&┓┏┛-|
+ *    　　　┃┫┫　 ┃┫┫
+ *    　　　┗┻┛　 ┗┻┛
+ *
+ *
+ *"CODE IS FAR AWAY FROM BUG WITH THE ANIMAL PROTECTING"
+ */
 #import "BLECommunicationViewController.h"
 #import "AppDelegate.h"
 
@@ -19,7 +43,6 @@
     NSInteger duration;
 }
 @property (weak, nonatomic) IBOutlet UIButton *lockButton;
-@property (weak, nonatomic) IBOutlet UIButton *recordButton;
 @property (weak, nonatomic) IBOutlet UIButton *modeButton;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *pressureButton;
@@ -66,7 +89,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.title = @"便携负压";
+    
     //检测有没有绑定蓝牙设备
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (![userDefaults objectForKey:@"MacString"]) {
@@ -163,8 +187,8 @@
     }
     
     if ([keyPath isEqualToString:@"sendCharacteristic"]) {
-        [self askForDuration];
-        [self performSelector:@selector(askForDeviceState) withObject:nil afterDelay:0.01];
+//        [self askForDuration];
+        [self performSelector:@selector(askForDeviceState) withObject:nil afterDelay:0.10];
     }
 }
 
@@ -173,9 +197,6 @@
 -(void)configureButtonUI{
     [self.lockButton setTitleEdgeInsets:UIEdgeInsetsMake(self.lockButton.imageView.frame.size.height+20 ,-self.lockButton.imageView.frame.size.width, 0.0,0.0)];
     [self.lockButton setImageEdgeInsets:UIEdgeInsetsMake(-20, 0.0,0.0, -self.lockButton.titleLabel.bounds.size.width)];
-    
-    [self.recordButton setTitleEdgeInsets:UIEdgeInsetsMake(self.recordButton.imageView.frame.size.height+20 ,-self.recordButton.imageView.frame.size.width, 0.0,0.0)];
-    [self.recordButton setImageEdgeInsets:UIEdgeInsetsMake(-20, 0.0,0.0, -self.recordButton.titleLabel.bounds.size.width)];
     
     [self.modeButton setTitleEdgeInsets:UIEdgeInsetsMake(self.modeButton.imageView.frame.size.height+20 ,-self.modeButton.imageView.frame.size.width, 0.0,0.0)];
     [self.modeButton setImageEdgeInsets:UIEdgeInsetsMake(-20, 0.0,0.0, -self.modeButton.titleLabel.bounds.size.width)];
@@ -290,7 +311,6 @@
         }
         
         self.modeButton.enabled = NO;
-        self.recordButton.enabled = NO;
         self.startButton.enabled = NO;
         self.pressureButton.enabled = NO;
         
@@ -302,7 +322,6 @@
         [self configureButton:self.lockButton WithTitle:@"锁屏" imageName:@"lock"];
         
         self.modeButton.enabled = YES;
-        self.recordButton.enabled = YES;
         self.startButton.enabled = YES;
         self.pressureButton.enabled = YES;
     }
@@ -648,10 +667,10 @@
                     }
                     
                 }else if(self.runningState == RUNNING_STATE_PAUSE){
-                    [self askForDuration];
+//                    [self askForDuration];
                     [self stopTimer];
                 }else if(self.runningState == RUNNING_STATE_POWER_OFF){
-                    [self askForDuration];
+//                    [self askForDuration];
                     [self stopTimer];
                     
                     //治疗经过时间
@@ -797,20 +816,21 @@
 
 
 -(void)askForDeviceState {
+//
+//    [self.peripheral writeValue:[Pack packetWithCmdid:CMDID_DEVICE_STATE
+//                                          dataEnabled:NO
+//                                                 data:nil]
+//              forCharacteristic:self.sendCharacteristic
+//                           type:CBCharacteristicWriteWithResponse];
+    [self writeWithCmdid:CMDID_DEVICE_STATE dataString:@"00"];
 
-    [self.peripheral writeValue:[Pack packetWithCmdid:CMDID_DEVICE_STATE
-                                          dataEnabled:NO
-                                                 data:nil]
-              forCharacteristic:self.sendCharacteristic
-                           type:CBCharacteristicWriteWithResponse];
     
 }
 
--(void)askForDuration {
-    [self writeWithCmdid:CMDID_TREAT_TIME dataString:nil];
-}
+//-(void)askForDuration {
+//    [self writeWithCmdid:CMDID_TREAT_TIME dataString:nil];
+//}
 
- 
 
 #pragma mark - connect
 -(void)connectPeripheral {
@@ -829,7 +849,6 @@
         }
     }
 }
-
 
 #pragma mark - action
 - (IBAction)lock:(id)sender {
@@ -861,7 +880,6 @@
     }
 
     self.modeButton.enabled = !self.modeButton.enabled;
-    self.recordButton.enabled = !self.recordButton.enabled;
     self.startButton.enabled = !self.startButton.enabled;
     self.pressureButton.enabled = !self.pressureButton.enabled;
 }
@@ -871,26 +889,28 @@
     [ModeChooseView alertControllerAboveIn:self selectedReturn:^(NSInteger mode) {
         switch (mode) {
             case 0:
-                
+
                 [self configureButton:self.modeButton WithTitle:@"持续吸引" imageName:@"keep_grey"];
                 [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0000"];
                 break;
             case 1:
-                
+
                 [self configureButton:self.modeButton WithTitle:@"间歇吸引" imageName:@"interval_grey"];
                 [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0100"];
-                
+
                 break;
             case 2:
-                
+
                 [self configureButton:self.modeButton WithTitle:@"动态吸引" imageName:@"dynamic_grey"];
                 [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0200"];
-                
+
                 break;
             default:
                 break;
         }
     }];
+//    [ParameterView alertControllerAboveIn:<#(UIViewController *)#> mode:<#(NSInteger)#> setReturn:<#^(NSString *)returnEvent#>]
+    
 }
 - (IBAction)tapPressButton:(id)sender {
     [PressParameterSetView alertControllerAboveIn:self mode:self.treatMode setReturn:^(NSString *pressValue) {
@@ -898,20 +918,12 @@
         [self writeWithCmdid:CMDID_PRESSURE_SET dataString:dataString];
     }];
 }
-- (IBAction)tapRecordButton:(id)sender {
-    if (self.isConnected) {
-    [self performSegueWithIdentifier:@"ShowBLERecord" sender:nil];
-    }
-
-}
-
 
 - (IBAction)start:(id)sender {
     if (self.isConnected) {
         [self writeWithCmdid:CMDID_POWER_CONTROL dataString:@"0100"];
     }
 }
-
 
 - (IBAction)pause:(id)sender {
 
@@ -993,13 +1005,14 @@
         vc.receiveCharacteristic = self.receiveCharacteristic;
         vc.currPeripheral = self.peripheral;
         vc ->baby = self ->baby;
-    }else if ([segue.identifier isEqualToString:@"ShowBLERecord"]){
-        BLERecordViewController *vc = (BLERecordViewController *)segue.destinationViewController;
-        vc.sendCharacteristic = self.sendCharacteristic;
-        vc.receiveCharacteristic = self.receiveCharacteristic;
-        vc.currPeripheral = self.peripheral;
-        vc ->baby = self ->baby;
     }
+//    else if ([segue.identifier isEqualToString:@"ShowBLERecord"]){
+//        BLERecordViewController *vc = (BLERecordViewController *)segue.destinationViewController;
+//        vc.sendCharacteristic = self.sendCharacteristic;
+//        vc.receiveCharacteristic = self.receiveCharacteristic;
+//        vc.currPeripheral = self.peripheral;
+//        vc ->baby = self ->baby;
+//    }
 }
 
 -(int) lBytesToInt:(Byte[]) byte withLength:(int)length
