@@ -123,7 +123,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="backgroundView" destination="vD2-tv-m70" id="jvR-tH-PIY"/>
+                <outlet property="backgroundView" destination="vD2-tv-m70" id="J6v-Im-n2H"/>
                 <outlet property="modeLabel" destination="FZH-7y-yXv" id="dKr-TV-1rz"/>
                 <outlet property="pressLabel" destination="pua-cx-XAa" id="Ef2-on-H3P"/>
             </connections>

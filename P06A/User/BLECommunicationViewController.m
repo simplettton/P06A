@@ -32,6 +32,8 @@
  */
 #import "BLECommunicationViewController.h"
 #import "AppDelegate.h"
+#import "ProgressChart.h"
+
 
 @interface BLECommunicationViewController ()<CALayerDelegate>{
     BabyBluetooth *baby;
@@ -82,6 +84,13 @@
 @property (nonatomic,strong) NSString *pressure;
 @property (nonatomic,assign) NSInteger runningState;
 
+@property (nonatomic,assign) NSInteger keepPressure;
+@property (nonatomic,assign) NSInteger intervalPressure;
+@property (nonatomic,assign) NSInteger dynamicPressure;
+
+//压力圈
+@property (nonatomic,strong)ProgressData *progress;
+@property (nonatomic,strong)ProgressChart * chart;
 
 @end
 
@@ -112,8 +121,8 @@
         });
     }else{
         //配置svprogressHUD
-        [SVProgressHUD showWithStatus:@"正在连接设备..."];
-        [self performSelector:@selector(handleConnectTimeOut) withObject:nil afterDelay:5];
+//        [SVProgressHUD showWithStatus:@"正在连接设备..."];
+//        [self performSelector:@selector(handleConnectTimeOut) withObject:nil afterDelay:5];
     }
     
     [self configureButtonUI];
@@ -130,9 +139,40 @@
     }
     //创建数据缓存区
     self.readBuf = [[NSMutableData alloc] init];
+    [self initPressureProgress];
   
 }
-
+-(void)initPressureProgress{
+    if (self.chart == nil) {
+        ProgressData * progress = [[ProgressData alloc] init];
+        progress.maxValue = 200;
+        progress.value = 50;
+        progress.progressRadius = 110;
+        progress.centerLable.stringFormat = @"%d";
+        progress.centerLable.stringOffSet = CGSizeMake(0, -20);
+        progress.centerLable.lableFont = [UIFont systemFontOfSize:40 weight:UIFontWeightSemibold];
+        progress.centerLable.lableColor =UIColorFromHex(0x6CD56B);
+        progress.progressBackColor = UIColorFromHex(0xd6d6d6);
+        progress.progressGradientColor = @[UIColorFromHex(0x65B8F3),UIColorFromHex(0xBCCCF9),UIColorFromHex(0xA9D8F9)];
+        //    UIColorFromHex(0x65D1F3),
+        self.progress = progress;
+        
+        
+        ProgressChart * chart = [[ProgressChart alloc] initWithFrame:CGRectZero];
+        chart.gg_top = 130;
+        chart.gg_size = CGSizeMake(238, 238);
+        chart.gg_centerX = kScreenW / 2;
+        chart.progressData = self.progress;
+        self.chart = chart;
+        [self.chart drawProgressChart];
+        [self.view addSubview:self.chart];
+//        [self.chart startAnimationWithDuration:.5f];
+    }
+}
+-(void)updatePressProgress{
+    [self.chart drawProgressChart];
+//    [self.chart startAnimationWithDuration:.5f];
+}
 -(void)handleConnectTimeOut{
     if (!self.isConnected) {
         [SVProgressHUD setMinimumSize:CGSizeZero];
@@ -222,34 +262,41 @@
     maskLayer1.lineWidth = 2;
     maskLayer1.borderColor = [UIColor whiteColor].CGColor;
     self.pauseButton.layer.mask=maskLayer1;
-    
     self.pressureButton.layer.cornerRadius = 15;
 }
 
 
 -(void)updateUI{
-    if (self.runningState != RUNNING_STATE_POWER_ON) {
+    if (self.runningState != STATE_RUNNING) {
         //保存的电压值
         NSArray *savedPressKeys = @[@"KeepPress",@"IntervalPress",@"DynamicPress"];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *pressString = [defaults objectForKey:savedPressKeys[self.treatMode]];
         
         self.pressureDisplay.text = pressString == nil? @"125": pressString;
-
+        //刷新press进度圈
+        self.progress.value = [pressString integerValue];
+        
         self.startButton.hidden = NO;
         self.pauseButton.hidden = YES;
         self.stopButton.hidden = YES;
         
     }else{
         
+        //正在运行中
         self.pressureDisplay.text = self.pressure;
+        
+        //刷新press进度圈
+        self.progress.value = [self.pressure integerValue];
+        
         self.startButton.hidden = YES;
         self.pauseButton.hidden = NO;
         self.stopButton.hidden = NO;
     }
+    [self updatePressProgress];
     //开关状态
     switch (self.runningState) {
-        case RUNNING_STATE_PAUSE:
+        case STATE_PAUSE:
         {
             
             self.startButton.titleLabel.text = @"继续";
@@ -258,7 +305,7 @@
         }
             break;
             
-        case RUNNING_STATE_POWER_OFF:
+        case STATE_STOP:
             
             self.timeDisplay.text = @"00:00";
             self.startButton.titleLabel.text = @"开启";
@@ -266,7 +313,7 @@
 
             
             break;
-        case RUNNING_STATE_POWER_ON:
+        case STATE_RUNNING:
 
             break;
             
@@ -592,6 +639,9 @@
                 self.treatMode = bytes[4];
                 
                 //电压
+                self.keepPressure = bytes[5];
+                self.intervalPressure = bytes[6];
+                self.dynamicPressure = bytes[7];
                 NSString *keepPress = [NSString stringWithFormat:@"%d",bytes[5]];
                 NSString *intervalPress = [NSString stringWithFormat:@"%d",bytes[6]];
                 NSString *dynamicPress = [NSString stringWithFormat:@"%d",bytes[7]];
@@ -633,7 +683,7 @@
             case CMDID_TREAT_TIME:
             {
                 //因为下位机的bug写的这句 结束的时候保存的治疗时间值没有清零
-                if (self.runningState == RUNNING_STATE_POWER_OFF ) {
+                if (self.runningState == STATE_STOP ) {
                     startTime = 0;
                 }
                 Byte timeBytes [] = {bytes[1],bytes[2],bytes[3],bytes[4]};
@@ -656,7 +706,7 @@
             {
 
                 self.runningState = bytes[1];
-                if (self.runningState == RUNNING_STATE_POWER_ON) {
+                if (self.runningState == STATE_RUNNING) {
                     //获取系统当前的时间戳
                     NSString *currentTimeString = [self getCurrentTime];
                     [self writeWithCmdid:CMDID_DATE dataString:currentTimeString];
@@ -666,10 +716,10 @@
                         [self startGCDTimerWithStartTime:startTime];
                     }
                     
-                }else if(self.runningState == RUNNING_STATE_PAUSE){
+                }else if(self.runningState == STATE_PAUSE){
 //                    [self askForDuration];
                     [self stopTimer];
-                }else if(self.runningState == RUNNING_STATE_POWER_OFF){
+                }else if(self.runningState == STATE_STOP){
 //                    [self askForDuration];
                     [self stopTimer];
                     
@@ -770,7 +820,7 @@
             //警告信息
             case CMDID_ALERT_INFORMATION:
             {
-                self.runningState = RUNNING_STATE_POWER_OFF;
+                self.runningState = STATE_STOP;
                 NSString *alertMessege = [[NSString alloc]init];
                 switch (dataByte) {
                     case 0x00:  alertMessege = @"无异常报警";    break;
@@ -799,19 +849,26 @@
 
 
 #pragma mark - writeData
-- (void)writeData:(NSData *)data {
-    [self.peripheral writeValue:data
-              forCharacteristic:self.sendCharacteristic
-                           type:CBCharacteristicWriteWithResponse];
-}
+
 
 -(void)writeWithCmdid:(Byte)cmdid dataString:(NSString *)dataString{
+    if (self.sendCharacteristic) {
+        [self.peripheral writeValue:[Pack packetWithCmdid:cmdid
+                                              dataEnabled:YES
+                                                     data:[self convertHexStrToData:dataString]]
+                  forCharacteristic:self.sendCharacteristic
+                               type:CBCharacteristicWriteWithResponse];
+    }
+}
+-(void)writeWithCmdid:(Byte)cmdid data:(NSData *)data{
     
-    [self.peripheral writeValue:[Pack packetWithCmdid:cmdid
-                                          dataEnabled:YES
-                                                 data:[self convertHexStrToData:dataString]]
-              forCharacteristic:self.sendCharacteristic
-                           type:CBCharacteristicWriteWithResponse];
+    if (self.sendCharacteristic) {
+        [self.peripheral writeValue:[Pack packetWithCmdid:cmdid
+                                              dataEnabled:YES
+                                                     data:data]
+                  forCharacteristic:self.sendCharacteristic
+                               type:CBCharacteristicWriteWithResponse];
+    }
 }
 
 
@@ -886,37 +943,116 @@
 
 
 - (IBAction)tapModeButton:(id)sender {
-    [ModeChooseView alertControllerAboveIn:self selectedReturn:^(NSInteger mode) {
+//    [ModeChooseView alertControllerAboveIn:self selectedReturn:^(NSInteger mode) {
+//        switch (mode) {
+//            case 0:
+//
+//                [self configureButton:self.modeButton WithTitle:@"持续吸引" imageName:@"keep_grey"];
+//                [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0000"];
+//                break;
+//            case 1:
+//
+//                [self configureButton:self.modeButton WithTitle:@"间歇吸引" imageName:@"interval_grey"];
+//                [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0100"];
+//
+//                break;
+//            case 2:
+//
+//                [self configureButton:self.modeButton WithTitle:@"动态吸引" imageName:@"dynamic_grey"];
+//                [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0200"];
+//
+//                break;
+//            default:
+//                break;
+//        }
+//    }];
+    [ParameterView alertControllerAboveIn:self mode:self.treatMode setReturn:^(NSDictionary *parameters) {
+        __weak typeof(self) weakself = self;
+        NSInteger mode = [[parameters objectForKey:@"mode"]integerValue];
+        NSInteger press = [[parameters objectForKey:@"press"]integerValue];
+        NSString *firstTime = [parameters objectForKey:@"firstTime"];
+        NSString *secondTime = [parameters objectForKey:@"secondTime"];
+        
+        //设置模式 时间
         switch (mode) {
-            case 0:
-
-                [self configureButton:self.modeButton WithTitle:@"持续吸引" imageName:@"keep_grey"];
+            case DATA_TREAT_MODE_KEEP:
+                
+                weakself.keepPressure = press;
+                
                 [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0000"];
+                
                 break;
-            case 1:
-
-                [self configureButton:self.modeButton WithTitle:@"间歇吸引" imageName:@"interval_grey"];
+            case DATA_TREAT_MODE_INTERVAL:
+                
+                weakself.intervalPressure = press;
+                
                 [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0100"];
-
+                [self writeWithCmdid:CMDID_WORK_TIME dataString:firstTime];
+                [self writeWithCmdid:CMDID_INTERVAL_TIME dataString:secondTime];
+                
                 break;
-            case 2:
-
-                [self configureButton:self.modeButton WithTitle:@"动态吸引" imageName:@"dynamic_grey"];
+            
+            case DATA_TREAT_MODE_DYNAMIC:
+                weakself.dynamicPressure = press;
+                
                 [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0200"];
+                [self writeWithCmdid:CMDID_UP_TIME dataString:firstTime];
+                [self writeWithCmdid:CMDID_DOWN_TIME dataString:secondTime];
 
                 break;
+                
             default:
                 break;
         }
+        //设置压力
+        Byte byte[] = {
+                        weakself.keepPressure,
+                        weakself.intervalPressure,
+                        weakself.dynamicPressure
+                      };
+        NSData *pressData = [[NSData alloc]initWithBytes:byte length:3];
+        [self writeWithCmdid:CMDID_PRESSURE_SET data:pressData];
+        
+        
+        
     }];
-//    [ParameterView alertControllerAboveIn:<#(UIViewController *)#> mode:<#(NSInteger)#> setReturn:<#^(NSString *)returnEvent#>]
     
 }
 - (IBAction)tapPressButton:(id)sender {
+    
     [PressParameterSetView alertControllerAboveIn:self mode:self.treatMode setReturn:^(NSString *pressValue) {
-        NSString *dataString = [NSString stringWithFormat:@"%@",pressValue];
-        [self writeWithCmdid:CMDID_PRESSURE_SET dataString:dataString];
+        __weak typeof(self) weakself = self;
+        switch (self.treatMode) {
+            case DATA_TREAT_MODE_KEEP:
+                
+                weakself.keepPressure = pressValue.integerValue;
+                
+                break;
+            case DATA_TREAT_MODE_INTERVAL:
+                
+                weakself.intervalPressure = pressValue.integerValue;
+                
+                break;
+                
+            case DATA_TREAT_MODE_DYNAMIC:
+                weakself.dynamicPressure = pressValue.integerValue;
+
+                break;
+                
+            default:
+                break;
+        }
+        
+        //设置压力
+        Byte byte[] = {
+            weakself.keepPressure,
+            weakself.intervalPressure,
+            weakself.dynamicPressure
+        };
+        NSData *pressData = [[NSData alloc]initWithBytes:byte length:3];
+        [self writeWithCmdid:CMDID_PRESSURE_SET data:pressData];
     }];
+    
 }
 
 - (IBAction)start:(id)sender {

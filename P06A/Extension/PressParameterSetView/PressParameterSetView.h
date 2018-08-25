@@ -14,5 +14,6 @@ typedef void (^SetReturn)(NSString *);
 @property(nonatomic,assign)NSInteger mode;
 @property (weak, nonatomic) IBOutlet UILabel *pressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *modeLabel;
+
 +(void)alertControllerAboveIn:(UIViewController *)controller mode:(NSInteger)modeInterger setReturn:(SetReturn)returnEvent;
 @end

@@ -16,12 +16,11 @@
 @interface PressParameterSetView()
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 
-
 @end
 @implementation PressParameterSetView
 -(void)awakeFromNib{
     [super awakeFromNib];
-    self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.5];
+    self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.2];
 
     
 }
@@ -47,12 +46,17 @@
      *  usingSpringWithDamping：0-1 数值越小，弹簧振动效果越明显
      *  initialSpringVelocity ：数值越大，一开始移动速度越快
      */
-    [UIView animateWithDuration:0.3 delay:0.1 usingSpringWithDamping:0.5 initialSpringVelocity:10 options:UIViewAnimationOptionCurveLinear animations:^{
-        alert.backgroundView.transform = transform;
-        alert.backgroundView.alpha = 1;
-    } completion:^(BOOL finished) {
+    [UIView animateWithDuration:0.3
+                          delay:0.1
+         usingSpringWithDamping:0.5
+          initialSpringVelocity:10
+                        options:UIViewAnimationOptionCurveLinear animations:^{
+                            alert.backgroundView.transform = transform;
+                            alert.backgroundView.alpha = 1;
+                        }
+                        completion:^(BOOL finished) {
 
-    }];
+                     }];
 }
 
 - (IBAction)cancel:(id)sender {
@@ -61,7 +65,8 @@
 
 - (IBAction)save:(id)sender {
     [self removeFromSuperview];
-    NSString *hexString = [self byteStringToHex:_pressLabel.text];
+    
+    NSString *hexString = _pressLabel.text;
 
     self.returnEvent(hexString);
 }
@@ -106,13 +111,13 @@
     NSArray *savedPressKeys = @[@"KeepPress",@"IntervalPress",@"DynamicPress"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *pressString = [defaults objectForKey:savedPressKeys[self.mode]];
-    
-    
+
     
     self.pressLabel.text = pressString == nil? @"125" :pressString;
     self.modeLabel.text = modeString == nil?@"治疗模式":modeString;
     
 }
+
 
 -(NSString *)byteStringToHex:(NSString *)byteString{
     NSString *hexStr = @"";

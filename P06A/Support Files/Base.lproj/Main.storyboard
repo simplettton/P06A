@@ -1319,7 +1319,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.42281365389999997" green="0.83174973730000001" blue="0.4153529406" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.070588235289999995" green="0.58823529409999997" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="E0f-GU-EF5" firstAttribute="centerY" secondItem="Vu7-it-d1M" secondAttribute="centerY" id="5Ex-xa-Pei"/>
                                     <constraint firstItem="E0f-GU-EF5" firstAttribute="centerX" secondItem="Vu7-it-d1M" secondAttribute="centerX" id="PSx-ab-vLl"/>
@@ -1329,10 +1329,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJG-WY-cGH" userLabel="backgroundView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="507"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="userHome" translatesAutoresizingMaskIntoConstraints="NO" id="Z4c-pA-y5I" userLabel="BackgroundView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="507"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yjf-3D-esR" userLabel="Pause Stop View">
                                         <rect key="frame" x="110" y="392" width="154" height="43"/>
                                         <subviews>
@@ -1366,21 +1362,21 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgK-d0-hDx">
-                                        <rect key="frame" x="121" y="147" width="133" height="60"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgK-d0-hDx">
+                                        <rect key="frame" x="121" y="133" width="133" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="133" id="YWl-eE-uVP"/>
                                             <constraint firstAttribute="height" constant="60" id="cBn-qq-dkE"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
-                                        <color key="textColor" red="0.42280891539999998" green="0.83526241779999999" blue="0.41940093039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.42352941176470588" green="0.83529411764705885" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDN-EU-8yU">
-                                        <rect key="frame" x="121" y="215" width="133" height="37"/>
+                                        <rect key="frame" x="121" y="201" width="133" height="35"/>
                                         <color key="backgroundColor" red="0.32109060883522034" green="0.65814065933227539" blue="0.78873032331466675" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="37" id="GO4-Bx-Yhc"/>
+                                            <constraint firstAttribute="height" constant="35" id="GO4-Bx-Yhc"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="133" id="qUj-7c-v1a"/>
                                         </constraints>
                                         <state key="normal" title="治疗压力" image="pressure"/>
@@ -1466,7 +1462,7 @@
                                     <constraint firstItem="xgK-d0-hDx" firstAttribute="centerX" secondItem="UJG-WY-cGH" secondAttribute="centerX" id="8xA-DM-5aS"/>
                                     <constraint firstItem="MDN-EU-8yU" firstAttribute="top" secondItem="xgK-d0-hDx" secondAttribute="bottom" constant="8" id="Evo-f4-EEr"/>
                                     <constraint firstAttribute="trailing" secondItem="ici-N1-0lw" secondAttribute="trailing" constant="9" id="F9y-tS-6bj"/>
-                                    <constraint firstItem="MDN-EU-8yU" firstAttribute="centerY" secondItem="UJG-WY-cGH" secondAttribute="centerY" constant="-20" id="Msb-UB-fjZ"/>
+                                    <constraint firstItem="MDN-EU-8yU" firstAttribute="centerY" secondItem="UJG-WY-cGH" secondAttribute="centerY" constant="-35" id="Msb-UB-fjZ"/>
                                     <constraint firstItem="zFd-98-zD8" firstAttribute="top" secondItem="N5U-9K-gXT" secondAttribute="bottom" constant="33" id="X8h-Ed-heD"/>
                                     <constraint firstItem="yjf-3D-esR" firstAttribute="centerY" secondItem="UJG-WY-cGH" secondAttribute="centerY" constant="160" id="Y6A-iS-uN7"/>
                                     <constraint firstItem="N5U-9K-gXT" firstAttribute="centerX" secondItem="UJG-WY-cGH" secondAttribute="centerX" id="pCB-D1-LGT"/>
@@ -3665,7 +3661,6 @@
         <image name="time" width="28" height="28"/>
         <image name="upgrade" width="40" height="37"/>
         <image name="user" width="30" height="29"/>
-        <image name="userHome" width="283" height="425"/>
         <image name="wechat" width="40" height="40"/>
         <image name="weibo" width="40" height="40"/>
         <image name="wifi" width="40" height="40"/>

@@ -20,7 +20,14 @@
 #define HTTPServerURLString @"http://192.168.2.127:8888/"
 
 
+
+#ifdef __OBJC__
+#import "GGGraphics.h"
 #import "NetWorkTool.h"
 #import <SVProgressHUD.h>
 #import "AAGlobalMacro.h"
+
+#endif
+
+
 #endif /* PrefixHeader_pch */

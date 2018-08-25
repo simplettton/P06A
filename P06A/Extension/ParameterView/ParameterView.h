@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void (^SetReturn)(NSString *);
 
+typedef void (^ReturnBlock)(NSDictionary *);
+typedef NS_ENUM(NSInteger,modes){
+    MODE_KEEP = 0X00,
+    MODE_INTERVAL = 0X01,
+    MODE_DYNAMIC = 0X02
+};
 @interface ParameterView : UIView
-@property(nonatomic,copy)SetReturn returnEvent;
+@property(nonatomic,copy)ReturnBlock returnEvent;
 @property(nonatomic,assign)NSInteger mode;
-+(void)alertControllerAboveIn:(UIViewController *)controller mode:(NSInteger)modeInterger setReturn:(SetReturn)returnEvent;
+
++(void)alertControllerAboveIn:(UIViewController *)controller mode:(NSInteger)modeInterger setReturn:(ReturnBlock)returnEvent;
+
 @end
