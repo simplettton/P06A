@@ -1292,7 +1292,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-it-d1M">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vu7-it-d1M" userLabel="BottomView">
                                 <rect key="frame" x="0.0" y="571" width="375" height="96"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="E0f-GU-EF5">
@@ -1439,7 +1439,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5U-9K-gXT">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5U-9K-gXT">
                                         <rect key="frame" x="110" y="392" width="154" height="43"/>
                                         <color key="backgroundColor" red="0.44293802976608276" green="0.84227925539016724" blue="0.43953442573547363" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -1484,15 +1484,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cRo-bv-rph"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cGI-wQ-ddo">
-                        <barButtonItem key="rightBarButtonItem" title="设置" id="oeZ-D9-TnR">
-                            <connections>
-                                <segue destination="sxo-1p-ZYi" kind="show" identifier="ShowSetController" id="iTU-B8-Z2m"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="cGI-wQ-ddo"/>
                     <connections>
                         <outlet property="batteryView" destination="ici-N1-0lw" id="ZQV-UU-KDK"/>
+                        <outlet property="controllButtonView" destination="yjf-3D-esR" id="ycS-dz-aZq"/>
                         <outlet property="lockButton" destination="bB6-cN-bqw" id="u1l-Fg-cJi"/>
                         <outlet property="modeButton" destination="Jdm-M1-Tvo" id="GeW-lF-k9u"/>
                         <outlet property="pauseButton" destination="BYe-sL-Awn" id="Otr-bS-fOp"/>

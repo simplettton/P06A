@@ -50,6 +50,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *pressureButton;
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
+/**
+ * 两个控制buttonView
+ */
+@property (weak, nonatomic) IBOutlet UIStackView *controllButtonView;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *timeDisplay;
@@ -146,7 +150,7 @@
     if (self.chart == nil) {
         ProgressData * progress = [[ProgressData alloc] init];
         progress.maxValue = 200;
-        progress.value = 50;
+        progress.value = 0;
         progress.progressRadius = 110;
         progress.centerLable.stringFormat = @"%d";
         progress.centerLable.stringOffSet = CGSizeMake(0, -20);
@@ -277,10 +281,6 @@
         //刷新press进度圈
         self.progress.value = [pressString integerValue];
         
-        self.startButton.hidden = NO;
-        self.pauseButton.hidden = YES;
-        self.stopButton.hidden = YES;
-        
     }else{
         
         //正在运行中
@@ -288,33 +288,39 @@
         
         //刷新press进度圈
         self.progress.value = [self.pressure integerValue];
-        
-        self.startButton.hidden = YES;
-        self.pauseButton.hidden = NO;
-        self.stopButton.hidden = NO;
     }
     [self updatePressProgress];
     //开关状态
     switch (self.runningState) {
         case STATE_PAUSE:
         {
+            self.controllButtonView.hidden = NO;
+            self.startButton.hidden = YES;
             
-            self.startButton.titleLabel.text = @"继续";
-            [self.startButton setTitle:@"继续" forState:UIControlStateNormal];
+            self.pauseButton.titleLabel.text = @"继续";
+            [self.pauseButton setTitle:@"继续" forState:UIControlStateNormal];
+//            self.startButton.titleLabel.text = @"继续";
+//            [self.startButton setTitle:@"继续" forState:UIControlStateNormal];
             
         }
             break;
             
         case STATE_STOP:
-            
+            self.controllButtonView.hidden = YES;
+            self.startButton.hidden = NO;
             self.timeDisplay.text = @"00:00";
-            self.startButton.titleLabel.text = @"开启";
-            [self.startButton setTitle:@"开启" forState:UIControlStateNormal];
+            
+//            self.startButton.titleLabel.text = @"开启";
+//            [self.startButton setTitle:@"开启" forState:UIControlStateNormal];
 
             
             break;
         case STATE_RUNNING:
-
+            self.controllButtonView.hidden = NO;
+            self.startButton.hidden = YES;
+            self.pauseButton.titleLabel.text = @"暂停";
+            [self.pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
+            
             break;
             
         default:
@@ -1063,7 +1069,11 @@
 
 - (IBAction)pause:(id)sender {
 
-    [self writeWithCmdid:CMDID_POWER_CONTROL dataString:@"0200"];
+    if (self.runningState ==STATE_RUNNING) {
+        [self writeWithCmdid:CMDID_POWER_CONTROL dataString:@"0200"];
+    }else{
+        [self writeWithCmdid:CMDID_POWER_CONTROL dataString:@"0100"];
+    }
 }
 
 
