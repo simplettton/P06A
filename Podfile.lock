@@ -18,6 +18,7 @@ PODS:
     - AMapFoundation (~> 1.4)
   - AMapFoundation (1.5.3)
   - BabyBluetooth (0.7.0)
+  - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - AFNetworking
   - AMap2DMap
   - BabyBluetooth
+  - Masonry
   - MBProgressHUD
   - MMDrawerController
   - MQTTClient
@@ -77,6 +79,7 @@ SPEC REPOS:
     - AMap2DMap
     - AMapFoundation
     - BabyBluetooth
+    - Masonry
     - MBProgressHUD
     - MMDrawerController
     - MQTTClient
@@ -88,12 +91,13 @@ SPEC CHECKSUMS:
   AMap2DMap: cf0bfd6ae97951b55cc061903b814f924ba6c221
   AMapFoundation: 58f883c80754c659cf626deb3150936bfe8f1772
   BabyBluetooth: d50758aecf24d4a0ab9271d69f0f116d6bee51c9
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MQTTClient: eea2eaaa6ddef852a1019a4dda091e22ad928b58
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
 
-PODFILE CHECKSUM: cff6ddc3006a64020cbd2ed7e96411cdb2ae8644
+PODFILE CHECKSUM: 16165c0bfafe76d6d48db728c3c3e330d0128260
 
 COCOAPODS: 1.5.3

@@ -219,7 +219,7 @@
 
             [userDefaults setObject:imageData forKey:@"USER_ICON"];
             [userDefaults setObject:resp.name forKey:@"USER_NAME"];
-            [userDefaults setObject:resp.unionGender forKey:@"USER_SEX"];
+            [userDefaults setObject:resp.unionGender forKey:@"USER_GENDER"];
             [userDefaults setObject:@"user" forKey:@"ROLE"];
             [userDefaults synchronize];
             

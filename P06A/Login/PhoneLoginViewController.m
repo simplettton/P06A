@@ -157,11 +157,29 @@
                                          NSString *token = [responseObject.content objectForKey:@"token"];
 
                                          NSString *phone = [responseObject.content objectForKey:@"phone"];
+                                         
+                                         NSDictionary *patientInfoDic = [responseObject.content objectForKey:@"patientinfo"];
+                                         
+                                         NSString *name = [patientInfoDic objectForKey:@"name"];
+                                         NSString *idCart = [patientInfoDic objectForKey:@"idcard"];
+                                         NSString *address = [patientInfoDic objectForKey:@"address"];
+                                         NSNumber *age = [patientInfoDic objectForKey:@"age"];
+                                         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+                                         NSString* ageString = [numberFormatter stringFromNumber:age];
+                                         
+                                         NSString *gender = [patientInfoDic objectForKey:@"gender"];
 
                                          [UserDefault setObject:phone forKey:@"PHONE_NUMBER"];
+                                         [UserDefault setObject:name forKey:@"USER_NAME"];
+                                         [UserDefault setObject:gender forKey:@"USER_GENDER"];
+                                         [UserDefault setObject:ageString forKey:@"AGE"];
+                                         [UserDefault setObject:address forKey:@"ADDRESS"];
 
+                                         
                                          [UserDefault setObject:token forKey:@"Token"];
-
+                                         
+                                         [UserDefault setObject:@"patient" forKey:@"Identity"];
+                                         
                                          [UserDefault setBool:YES forKey:@"IsLogined"];
                                          
                                          [UserDefault synchronize];

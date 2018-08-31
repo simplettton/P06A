@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIView *upgradeView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttomConstraint;
 - (IBAction)showMenu:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *AddDeviceView;
+@property (weak, nonatomic) IBOutlet UIView *accountView;
 
 @end
 
@@ -27,11 +29,13 @@
     backButton.title = @"";
     self.navigationItem.backBarButtonItem = backButton;
     
+    [self.AddDeviceView addTapBlock:^(id obj) {
+        [self performSegueWithIdentifier:@"AddDevice" sender:nil];
+    }];
     [self.upgradeView addTapBlock:^(id obj) {
         [self performSegueWithIdentifier:@"Upgrade" sender:nil];
     }];
-    
-    self.buttomConstraint.constant = self.view.bounds.size.height / 667.0 * 133;
+//    self.buttomConstraint.constant = self.view.bounds.size.height / 667.0 * 133;
 }
 
 -(void)viewDidAppear:(BOOL)animated{

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ChangePhoneNumViewController : UIViewController
-
+@property (nonatomic,strong)NSString *phoneNumber;
 @end

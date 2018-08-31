@@ -35,9 +35,17 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.scrollEnabled = NO;
     
-    [self.headerView.myInformationButton addTarget:self action:@selector(buttonClickListener:) forControlEvents:UIControlEventTouchUpInside];
-    self.functionArray = @[@"",@"设置",@"我的设备",@"联系我们",@"帮助",@"",@"",@"",@"退出登录"];
-    self.imageNameArray = @[@"",@"setting",@"star",@"service",@"help",@"",@"",@"",@""];
+    NSString *identity = [UserDefault objectForKey:@"Identity"];
+    //判断身份显示不同的界面
+    if ([identity isEqualToString:@"patient"]) {
+        [self.headerView.myInformationButton addTarget:self action:@selector(buttonClickListener:) forControlEvents:UIControlEventTouchUpInside];
+        self.functionArray = @[@"",@"设置",@"我的设备",@"联系我们",@"帮助",@"",@"",@"",@"退出登录"];
+        self.imageNameArray = @[@"",@"setting",@"star",@"service",@"help",@"",@"",@"",@""];
+    }else{
+        self.functionArray = @[@"",@"",@"",@"",@"",@"",@"",@"",@"退出登录"];
+        self.imageNameArray = @[@"",@"",@"",@"",@"",@"",@"",@"",@""];
+    }
+
 }
 
 #pragma mark -- UITableViewDataSource
@@ -49,23 +57,12 @@
 {
     return 9;
 }
-- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
-{
-    
-//    UILabel *textLabel = [cell viewWithTag:2];
-    if (indexPath.row==8)
-    {
-//        textLabel.textColor = UIColorFromHex(0X65BBA9);
-//        textLabel.textAlignment = NSTextAlignmentCenter;
-    }
-}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     if(!cell){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
-
 
     UILabel *textLabel = [cell viewWithTag:2];
     UIImageView *imageView = [cell viewWithTag:1];
@@ -86,36 +83,42 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *identity = [UserDefault objectForKey:@"Identity"];
     UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     __block UIViewController *showVC;
-    NSInteger settingIndex = [self.functionArray indexOfObject:@"设置"];
-    NSInteger myDeviceIndex = [self.functionArray indexOfObject:@"我的设备"];
-    NSInteger contactUSIndex = [self.functionArray indexOfObject:@"联系我们"];
-    if (indexPath.row == myDeviceIndex) {
-        
-        MyDeviceTableViewController *myDeviceVC = (MyDeviceTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"MyDeviceViewController"];
+    if ([identity isEqualToString:@"patient"]) {
 
-        showVC = myDeviceVC;
-        
-        UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
-        
-        [nav pushViewController:showVC animated:YES];
-    }else if (indexPath.row == contactUSIndex){
-        
-        ContactUSTableViewController *contactUSVC = (ContactUSTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"ContactUSTableViewController"];
-        showVC = contactUSVC;
-        UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
-        
-        [nav pushViewController:showVC animated:YES];
-    }else if(indexPath.row == settingIndex){
-        
-        SettingViewController *settingVC = (SettingViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"SettingViewController"];
-        showVC = settingVC;
-        UINavigationController *nav = (UINavigationController *)self.mm_drawerController.centerViewController;
-        [nav pushViewController:showVC animated:YES];
-        
+        NSInteger settingIndex = [self.functionArray indexOfObject:@"设置"];
+        NSInteger myDeviceIndex = [self.functionArray indexOfObject:@"我的设备"];
+        NSInteger contactUSIndex = [self.functionArray indexOfObject:@"联系我们"];
+        if (indexPath.row == myDeviceIndex) {
+            
+            MyDeviceTableViewController *myDeviceVC = (MyDeviceTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"MyDeviceViewController"];
+            
+            showVC = myDeviceVC;
+            
+            UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+            
+            [nav pushViewController:showVC animated:YES];
+        }else if (indexPath.row == contactUSIndex){
+            
+            ContactUSTableViewController *contactUSVC = (ContactUSTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"ContactUSTableViewController"];
+            showVC = contactUSVC;
+            UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+            
+            [nav pushViewController:showVC animated:YES];
+        }else if(indexPath.row == settingIndex){
+            
+            SettingViewController *settingVC = (SettingViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"SettingViewController"];
+            showVC = settingVC;
+            UINavigationController *nav = (UINavigationController *)self.mm_drawerController.centerViewController;
+            [nav pushViewController:showVC animated:YES];
+            
+        }
+    }else{
+        //用服
     }
-
+ 
     if (indexPath.row==8) {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
                                                                        message:@"退出后不会删除任何历史数据，下次登录依然可以使用本账号。"

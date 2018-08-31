@@ -21,7 +21,7 @@
         [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
     }
     NSString *string = [dataArray componentsJoinedByString:@"---"];
-    NSLog(@"receive----------%@",string);
+//    NSLog(@"receive----------%@",string);
     
     
     NSInteger lengthOfData = [pdata length];    //寻找头部

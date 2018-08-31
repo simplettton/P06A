@@ -31,7 +31,7 @@
     self.tableView.sectionHeaderHeight  = 0;
     self.tableView.sectionFooterHeight = 20;
     self.tableView.contentInset = UIEdgeInsetsMake(20 - 35, 0, 0, 0);
-    keys = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"AGE",@"TREAT_AREA",@"PHONE_NUMBER",@"ADDRESS", nil];
+    keys = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_GENDER",@"AGE",@"TREAT_AREA",@"PHONE_NUMBER",@"ADDRESS", nil];
 
     
     [self setRoundHeadPortrait:self.headImageView];
@@ -82,7 +82,7 @@
 {
     if (section == 0)
     {
-        return 5;
+        return 4;
     }
     else if(section == 1)
     {
@@ -146,13 +146,13 @@
             NSLog(@"点击取消");
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [UserDefault setObject:@"男" forKey:@"USER_SEX"];
+            [UserDefault setObject:@"男" forKey:@"USER_GENDER"];
             [UserDefault synchronize];
             label.text = @"男";
             
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [UserDefault setObject:@"女" forKey:@"USER_SEX"];
+            [UserDefault setObject:@"女" forKey:@"USER_GENDER"];
             [UserDefault synchronize];
             label.text = @"女";
         }]];

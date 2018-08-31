@@ -104,7 +104,10 @@
                                         if ([role isEqual:@1]) {
                                             
                                             NSString *token = [responseObject.content objectForKey:@"token"];
-
+                                            NSString *nickName = [responseObject.content objectForKey:@"nickname"];
+                                            [UserDefault setObject:nickName forKey:@"USER_NAME"];
+                                            [UserDefault setObject:@"admin" forKey:@"Identity"];
+                                            
                                             [UserDefault setObject:token forKey:@"Token"];
                                             [UserDefault setBool:YES forKey:@"IsLogined"];
                                             [UserDefault synchronize];

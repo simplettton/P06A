@@ -217,10 +217,10 @@ static NSString * const KFilePath               = @"KFilePath";
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *centerNavi = [[UINavigationController alloc]init];
-   NSString *role = [UserDefault objectForKey:@"ROLE"];
+   NSString *role = [UserDefault objectForKey:@"Identity"];
     if ([role isEqualToString:@"admin"]) {
         centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"admin"];
-    }else if([role isEqualToString:@"user"]){
+    }else if([role isEqualToString:@"patient"]){
         centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];
     }
     UIViewController *leftViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"menu"];

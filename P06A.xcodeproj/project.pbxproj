@@ -19,6 +19,7 @@
 		041D426B1FFF232300EEA43C /* UIView+Tap.m in Sources */ = {isa = PBXBuildFile; fileRef = 041D426A1FFF232300EEA43C /* UIView+Tap.m */; };
 		042B90BA20EB5AF600579CB5 /* HttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 042B90B720EB5AF600579CB5 /* HttpResponse.m */; };
 		042B90BB20EB5AF600579CB5 /* NetWorkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 042B90B920EB5AF600579CB5 /* NetWorkTool.m */; };
+		042E79202137EB8900DCBA18 /* AddDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E791F2137EB8900DCBA18 /* AddDeviceViewController.m */; };
 		04349F512028292F001FFEC5 /* BLERecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04349F502028292F001FFEC5 /* BLERecordViewController.m */; };
 		043A38F6202AD66000835BDD /* AAChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A38B3202AD66000835BDD /* AAChartModel.m */; };
 		043A38F7202AD66000835BDD /* AAChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A38B5202AD66000835BDD /* AAChartView.m */; };
@@ -199,6 +200,8 @@
 		0453055A204659C500BC06BA /* TreatmentRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04530558204659C500BC06BA /* TreatmentRecordCell.m */; };
 		0453055B204659C500BC06BA /* TreatmentRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04530559204659C500BC06BA /* TreatmentRecordCell.xib */; };
 		0453324620293D8E00B63C58 /* MQTTCommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453324520293D8E00B63C58 /* MQTTCommunicationViewController.m */; };
+		0454D17A2138C96700552036 /* AddDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454D1792138C96700552036 /* AddDeviceCell.m */; };
+		0454D17D2138FC7600552036 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454D17C2138FC7600552036 /* RoundedButton.m */; };
 		045798B121226961007EE5BE /* PhonenumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045798B021226961007EE5BE /* PhonenumViewController.m */; };
 		045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045930F3204511A6003F6BDC /* ServerRecordViewController.m */; };
 		0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC37212679090030E338 /* ChangePhoneNumViewController.m */; };
@@ -217,11 +220,18 @@
 		04787BE82110188300992FA3 /* PasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04787BE72110188300992FA3 /* PasswordLoginViewController.m */; };
 		0478C2C8204FCB4A0000135D /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 0478C2C7204FCB4A0000135D /* report.html */; };
 		0478C2CB204FE6F10000135D /* EditTreatAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */; };
+		047B7DBB21368129004D26CD /* DeviceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047B7DBA21368129004D26CD /* DeviceListView.xib */; };
+		047B7DBE21368155004D26CD /* DeviceListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047B7DBD21368155004D26CD /* DeviceListView.m */; };
+		047B7DC12136853A004D26CD /* DeviceItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047B7DC02136853A004D26CD /* DeviceItemCell.m */; };
 		047D489C2047AB7D00DF7DF1 /* RecordRepordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */; };
 		047D48A12047F30D00DF7DF1 /* UIWebView+ConverToPDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D48A02047F30D00DF7DF1 /* UIWebView+ConverToPDF.m */; };
+		04885F7C2133DCF60082EABE /* MQVerCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04885F792133DCF50082EABE /* MQVerCodeInputView.m */; };
+		04885F7D2133DCF60082EABE /* UIView+MQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 04885F7B2133DCF50082EABE /* UIView+MQ.m */; };
 		04892F6D202403BB00100545 /* SetTreatmentParameterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04892F6C202403BB00100545 /* SetTreatmentParameterController.m */; };
 		04892F71202463C500100545 /* TimeSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04892F6F202463C500100545 /* TimeSetCell.m */; };
 		04892F72202463C500100545 /* TimeSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04892F70202463C500100545 /* TimeSetCell.xib */; };
+		048A497E2134EB7E00DB55F1 /* CheckCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A497D2134EB7E00DB55F1 /* CheckCodeViewController.m */; };
+		048A49812134EEE800DB55F1 /* CheckCodeResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A49802134EEE800DB55F1 /* CheckCodeResultViewController.m */; };
 		048E92A22043EBD2009F8532 /* RecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E92A12043EBD2009F8532 /* RecordTableViewCell.m */; };
 		049B57CD204E46EC0072F7A4 /* ReportComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57CC204E46EC0072F7A4 /* ReportComposer.m */; };
 		049B57E5204E9ACA0072F7A4 /* CustomPrintPageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */; };
@@ -276,6 +286,8 @@
 		042B90B720EB5AF600579CB5 /* HttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpResponse.m; sourceTree = "<group>"; };
 		042B90B820EB5AF600579CB5 /* NetWorkTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkTool.h; sourceTree = "<group>"; };
 		042B90B920EB5AF600579CB5 /* NetWorkTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkTool.m; sourceTree = "<group>"; };
+		042E791E2137EB8900DCBA18 /* AddDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceViewController.h; sourceTree = "<group>"; };
+		042E791F2137EB8900DCBA18 /* AddDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceViewController.m; sourceTree = "<group>"; };
 		04349F4F2028292F001FFEC5 /* BLERecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLERecordViewController.h; sourceTree = "<group>"; };
 		04349F502028292F001FFEC5 /* BLERecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLERecordViewController.m; sourceTree = "<group>"; };
 		043A38AC202AD3A200835BDD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -652,6 +664,10 @@
 		04530559204659C500BC06BA /* TreatmentRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TreatmentRecordCell.xib; sourceTree = "<group>"; };
 		0453324420293D8E00B63C58 /* MQTTCommunicationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MQTTCommunicationViewController.h; sourceTree = "<group>"; };
 		0453324520293D8E00B63C58 /* MQTTCommunicationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MQTTCommunicationViewController.m; sourceTree = "<group>"; };
+		0454D1782138C96700552036 /* AddDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceCell.h; sourceTree = "<group>"; };
+		0454D1792138C96700552036 /* AddDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceCell.m; sourceTree = "<group>"; };
+		0454D17B2138FC7600552036 /* RoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoundedButton.h; sourceTree = "<group>"; };
+		0454D17C2138FC7600552036 /* RoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoundedButton.m; sourceTree = "<group>"; };
 		045798AF21226961007EE5BE /* PhonenumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhonenumViewController.h; sourceTree = "<group>"; };
 		045798B021226961007EE5BE /* PhonenumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhonenumViewController.m; sourceTree = "<group>"; };
 		045930F2204511A6003F6BDC /* ServerRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerRecordViewController.h; sourceTree = "<group>"; };
@@ -687,15 +703,28 @@
 		0478C2C7204FCB4A0000135D /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
 		0478C2C9204FE6F00000135D /* EditTreatAreaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditTreatAreaViewController.h; sourceTree = "<group>"; };
 		0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditTreatAreaViewController.m; sourceTree = "<group>"; };
+		047B7DBA21368129004D26CD /* DeviceListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceListView.xib; sourceTree = "<group>"; };
+		047B7DBC21368155004D26CD /* DeviceListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceListView.h; sourceTree = "<group>"; };
+		047B7DBD21368155004D26CD /* DeviceListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceListView.m; sourceTree = "<group>"; };
+		047B7DBF2136853A004D26CD /* DeviceItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceItemCell.h; sourceTree = "<group>"; };
+		047B7DC02136853A004D26CD /* DeviceItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceItemCell.m; sourceTree = "<group>"; };
 		047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordRepordViewController.h; sourceTree = "<group>"; };
 		047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordRepordViewController.m; sourceTree = "<group>"; };
 		047D489F2047F30D00DF7DF1 /* UIWebView+ConverToPDF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ConverToPDF.h"; sourceTree = "<group>"; };
 		047D48A02047F30D00DF7DF1 /* UIWebView+ConverToPDF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+ConverToPDF.m"; sourceTree = "<group>"; };
+		04885F782133DCF50082EABE /* MQVerCodeInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQVerCodeInputView.h; sourceTree = "<group>"; };
+		04885F792133DCF50082EABE /* MQVerCodeInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQVerCodeInputView.m; sourceTree = "<group>"; };
+		04885F7A2133DCF50082EABE /* UIView+MQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MQ.h"; sourceTree = "<group>"; };
+		04885F7B2133DCF50082EABE /* UIView+MQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MQ.m"; sourceTree = "<group>"; };
 		04892F6B202403BB00100545 /* SetTreatmentParameterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTreatmentParameterController.h; sourceTree = "<group>"; };
 		04892F6C202403BB00100545 /* SetTreatmentParameterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTreatmentParameterController.m; sourceTree = "<group>"; };
 		04892F6E202463C500100545 /* TimeSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeSetCell.h; sourceTree = "<group>"; };
 		04892F6F202463C500100545 /* TimeSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeSetCell.m; sourceTree = "<group>"; };
 		04892F70202463C500100545 /* TimeSetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSetCell.xib; sourceTree = "<group>"; };
+		048A497C2134EB7E00DB55F1 /* CheckCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckCodeViewController.h; sourceTree = "<group>"; };
+		048A497D2134EB7E00DB55F1 /* CheckCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckCodeViewController.m; sourceTree = "<group>"; };
+		048A497F2134EEE800DB55F1 /* CheckCodeResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckCodeResultViewController.h; sourceTree = "<group>"; };
+		048A49802134EEE800DB55F1 /* CheckCodeResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckCodeResultViewController.m; sourceTree = "<group>"; };
 		048E92A02043EBD2009F8532 /* RecordTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordTableViewCell.h; sourceTree = "<group>"; };
 		048E92A12043EBD2009F8532 /* RecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewCell.m; sourceTree = "<group>"; };
 		049B57CB204E46EC0072F7A4 /* ReportComposer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportComposer.h; sourceTree = "<group>"; };
@@ -777,6 +806,10 @@
 				04118BB61FFE28A30054BC15 /* AdminHomeViewController.m */,
 				04118BB11FFE23860054BC15 /* UpgradeOnlineViewController.h */,
 				04118BB21FFE23860054BC15 /* UpgradeOnlineViewController.m */,
+				042E791E2137EB8900DCBA18 /* AddDeviceViewController.h */,
+				042E791F2137EB8900DCBA18 /* AddDeviceViewController.m */,
+				0454D1782138C96700552036 /* AddDeviceCell.h */,
+				0454D1792138C96700552036 /* AddDeviceCell.m */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -803,6 +836,7 @@
 				04150EFA2011C9DD007EAC85 /* SearchBLEViewController.m */,
 				04ED0EA42052318B00638850 /* MyDeviceTableViewController.h */,
 				04ED0EA52052318B00638850 /* MyDeviceTableViewController.m */,
+				047B7DC221368548004D26CD /* Device View */,
 				04DA58AE20E4DE7700E78816 /* MapViewController.h */,
 				04DA58AF20E4DE7700E78816 /* MapViewController.m */,
 			);
@@ -1577,6 +1611,10 @@
 				0464FC37212679090030E338 /* ChangePhoneNumViewController.m */,
 				0464FC39212681BE0030E338 /* EnterVerificationCodeViewController.h */,
 				0464FC3A212681BE0030E338 /* EnterVerificationCodeViewController.m */,
+				048A497C2134EB7E00DB55F1 /* CheckCodeViewController.h */,
+				048A497D2134EB7E00DB55F1 /* CheckCodeViewController.m */,
+				048A497F2134EEE800DB55F1 /* CheckCodeResultViewController.h */,
+				048A49802134EEE800DB55F1 /* CheckCodeResultViewController.m */,
 				044E02182124081C003B6C9D /* SettingViewController.h */,
 				044E02192124081C003B6C9D /* SettingViewController.m */,
 			);
@@ -1638,6 +1676,7 @@
 		0469FEA81FFE0C75002E25C3 /* P06A */ = {
 			isa = PBXGroup;
 			children = (
+				04885F772133DCF50082EABE /* MQVerViewInputView */,
 				04454EFC212FFF2D0087A18F /* GGChartKit */,
 				043A38AF202AD66000835BDD /* AAChartKitLib */,
 				045129BF201872210054EDB3 /* LeftDrawer */,
@@ -1695,6 +1734,8 @@
 				0451F0CF2019CAEB0001A9D4 /* UIImage+ImageWithColor.m */,
 				0453055C2046955100BC06BA /* TimeSetCell */,
 				0453055D2046957800BC06BA /* TreatmentRecordCell */,
+				0454D17B2138FC7600552036 /* RoundedButton.h */,
+				0454D17C2138FC7600552036 /* RoundedButton.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1716,6 +1757,29 @@
 				0469FEB81FFE0C75002E25C3 /* main.m */,
 			);
 			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		047B7DC221368548004D26CD /* Device View */ = {
+			isa = PBXGroup;
+			children = (
+				047B7DBA21368129004D26CD /* DeviceListView.xib */,
+				047B7DBC21368155004D26CD /* DeviceListView.h */,
+				047B7DBD21368155004D26CD /* DeviceListView.m */,
+				047B7DBF2136853A004D26CD /* DeviceItemCell.h */,
+				047B7DC02136853A004D26CD /* DeviceItemCell.m */,
+			);
+			path = "Device View";
+			sourceTree = "<group>";
+		};
+		04885F772133DCF50082EABE /* MQVerViewInputView */ = {
+			isa = PBXGroup;
+			children = (
+				04885F782133DCF50082EABE /* MQVerCodeInputView.h */,
+				04885F792133DCF50082EABE /* MQVerCodeInputView.m */,
+				04885F7A2133DCF50082EABE /* UIView+MQ.h */,
+				04885F7B2133DCF50082EABE /* UIView+MQ.m */,
+			);
+			path = MQVerViewInputView;
 			sourceTree = "<group>";
 		};
 		049B57CE204E46FA0072F7A4 /* Report */ = {
@@ -1863,6 +1927,7 @@
 				0445509F212FFF2E0087A18F /* IndexLuaCode.bundle in Resources */,
 				0451B12D212D4C7100B2B43A /* ParameterView.xib in Resources */,
 				043A38FF202AD66000835BDD /* AAHighchartsMore.js in Resources */,
+				047B7DBB21368129004D26CD /* DeviceListView.xib in Resources */,
 				04769EFE20085C570061E2FA /* ModeChooseView.xib in Resources */,
 				043A38FC202AD66000835BDD /* AAFunnel.js in Resources */,
 				04DAE84C2009B0A500BF4127 /* BatteryView.xib in Resources */,
@@ -1949,6 +2014,7 @@
 			files = (
 				043A3904202AD66000835BDD /* AAChart.m in Sources */,
 				04E1B1DB200C56B3007FC2DB /* LeftDrawerViewController.m in Sources */,
+				0454D17D2138FC7600552036 /* RoundedButton.m in Sources */,
 				04455048212FFF2E0087A18F /* ProgressChart.m in Sources */,
 				04455051212FFF2E0087A18F /* LineData.m in Sources */,
 				043A3914202AD66000835BDD /* AASubtitle.m in Sources */,
@@ -1980,10 +2046,12 @@
 				044550B1212FFF2E0087A18F /* llex.c in Sources */,
 				04455069212FFF2E0087A18F /* CenterCanvas.m in Sources */,
 				04455078212FFF2E0087A18F /* NSArray+GGGraphics.m in Sources */,
+				048A49812134EEE800DB55F1 /* CheckCodeResultViewController.m in Sources */,
 				04455063212FFF2E0087A18F /* LineAnimationsManager.m in Sources */,
 				0445509C212FFF2E0087A18F /* MIKELayer.m in Sources */,
 				044550AB212FFF2E0087A18F /* ldo.c in Sources */,
 				0451B134212D5BC100B2B43A /* ParameterView.m in Sources */,
+				047B7DC12136853A004D26CD /* DeviceItemCell.m in Sources */,
 				04455070212FFF2E0087A18F /* BaseScaler.m in Sources */,
 				0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */,
 				04455080212FFF2E0087A18F /* GGLineRenderer.m in Sources */,
@@ -2003,6 +2071,7 @@
 				04455097212FFF2E0087A18F /* EMALayer.m in Sources */,
 				04455076212FFF2E0087A18F /* DRadarScaler.m in Sources */,
 				044550B6212FFF2E0087A18F /* lopcodes.c in Sources */,
+				04885F7D2133DCF60082EABE /* UIView+MQ.m in Sources */,
 				043A38F9202AD66000835BDD /* AAOptionsConstructor.m in Sources */,
 				0445506F212FFF2E0087A18F /* RadarCanvas.m in Sources */,
 				044550C0212FFF2E0087A18F /* lutf8lib.c in Sources */,
@@ -2011,6 +2080,7 @@
 				04040DE120034759009D3509 /* Pack.m in Sources */,
 				043A3913202AD66000835BDD /* AAStyle.m in Sources */,
 				044550BD212FFF2E0087A18F /* ltablib.c in Sources */,
+				0454D17A2138C96700552036 /* AddDeviceCell.m in Sources */,
 				04455095212FFF2E0087A18F /* BBILayer.m in Sources */,
 				044550C2212FFF2E0087A18F /* lzio.c in Sources */,
 				0445508A212FFF2E0087A18F /* GGKShape.m in Sources */,
@@ -2028,7 +2098,9 @@
 				04455067212FFF2E0087A18F /* GGShapeCanvas.m in Sources */,
 				04455066212FFF2E0087A18F /* GGPieLayer.m in Sources */,
 				0445505B212FFF2E0087A18F /* PieDataSet.m in Sources */,
+				047B7DBE21368155004D26CD /* DeviceListView.m in Sources */,
 				043A390D202AD66000835BDD /* AAOptions3d.m in Sources */,
+				048A497E2134EB7E00DB55F1 /* CheckCodeViewController.m in Sources */,
 				04455084212FFF2E0087A18F /* GGStringRenderer.m in Sources */,
 				0445504D212FFF2E0087A18F /* BarDataSet.m in Sources */,
 				044550A3212FFF2E0087A18F /* lauxlib.c in Sources */,
@@ -2105,6 +2177,7 @@
 				04455065212FFF2E0087A18F /* GGCanvas.m in Sources */,
 				047D48A12047F30D00DF7DF1 /* UIWebView+ConverToPDF.m in Sources */,
 				049C3D4920EC7E810079F662 /* LoginWithPhoneViewController.m in Sources */,
+				04885F7C2133DCF60082EABE /* MQVerCodeInputView.m in Sources */,
 				04455083212FFF2E0087A18F /* GGRectRenderer.m in Sources */,
 				0445507C212FFF2E0087A18F /* UIView+GGFrame.m in Sources */,
 				04349F512028292F001FFEC5 /* BLERecordViewController.m in Sources */,
@@ -2117,6 +2190,7 @@
 				044550AE212FFF2E0087A18F /* lgc.c in Sources */,
 				0445504F212FFF2E0087A18F /* BaseLineBarSet.m in Sources */,
 				04455064212FFF2E0087A18F /* PieAnimationManager.m in Sources */,
+				042E79202137EB8900DCBA18 /* AddDeviceViewController.m in Sources */,
 				045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */,
 				044550AC212FFF2E0087A18F /* ldump.c in Sources */,
 				04455044212FFF2E0087A18F /* BaseLineBarChart.m in Sources */,

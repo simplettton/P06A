@@ -14,15 +14,26 @@
 @end
 
 @implementation ChangePhoneNumViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+//    [self.phoneNumberTextField becomeFirstResponder];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"更换手机号";
+    self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     self.changePhoneNumberButton.layer.cornerRadius = 5.0f;
 }
 
 - (IBAction)changePhoneNumber:(id)sender {
     if ([self isPhoneNumberValid:self.phoneNumberTextField.text]) {
-        [self performSegueWithIdentifier:@"EnterVerificationCode" sender:nil];
+//        if([self.phoneNumberTextField.text isEqualToString:self.phoneNumber]){
+//            [SVProgressHUD showErrorWithStatus:@"新手机号不能与旧手机号一致"];
+//        }else{
+            [self performSegueWithIdentifier:@"EnterVerificationCode" sender:nil];
+//        }
+
     }else{
         [SVProgressHUD showErrorWithStatus:@"请输入有效手机号"];
     }

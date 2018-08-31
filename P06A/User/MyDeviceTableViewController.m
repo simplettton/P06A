@@ -7,6 +7,7 @@
 //
 
 #import "MyDeviceTableViewController.h"
+#import "DeviceListView.h"
 #import <SVProgressHUD.h>
 @interface MyDeviceTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *macStringLabel;
@@ -29,12 +30,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 2;
+    return 3;
 }
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1) {
+    
+    NSMutableArray *array = [[NSMutableArray alloc]initWithObjects:
+                            @{@"serialNum":@"P01B23444511",@"hospital":@"西丽医院"},
+                            @{@"serialNum":@"P01A23444521",@"hospital":@"南山医院"},nil];
+    
+    if(indexPath.section == 0){
+        [DeviceListView showAboveIn:self withData:array returnBlock:^(NSString *serialNum) {
+            
+        }];
+    }else if (indexPath.section == 2) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"设备解除绑定后，您需要重新绑定新的设备，才能够正常测量，确定要解除绑定吗？" preferredStyle:UIAlertControllerStyleActionSheet];
         [alert addAction:[UIAlertAction actionWithTitle:@"解除绑定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {

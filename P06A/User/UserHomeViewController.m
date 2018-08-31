@@ -46,7 +46,7 @@
     
     NSDictionary *defaultDic = @{
                                  @"USER_NAME":            @"游客",
-                                 @"USER_SEX":             @"--",
+                                 @"USER_GENDER":             @"--",
                                  @"AGE":                  @"0",
                                  @"TREAT_AREA":           @"手部",
                                  @"PHONE_NUMBER":         @"--",

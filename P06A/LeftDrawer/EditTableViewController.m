@@ -32,7 +32,7 @@
     self.title = [NSString stringWithFormat:@"设置%@",self.editKey];
     self.contentTextField.text = self.editValue;
     
-    items = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_SEX",@"AGE",@"TREAT_AREA",@"PHONE_NUMBER",@"ADDRESS",nil];
+    items = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_GENDER",@"AGE",@"TREAT_AREA",@"PHONE_NUMBER",@"ADDRESS",nil];
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

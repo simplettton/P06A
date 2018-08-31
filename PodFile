@@ -10,4 +10,5 @@ target 'P06A' do
    pod 'UMengUShare/Social/QQ'
    pod 'UMengUShare/Social/WeChat'
    pod 'AMap2DMap'
+   pod 'Masonry'
 end

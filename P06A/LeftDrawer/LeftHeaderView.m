@@ -70,13 +70,20 @@
     self.nickNameLabel.font = [UIFont systemFontOfSize:35*KScreenUnit];
     [self addSubview:self.nickNameLabel];
     
-    
     //添加点击button
-    self.myInformationButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 44, tableViewWidth, 230 * KScreenUnit)];
-    self.myInformationButton.tag = 1;
-    self.myInformationButton.backgroundColor = [UIColor clearColor];
-    [self.myInformationButton setBackgroundImage:[UIImage imageWithColor:UIColorFromRGBAndAlpha(0Xffffff, 0.3)] forState:UIControlStateHighlighted];
-    [self addSubview:self.myInformationButton];
+    NSString *identity = [UserDefault objectForKey:@"Identity"];
+    
+    //判断身份显示不同的界面
+    if ([identity isEqualToString:@"admin"]) {
+        
+    }else{
+        self.myInformationButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 44, tableViewWidth, 230 * KScreenUnit)];
+        self.myInformationButton.tag = 1;
+        self.myInformationButton.backgroundColor = [UIColor clearColor];
+        [self.myInformationButton setBackgroundImage:[UIImage imageWithColor:UIColorFromRGBAndAlpha(0Xffffff, 0.3)] forState:UIControlStateHighlighted];
+        [self addSubview:self.myInformationButton];
+    }
+
     
     
     //添加二维码button
@@ -94,7 +101,8 @@
     
     UILabel * personalSignature = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(symbolImageView.frame) + 15 * KScreenUnit, 230  * KScreenUnit, 500 * KScreenUnit, 50 * KScreenUnit)];
     personalSignature.font = [UIFont systemFontOfSize:22 * KScreenUnit];
-    personalSignature.text =  @"                    🐑";
+//    personalSignature.text =  @"                    🐑";
+    personalSignature.text =  @"                     ";
     personalSignature.textColor = UIColorFromRGBAndAlpha(0x000000, 0.54);
     [self addSubview:personalSignature];
     

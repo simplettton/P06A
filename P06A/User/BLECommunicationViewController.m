@@ -125,8 +125,8 @@
         });
     }else{
         //配置svprogressHUD
-//        [SVProgressHUD showWithStatus:@"正在连接设备..."];
-//        [self performSelector:@selector(handleConnectTimeOut) withObject:nil afterDelay:5];
+        [SVProgressHUD showWithStatus:@"正在连接设备..."];
+        [self performSelector:@selector(handleConnectTimeOut) withObject:nil afterDelay:5];
     }
     
     [self configureButtonUI];
@@ -231,7 +231,7 @@
     }
     
     if ([keyPath isEqualToString:@"sendCharacteristic"]) {
-//        [self askForDuration];
+        [self askForDuration];
         [self performSelector:@selector(askForDeviceState) withObject:nil afterDelay:0.10];
     }
 }
@@ -569,6 +569,16 @@
            block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
 //               NSLog(@"BLECommunication----------------------------------------------");
                NSData *data = characteristic.value;
+
+               Byte *dataWithCmdIdBytes = (Byte *)[data bytes];
+               NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+               for (int i = 0; i<[data length]; i++) {
+                   [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
+               }
+               NSString *string = [dataArray componentsJoinedByString:@"---"];
+               NSLog(@"receive----------%@",string);
+               
+               
                if (data) {
                    //将数据存入缓存
                    [weakSelf.readBuf appendData:[self convertData:data]];
@@ -715,7 +725,7 @@
                 if (self.runningState == STATE_RUNNING) {
                     //获取系统当前的时间戳
                     NSString *currentTimeString = [self getCurrentTime];
-                    [self writeWithCmdid:CMDID_DATE dataString:currentTimeString];
+//                    [self writeWithCmdid:CMDID_DATE dataString:currentTimeString];
                     
                     if (!_timer) {
                         NSLog(@"timerStartTime = %ld",(long)startTime);
@@ -723,10 +733,10 @@
                     }
                     
                 }else if(self.runningState == STATE_PAUSE){
-//                    [self askForDuration];
+                    [self askForDuration];
                     [self stopTimer];
                 }else if(self.runningState == STATE_STOP){
-//                    [self askForDuration];
+                    [self askForDuration];
                     [self stopTimer];
                     
                     //治疗经过时间
@@ -890,9 +900,9 @@
     
 }
 
-//-(void)askForDuration {
-//    [self writeWithCmdid:CMDID_TREAT_TIME dataString:nil];
-//}
+-(void)askForDuration {
+    [self writeWithCmdid:CMDID_TREAT_TIME dataString:nil];
+}
 
 
 #pragma mark - connect
