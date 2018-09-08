@@ -55,7 +55,7 @@ static NSString * const KFilePath               = @"KFilePath";
     [[UMSocialManager defaultManager] openLog:YES];
     [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_APPKEY];
 
-    [self configUSharePlatforms];
+//    [self configUSharePlatforms];
     [self configureSVProgress];
 
     baby = [BabyBluetooth shareBabyBluetooth];
@@ -80,6 +80,7 @@ static NSString * const KFilePath               = @"KFilePath";
     __weak typeof(self) weakSelf = self;
     [baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
         if (central.state == CBCentralManagerStatePoweredOff){
+            //蓝牙关闭发送通知
             [[NSNotificationCenter defaultCenter]postNotificationName:@"BLEPoweredOffNotification" object:nil];
             NSLog(@"蓝牙关了");
             weakSelf.isBLEPoweredOff = YES;
@@ -173,7 +174,6 @@ static NSString * const KFilePath               = @"KFilePath";
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-
     if ([UserDefault objectForKey:@"Identity"]) {
         //登录了之后跳转到主界面
         if ([self isUserLogin]) {

@@ -12,5 +12,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *ringButton;
 @property (weak, nonatomic) IBOutlet UIButton *scanButton;
 @property (weak, nonatomic) IBOutlet UITextField *serialNumTextField;
-
+@property (weak, nonatomic) IBOutlet UIImageView *selectedView;
 @end

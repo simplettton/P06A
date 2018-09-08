@@ -33,6 +33,7 @@
     
     [super viewDidLoad];
     [self initAll];
+    
 }
 
 -(void)initAll {
@@ -62,6 +63,18 @@
     self.patientButton.layer.cornerRadius =5.0f;
     self.patientButton.layer.borderWidth = 1.0f;
     
+    //默认选择患者身份
+    NSString *identity = [UserDefault objectForKey:@"Identity"];
+    if (!identity) {
+        [self chooseRight:nil];
+    }else{
+        if ([identity isEqualToString:@"patient"]) {
+            [self chooseRight:nil];
+        }else{
+            [self chooseLeft:nil];
+        }
+    }
+
 }
 
 - (IBAction)chooseRight:(id)sender {

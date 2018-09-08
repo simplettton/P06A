@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
-@property (nonatomic,strong)NSString *selectedSerialNum;
+@property (nonatomic,strong)NSDictionary *selectedData;
 @end
 @implementation DeviceListView
 - (IBAction)cancel:(id)sender {
@@ -24,10 +24,11 @@
 - (IBAction)confirm:(id)sender {
     
     [self removeFromSuperview];
-    self.returnEvent(self.selectedSerialNum);
+    self.returnEvent(self.selectedData);
 }
 
 -(void)awakeFromNib{
+    
     [super awakeFromNib];
     self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.1];
     self.backgroundView.layer.cornerRadius = 5.0f;
@@ -73,8 +74,8 @@
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = UIColorFromHex(0xebebeb);
     NSDictionary *dataDic = [self.DeviceArray objectAtIndex:indexPath.row];
-    cell.serialNumLabel.text = [dataDic objectForKey:@"serialNum"];
-    cell.hospitalLabel.text = [dataDic objectForKey:@"hospital"];
+    cell.serialNumLabel.text = [dataDic objectForKey:@"serialnum"];
+    cell.hospitalLabel.text = [dataDic objectForKey:@"from"];
     
     return cell;
 }
@@ -87,8 +88,7 @@
     cell.selectedView.image = [UIImage imageNamed:@"selected"];
     self.selectedIndex = indexPath.row;
     NSDictionary *dataDic = [self.DeviceArray objectAtIndex:indexPath.row];
-    self.selectedSerialNum = [dataDic objectForKey:@"serialNum"];
-    
+    self.selectedData = dataDic;
 }
 
 - (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width

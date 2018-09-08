@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void (^returnBlock)(NSString* serialNum);
+typedef void (^returnBlock)(NSDictionary* dataDic);
 @interface DeviceListView : UIView<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) returnBlock returnEvent;

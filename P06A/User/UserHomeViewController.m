@@ -77,6 +77,7 @@
     [self initUI];
 }
 
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
 

@@ -13,7 +13,9 @@
 #import "PersonalInfomationViewController.h"
 #import "ContactUSTableViewController.h"
 #import "SettingViewController.h"
+#import "UpgradeOnlineViewController.h"
 #import "BaseHeader.h"
+#import "AppDelegate.h"
 
 #import "PhoneLoginViewController.h"
 #import "PasswordLoginViewController.h"
@@ -42,8 +44,8 @@
         self.functionArray = @[@"",@"设置",@"我的设备",@"联系我们",@"帮助",@"",@"",@"",@"退出登录"];
         self.imageNameArray = @[@"",@"setting",@"star",@"service",@"help",@"",@"",@"",@""];
     }else{
-        self.functionArray = @[@"",@"",@"",@"",@"",@"",@"",@"",@"退出登录"];
-        self.imageNameArray = @[@"",@"",@"",@"",@"",@"",@"",@"",@""];
+        self.functionArray = @[@"",@"在线升级",@"修改密码",@"",@"",@"",@"",@"",@"退出登录"];
+        self.imageNameArray = @[@"",@"setting",@"help",@"",@"",@"",@"",@"",@""];
     }
 
 }
@@ -96,27 +98,41 @@
             MyDeviceTableViewController *myDeviceVC = (MyDeviceTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"MyDeviceViewController"];
             
             showVC = myDeviceVC;
-            
-            UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
-            
-            [nav pushViewController:showVC animated:YES];
+            [self pushViewController:showVC];
+//            UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+//
+//            [nav pushViewController:showVC animated:YES];
         }else if (indexPath.row == contactUSIndex){
             
             ContactUSTableViewController *contactUSVC = (ContactUSTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"ContactUSTableViewController"];
             showVC = contactUSVC;
-            UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
-            
-            [nav pushViewController:showVC animated:YES];
+            [self pushViewController:showVC];
+//            UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+//
+//            [nav pushViewController:showVC animated:YES];
         }else if(indexPath.row == settingIndex){
             
             SettingViewController *settingVC = (SettingViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"SettingViewController"];
             showVC = settingVC;
-            UINavigationController *nav = (UINavigationController *)self.mm_drawerController.centerViewController;
-            [nav pushViewController:showVC animated:YES];
+            [self pushViewController:showVC];
+//            UINavigationController *nav = (UINavigationController *)self.mm_drawerController.centerViewController;
+//            [nav pushViewController:showVC animated:YES];
             
         }
     }else{
         //用服
+        
+        NSInteger upgradeIndex = [self.functionArray indexOfObject:@"在线升级"];
+        if (indexPath.row == upgradeIndex) {
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+            if (appDelegate.isBLEPoweredOff) {
+                [SVProgressHUD showErrorWithStatus:@"未打开蓝牙无法升级设备"];
+            }else{
+                UpgradeOnlineViewController *upgradeVC = (UpgradeOnlineViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"UpgradeOnlineViewController"];
+                showVC = upgradeVC;
+                [self pushViewController:showVC];
+            }
+        }
     }
  
     if (indexPath.row==8) {
@@ -168,6 +184,10 @@
              [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
          }];
     }
+}
+-(void)pushViewController:(UIViewController *)viewController{
+    UINavigationController *nav = (UINavigationController *)self.mm_drawerController.centerViewController;
+    [nav pushViewController:viewController animated:YES];
 }
 
 -(void)buttonClickListener:(UIButton *)sender

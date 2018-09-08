@@ -464,22 +464,29 @@
                 }
             }
 
-            NSString *macString = [array componentsJoinedByString:@"-"];
+            NSString *macString = [array componentsJoinedByString:@""];
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSString *savedMacString = [userDefaults objectForKey:@"MacString"];
-            NSString *savedPeripheralName = [userDefaults objectForKey:@"PeripheralName"];
+//            NSString *savedPeripheralName = [userDefaults objectForKey:@"PeripheralName"];
             if (!savedMacString) {
 
             }else {
-                if ([savedMacString isEqualToString:macString] &&  [savedPeripheralName isEqualToString:peripheral.name]){
+                if([savedMacString isEqualToString:macString]){
                     if (weakSelf.HUD) {
                         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                     }
                     [weakBaby cancelScan];
                     weakSelf.peripheral = peripheral;
-                    
                 }
+//                if ([savedMacString isEqualToString:macString] &&  [savedPeripheralName isEqualToString:peripheral.name]){
+//                    if (weakSelf.HUD) {
+//                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+//                    }
+//                    [weakBaby cancelScan];
+//                    weakSelf.peripheral = peripheral;
+//
+//                }
             }
 //        }
     }];
@@ -584,7 +591,6 @@
                    [weakSelf.readBuf appendData:[self convertData:data]];
                    [weakSelf analyzeReceivedData];
                }
-
            }];
 }
 

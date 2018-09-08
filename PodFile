@@ -11,4 +11,6 @@ target 'P06A' do
    pod 'UMengUShare/Social/WeChat'
    pod 'AMap2DMap'
    pod 'Masonry'
+   pod 'MJRefresh'
+   pod 'JSONModel'
 end

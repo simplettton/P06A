@@ -37,34 +37,16 @@
     [self setBorderWithView:self.passwordView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xeeeeee) borderWidth:1];
     self.loginButton.layer.cornerRadius = 5;
 }
-- (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width
-{
+//关闭键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
-    if (top) {
-        CALayer *layer = [CALayer layer];
-        layer.frame = CGRectMake(0, 0, view.frame.size.width, width);
-        layer.backgroundColor = color.CGColor;
-        [view.layer addSublayer:layer];
-    }
-    if (left) {
-        CALayer *layer = [CALayer layer];
-        layer.frame = CGRectMake(0, 0, width, view.frame.size.height);
-        layer.backgroundColor = color.CGColor;
-        [view.layer addSublayer:layer];
-    }
-    if (bottom) {
-        CALayer *layer = [CALayer layer];
-        layer.frame = CGRectMake(0, view.frame.size.height - width, view.frame.size.width, width);
-        layer.backgroundColor = color.CGColor;
-        [view.layer addSublayer:layer];
-    }
-    if (right) {
-        CALayer *layer = [CALayer layer];
-        layer.frame = CGRectMake(view.frame.size.width - width, 0, width, view.frame.size.height);
-        layer.backgroundColor = color.CGColor;
-        [view.layer addSublayer:layer];
-    }
+    [self hideKeyBoard];
 }
+-(void)hideKeyBoard{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - login
 -(void)showLoginingIndicator{
     
     [SVProgressHUD showWithStatus:@"正在登录中..."];
@@ -158,6 +140,37 @@
     [SVProgressHUD dismiss];
     
 }
+#pragma mark - PrivateMethod
+
+- (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width
+{
+    
+    if (top) {
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, 0, view.frame.size.width, width);
+        layer.backgroundColor = color.CGColor;
+        [view.layer addSublayer:layer];
+    }
+    if (left) {
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, 0, width, view.frame.size.height);
+        layer.backgroundColor = color.CGColor;
+        [view.layer addSublayer:layer];
+    }
+    if (bottom) {
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(0, view.frame.size.height - width, view.frame.size.width, width);
+        layer.backgroundColor = color.CGColor;
+        [view.layer addSublayer:layer];
+    }
+    if (right) {
+        CALayer *layer = [CALayer layer];
+        layer.frame = CGRectMake(view.frame.size.width - width, 0, width, view.frame.size.height);
+        layer.backgroundColor = color.CGColor;
+        [view.layer addSublayer:layer];
+    }
+}
+
 - (NSString *) md5:(NSString *) input {
     
     const char *cStr = [input UTF8String];

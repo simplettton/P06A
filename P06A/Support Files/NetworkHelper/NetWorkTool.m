@@ -7,7 +7,10 @@
 //
 
 #import "NetWorkTool.h"
+#import "MJRefresh.h"
 #import "AppDelegate.h"
+#import "PhoneLoginViewController.h"
+#import "PasswordLoginViewController.h"
 #import <SVProgressHUD.h>
 @interface NetWorkTool()
 
@@ -20,8 +23,7 @@ static NetWorkTool *_instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [[NetWorkTool alloc]initWithBaseURL:nil];
-//
-//        _instance.requestSerializer = [AFJSONRequestSerializer serializer];
+
         [_instance.requestSerializer setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
 
         //设置请求的超时时间
@@ -53,7 +55,6 @@ static NetWorkTool *_instance;
     //通用token data模板
     if( hasToken )
     {
-//        [_instance.requestSerializer setValue:token forHTTPHeaderField:@"token"];
         [_instance.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     }
 
@@ -89,9 +90,12 @@ static NetWorkTool *_instance;
                
                //token失效
                if ([errorString isEqualToString:@"无法识别的用户"]) {
+                   [UserDefault setBool:NO forKey:@"IsLogined"];
+                   [UserDefault synchronize];
                    dispatch_async(dispatch_get_main_queue(), ^{
                        [SVProgressHUD showErrorWithStatus:@"账号验证过期，即将重新登录"];
-                    
+                       AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                       [appDelegate performSelector:@selector(initRootViewController) withObject:nil afterDelay:1];
                    });
                }else{
                    
@@ -100,8 +104,11 @@ static NetWorkTool *_instance;
                    responseObject.content = content;
                    responseObject.errorString = errorString;
                    responseBlock(responseObject);
+                   //停止刷新
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       [self endTableViewRefreshing:NO];
+                   });
                }
-
            }
        }
        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -125,6 +132,8 @@ static NetWorkTool *_instance;
                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
                    NSLog(@"ERROR = %@",error);
                }
+               //endrefresh操作
+               [self endTableViewRefreshing:YES];
            });
        }];
 }
@@ -133,6 +142,8 @@ static NetWorkTool *_instance;
      params:(id)parameters
     success:(HttpResponseObject)responseBlock
     failure:(HttpFailureBlock)failureBlock{
+    
+    NSString *fileName = (NSString *)parameters;
     
     //服务器返回字节流格式
     _instance.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -159,8 +170,7 @@ static NetWorkTool *_instance;
         [SVProgressHUD showProgress:(double)downloadProgress.completedUnitCount / downloadProgress.totalUnitCount status:@"正在下载中…"];
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         //保存的文件路径
-//        NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:response.suggestedFilename];
-        NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"app.bin"];
+        NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:fileName];
          /* 设定下载到的位置 */
         return [NSURL fileURLWithPath:fullPath];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
@@ -183,5 +193,78 @@ static NetWorkTool *_instance;
     [download resume];
     
 }
+-(void)endTableViewRefreshing:(BOOL)includeFooter{
+    
+    UIViewController *controller = [self getCurrentVC];
+    
+    //当前控制器是导航控制器
+    if ([[self getCurrentVC]isKindOfClass:[UINavigationController class]]) {
+        
+        UINavigationController *navi = (UINavigationController *)[self getCurrentVC];
+        
+        controller = [navi viewControllers][0];
+    }
+    
+    [self traverseAllSubviews:controller.view includeFooter:includeFooter];
+    
+    
+}
+-(void)traverseAllSubviews:(UIView *)rootView includeFooter:(BOOL)includeFooter {
+    for (UIView *subView in [rootView subviews])
+    {
+        if (!rootView.subviews.count) {
+            return;
+        }
+        
+        //如果是tableview 取消刷新
+        if ([subView isKindOfClass:[UITableView class]]) {
+            __weak UITableView *tableview = (UITableView *)subView;
+            [tableview.mj_header endRefreshing];
+            if (includeFooter) {
+                [tableview.mj_footer endRefreshing];
+            }
+            
+        }else if([subView isKindOfClass:[UICollectionView class]]){
+            __weak UICollectionView *collectionview = (UICollectionView *)subView;
+            [collectionview.mj_header endRefreshing];
+            if (includeFooter) {
+                [collectionview.mj_footer endRefreshing];
+            }
+            
+        }
+        [self traverseAllSubviews:subView includeFooter:includeFooter];
+    }
+}
+
+//获取当前窗口控制器
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *result = nil;
+    
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    
+    if ([nextResponder isKindOfClass:[UIViewController class]])
+        result = nextResponder;
+    else
+        result = window.rootViewController;
+    
+    return result;
+}
+
 
 @end

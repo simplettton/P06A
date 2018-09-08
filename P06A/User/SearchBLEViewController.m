@@ -195,10 +195,10 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
             
             //保存新的绑定设备 mac地址 设备蓝牙名字
             NSString *peripheralName = peripheral.name;
-            NSString *macString = [array componentsJoinedByString:@"-"];
+            NSString *macString = [array componentsJoinedByString:@""];
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:macString forKey:@"MacString"];
-            [userDefaults setObject:peripheralName forKey:@"PeripheralName"];
+//            [userDefaults setObject:peripheralName forKey:@"PeripheralName"];
             [userDefaults synchronize];
             
             //提示框

@@ -12,6 +12,8 @@
 @interface MyDeviceTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *macStringLabel;
 @property (weak, nonatomic) IBOutlet UILabel *serialNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *hospitalLabel;
 @end
 
 @implementation MyDeviceTableViewController
@@ -20,9 +22,57 @@
     [super viewDidLoad];
     self.title = @"我的设备";
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    NSString *string = [userDefault objectForKey:@"MacString"];
-    self.macStringLabel.text = string;
-//    self.serialNumLabel.text = @"";
+    NSString *macString = [userDefault objectForKey:@"MacString"];
+    
+    //默认选择第一个设备
+    if (macString == nil) {
+        [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
+                                      params:@{}
+                                    hasToken:YES
+                                     success:^(HttpResponse *responseObject) {
+                                         if ([responseObject.result integerValue] == 1) {
+                                             NSMutableArray *dataArray = responseObject.content;
+                                             if ([dataArray count]>0) {
+                                                     NSDictionary *dataDic = [dataArray firstObject];
+                                                     NSString *cpuId = [dataDic objectForKey:@"cpuid"];
+                                                     NSString *serialNum = [dataDic objectForKey:@"serialnum"];
+                                                     NSString *hospital = [dataDic objectForKey:@"from"];
+                                                     NSString *type = [dataDic objectForKey:@"type"];
+                                                     NSString *macString = [dataDic objectForKey:@"mac"];
+                                                     
+                                                     self.serialNumLabel.text = serialNum;
+                                                     self.hospitalLabel.text = hospital;
+                                                     self.typeLabel.text = type;
+                                                     self.macStringLabel.text = macString;
+                                                     //
+                                                     [UserDefault setObject:cpuId forKey:@"Cpuid"];
+                                                     [UserDefault setObject:serialNum forKey:@"SerialNum"];
+                                                     [UserDefault setObject:hospital forKey:@"Hospital"];
+                                                     [UserDefault setObject:macString forKey:@"MacString"];
+                                                     [UserDefault setObject:type forKey:@"MachineType"];
+                                                     [UserDefault synchronize];
+                                             }
+                                         }else{
+                                             [SVProgressHUD showErrorWithStatus:responseObject.errorString];
+                                         }
+                                     }
+                                     failure:nil];
+    }else{
+        [self initSavedDeviceInfomation];
+    }
+}
+-(void)initSavedDeviceInfomation{
+    
+    NSString *cpuId = [UserDefault objectForKey:@"Cpuid"];
+    NSString *serialNum = [UserDefault objectForKey:@"SerialNum"];
+    NSString *hospital = [UserDefault objectForKey:@"Hospital"];
+    NSString *type = [UserDefault objectForKey:@"MachineType"];
+    NSString *macString = [UserDefault objectForKey:@"MacString"];
+    
+    self.serialNumLabel.text = serialNum;
+    self.hospitalLabel.text = hospital;
+    self.typeLabel.text = type;
+    self.macStringLabel.text = macString;
 }
 
 
@@ -35,15 +85,45 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSMutableArray *array = [[NSMutableArray alloc]initWithObjects:
-                            @{@"serialNum":@"P01B23444511",@"hospital":@"西丽医院"},
-                            @{@"serialNum":@"P01A23444521",@"hospital":@"南山医院"},nil];
+
     
     if(indexPath.section == 0){
-        [DeviceListView showAboveIn:self withData:array returnBlock:^(NSString *serialNum) {
-            
-        }];
+        [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
+                                      params:@{}
+                                    hasToken:YES
+                                     success:^(HttpResponse *responseObject) {
+                                         if ([responseObject.result integerValue] == 1) {
+                                             NSMutableArray *dataArray = responseObject.content;
+                                             if ([dataArray count]>0) {
+                                                 [DeviceListView showAboveIn:self withData:dataArray returnBlock:^(NSDictionary *dataDic) {
+
+                                                     
+                                                     NSString *cpuId = [dataDic objectForKey:@"cpuid"];
+                                                     NSString *serialNum = [dataDic objectForKey:@"serialnum"];
+                                                     NSString *hospital = [dataDic objectForKey:@"from"];
+                                                     NSString *type = [dataDic objectForKey:@"type"];
+                                                     NSString *macString = [dataDic objectForKey:@"mac"];
+                                                     
+                                                     self.serialNumLabel.text = serialNum;
+                                                     self.hospitalLabel.text = hospital;
+                                                     self.typeLabel.text = type;
+                                                     self.macStringLabel.text = macString;
+//                                                     
+                                                     [UserDefault setObject:cpuId forKey:@"Cpuid"];
+                                                     [UserDefault setObject:serialNum forKey:@"SerialNum"];
+                                                     [UserDefault setObject:hospital forKey:@"Hospital"];
+                                                     [UserDefault setObject:macString forKey:@"MacString"];
+                                                     [UserDefault setObject:type forKey:@"MachineType"];
+                                                     [UserDefault synchronize];
+                                                 }];
+                                             }
+                                         }else{
+                                             [SVProgressHUD showErrorWithStatus:responseObject.errorString];
+                                         }
+                                     }
+                                     failure:nil];
+        
+
     }else if (indexPath.section == 2) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"设备解除绑定后，您需要重新绑定新的设备，才能够正常测量，确定要解除绑定吗？" preferredStyle:UIAlertControllerStyleActionSheet];

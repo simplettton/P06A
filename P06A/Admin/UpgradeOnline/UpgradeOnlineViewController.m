@@ -15,6 +15,8 @@
 
 #import "Pack.h"
 #import "Unpack.h"
+#import "FileModel.h"
+#import "FileListView.h"
 
 #import "NetWorkTool.h"
 
@@ -42,7 +44,7 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
 
 typedef NS_ENUM(NSInteger,KCmdids) {
     CMDID_UPGRATE_REQUEST                = 0X9B,
-    CMDID_SEND_DATA                      = 0X9F,
+//    CMDID_SEND_DATA                      = 0X9F,
     CMDID_ARM_UPGRATE_PREPARE_COMPLETED  = 0X0D,
     CMDID_ARM_UPGRATE_DATA_REQUEST       = 0X0F,
     CMDID_ARM_UPGRATE_SUCCESSFULLY       = 0X14,
@@ -64,7 +66,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 @property (nonatomic, strong) NSString *documentPath;
 @property (nonatomic, strong) NSString *fileName;
 @property (nonatomic, strong) NSData *binData;
-
+@property (nonatomic, strong) NSTimer *upgradeTimer;
 
 @property (nonatomic, assign) BOOL isConnected;
 
@@ -146,8 +148,12 @@ typedef NS_ENUM(NSInteger,KCmdids) {
            forKeyPath:@"sendCharacteristic"
               options:NSKeyValueObservingOptionNew
               context:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleBLEPowerOff) name:@"BLEPoweredOffNotification" object:nil];
 }
-
+-(void)handleBLEPowerOff{
+    [SVProgressHUD showErrorWithStatus:@"蓝牙未打开升级连接设备"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
     
@@ -163,6 +169,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
+    [self closeTimer];
     [baby cancelScan];
 
     [baby cancelAllPeripheralsConnection];
@@ -171,6 +178,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     [[NSNotificationCenter defaultCenter]removeObserver:self
                                                    name:kOpenFileNotification
                                                  object:nil];
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"BLEPoweredOffNotification" object:nil];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -193,26 +201,15 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 #pragma mark - babyDelegate
 - (void)babyDelegate {
     __weak typeof(self) weakSelf = self;
-    [baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
-        if (central.state == CBCentralManagerStatePoweredOn) {
-            weakSelf.HUD = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-            weakSelf.HUD.label.text = @"扫描设备中";
-            // 隐藏时候从父控件中移除
-            weakSelf.HUD.removeFromSuperViewOnHide = YES;
-            [weakSelf.HUD showAnimated:YES];
-            
-        }else if(central.state == CBCentralManagerStatePoweredOff) {
-            [SVProgressHUD showInfoWithStatus:@"请打开蓝牙以连接设备"];
-            [SVProgressHUD dismissWithDelay:1.5];
-            
-        }
-    }];
     
     //扫描到设备
     [baby setBlockOnDiscoverToPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         NSLog(@"搜索到了设备:%@",peripheral.name);
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        [weakSelf insertTableView:peripheral advertisementData:advertisementData RSSI:RSSI];
+        if ([peripheral.name hasPrefix:@"P06A"]) {
+            [weakSelf insertTableView:peripheral advertisementData:advertisementData RSSI:RSSI];
+        }
+
         if ([peripheral.name hasPrefix:@"P06A"])
         {
 //            NSData *data = (NSData *)[advertisementData objectForKey:@"kCBAdvDataManufacturerData"];
@@ -235,6 +232,8 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     
     [baby setBlockOnDisconnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
         NSLog(@"断开连接");
+        [SVProgressHUD showErrorWithStatus:@"断开连接"];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
     
     //发现service的Characteristics
@@ -295,7 +294,23 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     [SVProgressHUD showSuccessWithStatus:statusString];
     
 }
+#pragma mark - timer
 
+-(void)upgradeErrorDisplay {
+    self.HUD.label.text = @"升级超时";
+    [self.HUD hideAnimated:YES afterDelay:1.5];
+    
+//    [SVProgressHUD showErrorWithStatus:@"升级超时"];
+}
+-(void)startTimer{
+    self.upgradeTimer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(upgradeErrorDisplay) userInfo:nil repeats:NO];
+}
+-(void)closeTimer {
+    if (self.upgradeTimer) {
+        [self.upgradeTimer invalidate];
+        self.upgradeTimer = nil;
+    }
+}
 #pragma mark - receiveData
 - (void)setNotify:(CBCharacteristic *)characteristic {
     __weak typeof(self)weakSelf = self;
@@ -324,7 +339,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         
         NSData *lengthData = [head subdataWithRange:NSMakeRange(1, 1)];//取得长度数据
         
-        
         NSInteger length;
         
         length = *((Byte *)([lengthData bytes]));
@@ -342,6 +356,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         }
         else//如果缓存中的数据长度不够一个包的长度，则包不完整(处理半包，继续读取)
         {
+            
             //            [_socket readDataWithTimeout:-1 buffer:_readBuf bufferOffset:_readBuf.length tag:0];//继续读取数据
             return;
         }
@@ -367,6 +382,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
             }
             case CMDID_ARM_UPGRATE_DATA_REQUEST:
                 if (self.binData) {
+                    [self closeTimer];
                     NSInteger packNumber;
                     if ([self.binData length] % BLE_SEND_MAX_LEN) {
                         packNumber = [self.binData length]/BLE_SEND_MAX_LEN +1;
@@ -399,7 +415,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
             case CMDID_ARM_UPGRATE_SUCCESSFULLY:
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
+                    [self closeTimer];
                     self.HUD.mode = MBProgressHUDModeText;
                     self.HUD.minSize = CGSizeZero;
                     self.HUD.label.text = @"升级成功";
@@ -412,9 +428,9 @@ typedef NS_ENUM(NSInteger,KCmdids) {
             }
             case CMDID_ARM_WAIT_UPGRATE_TIMEOUT:
             {
+                [self closeTimer];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.HUD.label.text = @"✖️升级超时";
-                    //✕✗✘/
                     [self.HUD hideAnimated:1.5];
                 });
 
@@ -430,7 +446,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 #pragma mark - writeData
 - (void)writeData:(NSData *)data
 {
-    
     [self.peripheral writeValue:data
                   forCharacteristic:self.sendCharacteristic
                                type:CBCharacteristicWriteWithoutResponse];
@@ -439,6 +454,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 //分包 每次发50个
 -(void)sendSubPackage:(NSData*)completeData
 {
+    [self startTimer];
     self.beginByte = self.sendTimes * BLE_SEND_MAX_LEN;
     for (int i = self.beginByte ;(i < (EACH_TIME_PACKECT_NUM * BLE_SEND_MAX_LEN + self.beginByte)) && (i < [completeData length]); i += BLE_SEND_MAX_LEN) {
         // 预加 最大包长度，如果依然小于总数据长度，可以取最大包数据大小
@@ -512,7 +528,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         }
     }
     
-    NSString *mac = [array componentsJoinedByString:@"-"];
+    NSString *mac = [array componentsJoinedByString:@""];
     
     
     UILabel *nameLabel      = (UILabel *)[cell.contentView viewWithTag:nameLableTag];
@@ -531,6 +547,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     return 120.0f;
+//    return 85.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -582,7 +599,17 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         
         [self.tableView insertRowsAtIndexPaths:indexPaths
                               withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        NSInteger index = [peripherals indexOfObject:peripheral];
+        
+        NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
+        [item setValue:peripheral forKey:@"peripheral"];
+        [item setValue:RSSI forKey:@"RSSI"];
+        [item setValue:advertisementData forKey:@"advertisementData"];
+        [peripheralDataArray replaceObjectAtIndex:index withObject:item];
+        
     }
+
 }
 
 #pragma mark - refresh
@@ -606,17 +633,90 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 #pragma mark -downLoad
 
 - (IBAction)downLoad:(id)sender {
-    [[NetWorkTool sharedNetWorkTool]DownLoadFile:@"http://api.lifotronic.com:3086/Api/AppendVM/DownloadFile?key=p06aupdate" params:nil success:^(HttpResponse *responseObject) {
-        
-        NSString *tempFilePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"app.bin"];
-        self.fileName = @"app.bin";
-        self.binData = [[NSData alloc] initWithContentsOfFile:tempFilePath];
-        self.noFileView.hidden = YES;
-        [self configFileViewWithDate:[NSDate date]];
-        
-    } failure:^(NSError *error) {
-        
-    }];
+    
+    
+//    [[NetWorkTool sharedNetWorkTool]DownLoadFile:@"http://api.lifotronic.com:3086/Api/AppendVM/DownloadFile?key=p06aupdate" params:nil success:^(HttpResponse *responseObject) {
+//
+//        NSString *tempFilePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"app.bin"];
+//        self.fileName = @"app.bin";
+//        self.binData = [[NSData alloc] initWithContentsOfFile:tempFilePath];
+//        self.noFileView.hidden = YES;
+//        [self configFileViewWithDate:[NSDate date]];
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+    [[NetWorkTool sharedNetWorkTool]POST:@"http://api.lifotronic.com:3086/Api/AppendVM/ListOpen" params:nil hasToken:NO success:^(HttpResponse *responseObject) {
+        if ([responseObject.result integerValue] == 1) {
+            NSMutableArray *fileArray = [[NSMutableArray alloc]initWithCapacity:20];
+            
+            for (NSDictionary *dic in responseObject.content) {
+                NSError* err = nil;
+                FileModel *file = [[FileModel alloc]initWithDictionary:dic error:&err];
+                if ([file.projectName isEqualToString:@"P06A"]) {
+                    [fileArray addObject:file];
+                }
+            }
+            if ([fileArray count]>0) {
+                [FileListView showAboveIn:self withData:fileArray returnBlock:^(FileModel *file) {
+                    if (file) {
+                        //p01bupdate
+                        NSString *downLoadApi = [NSString stringWithFormat:@"http://api.lifotronic.com:3086/Api/AppendVM/DownloadFile?key=%@",file.key];
+                        [[NetWorkTool sharedNetWorkTool]DownLoadFile:downLoadApi params:file.name success:^(HttpResponse *responseObject) {
+                            [self handleDownLoadFile:file];
+                        } failure:^(NSError *error) {
+                            [SVProgressHUD showErrorWithStatus:error.description];
+                        }];
+                    }
+                }];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"无升级文件"];
+            }
+        }
+    } failure:nil];
+    
+}
+-(void)handleDownLoadFile:(FileModel *)file{
+    //下载的文件保存在NSCachesDirectory文件夹中
+    self.noFileView.hidden = YES;
+    self.fileName = file.name;
+    NSString *tempFilePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:file.name];
+    self.binData = [[NSData alloc] initWithContentsOfFile:tempFilePath];
+    NSDate *fileDate = [NSDate dateWithTimeIntervalSince1970:[[NSString stringWithFormat:@"%@",file.updateTime] doubleValue]];
+    self.fileLengthLabel.text = [self transformedValue:file.size];
+    [self configFileViewWithDate:fileDate];
+    
+    [self saveFile:file];
+}
+-(void)saveFile:(FileModel *)file{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *tempFilePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:file.name];
+    NSString *fileNameStr = file.name;
+    NSData *data = [[NSData alloc] initWithContentsOfFile:tempFilePath];
+    //documents路径
+    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //documents有文件则删除
+    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager]enumeratorAtPath:documents];
+    if(enumerator !=nil)
+    {
+        for (NSString *fileName in enumerator)
+        {
+            BOOL isDirectory = NO;
+            [[NSFileManager defaultManager] fileExistsAtPath:[documents stringByAppendingPathComponent:fileName] isDirectory:&isDirectory];
+            if (!isDirectory)
+            {
+                [fileManager removeItemAtPath:[documents stringByAppendingPathComponent:fileName] error:nil];
+            }
+        }
+    }
+    NSString *documentPath = [documents stringByAppendingPathComponent:fileNameStr];
+    
+    //保存新文件
+    BOOL success = [data writeToFile:documentPath atomically:YES];
+    if (success)
+    {
+        NSLog(@"写入文件成功");
+    }
 }
 
 #pragma mark - upgrate
@@ -628,7 +728,10 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         {
             [self sendUpgrateRequest];
             
+//            [SVProgressHUD showSuccessWithStatus:@"正在请求进入升级模式..."];
             [self showMessageWithTitle:@"正在请求进入升级模式…" hideAfterDelay:NO];
+            [self startTimer];
+
         }else
         {
             [SVProgressHUD showErrorWithStatus:@"没有找到升级包"];
@@ -759,7 +862,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 }
 
 -(void)pushNotification {
-    
+
     // 1.创建通知内容
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
     content.title = @"";
@@ -770,18 +873,18 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     // 2.设置声音
     UNNotificationSound *sound = [UNNotificationSound defaultSound];
     content.sound = sound;
-    
+
     // 3.触发模式
     UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:0.05 repeats:NO];
-    
+
     // 4.设置UNNotificationRequest
     NSString *requestIdentifer = @"TestRequest";
     UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifer content:content trigger:trigger];
-    
+
     //5.把通知加到UNUserNotificationCenter, 到指定触发点会被触发
     [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
     }];
-    
+
 }
 
 

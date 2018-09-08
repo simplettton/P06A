@@ -20,5 +20,6 @@
  */
 @property(nonatomic,strong) MMDrawerController * drawerController;
 
+-(void)initRootViewController;
 @end
 
