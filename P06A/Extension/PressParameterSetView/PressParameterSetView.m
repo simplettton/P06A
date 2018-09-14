@@ -95,13 +95,13 @@
     NSString *modeString = [[NSString alloc]init];
     switch (self.mode) {
         case 0x00:
-            modeString = @"持续吸引模式";
+            modeString = @"连续模式";
             break;
         case 0x01:
-            modeString = @"间歇吸引模式";
+            modeString = @"间隔模式";
             break;
         case 0x02:
-            modeString = @"动态吸引模式";
+            modeString = @"动态模式";
             break;
             
         default:

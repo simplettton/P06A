@@ -206,21 +206,8 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     [baby setBlockOnDiscoverToPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         NSLog(@"搜索到了设备:%@",peripheral.name);
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if ([peripheral.name hasPrefix:@"P06A"]) {
+        if ([peripheral.name hasPrefix:@"P"]) {
             [weakSelf insertTableView:peripheral advertisementData:advertisementData RSSI:RSSI];
-        }
-
-        if ([peripheral.name hasPrefix:@"P06A"])
-        {
-//            NSData *data = (NSData *)[advertisementData objectForKey:@"kCBAdvDataManufacturerData"];
-//            Byte *dataByte = (Byte *)[data bytes];
-//            
-//            NSMutableArray *array = [NSMutableArray arrayWithCapacity:20];
-//            for (int i =0 ; i < 6; i++) {
-//                [array addObject:[NSString stringWithFormat:@"%x",dataByte[i]]];
-//            }
-//
-//            NSString *mac = [array componentsJoinedByString:@"-"];
         }
     }];
     
@@ -365,6 +352,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 
 
 - (void)handleResponseData:(NSData *)complateData {
+    __weak typeof(baby)weakBaby = baby;
     NSData *data = [Unpack unpackData:complateData];
     if (data != nil) {
         Byte* bytes = (Byte *)[data bytes];
@@ -415,10 +403,12 @@ typedef NS_ENUM(NSInteger,KCmdids) {
             case CMDID_ARM_UPGRATE_SUCCESSFULLY:
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    
                     [self closeTimer];
                     self.HUD.mode = MBProgressHUDModeText;
                     self.HUD.minSize = CGSizeZero;
                     self.HUD.label.text = @"升级成功";
+//                    [weakBaby cancelAllPeripheralsConnection];
                     [self.HUD hideAnimated:YES afterDelay:1.5];
                     
                 });
@@ -467,7 +457,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 
             NSLog(@"i = %d",i);
             [self writeData:subData];
-            NSLog(@"upgrateTime = %ld",(long)UPGRATE_TIME_INTERVAL);
             [NSThread sleepForTimeInterval:0.01];
             self.sendTimes ++;
 

@@ -31,6 +31,7 @@
  *"CODE IS FAR AWAY FROM BUG WITH THE ANIMAL PROTECTING"
  */
 #import "BLECommunicationViewController.h"
+#import "AlertView.h"
 #import "AppDelegate.h"
 #import "ProgressChart.h"
 
@@ -103,6 +104,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"便携负压";
+
     
     //检测有没有绑定蓝牙设备
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -117,7 +119,6 @@
                                                                   
                                                                   [self.navigationController popToRootViewControllerAnimated:YES];
                                                               }];
-        
         [alert addAction:cancelAction];
         [alert addAction:defaultAction];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -333,17 +334,17 @@
     switch (self.treatMode) {
         case 0:
             
-            [self configureButton:self.modeButton WithTitle:@"持续吸引" imageName:@"keep_grey"];
+            [self configureButton:self.modeButton WithTitle:@"连续模式" imageName:@"keep_grey"];
             
             break;
         case 1:
             
-            [self configureButton:self.modeButton WithTitle:@"间歇吸引" imageName:@"interval_grey"];
+            [self configureButton:self.modeButton WithTitle:@"间隔模式" imageName:@"interval_grey"];
             
             break;
         case 2:
             
-            [self configureButton:self.modeButton WithTitle:@"动态吸引" imageName:@"dynamic_grey"];
+            [self configureButton:self.modeButton WithTitle:@"动态模式" imageName:@"dynamic_grey"];
             
             break;
         default:
@@ -854,8 +855,9 @@
                     default:
                         break;
                 }
-                [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-                [SVProgressHUD showErrorWithStatus:alertMessege];
+//                [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+//                [SVProgressHUD showErrorWithStatus:alertMessege];
+                [AlertView showAboveIn:self withData:alertMessege];
                 
                 //清零记时
                 startTime = 0;
@@ -969,18 +971,18 @@
 //        switch (mode) {
 //            case 0:
 //
-//                [self configureButton:self.modeButton WithTitle:@"持续吸引" imageName:@"keep_grey"];
+//                [self configureButton:self.modeButton WithTitle:@"连续模式" imageName:@"keep_grey"];
 //                [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0000"];
 //                break;
 //            case 1:
 //
-//                [self configureButton:self.modeButton WithTitle:@"间歇吸引" imageName:@"interval_grey"];
+//                [self configureButton:self.modeButton WithTitle:@"间隔模式" imageName:@"interval_grey"];
 //                [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0100"];
 //
 //                break;
 //            case 2:
 //
-//                [self configureButton:self.modeButton WithTitle:@"动态吸引" imageName:@"dynamic_grey"];
+//                [self configureButton:self.modeButton WithTitle:@"动态模式" imageName:@"dynamic_grey"];
 //                [self writeWithCmdid:CMDID_TREAT_MODE dataString:@"0200"];
 //
 //                break;

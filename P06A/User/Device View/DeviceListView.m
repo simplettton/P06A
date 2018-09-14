@@ -36,14 +36,30 @@
     self.contentView.layer.cornerRadius = 5.0f;
     self.footerView.layer.cornerRadius = 5.0f;
     self.tableView.tableFooterView = [[UIView alloc]init];
+
+    
     [self setNeedsLayout];
 }
+//-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    NSString *serialNum = [UserDefault objectForKey:@"SerialNum"];
+//    for (NSDictionary *dataDic in self.DeviceArray) {
+//        if ([serialNum isEqualToString:[dataDic objectForKey:@"serialnum"]]) {
+//            NSInteger cellIndex = [self.DeviceArray indexOfObject:dataDic];
+//            DeviceItemCell *cell = [[self.tableView visibleCells]objectAtIndex:cellIndex];
+//            cell.selectedView.image = [UIImage imageNamed:@"selected"];
+//        }
+//    }
+//    
+//}
+
 -(void)layoutIfNeeded{
     //设置按钮边框
     [self setBorderWithView:self.tableView top:YES left:NO bottom:NO right:NO borderColor:UIColorFromHex(0xCDCDCD) borderWidth:1.0f];
 }
 
 +(void)showAboveIn:(UIViewController *)controller withData:(NSMutableArray *)data returnBlock:(returnBlock)returnEvent{
+    
     DeviceListView *view = [[NSBundle mainBundle]loadNibNamed:@"DeviceListView" owner:nil options:nil][0];
     view.frame = CGRectMake(0, 0, kScreenW, kScreenH);
     view.returnEvent = returnEvent;
@@ -76,6 +92,13 @@
     NSDictionary *dataDic = [self.DeviceArray objectAtIndex:indexPath.row];
     cell.serialNumLabel.text = [dataDic objectForKey:@"serialnum"];
     cell.hospitalLabel.text = [dataDic objectForKey:@"from"];
+    
+    NSString *savedSerialNum = [UserDefault objectForKey:@"SerialNum"];
+    if ([[dataDic objectForKey:@"serialnum"]isEqualToString:savedSerialNum]) {
+        cell.selectedView.image = [UIImage imageNamed:@"selected"];
+    }else{
+        [UIImage imageNamed:@"selected"];
+    }
     
     return cell;
 }

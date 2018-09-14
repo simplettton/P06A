@@ -16,6 +16,7 @@
 #define IntervalMode 0x01
 #define DynamicMode 0x02
 @interface ServerRecordViewController ()
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *recordSumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *firstDateLabel;
@@ -34,18 +35,26 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Users/UserInfo"]
+    [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Data/MyTreatRecord?action=Summary"]
                                   params:nil
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
                                     if ([responseObject.result integerValue] == 1) {
-                                        NSLog(@"receive : %@",responseObject.content);
-                                    }else{
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            self.accumulateTimeLabel.text = [NSString stringWithFormat:@"%@",[responseObject.content objectForKey:@"hour"]];
+                                            self.firstDateLabel.text = [responseObject.content objectForKey:@"firsttime"];
+                                            self.lastDateLabel.text = [responseObject.content objectForKey:@"lasttime"];
+                                            self.recordSumLabel.text = [NSString stringWithFormat:@"%@",[responseObject.content objectForKey:@"count"]];
+                                            
+                                            self->sum = [[responseObject.content objectForKey:@"count"]intValue];
+                                        });
+
+                                        
+                                        NSLog(@"receive : %@",responseObject.content);                                    }else{
                                         [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                     }
                                  } failure:nil];
     
-//    [self startRequest];
     self.title = @"治疗记录";
     [self initAll];
 }
@@ -60,10 +69,10 @@
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc]init];
     
-    self.accumulateTimeLabel.text = [NSString stringWithFormat:@"4"];
-    self.firstDateLabel.text = [self stringFromTimeIntervalString:@"1530428999" dateFormat:@"yyyy/MM/dd"];
-    self.lastDateLabel.text = [self stringFromTimeIntervalString:@"1533107399" dateFormat:@"yyyy/MM/dd"];
-    self.recordSumLabel.text = @"10";
+//    self.accumulateTimeLabel.text = [NSString stringWithFormat:@"4"];
+//    self.firstDateLabel.text = [self stringFromTimeIntervalString:@"1530428999" dateFormat:@"yyyy/MM/dd"];
+//    self.lastDateLabel.text = [self stringFromTimeIntervalString:@"1533107399" dateFormat:@"yyyy/MM/dd"];
+//    self.recordSumLabel.text = @"10";
     
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithCapacity:20];
     [dictionary setObject:@"0" forKey:@"mode"];
@@ -96,103 +105,7 @@
 }
 
 -(void)startRequest{
-
     
-    NetWorkTool *netWorkTool = [NetWorkTool sharedNetWorkTool];
-    
-    
-
-    
-    NSDictionary *parameters = @{
-                                    @"action":@"getonetreatsum",
-                                    @"id":DeviceId
-                                 };
-
-    [netWorkTool POST:HTTPServerURLSting
-           parameters:parameters
-             progress:^(NSProgress * _Nonnull uploadProgress) {
-
-             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                 NSDictionary *jsonDict = responseObject;
-                 if (jsonDict != nil) {
-                     NSString *state = [jsonDict objectForKey:@"state"];
-
-                     if ([state intValue] == 1) {
-                         sum = [[jsonDict objectForKey:@"sum"]intValue];
-                         numberOfPage = (sum +10-1)/10;
-
-                         for (int i =0; i < numberOfPage; i++) {
-                             [self getDataWithPage:i];
-                         }
-
-
-                         //更新总数UI
-                         self.recordSumLabel.text = [jsonDict objectForKey:@"sum"];
-
-
-                         //获取第一页
-                         NetWorkTool *netWorkTool = [NetWorkTool sharedNetWorkTool];
-                         NSDictionary *parameter = @{
-                                                     @"action":@"getalltreats",
-                                                     @"page":@"0",
-                                                     @"id":DeviceId
-                                                     };
-
-                         [netWorkTool POST:HTTPServerURLSting
-                                parameters:parameter
-                                  progress:nil
-                                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                       NSDictionary *jsonDict = responseObject;
-                                       if (jsonDict != nil) {
-                                           NSString *state = [jsonDict objectForKey:@"state"];
-                                           if ([state intValue] == 1) {
-                                               NSArray *dataArray = [jsonDict objectForKey:@"body"];
-                                               NSDictionary *firstDataDic = [dataArray objectAtIndex:0];
-                                               NSString *timeStamp = [firstDataDic objectForKey:@"date"];
-
-                                               //upload lase treatment date
-                                               self.lastDateLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"yyyy/MM/dd"];
-                                           }
-                                       }
-
-                                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                       NSLog(@"error==%@",error);
-                                   }];
-
-
-
-                     //获取最后一页
-                         parameter = @{
-                                         @"action":@"getalltreats",
-                                         @"page":[NSString stringWithFormat:@"%ld",numberOfPage -1],
-                                         @"id":DeviceId
-                                       };
-
-                         [netWorkTool POST:HTTPServerURLSting
-                                parameters:parameter
-                                  progress:nil
-                                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                       NSDictionary *jsonDict = responseObject;
-                                       if (jsonDict != nil) {
-                                           NSString *state = [jsonDict objectForKey:@"state"];
-                                           if ([state intValue] == 1) {
-                                               NSArray *dataArray = [jsonDict objectForKey:@"body"];
-                                               NSDictionary *firstDataDic = [dataArray lastObject];
-                                               NSString *timeStamp = [firstDataDic objectForKey:@"date"];
-
-                                               //upload lase treatment date
-                                               self.firstDateLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"yyyy/MM/dd"];
-                                           }
-                                       }
-
-                                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                       NSLog(@"error==%@",error);
-                                   }];
-                     }
-                 }
-             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                    NSLog(@"error==%@",error);
-             }];
 }
 
 
@@ -217,13 +130,13 @@
                           NSArray *dataDic = [jsonDict objectForKey:@"body"];
                           
                           for(NSDictionary *dic in dataDic){
-                              accumulateTime += [[dic objectForKey:@"dur"]intValue]/60;
-                              [datas addObject:dic];
+                              self->accumulateTime += [[dic objectForKey:@"dur"]intValue]/60;
+                              [self->datas addObject:dic];
                           }
                           dispatch_async(dispatch_get_main_queue(), ^{
                               
                               [self.tableView reloadData];
-                              self.accumulateTimeLabel.text = [NSString stringWithFormat:@"%ld",(long)accumulateTime];
+                              self.accumulateTimeLabel.text = [NSString stringWithFormat:@"%ld",(long)self->accumulateTime];
                           });
                       }
                   }
@@ -250,17 +163,17 @@
     switch (mode) {
             
         case DynamicMode:
-            cell.modeLabel.text = @"动态吸引";
+            cell.modeLabel.text = @"动态模式";
             cell.modeImageView.image = [UIImage imageNamed:@"dynamic_grey"];
             break;
             
         case KeepMode:
-            cell.modeLabel.text = @"持续吸引";
+            cell.modeLabel.text = @"连续模式";
             cell.modeImageView.image = [UIImage imageNamed:@"keep_grey"];
             break;
         
         case IntervalMode:
-            cell.modeLabel.text = @"间歇吸引";
+            cell.modeLabel.text = @"间隔模式";
             cell.modeImageView.image = [UIImage imageNamed:@"interval_grey"];
             break;
             

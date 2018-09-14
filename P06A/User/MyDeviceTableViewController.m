@@ -21,49 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的设备";
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    NSString *macString = [userDefault objectForKey:@"MacString"];
     
     //默认选择第一个设备
-    if (macString == nil) {
-        [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
-                                      params:@{}
-                                    hasToken:YES
-                                     success:^(HttpResponse *responseObject) {
-                                         if ([responseObject.result integerValue] == 1) {
-                                             NSMutableArray *dataArray = responseObject.content;
-                                             if ([dataArray count]>0) {
-                                                     NSDictionary *dataDic = [dataArray firstObject];
-                                                     NSString *cpuId = [dataDic objectForKey:@"cpuid"];
-                                                     NSString *serialNum = [dataDic objectForKey:@"serialnum"];
-                                                     NSString *hospital = [dataDic objectForKey:@"from"];
-                                                     NSString *type = [dataDic objectForKey:@"type"];
-                                                     NSString *macString = [dataDic objectForKey:@"mac"];
-                                                     
-                                                     self.serialNumLabel.text = serialNum;
-                                                     self.hospitalLabel.text = hospital;
-                                                     self.typeLabel.text = type;
-                                                     self.macStringLabel.text = macString;
-                                                     //
-                                                     [UserDefault setObject:cpuId forKey:@"Cpuid"];
-                                                     [UserDefault setObject:serialNum forKey:@"SerialNum"];
-                                                     [UserDefault setObject:hospital forKey:@"Hospital"];
-                                                     [UserDefault setObject:macString forKey:@"MacString"];
-                                                     [UserDefault setObject:type forKey:@"MachineType"];
-                                                     [UserDefault synchronize];
-                                             }
-                                         }else{
-                                             [SVProgressHUD showErrorWithStatus:responseObject.errorString];
-                                         }
-                                     }
-                                     failure:nil];
-    }else{
-        [self initSavedDeviceInfomation];
-    }
+
+    [self initSavedDeviceInfomation];
 }
 -(void)initSavedDeviceInfomation{
     
-    NSString *cpuId = [UserDefault objectForKey:@"Cpuid"];
     NSString *serialNum = [UserDefault objectForKey:@"SerialNum"];
     NSString *hospital = [UserDefault objectForKey:@"Hospital"];
     NSString *type = [UserDefault objectForKey:@"MachineType"];
@@ -97,7 +61,6 @@
                                              if ([dataArray count]>0) {
                                                  [DeviceListView showAboveIn:self withData:dataArray returnBlock:^(NSDictionary *dataDic) {
 
-                                                     
                                                      NSString *cpuId = [dataDic objectForKey:@"cpuid"];
                                                      NSString *serialNum = [dataDic objectForKey:@"serialnum"];
                                                      NSString *hospital = [dataDic objectForKey:@"from"];

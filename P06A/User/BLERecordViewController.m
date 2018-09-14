@@ -117,13 +117,13 @@
         switch ([[datas[indexPath.row]objectForKey:@"Mode"]intValue])
         {
             case 0:
-                treatWayString = @"持续吸引模式";
+                treatWayString = @"连续模式";
                 break;
             case 1:
-                treatWayString = @"间歇吸引模式";
+                treatWayString = @"间隔模式";
                 break;
             case 2:
-                treatWayString = @"动态吸引模式";
+                treatWayString = @"动态模式";
                 break;
             default:
                 treatWayString = @"治疗模式";

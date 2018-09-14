@@ -43,7 +43,7 @@
     [super viewDidLoad];
     self.title = @"设备入库";
     [self initAll];
-//    [datas addObject:@{@"cpuid":@"sdklfjeklj"}];
+
 }
 -(void)initAll{
 
@@ -53,6 +53,10 @@
     [self setBorderWithView:self.DeviceTypeView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xf4f4f4) borderWidth:2.0f];
     [self getSupportMachineType];
     self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    UIBarButtonItem *button =[[UIBarButtonItem alloc]initWithTitle:@"下一步" style:UIBarButtonItemStyleDone target:self action:@selector(nextStep:)];
+    self.navigationItem.rightBarButtonItem = button;
     
 }
 - (IBAction)nextStep:(id)sender {
@@ -85,7 +89,7 @@
                                              [self initScrollView];
                                              [self initTableHeaderAndFooter];
                                          }
-//                                         [self initTableHeaderAndFooter];
+
                                      }else{
                                          [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                      }

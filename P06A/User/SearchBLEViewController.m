@@ -175,7 +175,7 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1) {
         NSDictionary *item = [peripheralDataArray objectAtIndex:indexPath.row];
-        CBPeripheral *peripheral = [item objectForKey:@"peripheral"];
+//        CBPeripheral *peripheral = [item objectForKey:@"peripheral"];
         NSDictionary *advertisementData = [item objectForKey:@"advertisementData"];
         NSData *data = (NSData *)[advertisementData objectForKey:@"kCBAdvDataManufacturerData"];
         if (!data) {
@@ -194,12 +194,26 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
             }
             
             //保存新的绑定设备 mac地址 设备蓝牙名字
-            NSString *peripheralName = peripheral.name;
+//            NSString *peripheralName = peripheral.name;
             NSString *macString = [array componentsJoinedByString:@""];
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:macString forKey:@"MacString"];
 //            [userDefaults setObject:peripheralName forKey:@"PeripheralName"];
             [userDefaults synchronize];
+            
+            //获取cpuid并保存
+            [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Device/FindCpuidByMac"]
+                                          params:@{@"mac":macString}
+                                        hasToken:YES
+                                         success:^(HttpResponse *responseObject) {
+                                            if ([responseObject.result integerValue] == 1) {
+                                                NSString *cpuid = [responseObject.content objectForKey:@"cpuid"];
+                                                [userDefaults setObject:cpuid forKey:@"Cpuid"];
+                                                [userDefaults synchronize];
+                                              }
+                                            }
+                                        failure:nil];
+            
             
             //提示框
             self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -219,11 +233,10 @@ typedef NS_ENUM(NSUInteger,ViewTags) {
             label.text = [NSString stringWithFormat:@"蓝牙地址：%@",macString];
             
         }
-    }else {
-        
     }
-
 }
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         return 60.0;

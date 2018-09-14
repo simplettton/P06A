@@ -30,6 +30,10 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    [self hideKeyBoard];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -112,6 +116,7 @@
     
 }
 - (IBAction)getVerifyCode:(id)sender {
+    [self.verificationCodeTextField becomeFirstResponder];
     NSString *phone = self.phoneTextField.text;
     if([self isPhoneNumberValid:phone]){
         [self openCountdown];
@@ -136,6 +141,9 @@
     [SVProgressHUD showWithStatus:@"正在登录中..."];
 }
 - (IBAction)login:(id)sender {
+    [self.phoneTextField resignFirstResponder];
+    [self.verificationCodeTextField resignFirstResponder];
+    
     NSString *code = self.verificationCodeTextField.text;
 
     if(self.phoneTextField.text.length == 0){

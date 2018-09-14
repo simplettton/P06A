@@ -205,6 +205,9 @@
 		0454D17D2138FC7600552036 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454D17C2138FC7600552036 /* RoundedButton.m */; };
 		045798B121226961007EE5BE /* PhonenumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045798B021226961007EE5BE /* PhonenumViewController.m */; };
 		045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045930F3204511A6003F6BDC /* ServerRecordViewController.m */; };
+		045E912221475AB100B2F39C /* EditPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E912121475AB100B2F39C /* EditPasswordController.m */; };
+		04607B862149ED200033AE0A /* AccountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04607B852149ED200033AE0A /* AccountListCell.m */; };
+		04607B8A2149F84F0033AE0A /* AccountListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04607B892149F84F0033AE0A /* AccountListViewController.m */; };
 		0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC37212679090030E338 /* ChangePhoneNumViewController.m */; };
 		0464FC3B212681BE0030E338 /* EnterVerificationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC3A212681BE0030E338 /* EnterVerificationCodeViewController.m */; };
 		04672BB62005F128007D8410 /* BLECommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04672BB52005F128007D8410 /* BLECommunicationViewController.m */; };
@@ -215,6 +218,8 @@
 		0469FEB91FFE0C75002E25C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469FEB81FFE0C75002E25C3 /* main.m */; };
 		0469FEC31FFE0C75002E25C3 /* P06ATests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469FEC21FFE0C75002E25C3 /* P06ATests.m */; };
 		0469FECE1FFE0C75002E25C3 /* P06AUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469FECD1FFE0C75002E25C3 /* P06AUITests.m */; };
+		046B994F2146792B00BD3A62 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046B994E2146792B00BD3A62 /* AlertView.xib */; };
+		046B99522146794200BD3A62 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046B99512146794200BD3A62 /* AlertView.m */; };
 		046E25E52140C79100014C1D /* DistributeEquipmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E25E42140C79100014C1D /* DistributeEquipmentViewController.m */; };
 		04769EFC20085C440061E2FA /* ModeChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04769EFB20085C440061E2FA /* ModeChooseView.m */; };
 		04769EFE20085C570061E2FA /* ModeChooseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04769EFD20085C570061E2FA /* ModeChooseView.xib */; };
@@ -225,6 +230,7 @@
 		047B7DBB21368129004D26CD /* DeviceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047B7DBA21368129004D26CD /* DeviceListView.xib */; };
 		047B7DBE21368155004D26CD /* DeviceListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047B7DBD21368155004D26CD /* DeviceListView.m */; };
 		047B7DC12136853A004D26CD /* DeviceItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047B7DC02136853A004D26CD /* DeviceItemCell.m */; };
+		047BEC2B2148FFF3000ADDF5 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047BEC2A2148FFF3000ADDF5 /* AddAccountViewController.m */; };
 		047D489C2047AB7D00DF7DF1 /* RecordRepordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */; };
 		047D48A12047F30D00DF7DF1 /* UIWebView+ConverToPDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D48A02047F30D00DF7DF1 /* UIWebView+ConverToPDF.m */; };
 		04885F7C2133DCF60082EABE /* MQVerCodeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04885F792133DCF50082EABE /* MQVerCodeInputView.m */; };
@@ -696,6 +702,12 @@
 		045798B021226961007EE5BE /* PhonenumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhonenumViewController.m; sourceTree = "<group>"; };
 		045930F2204511A6003F6BDC /* ServerRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerRecordViewController.h; sourceTree = "<group>"; };
 		045930F3204511A6003F6BDC /* ServerRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerRecordViewController.m; sourceTree = "<group>"; };
+		045E912021475AB100B2F39C /* EditPasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditPasswordController.h; sourceTree = "<group>"; };
+		045E912121475AB100B2F39C /* EditPasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditPasswordController.m; sourceTree = "<group>"; };
+		04607B842149ED200033AE0A /* AccountListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountListCell.h; sourceTree = "<group>"; };
+		04607B852149ED200033AE0A /* AccountListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListCell.m; sourceTree = "<group>"; };
+		04607B882149F84F0033AE0A /* AccountListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountListViewController.h; sourceTree = "<group>"; };
+		04607B892149F84F0033AE0A /* AccountListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListViewController.m; sourceTree = "<group>"; };
 		0464FC36212679090030E338 /* ChangePhoneNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePhoneNumViewController.h; sourceTree = "<group>"; };
 		0464FC37212679090030E338 /* ChangePhoneNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePhoneNumViewController.m; sourceTree = "<group>"; };
 		0464FC39212681BE0030E338 /* EnterVerificationCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterVerificationCodeViewController.h; sourceTree = "<group>"; };
@@ -717,6 +729,9 @@
 		0469FEC91FFE0C75002E25C3 /* P06AUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P06AUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0469FECD1FFE0C75002E25C3 /* P06AUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = P06AUITests.m; sourceTree = "<group>"; };
 		0469FECF1FFE0C75002E25C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		046B994E2146792B00BD3A62 /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
+		046B99502146794200BD3A62 /* AlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
+		046B99512146794200BD3A62 /* AlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		046E25E32140C79100014C1D /* DistributeEquipmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributeEquipmentViewController.h; sourceTree = "<group>"; };
 		046E25E42140C79100014C1D /* DistributeEquipmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributeEquipmentViewController.m; sourceTree = "<group>"; };
 		04769EFA20085C440061E2FA /* ModeChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModeChooseView.h; sourceTree = "<group>"; };
@@ -734,6 +749,8 @@
 		047B7DBD21368155004D26CD /* DeviceListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceListView.m; sourceTree = "<group>"; };
 		047B7DBF2136853A004D26CD /* DeviceItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceItemCell.h; sourceTree = "<group>"; };
 		047B7DC02136853A004D26CD /* DeviceItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceItemCell.m; sourceTree = "<group>"; };
+		047BEC292148FFF3000ADDF5 /* AddAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
+		047BEC2A2148FFF3000ADDF5 /* AddAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
 		047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordRepordViewController.h; sourceTree = "<group>"; };
 		047D489B2047AB7D00DF7DF1 /* RecordRepordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordRepordViewController.m; sourceTree = "<group>"; };
 		047D489F2047F30D00DF7DF1 /* UIWebView+ConverToPDF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ConverToPDF.h"; sourceTree = "<group>"; };
@@ -861,14 +878,13 @@
 				048D7E3E213F628B000EAEAA /* UpgradeOnline */,
 				04118BB51FFE28A30054BC15 /* AdminHomeViewController.h */,
 				04118BB61FFE28A30054BC15 /* AdminHomeViewController.m */,
-				042E791E2137EB8900DCBA18 /* AddDeviceViewController.h */,
-				042E791F2137EB8900DCBA18 /* AddDeviceViewController.m */,
-				046E25E32140C79100014C1D /* DistributeEquipmentViewController.h */,
-				046E25E42140C79100014C1D /* DistributeEquipmentViewController.m */,
-				0454D1782138C96700552036 /* AddDeviceCell.h */,
-				0454D1792138C96700552036 /* AddDeviceCell.m */,
-				042E72E72141102B003F5B9C /* AccountCell.h */,
-				042E72E82141102B003F5B9C /* AccountCell.m */,
+				047BEC3021491F4B000ADDF5 /* AddDevice */,
+				047BEC2F21491DBC000ADDF5 /* DistributeDevice */,
+				04607B872149F0E70033AE0A /* AccountList */,
+				047BEC292148FFF3000ADDF5 /* AddAccountViewController.h */,
+				047BEC2A2148FFF3000ADDF5 /* AddAccountViewController.m */,
+				045E912021475AB100B2F39C /* EditPasswordController.h */,
+				045E912121475AB100B2F39C /* EditPasswordController.m */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -887,6 +903,7 @@
 				04672BB52005F128007D8410 /* BLECommunicationViewController.m */,
 				0453324420293D8E00B63C58 /* MQTTCommunicationViewController.h */,
 				0453324520293D8E00B63C58 /* MQTTCommunicationViewController.m */,
+				046B99532146797B00BD3A62 /* AlertView */,
 				04892F6B202403BB00100545 /* SetTreatmentParameterController.h */,
 				04892F6C202403BB00100545 /* SetTreatmentParameterController.m */,
 				04150EF62011971C007EAC85 /* GuideBindDeviceViewController.h */,
@@ -1710,6 +1727,17 @@
 			path = TreatmentRecordCell;
 			sourceTree = "<group>";
 		};
+		04607B872149F0E70033AE0A /* AccountList */ = {
+			isa = PBXGroup;
+			children = (
+				04607B842149ED200033AE0A /* AccountListCell.h */,
+				04607B852149ED200033AE0A /* AccountListCell.m */,
+				04607B882149F84F0033AE0A /* AccountListViewController.h */,
+				04607B892149F84F0033AE0A /* AccountListViewController.m */,
+			);
+			path = AccountList;
+			sourceTree = "<group>";
+		};
 		0469FE9D1FFE0C75002E25C3 = {
 			isa = PBXGroup;
 			children = (
@@ -1766,6 +1794,16 @@
 				0469FECF1FFE0C75002E25C3 /* Info.plist */,
 			);
 			path = P06AUITests;
+			sourceTree = "<group>";
+		};
+		046B99532146797B00BD3A62 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				046B994E2146792B00BD3A62 /* AlertView.xib */,
+				046B99502146794200BD3A62 /* AlertView.h */,
+				046B99512146794200BD3A62 /* AlertView.m */,
+			);
+			path = AlertView;
 			sourceTree = "<group>";
 		};
 		04769EFF20085C660061E2FA /* ModeChooseView */ = {
@@ -1829,6 +1867,28 @@
 				047B7DC02136853A004D26CD /* DeviceItemCell.m */,
 			);
 			path = "Device View";
+			sourceTree = "<group>";
+		};
+		047BEC2F21491DBC000ADDF5 /* DistributeDevice */ = {
+			isa = PBXGroup;
+			children = (
+				046E25E32140C79100014C1D /* DistributeEquipmentViewController.h */,
+				046E25E42140C79100014C1D /* DistributeEquipmentViewController.m */,
+				042E72E72141102B003F5B9C /* AccountCell.h */,
+				042E72E82141102B003F5B9C /* AccountCell.m */,
+			);
+			path = DistributeDevice;
+			sourceTree = "<group>";
+		};
+		047BEC3021491F4B000ADDF5 /* AddDevice */ = {
+			isa = PBXGroup;
+			children = (
+				042E791E2137EB8900DCBA18 /* AddDeviceViewController.h */,
+				042E791F2137EB8900DCBA18 /* AddDeviceViewController.m */,
+				0454D1782138C96700552036 /* AddDeviceCell.h */,
+				0454D1792138C96700552036 /* AddDeviceCell.m */,
+			);
+			path = AddDevice;
 			sourceTree = "<group>";
 		};
 		04885F772133DCF50082EABE /* MQVerViewInputView */ = {
@@ -2061,6 +2121,7 @@
 				048D7E43213F62DD000EAEAA /* FileListView.xib in Resources */,
 				0469FEB61FFE0C75002E25C3 /* LaunchScreen.storyboard in Resources */,
 				043A38FE202AD66000835BDD /* AAHighchartsLib.js in Resources */,
+				046B994F2146792B00BD3A62 /* AlertView.xib in Resources */,
 				048F9C69213E776A0083C83B /* QRCodeTopLeft@2x.png in Resources */,
 				044C526420255C6F00923060 /* PressParameterSetView.xib in Resources */,
 				043A38FD202AD66000835BDD /* AAHighcharts-3d.js in Resources */,
@@ -2192,7 +2253,9 @@
 				0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */,
 				042E72E92141102B003F5B9C /* AccountCell.m in Sources */,
 				04455080212FFF2E0087A18F /* GGLineRenderer.m in Sources */,
+				046B99522146794200BD3A62 /* AlertView.m in Sources */,
 				048F9C5D213E776A0083C83B /* QRCameraSwitchButton.m in Sources */,
+				04607B862149ED200033AE0A /* AccountListCell.m in Sources */,
 				048E92A22043EBD2009F8532 /* RecordTableViewCell.m in Sources */,
 				0445509E212FFF2E0087A18F /* TDLayer.m in Sources */,
 				044550A2212FFF2E0087A18F /* lapi.c in Sources */,
@@ -2227,6 +2290,7 @@
 				043A3915202AD66000835BDD /* AATitle.m in Sources */,
 				044550B0212FFF2E0087A18F /* liolib.c in Sources */,
 				04455057212FFF2E0087A18F /* YAxis.m in Sources */,
+				045E912221475AB100B2F39C /* EditPasswordController.m in Sources */,
 				042B90BB20EB5AF600579CB5 /* NetWorkTool.m in Sources */,
 				0445508F212FFF2E0087A18F /* GGSizeRange.m in Sources */,
 				0445506D212FFF2E0087A18F /* ProgressCanvas.m in Sources */,
@@ -2260,11 +2324,13 @@
 				043A38FA202AD66000835BDD /* AASeriesElement.m in Sources */,
 				0451F0CB2019BF310001A9D4 /* PersonalInfomationViewController.m in Sources */,
 				04455072212FFF2E0087A18F /* DBarScaler.m in Sources */,
+				04607B8A2149F84F0033AE0A /* AccountListViewController.m in Sources */,
 				04455096212FFF2E0087A18F /* BOLLLayer.m in Sources */,
 				04455047212FFF2E0087A18F /* PieChart.m in Sources */,
 				047D489C2047AB7D00DF7DF1 /* RecordRepordViewController.m in Sources */,
 				041D426B1FFF232300EEA43C /* UIView+Tap.m in Sources */,
 				04787BE52110186F00992FA3 /* PhoneLoginViewController.m in Sources */,
+				047BEC2B2148FFF3000ADDF5 /* AddAccountViewController.m in Sources */,
 				044550AF212FFF2E0087A18F /* linit.c in Sources */,
 				043A38F8202AD66000835BDD /* AAJsonConverter.m in Sources */,
 				04455052212FFF2E0087A18F /* LineDataSet.m in Sources */,

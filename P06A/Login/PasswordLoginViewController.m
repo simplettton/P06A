@@ -28,6 +28,10 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];
@@ -39,10 +43,11 @@
 }
 //关闭键盘
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
+
     [self hideKeyBoard];
 }
 -(void)hideKeyBoard{
+
     [self.view endEditing:YES];
 }
 
@@ -52,7 +57,8 @@
     [SVProgressHUD showWithStatus:@"正在登录中..."];
 }
 - (IBAction)login:(id)sender {
-    
+    [self.userNameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
     NSString *username = self.userNameTextField.text;
     NSString *pwd = [self md5:self.passwordTextField.text];
     
@@ -179,17 +185,11 @@
     
     CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
     
-    
-    
     NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    
-    
     
     for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
         
-        [output appendFormat:@"%02x", digest[i]];
-    
-    
+    [output appendFormat:@"%02x", digest[i]];
     
     return  output;
     

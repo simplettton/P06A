@@ -7,6 +7,7 @@
 //
 
 #import "AdminHomeViewController.h"
+#import "AccountListViewController.h"
 #import "AppDelegate.h"
 #import "UIViewController+MMDrawerController.h"
 #import "LeftDrawerViewController.h"
@@ -37,9 +38,8 @@
         [self performSegueWithIdentifier:@"Upgrade" sender:nil];
     }];
     [self.accountView addTapBlock:^(id obj) {
-
+        [self performSegueWithIdentifier:@"AddAcount" sender:nil];
     }];
-//    self.buttomConstraint.constant = self.view.bounds.size.height / 667.0 * 133;
 }
 
 -(void)viewDidAppear:(BOOL)animated{

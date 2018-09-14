@@ -39,14 +39,13 @@
 
     [self setUserDefault];
     [self initUI];
-
     
 }
 -(void)setUserDefault{
     
     NSDictionary *defaultDic = @{
                                  @"USER_NAME":            @"游客",
-                                 @"USER_GENDER":             @"--",
+                                 @"USER_GENDER":          @"--",
                                  @"AGE":                  @"0",
                                  @"TREAT_AREA":           @"手部",
                                  @"PHONE_NUMBER":         @"--",
@@ -60,12 +59,43 @@
             [UserDefault synchronize];
         }
     }
+    
+    //默认获取第一个设备信息
+    NSString *macString = [UserDefault objectForKey:@"MacString"];
+    if (macString == nil) {
+        [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
+                                      params:@{}
+                                    hasToken:YES
+                                     success:^(HttpResponse *responseObject) {
+                                         if ([responseObject.result integerValue] == 1) {
+                                             NSMutableArray *dataArray = responseObject.content;
+                                             if ([dataArray count]>0) {
+                                                 NSDictionary *dataDic = [dataArray firstObject];
+                                                 NSString *cpuId = [dataDic objectForKey:@"cpuid"];
+                                                 NSString *serialNum = [dataDic objectForKey:@"serialnum"];
+                                                 NSString *hospital = [dataDic objectForKey:@"from"];
+                                                 NSString *type = [dataDic objectForKey:@"type"];
+                                                 NSString *macString = [dataDic objectForKey:@"mac"];
+
+                                                 //
+                                                 [UserDefault setObject:cpuId forKey:@"Cpuid"];
+                                                 [UserDefault setObject:serialNum forKey:@"SerialNum"];
+                                                 [UserDefault setObject:hospital forKey:@"Hospital"];
+                                                 [UserDefault setObject:macString forKey:@"MacString"];
+                                                 [UserDefault setObject:type forKey:@"MachineType"];
+                                                 [UserDefault synchronize];
+                                             }
+                                         }else{
+                                             [SVProgressHUD showErrorWithStatus:responseObject.errorString];
+                                         }
+                                     }
+                                     failure:nil];
+    }
 }
 
 -(void)initUI{
     
     NSString *mode = [UserDefault objectForKey:@"COMMUNICATION_MODE"];
-    
     self.BLEView.hidden = [mode isEqualToString:@"MQTT"];
     self.MQTTView.hidden = [mode isEqualToString:@"BLE"];
 }

@@ -8,6 +8,7 @@
 
 #import "MQTTCommunicationViewController.h"
 #import "AAGlobalMacro.h"
+#import "AlertView.h"
 NSString *const HOST = @"218.17.22.130";
 NSString *const PORT = @"21613";
 NSString *const MQTTUserName = @"admin";
@@ -69,7 +70,9 @@ NSString *const MQTTPassWord = @"password";
     [super viewDidLoad];
     
     //发布数据主题
-    self.sendTopic = @"P06A/todev/1b00080002434d5632303320e906f405";
+    NSString *cpuid = [UserDefault objectForKey:@"Cpuid"];
+//    self.sendTopic = @"P06A/todev/1b00080002434d5632303320e906f405";
+    self.sendTopic = [NSString stringWithFormat:@"P06A/todev/%@",cpuid];
     
     [self initAll];
     [self connect];
@@ -231,9 +234,14 @@ NSString *const MQTTPassWord = @"password";
         //订阅主题
 //        self.manager.subscriptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:MQTTQosLevelExactlyOnce]
 //                                                                 forKey:[NSString stringWithFormat:@"%@", self.base]];
-        [self subcribe:@"1b00080002434d5632303320e906f405"];
-        [self subcribe:@"toapp/1b00080002434d5632303320e906f405"];
-        [self subcribe:@"phone/1b00080002434d5632303320e906f405"];
+        
+//        [self subcribe:@"1b00080002434d5632303320e906f405"];
+//        [self subcribe:@"toapp/1b00080002434d5632303320e906f405"];
+//        [self subcribe:@"phone/1b00080002434d5632303320e906f405"];
+        NSString *cpuid = [UserDefault objectForKey:@"Cpuid"];
+        [self subcribe:cpuid];
+        [self subcribe:[NSString stringWithFormat:@"toapp/%@",cpuid]];
+        [self subcribe:[NSString stringWithFormat:@"phone/%@",cpuid]];
         
         //连接服务器
         [self.manager connectTo:@"218.17.22.130"
@@ -379,8 +387,7 @@ NSString *const MQTTPassWord = @"password";
                     default:
                         break;
                 }
-                [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-                [SVProgressHUD showErrorWithStatus:alertMessege];
+                [AlertView showAboveIn:self withData:alertMessege];
             }
                 break;
                 
@@ -424,21 +431,21 @@ NSString *const MQTTPassWord = @"password";
     switch (self.treatMode) {
         case 0:
             
-            self.modeLabel.text = @"持续吸引模式";
+            self.modeLabel.text = @"连续模式";
             self.upTimeLabel.text = @"";
             self.downTimeLabel.text = @"";
             
             break;
         case 1:
             
-            self.modeLabel.text = @"间歇吸引模式";
+            self.modeLabel.text = @"间隔模式";
             self.upTimeLabel.text = [NSString stringWithFormat:@"工作时间:%ldmin",self.workTime];
             self.downTimeLabel.text = [NSString stringWithFormat:@"休息时间:%ldmin",self.restTime];
             
             break;
         case 2:
             
-            self.modeLabel.text = @"动态吸引模式";
+            self.modeLabel.text = @"动态模式";
             self.upTimeLabel.text = [NSString stringWithFormat:@"上升时间:%ldmin",self.upTime];
             self.downTimeLabel.text = [NSString stringWithFormat:@"下降时间:%ldmin",self.downTime];
             break;

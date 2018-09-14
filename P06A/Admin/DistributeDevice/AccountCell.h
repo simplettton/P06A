@@ -10,6 +10,5 @@
 
 @interface AccountCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *noteLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *selectedView;
 @end

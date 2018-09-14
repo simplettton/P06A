@@ -14,7 +14,7 @@
 #import "ContactUSTableViewController.h"
 #import "SettingViewController.h"
 #import "UpgradeOnlineViewController.h"
-#import "BaseHeader.h"
+#import "EditPasswordController.h"
 #import "AppDelegate.h"
 
 #import "PhoneLoginViewController.h"
@@ -123,6 +123,7 @@
         //用服
         
         NSInteger upgradeIndex = [self.functionArray indexOfObject:@"在线升级"];
+        NSInteger changePWDIndex = [self.functionArray indexOfObject:@"修改密码"];
         if (indexPath.row == upgradeIndex) {
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             if (appDelegate.isBLEPoweredOff) {
@@ -132,6 +133,10 @@
                 showVC = upgradeVC;
                 [self pushViewController:showVC];
             }
+        }else if (indexPath.row == changePWDIndex){
+            EditPasswordController *editPasswordVC = (EditPasswordController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"EditPasswordController"];
+            showVC = editPasswordVC;
+            [self pushViewController:showVC];
         }
     }
  

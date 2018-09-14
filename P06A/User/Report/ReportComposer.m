@@ -26,13 +26,13 @@
     NSString *modeString = [[NSString alloc]init];
     switch (mode) {
         case DynamicMode:
-            modeString = @"动态吸引";
+            modeString = @"动态模式";
             break;
         case KeepMode:
-            modeString = @"持续吸引";
+            modeString = @"连续模式";
             break;
         case IntervalMode:
-            modeString = @"间歇吸引";
+            modeString = @"间隔模式";
             break;
         default:
             break;

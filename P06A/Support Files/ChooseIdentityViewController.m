@@ -87,6 +87,7 @@
     
     //身份选择
     userIdentity = @"patient";
+    [self enterNextPage];
 }
 
 - (IBAction)chooseLeft:(id)sender {
@@ -99,9 +100,13 @@
     
     //身份选择
     userIdentity = @"admin";
+    [self enterNextPage];
+}
+- (IBAction)next:(id)sender {
+    [self enterNextPage];
 }
 
-- (IBAction)enterNextPage:(id)sender {
+- (void)enterNextPage{
     
      //保存选择的身份
     if(!userIdentity){
