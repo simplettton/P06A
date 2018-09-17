@@ -60,7 +60,6 @@
 -(void)refresh{
     [self askForData:YES];
 }
-
 -(void)loadMore{
     [self askForData:NO];
 }

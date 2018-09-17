@@ -213,9 +213,6 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="nextStep:" destination="waW-RW-Bqc" eventType="touchUpInside" id="mNj-CL-cFk"/>
-                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w1p-TI-9MY">
                                         <rect key="frame" x="0.0" y="317" width="375" height="158"/>
@@ -320,7 +317,7 @@
                         <outlet property="DeviceTypeView" destination="uxC-aW-ljd" id="pcr-ic-1AJ"/>
                         <outlet property="scrollView" destination="3xF-fM-gaL" id="nmh-bh-pdG"/>
                         <outlet property="tableView" destination="huQ-B1-ZcH" id="yNl-NJ-mGx"/>
-                        <segue destination="ByP-ho-Nsv" kind="show" identifier="DistributeDevice" id="qS5-oX-Ub9"/>
+                        <segue destination="ByP-ho-Nsv" kind="show" identifier="DistributeDevice" id="8XR-fj-dNH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifD-Zx-dCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3985,9 +3982,6 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="finish:" destination="ByP-ho-Nsv" eventType="touchUpInside" id="IHg-Eo-aIV"/>
-                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eWX-59-X4O">
                                         <rect key="frame" x="0.0" y="317" width="375" height="158"/>
@@ -4100,7 +4094,6 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="accountTypeView" destination="WEH-O2-KUH" id="CPT-lg-gXd"/>
                         <outlet property="tableView" destination="gCc-EU-fs2" id="XTH-Xk-Tnb"/>
                         <outletCollection property="accountButtons" destination="HR5-vv-KRe" id="7sz-Bu-C0b"/>
                         <outletCollection property="accountButtons" destination="RVc-KK-526" id="0wb-aO-0d1"/>

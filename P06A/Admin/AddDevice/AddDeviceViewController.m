@@ -59,7 +59,7 @@
     self.navigationItem.rightBarButtonItem = button;
     
 }
-- (IBAction)nextStep:(id)sender {
+-(void)nextStep:(id)sender{
     if ([datas count] == 0) {
         [SVProgressHUD showSuccessWithStatus:@"无可录入设备"];
     }else {
@@ -69,6 +69,9 @@
             [SVProgressHUD showErrorWithStatus:@"请扫描序列号"];
         }
     }
+//    self.cpuid = @"1b00080002434d5632303320e906f405";
+//    self.serialNum = @"P06A18900001";
+//    [self performSegueWithIdentifier:@"DistributeDevice" sender:nil];
 }
 
 -(void)getSupportMachineType {

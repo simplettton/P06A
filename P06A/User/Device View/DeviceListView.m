@@ -96,6 +96,8 @@
     NSString *savedSerialNum = [UserDefault objectForKey:@"SerialNum"];
     if ([[dataDic objectForKey:@"serialnum"]isEqualToString:savedSerialNum]) {
         cell.selectedView.image = [UIImage imageNamed:@"selected"];
+        NSDictionary *dataDic = [self.DeviceArray objectAtIndex:indexPath.row];
+        self.selectedData = dataDic;
     }else{
         [UIImage imageNamed:@"selected"];
     }
