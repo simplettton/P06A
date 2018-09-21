@@ -50,7 +50,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    
     if(indexPath.section == 0){
         [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
                                       params:@{}
@@ -66,17 +65,21 @@
                                                      NSString *hospital = [dataDic objectForKey:@"from"];
                                                      NSString *type = [dataDic objectForKey:@"type"];
                                                      NSString *macString = [dataDic objectForKey:@"mac"];
+                                                     NSString *treatArea = [dataDic objectForKey:@"parts"];
                                                      
                                                      self.serialNumLabel.text = serialNum;
                                                      self.hospitalLabel.text = hospital;
                                                      self.typeLabel.text = type;
                                                      self.macStringLabel.text = macString;
-//                                                     
+
+                                                     //保存设备信息
+                                                     [UserDefault setObject:treatArea forKey:@"TREAT_AREA"];
                                                      [UserDefault setObject:cpuId forKey:@"Cpuid"];
                                                      [UserDefault setObject:serialNum forKey:@"SerialNum"];
                                                      [UserDefault setObject:hospital forKey:@"Hospital"];
                                                      [UserDefault setObject:macString forKey:@"MacString"];
                                                      [UserDefault setObject:type forKey:@"MachineType"];
+                                                     
                                                      [UserDefault synchronize];
                                                  }];
                                              }
@@ -93,10 +96,8 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"解除绑定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
 
             NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-            
             if (![userDefault objectForKey:@"MacString"]) {
                 [SVProgressHUD showErrorWithStatus:@"当前没有绑定设备"];
-                
             }else{
                 [userDefault setObject:nil forKey:@"MacString"];
                 [userDefault synchronize];
@@ -106,9 +107,7 @@
                 dispatch_after(delayTime, dispatch_get_main_queue(), ^{
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 });
-
             }
-            
         }]];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];

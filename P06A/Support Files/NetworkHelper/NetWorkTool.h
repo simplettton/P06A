@@ -20,8 +20,15 @@ typedef  void (^HttpResponseObject)(HttpResponse* responseObject);
    hasToken:(bool)hasToken
     success:(HttpResponseObject)responseBlock
     failure:(HttpFailureBlock)failureBlock;
+
 -(void)DownLoadFile:(NSString *)address
      params:(id)parameters
+    success:(HttpResponseObject)responseBlock
+    failure:(HttpFailureBlock)failureBlock;
+
+//上传图片
+-(void)POST:(NSString *)address
+      image:(UIImage *)image
     success:(HttpResponseObject)responseBlock
     failure:(HttpFailureBlock)failureBlock;
 @end

@@ -746,7 +746,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="955"/>
         </scene>
-        <!--Record Repord View Controller-->
+        <!--治疗报告-->
         <scene sceneID="heg-Xf-OVA">
             <objects>
                 <viewController id="wWO-BL-0qT" customClass="RecordRepordViewController" sceneMemberID="viewController">
@@ -755,32 +755,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6S4-YO-JbS">
-                                <rect key="frame" x="8" y="72" width="359" height="492"/>
+                                <rect key="frame" x="8" y="72" width="359" height="539"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="539" id="wZj-oO-CdW"/>
+                                </constraints>
                             </webView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljH-Ro-qIT">
-                                <rect key="frame" x="267" y="585" width="92" height="30"/>
-                                <state key="normal" title="上传治疗照片">
-                                    <color key="titleColor" red="0.06911732256" green="0.374253273" blue="0.58759063479999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="uploadPicture:" destination="wWO-BL-0qT" eventType="touchUpInside" id="PhE-Aw-389"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ljH-Ro-qIT" firstAttribute="top" secondItem="6S4-YO-JbS" secondAttribute="bottom" constant="21" id="535-7g-7bM"/>
+                            <constraint firstItem="6S4-YO-JbS" firstAttribute="top" secondItem="vLJ-az-rfy" secondAttribute="top" constant="8" id="4Tn-OX-Cps"/>
                             <constraint firstItem="6S4-YO-JbS" firstAttribute="top" secondItem="vLJ-az-rfy" secondAttribute="top" constant="8" id="A5m-IX-dzK"/>
-                            <constraint firstItem="vLJ-az-rfy" firstAttribute="trailing" secondItem="ljH-Ro-qIT" secondAttribute="trailing" constant="16" id="MdG-Xs-o5G"/>
                             <constraint firstItem="6S4-YO-JbS" firstAttribute="leading" secondItem="vLJ-az-rfy" secondAttribute="leading" constant="8" id="icd-uD-HSo"/>
-                            <constraint firstItem="ljH-Ro-qIT" firstAttribute="bottom" secondItem="vLJ-az-rfy" secondAttribute="bottom" constant="-8" id="jwC-ZA-4bn"/>
                             <constraint firstItem="6S4-YO-JbS" firstAttribute="trailing" secondItem="vLJ-az-rfy" secondAttribute="trailing" constant="-8" id="l5Z-4H-TD3"/>
-                            <constraint firstItem="ljH-Ro-qIT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vLJ-az-rfy" secondAttribute="leading" id="uRh-CA-Zzp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vLJ-az-rfy"/>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="治疗报告" id="5nm-eF-VBD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="Yd3-P9-gsD">
+                            <connections>
+                                <action selector="addPhoto:" destination="wWO-BL-0qT" id="xwi-h7-yLt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="webView" destination="6S4-YO-JbS" id="N5A-GZ-wB1"/>
@@ -789,9 +787,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spp-ke-SE6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1800.8" y="-1509.8950524737631"/>
+            <point key="canvasLocation" x="1765.5999999999999" y="-1507.1964017991006"/>
         </scene>
-        <!--Server Record View Controller-->
+        <!--治疗记录-->
         <scene sceneID="tZT-7S-fNv">
             <objects>
                 <viewController id="R1x-wo-oOy" customClass="ServerRecordViewController" sceneMemberID="viewController">
@@ -812,13 +810,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="   " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FrH-lj-TEU">
-                                            <rect key="frame" x="144" y="51" width="87" height="61"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="44"/>
-                                            <color key="textColor" red="0.3457464873790741" green="0.30760908126831055" blue="0.37487700581550598" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="（小时）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXk-1O-5MJ">
@@ -870,6 +861,13 @@
                                             <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="   " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FrH-lj-TEU">
+                                            <rect key="frame" x="120" y="47" width="135" height="61"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="44"/>
+                                            <color key="textColor" red="0.3457464873790741" green="0.30760908126831055" blue="0.37487700581550598" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -913,8 +911,8 @@
                                                     <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01:40:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-lI-Int">
-                                                    <rect key="frame" x="304" y="6" width="67" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01:40:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-lI-Int">
+                                                    <rect key="frame" x="301" y="6" width="67" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -932,16 +930,21 @@
                                                     <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blueAlert" translatesAutoresizingMaskIntoConstraints="NO" id="QtX-L7-Akz">
+                                                    <rect key="frame" x="337" y="39" width="23" height="23"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="alertImageView" destination="QtX-L7-Akz" id="nvB-e5-enG"/>
                                             <outlet property="dateLabel" destination="yyT-Ae-SPL" id="Oj3-k9-Tx1"/>
-                                            <outlet property="detailDurationLabel" destination="g4s-lI-Int" id="D5a-JT-fqZ"/>
                                             <outlet property="durationLabel" destination="1z4-lj-jAP" id="hNE-6M-te5"/>
                                             <outlet property="modeImageView" destination="vnj-g7-jj2" id="uMB-DL-tV3"/>
                                             <outlet property="modeLabel" destination="V5q-k8-EbH" id="97k-dM-D3J"/>
                                             <outlet property="pressureLabel" destination="6dO-9R-Y1y" id="lPC-LA-1SC"/>
                                             <outlet property="timeLabel" destination="tE0-T6-PaZ" id="iZy-Z1-lXJ"/>
+                                            <outlet property="treatAreaLabel" destination="g4s-lI-Int" id="D5a-JT-fqZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -954,6 +957,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="M7A-ka-vyk"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="治疗记录" id="P0k-62-w3a">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="filter" id="noD-nP-PUM">
+                            <connections>
+                                <action selector="rightButtonAction:" destination="R1x-wo-oOy" id="Bic-Ff-Ac5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accumulateTimeLabel" destination="FrH-lj-TEU" id="4lK-12-G8p"/>
                         <outlet property="firstDateLabel" destination="ugE-PO-zru" id="q2E-Bl-VQr"/>
@@ -965,7 +977,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LH6-3Q-O3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="895" y="-1507"/>
+            <point key="canvasLocation" x="893.60000000000002" y="-1507.1964017991006"/>
         </scene>
         <!--Guide Bind Device View Controller-->
         <scene sceneID="Nta-Fv-6rQ">
@@ -4101,7 +4113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7v-Y4-fjO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2158" y="2603"/>
+            <point key="canvasLocation" x="2295" y="2603"/>
         </scene>
         <!--设置密码-->
         <scene sceneID="i4R-qa-REN">
@@ -4604,6 +4616,7 @@
         <image name="bell" width="28" height="28"/>
         <image name="bind" width="28" height="28"/>
         <image name="ble" width="40" height="40"/>
+        <image name="blueAlert" width="30" height="26"/>
         <image name="bluetooth" width="28" height="28"/>
         <image name="checkAckCode" width="128" height="128"/>
         <image name="checkCodeSuccess" width="128" height="128"/>
@@ -4612,6 +4625,7 @@
         <image name="doctor_selected" width="110" height="110"/>
         <image name="dynamic_grey" width="28" height="28"/>
         <image name="file" width="40" height="40"/>
+        <image name="filter" width="28" height="28"/>
         <image name="header" width="40" height="40"/>
         <image name="keep_green" width="28" height="28"/>
         <image name="location" width="40" height="40"/>
@@ -4635,7 +4649,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4NG-yu-p7I"/>
-        <segue reference="x7Q-io-PMa"/>
+        <segue reference="a0k-zp-eQG"/>
         <segue reference="03c-Sn-NlB"/>
         <segue reference="Cjf-Nl-YEh"/>
     </inferredMetricsTieBreakers>

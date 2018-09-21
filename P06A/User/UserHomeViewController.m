@@ -76,8 +76,11 @@
                                                  NSString *hospital = [dataDic objectForKey:@"from"];
                                                  NSString *type = [dataDic objectForKey:@"type"];
                                                  NSString *macString = [dataDic objectForKey:@"mac"];
-
-                                                 //
+                                                 NSString *treatArea = [dataDic objectForKey:@"parts"];
+                                                 
+                                                 
+                                                 //保存设备信息
+                                                 [UserDefault setObject:treatArea forKey:@"TREAT_AREA"];
                                                  [UserDefault setObject:cpuId forKey:@"Cpuid"];
                                                  [UserDefault setObject:serialNum forKey:@"SerialNum"];
                                                  [UserDefault setObject:hospital forKey:@"Hospital"];

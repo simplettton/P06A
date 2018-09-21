@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *pressureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *modeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *modeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *detailDurationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *treatAreaLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *alertImageView;
 
 @end

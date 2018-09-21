@@ -6,12 +6,13 @@
 //  Copyright © 2018年 Shenzhen Lifotronic Technology Co.,Ltd. All rights reserved.
 //
 
+
 #import "ServerRecordViewController.h"
 #import "RecordRepordViewController.h"
 #import "NetWorkTool.h"
 #import <MJRefresh.h>
 #import "TreatmentRecordCell.h"
-#define HTTPServerURLSting @"http://192.168.2.127/yun/fuya/index.php"
+#import "PopoverView.h"
 #define DeviceId @"P06A17A00001"
 #define KeepMode 0x00
 #define IntervalMode 0x01
@@ -28,6 +29,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *accumulateTimeLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *filterButton;
+@property (strong,nonatomic)NSMutableArray *deviceArray;
+@property (strong,nonatomic)NSString *hireId;
 
 @end
 
@@ -53,39 +57,82 @@
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc]init];
     [self initTableHeaderAndFooter];
+    
+    //右上角筛选菜单
+    [self getDevices];
+}
+#pragma mark - filterButton
+-(void)getDevices{
+    self.deviceArray = [[NSMutableArray alloc]initWithCapacity:20];
+    
+    [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"] params:@{} hasToken:YES success:^(HttpResponse *responseObject) {
+        if ([responseObject.result intValue] ==1) {
+                for (NSDictionary *dataDic in responseObject.content) {
+                    if((![self.deviceArray containsObject:dataDic])){
+                        [self.deviceArray addObject:dataDic];
+                }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                    });
+            }
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject.errorString];
+        }
+    } failure:nil];
+}
+- (IBAction)rightButtonAction:(id)sender {
+    PopoverView *popoverView = [PopoverView popoverView];
+    NSMutableArray *actionArray = [[NSMutableArray alloc]initWithCapacity:20];
+    if ([self.deviceArray count]>0) {
+        for (NSDictionary *deviceDic in self.deviceArray) {
+            NSString *title = deviceDic[@"serialnum"];
+            PopoverAction *action = [PopoverAction actionWithTitle:title handler:^(PopoverAction *action) {
+                
+                NSString *hiredId = deviceDic[@"hireid"];
+                self.hireId = hiredId;
+                [self refresh];
+            }];
+            [actionArray addObject:action];
+        }
+    }
 
-    
+    //popoverView.showShade = YES; // 显示阴影背景
+    //popoverView.style = PopoverViewStyleDark; // 设置为黑色风格
+    //popoverView.hideAfterTouchOutside = NO; // 点击外部时不允许隐藏
+    popoverView.arrowStyle = PopoverViewArrowStyleTriangle;
+    [popoverView showToView:sender withActions:actionArray];
 }
--(void)testData{
-    
-        NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithCapacity:20];
-        [dictionary setObject:@"0" forKey:@"mode"];
-        [dictionary setObject:@"50" forKey:@"press"];
-        [dictionary setObject:@"35" forKey:@"dur"];
-        [dictionary setObject:@"1532070599" forKey:@"date"];
-        [datas addObject:dictionary];
-    
-        NSMutableDictionary *dictionary1 = [[NSMutableDictionary alloc]initWithCapacity:20];
-        [dictionary1 setObject:@"1" forKey:@"mode"];
-        [dictionary1 setObject:@"50" forKey:@"press"];
-        [dictionary1 setObject:@"35" forKey:@"dur"];
-        [dictionary1 setObject:@"1532502599" forKey:@"date"];
-        [datas addObject:dictionary1];
-    
-        NSMutableDictionary *dictionary2 = [[NSMutableDictionary alloc]initWithCapacity:20];
-        [dictionary2 setObject:@"2" forKey:@"mode"];
-        [dictionary2 setObject:@"100" forKey:@"press"];
-        [dictionary2 setObject:@"20" forKey:@"dur"];
-        [dictionary2 setObject:@"1532761799" forKey:@"date"];
-        [datas addObject:dictionary2];
-    
-        NSMutableDictionary *dictionary3 = [[NSMutableDictionary alloc]initWithCapacity:20];
-        [dictionary3 setObject:@"2" forKey:@"mode"];
-        [dictionary3 setObject:@"80" forKey:@"press"];
-        [dictionary3 setObject:@"40" forKey:@"dur"];
-        [dictionary3 setObject:@"1532848199" forKey:@"date"];
-        [datas addObject:dictionary3];
-}
+
+//-(void)testData{
+//
+//        NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithCapacity:20];
+//        [dictionary setObject:@"0" forKey:@"mode"];
+//        [dictionary setObject:@"50" forKey:@"press"];
+//        [dictionary setObject:@"35" forKey:@"duration"];
+//        [dictionary setObject:@"1532070599" forKey:@"time"];
+//        [datas addObject:dictionary];
+//
+//        NSMutableDictionary *dictionary1 = [[NSMutableDictionary alloc]initWithCapacity:20];
+//        [dictionary1 setObject:@"1" forKey:@"mode"];
+//        [dictionary1 setObject:@"50" forKey:@"press"];
+//        [dictionary1 setObject:@"35" forKey:@"duration"];
+//        [dictionary1 setObject:@"1532502599" forKey:@"time"];
+//        [datas addObject:dictionary1];
+//
+//        NSMutableDictionary *dictionary2 = [[NSMutableDictionary alloc]initWithCapacity:20];
+//        [dictionary2 setObject:@"2" forKey:@"mode"];
+//        [dictionary2 setObject:@"100" forKey:@"press"];
+//        [dictionary2 setObject:@"20" forKey:@"duration"];
+//        [dictionary2 setObject:@"1532761799" forKey:@"time"];
+//        [datas addObject:dictionary2];
+//
+//        NSMutableDictionary *dictionary3 = [[NSMutableDictionary alloc]initWithCapacity:20];
+//        [dictionary3 setObject:@"2" forKey:@"mode"];
+//        [dictionary3 setObject:@"80" forKey:@"press"];
+//        [dictionary3 setObject:@"40" forKey:@"duration"];
+//        [dictionary3 setObject:@"1532848199" forKey:@"time"];
+//        [datas addObject:dictionary3];
+//}
 #pragma mark - Refresh
 -(void)initTableHeaderAndFooter{
     //下拉刷新
@@ -112,8 +159,12 @@
     [self askForData:NO];
 }
 -(void)askForData:(BOOL)isRefresh{
+    NSMutableDictionary *parameter;
+    if (self.hireId != nil) {
+        [parameter setObject:self.hireId forKey:@"hireid"];
+    }
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Data/MyTreatRecord?action=Summary"]
-                                  params:nil
+                                  params:parameter
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
                                      if ([responseObject.result integerValue] == 1) {
@@ -128,11 +179,13 @@
                                          }
                                          if ([count intValue]>0) {
                                              
+
                                              //获取列表数据
                                              [self getNetworkData:isRefresh];
                                              
                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                 self.accumulateTimeLabel.text = [NSString stringWithFormat:@"%@",[responseObject.content objectForKey:@"hour"]];
+                                                 NSNumber *hour = [responseObject.content objectForKey:@"hour"];
+                                                 self.accumulateTimeLabel.text = [self formatFloat:[hour floatValue]];
                                                  self.firstDateLabel.text = [responseObject.content objectForKey:@"firsttime"];
                                                  self.lastDateLabel.text = [responseObject.content objectForKey:@"lasttime"];
                                                  self.recordSumLabel.text = [NSString stringWithFormat:@"%@",[responseObject.content objectForKey:@"count"]];
@@ -147,9 +200,10 @@
                                                  self.recordSumLabel.text = @"0";
                                                  
                                              });
-                                             
-                                             [self->datas removeAllObjects];
-                                             [self endRefresh];
+//                                             
+//                                             [self->datas removeAllObjects];
+//                                             [self endRefresh];
+
                                              [self.tableView reloadData];
                                          }
      
@@ -174,7 +228,10 @@
     //配置请求http
     NSMutableDictionary *mutableParam = [[NSMutableDictionary alloc]init];
     [mutableParam setObject:[NSNumber numberWithInt:page] forKey:@"page"];
-    [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLSting stringByAppendingString:@"Api/Data/MyTreatRecord?action=List"]
+    if (self.hireId != nil) {
+        [mutableParam setObject:self.hireId forKey:@"hireid"];
+    }
+    [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Data/MyTreatRecord?action=List"]
                                   params:mutableParam
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
@@ -203,6 +260,7 @@
                                      if ([responseObject.result integerValue] == 1) {
                                          NSArray *content = responseObject.content;
                                          if ([content count]>0) {
+                                             NSLog(@"list = %@",content);
                                              for (NSDictionary *dataDic in responseObject.content) {
                                                  if (![self->datas containsObject:dataDic]) {
                                                      [self->datas addObject:dataDic];
@@ -226,7 +284,7 @@
     }
     //mode
     NSDictionary *dataDic = [datas objectAtIndex:indexPath.row];
-    NSInteger mode = [[dataDic objectForKey:@"note"]intValue];
+    NSInteger mode = [[dataDic objectForKey:@"mode"]intValue];
     switch (mode) {
             
         case DynamicMode:
@@ -248,29 +306,39 @@
             break;
     }
 
-    //pressure
+    //press
     NSString *pressure = [dataDic objectForKey:@"press"];
     cell.pressureLabel.text = [NSString stringWithFormat:@"-%@mmHg",pressure];
     
     //duration
     NSString *minutes = [dataDic objectForKey:@"duration"];
     cell.durationLabel.text = [NSString stringWithFormat:@"治疗时间%@分钟",minutes];
+//
+//    int hour = [minutes intValue]/60;
+//    int minute= [minutes intValue]%60;
+//    int second= [minutes intValue]*60%60;
+//    //治疗时间为两位数
+//    NSString *hourString = [NSString stringWithFormat:hour>9?@"%d":@"0%d",hour];
+//    NSString *minString = [NSString stringWithFormat:minute>9?@"%d":@"0%d",minute];
+//    NSString *secondString = [NSString stringWithFormat:second>9?@"%d":@"0%d",second];
+//
+//    cell.detailDurationLabel.text = [NSString stringWithFormat:@"%@:%@:%@",hourString,minString,secondString];
     
-    int hour = [minutes intValue]/60;
-    int minute= [minutes intValue]%60;
-    int second= [minutes intValue]*60%60;
-    //治疗时间为两位数
-    NSString *hourString = [NSString stringWithFormat:hour>9?@"%d":@"0%d",hour];
-    NSString *minString = [NSString stringWithFormat:minute>9?@"%d":@"0%d",minute];
-    NSString *secondString = [NSString stringWithFormat:second>9?@"%d":@"0%d",second];
-    
-    cell.detailDurationLabel.text = [NSString stringWithFormat:@"%@:%@:%@",hourString,minString,secondString];
+    //treatArea
+    cell.treatAreaLabel.text = [dataDic objectForKey:@"parts"];
 
     //timestamp
     NSString *timeStamp = [dataDic objectForKey:@"time"];
     cell.dateLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"M月d日"];
     cell.timeLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"H:mm"];
 
+    //alertCount
+    NSNumber *count = [dataDic objectForKey:@"warningcount"];
+    if ([count integerValue]>0) {
+        cell.alertImageView.hidden = NO;
+    }else{
+        cell.alertImageView.hidden = YES;
+    }
     return cell;
 }
 
@@ -309,14 +377,24 @@
     
     return dateString;
 }
-
+- (NSString *)formatFloat:(float)f
+{
+    if (fmodf(f, 1)==0) {    //如果有一位小数点
+        return [NSString stringWithFormat:@"%.0f",f];
+    } else if (fmodf(f*10, 1)==0) {     //如果有两位小数点
+        return [NSString stringWithFormat:@"%.1f",f];
+    } else {
+        return [NSString stringWithFormat:@"%.2f",f];
+    }
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"ShowServerReport"]) {
         RecordRepordViewController *vc = (RecordRepordViewController *)segue.destinationViewController;
         vc.dic = sender;
+        vc.recordId = sender[@"recordid"];
+        vc.hasImage = [sender[@"imgexist"]boolValue];
+        vc.hasAlertMessage = [sender[@"warningcount"]integerValue]>0;
     }
 }
-
-
 @end

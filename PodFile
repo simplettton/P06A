@@ -12,5 +12,7 @@ target 'P06A' do
    pod 'AMap2DMap'
    pod 'Masonry'
    pod 'MJRefresh'
-   pod 'JSONModel'
+   pod 'JSONModel' 
+   pod 'SDWebImage'
+   pod 'Popover.OC'
 end

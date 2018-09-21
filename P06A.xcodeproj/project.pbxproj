@@ -203,6 +203,7 @@
 		0453324620293D8E00B63C58 /* MQTTCommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453324520293D8E00B63C58 /* MQTTCommunicationViewController.m */; };
 		0454D17A2138C96700552036 /* AddDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454D1792138C96700552036 /* AddDeviceCell.m */; };
 		0454D17D2138FC7600552036 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454D17C2138FC7600552036 /* RoundedButton.m */; };
+		0455132621523761001D34F0 /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 0455132521523761001D34F0 /* report.html */; };
 		045798B121226961007EE5BE /* PhonenumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045798B021226961007EE5BE /* PhonenumViewController.m */; };
 		045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045930F3204511A6003F6BDC /* ServerRecordViewController.m */; };
 		045E912221475AB100B2F39C /* EditPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E912121475AB100B2F39C /* EditPasswordController.m */; };
@@ -225,7 +226,6 @@
 		04769EFE20085C570061E2FA /* ModeChooseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04769EFD20085C570061E2FA /* ModeChooseView.xib */; };
 		04787BE52110186F00992FA3 /* PhoneLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04787BE42110186F00992FA3 /* PhoneLoginViewController.m */; };
 		04787BE82110188300992FA3 /* PasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04787BE72110188300992FA3 /* PasswordLoginViewController.m */; };
-		0478C2C8204FCB4A0000135D /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 0478C2C7204FCB4A0000135D /* report.html */; };
 		0478C2CB204FE6F10000135D /* EditTreatAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */; };
 		047B7DBB21368129004D26CD /* DeviceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047B7DBA21368129004D26CD /* DeviceListView.xib */; };
 		047B7DBE21368155004D26CD /* DeviceListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047B7DBD21368155004D26CD /* DeviceListView.m */; };
@@ -269,6 +269,7 @@
 		04DAE84C2009B0A500BF4127 /* BatteryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DAE84B2009B0A500BF4127 /* BatteryView.xib */; };
 		04E1B1DB200C56B3007FC2DB /* LeftDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1B1DA200C56B3007FC2DB /* LeftDrawerViewController.m */; };
 		04ED0EA62052318B00638850 /* MyDeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ED0EA52052318B00638850 /* MyDeviceTableViewController.m */; };
+		04ED2DD32154A26F00EBCD78 /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ED2DD22154A26F00EBCD78 /* UIImage+Rotate.m */; };
 		B950FFB58DAF7D05F342B0A7 /* libPods-P06A.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B91FA2BEDD806EC10A0D366A /* libPods-P06A.a */; };
 /* End PBXBuildFile section */
 
@@ -698,6 +699,7 @@
 		0454D1792138C96700552036 /* AddDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceCell.m; sourceTree = "<group>"; };
 		0454D17B2138FC7600552036 /* RoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoundedButton.h; sourceTree = "<group>"; };
 		0454D17C2138FC7600552036 /* RoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoundedButton.m; sourceTree = "<group>"; };
+		0455132521523761001D34F0 /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
 		045798AF21226961007EE5BE /* PhonenumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhonenumViewController.h; sourceTree = "<group>"; };
 		045798B021226961007EE5BE /* PhonenumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhonenumViewController.m; sourceTree = "<group>"; };
 		045930F2204511A6003F6BDC /* ServerRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerRecordViewController.h; sourceTree = "<group>"; };
@@ -741,7 +743,6 @@
 		04787BE42110186F00992FA3 /* PhoneLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneLoginViewController.m; sourceTree = "<group>"; };
 		04787BE62110188300992FA3 /* PasswordLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasswordLoginViewController.h; sourceTree = "<group>"; };
 		04787BE72110188300992FA3 /* PasswordLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasswordLoginViewController.m; sourceTree = "<group>"; };
-		0478C2C7204FCB4A0000135D /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
 		0478C2C9204FE6F00000135D /* EditTreatAreaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditTreatAreaViewController.h; sourceTree = "<group>"; };
 		0478C2CA204FE6F10000135D /* EditTreatAreaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditTreatAreaViewController.m; sourceTree = "<group>"; };
 		047B7DBA21368129004D26CD /* DeviceListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceListView.xib; sourceTree = "<group>"; };
@@ -815,6 +816,8 @@
 		04E1B1DA200C56B3007FC2DB /* LeftDrawerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftDrawerViewController.m; sourceTree = "<group>"; };
 		04ED0EA42052318B00638850 /* MyDeviceTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyDeviceTableViewController.h; sourceTree = "<group>"; };
 		04ED0EA52052318B00638850 /* MyDeviceTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyDeviceTableViewController.m; sourceTree = "<group>"; };
+		04ED2DD12154A26F00EBCD78 /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotate.h"; sourceTree = "<group>"; };
+		04ED2DD22154A26F00EBCD78 /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotate.m"; sourceTree = "<group>"; };
 		613985788A67E8DBDCBA9A7C /* Pods-P06A.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P06A.release.xcconfig"; path = "Pods/Target Support Files/Pods-P06A/Pods-P06A.release.xcconfig"; sourceTree = "<group>"; };
 		B91FA2BEDD806EC10A0D366A /* libPods-P06A.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-P06A.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F002325A7AB1683275D2322D /* Pods-P06A.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P06A.debug.xcconfig"; path = "Pods/Target Support Files/Pods-P06A/Pods-P06A.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1824,6 +1827,8 @@
 				04769EFF20085C660061E2FA /* ModeChooseView */,
 				041D42691FFF232300EEA43C /* UIView+Tap.h */,
 				041D426A1FFF232300EEA43C /* UIView+Tap.m */,
+				04ED2DD12154A26F00EBCD78 /* UIImage+Rotate.h */,
+				04ED2DD22154A26F00EBCD78 /* UIImage+Rotate.m */,
 				047D489F2047F30D00DF7DF1 /* UIWebView+ConverToPDF.h */,
 				047D48A02047F30D00DF7DF1 /* UIWebView+ConverToPDF.m */,
 				043CA18F2027E93200713A3C /* UIViewController+BackButtonHandler.h */,
@@ -1967,7 +1972,7 @@
 		049B57CE204E46FA0072F7A4 /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				0478C2C7204FCB4A0000135D /* report.html */,
+				0455132521523761001D34F0 /* report.html */,
 				048E92A02043EBD2009F8532 /* RecordTableViewCell.h */,
 				048E92A12043EBD2009F8532 /* RecordTableViewCell.m */,
 				047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */,
@@ -2125,12 +2130,12 @@
 				048F9C69213E776A0083C83B /* QRCodeTopLeft@2x.png in Resources */,
 				044C526420255C6F00923060 /* PressParameterSetView.xib in Resources */,
 				043A38FD202AD66000835BDD /* AAHighcharts-3d.js in Resources */,
+				0455132621523761001D34F0 /* report.html in Resources */,
 				048F9C68213E776A0083C83B /* QRCodeLine@3x.png in Resources */,
 				048F9C6C213E776A0083C83B /* QRCodeTopRight@3x.png in Resources */,
 				0469FEB31FFE0C75002E25C3 /* Assets.xcassets in Resources */,
 				0469FEB11FFE0C75002E25C3 /* Main.storyboard in Resources */,
 				0453055B204659C500BC06BA /* TreatmentRecordCell.xib in Resources */,
-				0478C2C8204FCB4A0000135D /* report.html in Resources */,
 				048F9C64213E776A0083C83B /* QRCodeBottomLeft@3x.png in Resources */,
 				048F9C67213E776A0083C83B /* QRCodeLine@2x.png in Resources */,
 				04892F72202463C500100545 /* TimeSetCell.xib in Resources */,
@@ -2318,6 +2323,7 @@
 				044C526220255C4600923060 /* PressParameterSetView.m in Sources */,
 				044550B5212FFF2E0087A18F /* lobject.c in Sources */,
 				04040DE020034759009D3509 /* Unpack.m in Sources */,
+				04ED2DD32154A26F00EBCD78 /* UIImage+Rotate.m in Sources */,
 				04455077212FFF2E0087A18F /* GGGraphicsConstants.m in Sources */,
 				044550A5212FFF2E0087A18F /* lbitlib.c in Sources */,
 				044550A6212FFF2E0087A18F /* lcode.c in Sources */,

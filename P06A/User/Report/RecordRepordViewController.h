@@ -10,4 +10,7 @@
 
 @interface RecordRepordViewController : UIViewController
 @property (nonatomic,strong)NSDictionary *dic;
+@property (nonatomic,strong)NSString *recordId;
+@property (nonatomic,assign)BOOL hasAlertMessage;
+@property (nonatomic,assign)BOOL hasImage;
 @end

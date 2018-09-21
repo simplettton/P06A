@@ -10,5 +10,5 @@
 typedef void (^completeBlock)(void);
 @interface ReportComposer : NSObject
 -(NSString *)renderReportWith:(NSDictionary *)dic;
--(NSString *) exportHTMLContentToPDF:(NSString *)HTMLContent completed:(completeBlock)completion;
+-(NSString *)exportHTMLContentToPDF:(NSString *)HTMLContent completed:(completeBlock)completion;
 @end

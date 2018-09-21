@@ -26,51 +26,63 @@
     NSString *modeString = [[NSString alloc]init];
     switch (mode) {
         case DynamicMode:
+        {
             modeString = @"动态模式";
+            //生成一行显示时间设置
+            NSString *timeSetHtmlString = [NSString stringWithFormat:@"<tr><th>上升时间</th><th>下降时间</th></tr><tr><td>%@分钟</td><td>%@分钟</td></tr>",dic[@"uptime"],dic[@"downtime"]];
+            HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER#" withString:timeSetHtmlString];
             break;
+        }
         case KeepMode:
             modeString = @"连续模式";
+            HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER#" withString:@""];
             break;
         case IntervalMode:
+        {
             modeString = @"间隔模式";
+            //生成一行显示时间设置
+            NSString *timeSetHtmlString = [NSString stringWithFormat:@"<tr><th>工作时间</th><th>间歇时间</th></tr><tr><td>%@分钟</td><td>%@分钟</td></tr>",dic[@"worktime"],dic[@"resttime"]];
+            HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER" withString:timeSetHtmlString];
             break;
+        }
         default:
             break;
     }
-    
 
     NSString *pressureString = [NSString stringWithFormat:@"-%@mmHg",[dic objectForKey:@"press"]];
-    NSString *minutesString = [NSString stringWithFormat:@"%@分钟",[dic objectForKey:@"dur"]];
-    NSString *timeStamp = [dic objectForKey:@"date"];
+    NSString *minutesString = [NSString stringWithFormat:@"%@分钟",[dic objectForKey:@"duration"]];
+    NSString *timeStamp = [dic objectForKey:@"time"];
     NSString *dateString = [self stringFromTimeIntervalString:timeStamp dateFormat:@"yyyy/MM/dd HH:mm"];
     NSData *imageData = [dic objectForKey:@"imageData"];
-    
-    
+    NSArray *alertArray = [dic objectForKey:@"alertArray"];
+
     HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#MODE#" withString:modeString];
-    
     HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#PRESSURE#" withString:pressureString];
-    
     HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#DURATION#" withString:minutesString];
-    
     HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#DATE#" withString:dateString];
     
     if (imageData) {
-        
         HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#TREAT_IMAGE#" withString:[self htmlForPNGImage:imageData]];
     }
+    if ([alertArray count] > 0) {
+        HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#AlertMessage#" withString:[self alertStringHTML:alertArray]];
+    }else{
+        HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#AlertMessage#" withString:@"无"];
+    }
 
+    //患者数据
+    NSString *treatArea = [dic objectForKey:@"parts"];
+    NSString *name = [UserDefault objectForKey:@"USER_NAME"];
+    NSString *gender = [UserDefault objectForKey:@"USER_GENDER"];
+    NSString *age = [UserDefault objectForKey:@"AGE"];
     
+    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#TREAT_AREA#" withString:treatArea == nil?@"未知":treatArea];
     
-    //虚拟数据
-    NSString *treatArea = [dic objectForKey:@"treatArea"];
+    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#NAME#" withString:name];
     
-    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#TREAT_AREA#" withString:treatArea == nil?@"小臂":treatArea];
+    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#GENDER#" withString:gender];
     
-    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#NAME#" withString:@"JASPER"];
-    
-    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#GENDER#" withString:@"男"];
-    
-    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#AGE#" withString:@"18"];
+    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#AGE#" withString:age];
     
     return HTMLContent;
 }
@@ -125,7 +137,8 @@
     return pdfData;
     
 }
-#pragma mark - privateMethod
+
+#pragma mark - Private Method
 //时间戳字符串转化为日期或时间
 - (NSString *)stringFromTimeIntervalString:(NSString *)timeString dateFormat:(NSString*)dateFormat
 {
@@ -147,4 +160,20 @@
     NSString *imageSource = [NSString stringWithFormat:@"data:image/png;base64,%@",[imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn]];
     return imageSource;
 }
+-(NSString *)alertStringHTML:(NSArray *)alertMessageArray{
+    NSMutableString *html = [[NSMutableString alloc]initWithCapacity:20];
+    
+    for (NSDictionary *dataDic in alertMessageArray) {
+        
+        NSString *timeStamp = [dataDic objectForKey:@"time"];
+        
+        NSString *dateString = [self stringFromTimeIntervalString:timeStamp dateFormat:@"yyyy/MM/dd HH:mm"];
+        
+        //显示警告信息（模板：时间  警告信息）
+        [html appendFormat:@"<tr><td>%@    %@</td></tr>",dateString,dataDic[@"warnning"]];
+    }
+    return html;
+}
+//时间戳字符串转化为日期或时间
+
 @end

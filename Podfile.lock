@@ -42,6 +42,10 @@ PODS:
   - MQTTClient/Manager (0.14.0):
     - MQTTClient/Min
   - MQTTClient/Min (0.14.0)
+  - Popover.OC (2.2)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
   - SVProgressHUD (2.2.5)
   - UMengUShare/Core (6.4.8.2):
     - UMengUShare/Network
@@ -72,6 +76,8 @@ DEPENDENCIES:
   - MJRefresh
   - MMDrawerController
   - MQTTClient
+  - Popover.OC
+  - SDWebImage
   - SVProgressHUD
   - UMengUShare/Social/QQ
   - UMengUShare/Social/Sina
@@ -89,6 +95,8 @@ SPEC REPOS:
     - MJRefresh
     - MMDrawerController
     - MQTTClient
+    - Popover.OC
+    - SDWebImage
     - SVProgressHUD
     - UMengUShare
 
@@ -103,9 +111,11 @@ SPEC CHECKSUMS:
   MJRefresh: 0efa19656679d70a0f47cbe76e56c2271fe53a97
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
   MQTTClient: eea2eaaa6ddef852a1019a4dda091e22ad928b58
+  Popover.OC: bfcce8307f77593e1e1d7cf58604077f74e114bc
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
 
-PODFILE CHECKSUM: eff72285fb7916dde4c5ed0214cfcc7909d8b6d4
+PODFILE CHECKSUM: 7bb35c178d0084bdc53d31a22f7e4dcdfc71b467
 
 COCOAPODS: 1.5.3
