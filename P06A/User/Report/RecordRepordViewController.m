@@ -110,7 +110,9 @@
     self.picker.delegate = self;
     self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
-
+-(void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+}
 -(void)previewPDFWithHTMLContent:(NSString *)HTMLContent{
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *path = [reportComposer exportHTMLContentToPDF:HTMLContent completed:nil];
@@ -119,6 +121,64 @@
     [self.webView loadRequest:request];
 }
 
+- (IBAction)test:(id)sender {
+    UIImage *image = [UIImage imageNamed:@"doctor_grey"];
+    NSString *token = [UserDefault objectForKey:@"Token"];
+    NSString *api = [HTTPServerURLString stringByAppendingString:[NSString stringWithFormat:@"Api/Data/AddImageToTreatRecordAsync?token=%@&recordid=%@",token,self.recordId]];
+    
+    
+    
+//    [[NetWorkTool sharedNetWorkTool]POST:api
+//                                   image:image success:^(HttpResponse *responseObject) {
+//                                       if ([responseObject.result intValue] == 1) {
+//                                           [SVProgressHUD showSuccessWithStatus:@"治疗照片已保存"];
+//                                       }else{
+//                                           [SVProgressHUD showErrorWithStatus:responseObject.errorString];
+//                                       }
+//                                       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addPhoto:)];
+//                                   } failure:nil];
+    
+    
+    
+    
+    
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    //接收类型不一致请替换一致text/html或别的
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
+//                                                         @"text/html",
+//                                                         @"image/jpeg",
+//                                                         @"image/png",
+//                                                         @"application/octet-stream",
+//                                                         @"text/json",
+//                                                         nil];
+//
+//    NSURLSessionDataTask *task = [manager POST:api parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
+//
+//        NSData *imageData =UIImageJPEGRepresentation(image,1);
+//
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+//        formatter.dateFormat =@"yyyyMMddHHmmss";
+//        NSString *str = [formatter stringFromDate:[NSDate date]];
+//        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+//
+//        //上传的参数(上传图片，以文件流的格式)
+//        [formData appendPartWithFileData:imageData
+//                                    name:@"file"
+//                                fileName:fileName
+//                                mimeType:@"image/jpeg"];
+//
+//    } progress:^(NSProgress *_Nonnull uploadProgress) {
+//        //打印下上传进度
+//    } success:^(NSURLSessionDataTask *_Nonnull task,id _Nullable responseObject) {
+//
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addPhoto:)];
+//    } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+//        //上传失败
+//        NSLog(@"error = %@",error);
+//    }];
+//    [task resume];
+
+}
 
 - (IBAction)save:(id)sender {
     [self savePDF];
@@ -213,6 +273,7 @@
                                        } failure:nil];
     }
 }
+
 #pragma mark - delegate
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [self.picker dismissViewControllerAnimated:YES completion:NULL];
@@ -225,10 +286,8 @@
     [self.picker dismissViewControllerAnimated:YES completion:^{
 
     }];
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         //导航栏按钮改为保存按钮
-        
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(uploadImage:)];
         
         [self presentImage:image];

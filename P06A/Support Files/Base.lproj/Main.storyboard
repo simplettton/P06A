@@ -959,10 +959,17 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="治疗记录" id="P0k-62-w3a">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="filter" id="noD-nP-PUM">
-                            <connections>
-                                <action selector="rightButtonAction:" destination="R1x-wo-oOy" id="Bic-Ff-Ac5"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" id="KzR-mq-lta">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2TR-08-pNf">
+                                <rect key="frame" x="331" y="8" width="28" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="filter"/>
+                                <connections>
+                                    <action selector="rightButtonAction:" destination="R1x-wo-oOy" eventType="touchUpInside" id="WMJ-KM-x4R"/>
+                                </connections>
+                            </button>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

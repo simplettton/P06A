@@ -42,7 +42,7 @@
             modeString = @"间隔模式";
             //生成一行显示时间设置
             NSString *timeSetHtmlString = [NSString stringWithFormat:@"<tr><th>工作时间</th><th>间歇时间</th></tr><tr><td>%@分钟</td><td>%@分钟</td></tr>",dic[@"worktime"],dic[@"resttime"]];
-            HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER" withString:timeSetHtmlString];
+            HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER#" withString:timeSetHtmlString];
             break;
         }
         default:

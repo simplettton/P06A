@@ -95,13 +95,14 @@
             [actionArray addObject:action];
         }
     }
-
+    
     //popoverView.showShade = YES; // 显示阴影背景
     //popoverView.style = PopoverViewStyleDark; // 设置为黑色风格
     //popoverView.hideAfterTouchOutside = NO; // 点击外部时不允许隐藏
     popoverView.arrowStyle = PopoverViewArrowStyleTriangle;
     [popoverView showToView:sender withActions:actionArray];
 }
+
 
 //-(void)testData{
 //
@@ -148,7 +149,7 @@
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     [footer setTitle:@"" forState:MJRefreshStateIdle];
     [footer setTitle:@"" forState:MJRefreshStateRefreshing];
-    [footer setTitle:@"---END---" forState:MJRefreshStateNoMoreData];
+    [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
     self.tableView.mj_footer = footer;
 }
 
@@ -262,8 +263,8 @@
                                          if ([content count]>0) {
                                              NSLog(@"list = %@",content);
                                              for (NSDictionary *dataDic in responseObject.content) {
-                                                 if (![self->datas containsObject:dataDic]) {
-                                                     [self->datas addObject:dataDic];
+                                                    if (![self->datas containsObject:dataDic]) {
+                                                    [self->datas addObject:dataDic];
                                                  }
                                              }
                                          }
