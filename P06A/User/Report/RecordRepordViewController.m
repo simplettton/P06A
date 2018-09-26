@@ -10,6 +10,7 @@
 #import "RecordRepordViewController.h"
 #import "EditTreatAreaViewController.h"
 #import "UIWebView+ConverToPDF.h"
+#import "UIImage+WLCompress.h"
 #import "ReportComposer.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
@@ -122,25 +123,20 @@
 }
 
 - (IBAction)test:(id)sender {
-    UIImage *image = [UIImage imageNamed:@"doctor_grey"];
+    UIImage *image = [UIImage imageNamed:@"checkCodeSuccess"];
     NSString *token = [UserDefault objectForKey:@"Token"];
     NSString *api = [HTTPServerURLString stringByAppendingString:[NSString stringWithFormat:@"Api/Data/AddImageToTreatRecordAsync?token=%@&recordid=%@",token,self.recordId]];
     
-    
-    
-//    [[NetWorkTool sharedNetWorkTool]POST:api
-//                                   image:image success:^(HttpResponse *responseObject) {
-//                                       if ([responseObject.result intValue] == 1) {
-//                                           [SVProgressHUD showSuccessWithStatus:@"治疗照片已保存"];
-//                                       }else{
-//                                           [SVProgressHUD showErrorWithStatus:responseObject.errorString];
-//                                       }
-//                                       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addPhoto:)];
-//                                   } failure:nil];
-    
-    
-    
-    
+    [[NetWorkTool sharedNetWorkTool]POST:api
+                                   image:image success:^(HttpResponse *responseObject) {
+                                       if ([responseObject.result intValue] == 1) {
+                                           [SVProgressHUD showSuccessWithStatus:@"治疗照片已保存"];
+                                       }else{
+                                           [SVProgressHUD showErrorWithStatus:responseObject.errorString];
+                                       }
+                                       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addPhoto:)];
+                                   } failure:nil];
+
     
 //    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 //    //接收类型不一致请替换一致text/html或别的
@@ -282,6 +278,8 @@
     
     //获取图片
     UIImage *image = [[info objectForKey:UIImagePickerControllerOriginalImage]fixOrientation];
+    //压缩图片为3M
+//    self.image = [image compressImageWithMaxLenth:3*1024];
     self.image = image;
     [self.picker dismissViewControllerAnimated:YES completion:^{
 
@@ -289,11 +287,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         //导航栏按钮改为保存按钮
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(uploadImage:)];
-        
-        [self presentImage:image];
+        [self presentImage:self.image];
     });
     
-
+    
     
 //    [reportComposer exportHTMLContentToPDF:HTMLContent completed:^{
 //

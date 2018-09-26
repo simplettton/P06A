@@ -13,10 +13,13 @@
 #import <MJRefresh.h>
 #import "TreatmentRecordCell.h"
 #import "PopoverView.h"
+
+
 #define DeviceId @"P06A17A00001"
 #define KeepMode 0x00
 #define IntervalMode 0x01
 #define DynamicMode 0x02
+
 @interface ServerRecordViewController (){
     int page;
     int totalPage;
@@ -261,7 +264,6 @@
                                      if ([responseObject.result integerValue] == 1) {
                                          NSArray *content = responseObject.content;
                                          if ([content count]>0) {
-                                             NSLog(@"list = %@",content);
                                              for (NSDictionary *dataDic in responseObject.content) {
                                                     if (![self->datas containsObject:dataDic]) {
                                                     [self->datas addObject:dataDic];

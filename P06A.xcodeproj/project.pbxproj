@@ -209,6 +209,7 @@
 		045E912221475AB100B2F39C /* EditPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E912121475AB100B2F39C /* EditPasswordController.m */; };
 		04607B862149ED200033AE0A /* AccountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04607B852149ED200033AE0A /* AccountListCell.m */; };
 		04607B8A2149F84F0033AE0A /* AccountListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04607B892149F84F0033AE0A /* AccountListViewController.m */; };
+		04621049215B172200CFC0E1 /* UIImage+WLCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 04621048215B172200CFC0E1 /* UIImage+WLCompress.m */; };
 		0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC37212679090030E338 /* ChangePhoneNumViewController.m */; };
 		0464FC3B212681BE0030E338 /* EnterVerificationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC3A212681BE0030E338 /* EnterVerificationCodeViewController.m */; };
 		04672BB62005F128007D8410 /* BLECommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04672BB52005F128007D8410 /* BLECommunicationViewController.m */; };
@@ -710,6 +711,8 @@
 		04607B852149ED200033AE0A /* AccountListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListCell.m; sourceTree = "<group>"; };
 		04607B882149F84F0033AE0A /* AccountListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountListViewController.h; sourceTree = "<group>"; };
 		04607B892149F84F0033AE0A /* AccountListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListViewController.m; sourceTree = "<group>"; };
+		04621047215B172200CFC0E1 /* UIImage+WLCompress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImage+WLCompress.h"; path = "P06A/Extension/UIImage+WLCompress.h"; sourceTree = SOURCE_ROOT; };
+		04621048215B172200CFC0E1 /* UIImage+WLCompress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+WLCompress.m"; path = "P06A/Extension/UIImage+WLCompress.m"; sourceTree = SOURCE_ROOT; };
 		0464FC36212679090030E338 /* ChangePhoneNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePhoneNumViewController.h; sourceTree = "<group>"; };
 		0464FC37212679090030E338 /* ChangePhoneNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePhoneNumViewController.m; sourceTree = "<group>"; };
 		0464FC39212681BE0030E338 /* EnterVerificationCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterVerificationCodeViewController.h; sourceTree = "<group>"; };
@@ -1835,6 +1838,8 @@
 				043CA1902027E93200713A3C /* UIViewController+BackButtonHandler.m */,
 				0451F0D02019CAEB0001A9D4 /* UIImage+ImageWithColor.h */,
 				0451F0CF2019CAEB0001A9D4 /* UIImage+ImageWithColor.m */,
+				04621047215B172200CFC0E1 /* UIImage+WLCompress.h */,
+				04621048215B172200CFC0E1 /* UIImage+WLCompress.m */,
 				0453055C2046955100BC06BA /* TimeSetCell */,
 				0453055D2046957800BC06BA /* TreatmentRecordCell */,
 				0454D17B2138FC7600552036 /* RoundedButton.h */,
@@ -2292,6 +2297,7 @@
 				044550C2212FFF2E0087A18F /* lzio.c in Sources */,
 				0445508A212FFF2E0087A18F /* GGKShape.m in Sources */,
 				043A3900202AD66000835BDD /* AAAnimation.m in Sources */,
+				04621049215B172200CFC0E1 /* UIImage+WLCompress.m in Sources */,
 				043A3915202AD66000835BDD /* AATitle.m in Sources */,
 				044550B0212FFF2E0087A18F /* liolib.c in Sources */,
 				04455057212FFF2E0087A18F /* YAxis.m in Sources */,

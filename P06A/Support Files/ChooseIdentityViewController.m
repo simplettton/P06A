@@ -74,7 +74,6 @@
             [self chooseLeft:nil];
         }
     }
-
 }
 
 - (IBAction)chooseRight:(id)sender {

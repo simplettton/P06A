@@ -31,7 +31,7 @@ static NetWorkTool *_instance;
         _instance.requestSerializer.timeoutInterval = 3.f;
         [_instance.requestSerializer didChangeValueForKey:@"timeoutInterval"];
         
-        _instance.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"application/octet-stream", nil];
+        _instance.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
         
     });
     return _instance;
@@ -147,9 +147,9 @@ static NetWorkTool *_instance;
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
-    
-    
+
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
+    NSLog(@"imageData = %@",[data description]);
 //        NSData *data = UIImagePNGRepresentation(image);
     [self POST:address
     parameters:data

@@ -19,6 +19,8 @@
 #define UserDefault [NSUserDefaults standardUserDefaults]
 #define HTTPServerURLString @"http://192.168.2.127:8888/"
 
+//#define HTTPServerURLString @"http://api.lifotronic.com:3082/"
+
 
 #ifdef __OBJC__
 #import "GGGraphics.h"

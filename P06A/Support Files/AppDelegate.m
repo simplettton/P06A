@@ -76,7 +76,6 @@ static NSString * const KFilePath               = @"KFilePath";
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
 }
 -(void)babyDelegate{
-    
     __weak typeof(self) weakSelf = self;
     [baby setBlockOnCentralManagerDidUpdateState:^(CBCentralManager *central) {
         if (central.state == CBCentralManagerStatePoweredOff){
@@ -87,11 +86,9 @@ static NSString * const KFilePath               = @"KFilePath";
         }else if(central.state == CBCentralManagerStatePoweredOn) {
             weakSelf.isBLEPoweredOff = NO;
             NSLog(@"蓝牙开了");
-            
         }
     }];
 }
-
 -(void)configUSharePlatforms {
     /*
      设置新浪的appKey和appSecret
