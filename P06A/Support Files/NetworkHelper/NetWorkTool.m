@@ -149,7 +149,6 @@ static NetWorkTool *_instance;
     });
 
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
-    NSLog(@"imageData = %@",[data description]);
 //        NSData *data = UIImagePNGRepresentation(image);
     [self POST:address
     parameters:data

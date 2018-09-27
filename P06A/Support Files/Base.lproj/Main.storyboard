@@ -755,19 +755,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6S4-YO-JbS">
-                                <rect key="frame" x="8" y="72" width="359" height="539"/>
+                                <rect key="frame" x="8" y="72" width="367" height="551"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="539" id="wZj-oO-CdW"/>
-                                </constraints>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6S4-YO-JbS" firstAttribute="top" secondItem="vLJ-az-rfy" secondAttribute="top" constant="8" id="4Tn-OX-Cps"/>
-                            <constraint firstItem="6S4-YO-JbS" firstAttribute="top" secondItem="vLJ-az-rfy" secondAttribute="top" constant="8" id="A5m-IX-dzK"/>
                             <constraint firstItem="6S4-YO-JbS" firstAttribute="leading" secondItem="vLJ-az-rfy" secondAttribute="leading" constant="8" id="icd-uD-HSo"/>
-                            <constraint firstItem="6S4-YO-JbS" firstAttribute="trailing" secondItem="vLJ-az-rfy" secondAttribute="trailing" constant="-8" id="l5Z-4H-TD3"/>
+                            <constraint firstItem="6S4-YO-JbS" firstAttribute="trailing" secondItem="vLJ-az-rfy" secondAttribute="trailing" id="l5Z-4H-TD3"/>
+                            <constraint firstItem="6S4-YO-JbS" firstAttribute="bottom" secondItem="vLJ-az-rfy" secondAttribute="bottom" id="xtc-1Y-RaQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vLJ-az-rfy"/>
                     </view>
@@ -788,6 +785,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spp-ke-SE6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1765.5999999999999" y="-1507.1964017991006"/>
+        </scene>
+        <!--Message View Controller-->
+        <scene sceneID="t8b-sS-hZZ">
+            <objects>
+                <viewController id="cfT-da-MvQ" customClass="MessageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1fS-nJ-dhN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="F7a-L6-kD7"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jTe-6V-TUL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2450" y="-1507"/>
         </scene>
         <!--治疗记录-->
         <scene sceneID="tZT-7S-fNv">
@@ -868,6 +880,10 @@
                                             <color key="textColor" red="0.3457464873790741" green="0.30760908126831055" blue="0.37487700581550598" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="newlog" translatesAutoresizingMaskIntoConstraints="NO" id="HTD-kM-qgM">
+                                            <rect key="frame" x="316" y="57" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -977,9 +993,11 @@
                         <outlet property="accumulateTimeLabel" destination="FrH-lj-TEU" id="4lK-12-G8p"/>
                         <outlet property="firstDateLabel" destination="ugE-PO-zru" id="q2E-Bl-VQr"/>
                         <outlet property="lastDateLabel" destination="sY0-57-LGn" id="OdP-Pt-Vrb"/>
+                        <outlet property="messageImage" destination="HTD-kM-qgM" id="KCA-Kp-2XI"/>
                         <outlet property="recordSumLabel" destination="1Ql-TR-s2d" id="MJx-Mh-CHX"/>
                         <outlet property="tableView" destination="tsa-m9-94S" id="yRA-5E-1wX"/>
                         <segue destination="wWO-BL-0qT" kind="show" identifier="ShowServerReport" id="GkA-lS-Vd2"/>
+                        <segue destination="cfT-da-MvQ" kind="show" identifier="ShowMessage" id="q1C-G9-TJD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LH6-3Q-O3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4638,6 +4656,7 @@
         <image name="location" width="40" height="40"/>
         <image name="lock" width="28" height="28"/>
         <image name="menu" width="28" height="28"/>
+        <image name="newlog" width="30" height="30"/>
         <image name="password" width="30" height="30"/>
         <image name="patient" width="110" height="110"/>
         <image name="patient_grey" width="110" height="110"/>

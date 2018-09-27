@@ -47,19 +47,6 @@
 			font-weight: lighter;
 /*			font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";*/
 		}
-        .template table tr td div.img-box {
-            padding-bottom:100%;
-        }
-        .template table tr td div.img-box img{
-            position:absolute;
-            top:0;
-            bottom:0;
-            left:0;
-            right:0;
-            width:100%;
-            margin:auto;
-        }
-		
 	</style>
 </head>
 
@@ -124,9 +111,11 @@
 					<td> <br> </td>
 				</tr>
 				<tr>
-                    <div class="img-box">
-                        <img src = "#TREAT_IMAGE#">
-                    </div>
+                    <td>
+                        <div>
+                            <img style="max-width:100%; height:auto; overflow:hidden;" src = "#TREAT_IMAGE#">
+                        </div>
+                    </td>
 				</tr>
 				<tr class="heading">
 					<td>警告信息</td>

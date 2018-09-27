@@ -278,11 +278,10 @@
     
     //获取图片
     UIImage *image = [[info objectForKey:UIImagePickerControllerOriginalImage]fixOrientation];
-    //压缩图片为3M
-//    self.image = [image compressImageWithMaxLenth:3*1024];
-    self.image = image;
+    //压缩图片为3MB=3*1024*1024*6byte
+    self.image = [image compressImageWithMaxLenth:3*1024*1024*8];
     [self.picker dismissViewControllerAnimated:YES completion:^{
-
+        
     }];
     dispatch_async(dispatch_get_main_queue(), ^{
         //导航栏按钮改为保存按钮
@@ -290,8 +289,7 @@
         [self presentImage:self.image];
     });
     
-    
-    
+
 //    [reportComposer exportHTMLContentToPDF:HTMLContent completed:^{
 //
 //    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];

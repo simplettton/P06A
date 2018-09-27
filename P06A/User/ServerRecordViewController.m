@@ -6,14 +6,14 @@
 //  Copyright © 2018年 Shenzhen Lifotronic Technology Co.,Ltd. All rights reserved.
 //
 
-
+#import <MJRefresh.h>
 #import "ServerRecordViewController.h"
 #import "RecordRepordViewController.h"
 #import "NetWorkTool.h"
-#import <MJRefresh.h>
 #import "TreatmentRecordCell.h"
 #import "PopoverView.h"
-
+#import "UIImage+MessageImage.h"
+#import "UIView+Tap.h"
 
 #define DeviceId @"P06A17A00001"
 #define KeepMode 0x00
@@ -26,7 +26,7 @@
     BOOL isRefreshing;
     NSMutableArray *datas;
 }
-
+@property (weak, nonatomic) IBOutlet UIImageView *messageImage;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *recordSumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *firstDateLabel;
@@ -59,10 +59,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc]init];
-    [self initTableHeaderAndFooter];
     
+    //跳转消息界面
+    [self.messageImage addTapBlock:^(id obj) {
+        [self performSegueWithIdentifier:@"ShowMessage" sender:nil];
+    }];
     //右上角筛选菜单
     [self getDevices];
+
 }
 #pragma mark - filterButton
 -(void)getDevices{
@@ -74,6 +78,8 @@
                     if((![self.deviceArray containsObject:dataDic])){
                         [self.deviceArray addObject:dataDic];
                 }
+                    self.hireId = [responseObject.content lastObject][@"hireid"];
+                     [self initTableHeaderAndFooter];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                     });
@@ -163,7 +169,7 @@
     [self askForData:NO];
 }
 -(void)askForData:(BOOL)isRefresh{
-    NSMutableDictionary *parameter;
+    NSMutableDictionary *parameter = [[NSMutableDictionary alloc]initWithCapacity:20];
     if (self.hireId != nil) {
         [parameter setObject:self.hireId forKey:@"hireid"];
     }
@@ -193,7 +199,11 @@
                                                  self.firstDateLabel.text = [responseObject.content objectForKey:@"firsttime"];
                                                  self.lastDateLabel.text = [responseObject.content objectForKey:@"lasttime"];
                                                  self.recordSumLabel.text = [NSString stringWithFormat:@"%@",[responseObject.content objectForKey:@"count"]];
+                                                 NSInteger newlog = [[responseObject.content objectForKey:@"newlog"]integerValue];
                                                  
+                                                 //UIImage+MessageImage 显示未读消息
+                                                 self.messageImage.image = [[UIImage imageNamed:@"newlog"] hh_messageImageWithCount:newlog imageSize:CGSizeMake(30, 30) tipRadius:9 tipTop:9 tipRight:9  fontSize:12 textColor:nil tipColor:nil];
+                                                 [self.messageImage sizeToFit];
                                              });
                                          }else{
                                              
@@ -204,9 +214,9 @@
                                                  self.recordSumLabel.text = @"0";
                                                  
                                              });
-//                                             
-//                                             [self->datas removeAllObjects];
-//                                             [self endRefresh];
+                                             
+                                             [self->datas removeAllObjects];
+                                             [self endRefresh];
 
                                              [self.tableView reloadData];
                                          }

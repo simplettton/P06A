@@ -213,6 +213,8 @@
 		0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC37212679090030E338 /* ChangePhoneNumViewController.m */; };
 		0464FC3B212681BE0030E338 /* EnterVerificationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC3A212681BE0030E338 /* EnterVerificationCodeViewController.m */; };
 		04672BB62005F128007D8410 /* BLECommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04672BB52005F128007D8410 /* BLECommunicationViewController.m */; };
+		04676192215CCFB600CE87B4 /* UIImage+MessageImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04676191215CCFB600CE87B4 /* UIImage+MessageImage.m */; };
+		04676195215CE0FE00CE87B4 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04676194215CE0FE00CE87B4 /* MessageViewController.m */; };
 		0469FEAB1FFE0C75002E25C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469FEAA1FFE0C75002E25C3 /* AppDelegate.m */; };
 		0469FEB11FFE0C75002E25C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0469FEAF1FFE0C75002E25C3 /* Main.storyboard */; };
 		0469FEB31FFE0C75002E25C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0469FEB21FFE0C75002E25C3 /* Assets.xcassets */; };
@@ -720,6 +722,10 @@
 		04661DF32060A7D0002641D1 /* BaseHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseHeader.h; sourceTree = "<group>"; };
 		04672BB42005F128007D8410 /* BLECommunicationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLECommunicationViewController.h; sourceTree = "<group>"; };
 		04672BB52005F128007D8410 /* BLECommunicationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLECommunicationViewController.m; sourceTree = "<group>"; };
+		04676190215CCFB600CE87B4 /* UIImage+MessageImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MessageImage.h"; sourceTree = "<group>"; };
+		04676191215CCFB600CE87B4 /* UIImage+MessageImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MessageImage.m"; sourceTree = "<group>"; };
+		04676193215CE0FE00CE87B4 /* MessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		04676194215CE0FE00CE87B4 /* MessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		0469FEA61FFE0C75002E25C3 /* P06A.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P06A.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0469FEA91FFE0C75002E25C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0469FEAA1FFE0C75002E25C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -903,6 +909,8 @@
 				04349F502028292F001FFEC5 /* BLERecordViewController.m */,
 				045930F2204511A6003F6BDC /* ServerRecordViewController.h */,
 				045930F3204511A6003F6BDC /* ServerRecordViewController.m */,
+				04676193215CE0FE00CE87B4 /* MessageViewController.h */,
+				04676194215CE0FE00CE87B4 /* MessageViewController.m */,
 				04118BB81FFE2BD90054BC15 /* UserHomeViewController.h */,
 				04118BB91FFE2BD90054BC15 /* UserHomeViewController.m */,
 				04672BB42005F128007D8410 /* BLECommunicationViewController.h */,
@@ -1744,6 +1752,15 @@
 			path = AccountList;
 			sourceTree = "<group>";
 		};
+		0467618F215CCFB600CE87B4 /* UIImage+MessageImage */ = {
+			isa = PBXGroup;
+			children = (
+				04676190215CCFB600CE87B4 /* UIImage+MessageImage.h */,
+				04676191215CCFB600CE87B4 /* UIImage+MessageImage.m */,
+			);
+			path = "UIImage+MessageImage";
+			sourceTree = "<group>";
+		};
 		0469FE9D1FFE0C75002E25C3 = {
 			isa = PBXGroup;
 			children = (
@@ -1840,6 +1857,7 @@
 				0451F0CF2019CAEB0001A9D4 /* UIImage+ImageWithColor.m */,
 				04621047215B172200CFC0E1 /* UIImage+WLCompress.h */,
 				04621048215B172200CFC0E1 /* UIImage+WLCompress.m */,
+				0467618F215CCFB600CE87B4 /* UIImage+MessageImage */,
 				0453055C2046955100BC06BA /* TimeSetCell */,
 				0453055D2046957800BC06BA /* TreatmentRecordCell */,
 				0454D17B2138FC7600552036 /* RoundedButton.h */,
@@ -2405,6 +2423,7 @@
 				04349F512028292F001FFEC5 /* BLERecordViewController.m in Sources */,
 				044550BC212FFF2E0087A18F /* ltable.c in Sources */,
 				042B90BA20EB5AF600579CB5 /* HttpResponse.m in Sources */,
+				04676192215CCFB600CE87B4 /* UIImage+MessageImage.m in Sources */,
 				04455071212FFF2E0087A18F /* BaseShapeScaler.m in Sources */,
 				043A38F6202AD66000835BDD /* AAChartModel.m in Sources */,
 				04455075212FFF2E0087A18F /* DPieScaler.m in Sources */,
@@ -2413,6 +2432,7 @@
 				048F9C5E213E776A0083C83B /* QRCodeReader.m in Sources */,
 				0445504F212FFF2E0087A18F /* BaseLineBarSet.m in Sources */,
 				04455064212FFF2E0087A18F /* PieAnimationManager.m in Sources */,
+				04676195215CE0FE00CE87B4 /* MessageViewController.m in Sources */,
 				042E79202137EB8900DCBA18 /* AddDeviceViewController.m in Sources */,
 				045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */,
 				044550AC212FFF2E0087A18F /* ldump.c in Sources */,
