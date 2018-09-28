@@ -15,4 +15,5 @@ target 'P06A' do
    pod 'JSONModel' 
    pod 'SDWebImage'
    pod 'Popover.OC'
+   pod 'JSQMessagesViewController'
 end

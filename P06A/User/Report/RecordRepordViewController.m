@@ -5,15 +5,8 @@
 //  Created by Binger Zeng on 2018/3/1.
 //  Copyright © 2018年 Shenzhen Lifotronic Technology Co.,Ltd. All rights reserved.
 //
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "UIImage+Rotate.h"
+
 #import "RecordRepordViewController.h"
-#import "EditTreatAreaViewController.h"
-#import "UIWebView+ConverToPDF.h"
-#import "UIImage+WLCompress.h"
-#import "ReportComposer.h"
-#import "WXApi.h"
-#import "WXApiObject.h"
 
 @interface RecordRepordViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIWebViewDelegate>
 @property (nonatomic, strong) UIImagePickerController *picker;
@@ -128,14 +121,16 @@
     NSString *api = [HTTPServerURLString stringByAppendingString:[NSString stringWithFormat:@"Api/Data/AddImageToTreatRecordAsync?token=%@&recordid=%@",token,self.recordId]];
     
     [[NetWorkTool sharedNetWorkTool]POST:api
-                                   image:image success:^(HttpResponse *responseObject) {
+                                   image:image
+                                 success:^(HttpResponse *responseObject) {
                                        if ([responseObject.result intValue] == 1) {
                                            [SVProgressHUD showSuccessWithStatus:@"治疗照片已保存"];
                                        }else{
                                            [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                        }
                                        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addPhoto:)];
-                                   } failure:nil];
+                                   }
+                                 failure:nil];
 
     
 //    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

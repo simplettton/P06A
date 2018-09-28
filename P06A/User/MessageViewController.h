@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageModelData.h"
+// Import all the things
+#import "JSQMessages.h"
+@interface MessageViewController :JSQMessagesViewController
 
-@interface MessageViewController : UIViewController
+@property (strong, nonatomic)MessageModelData *messageData;
 
 @end

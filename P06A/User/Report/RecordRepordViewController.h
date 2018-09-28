@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIImage+Rotate.h"
+#import "EditTreatAreaViewController.h"
+#import "UIWebView+ConverToPDF.h"
+#import "UIImage+WLCompress.h"
+#import "ReportComposer.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "JSQMessages.h"
 @interface RecordRepordViewController : UIViewController
 @property (nonatomic,strong)NSDictionary *dic;
 @property (nonatomic,strong)NSString *recordId;

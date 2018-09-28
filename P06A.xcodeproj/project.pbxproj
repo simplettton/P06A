@@ -206,6 +206,7 @@
 		0455132621523761001D34F0 /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 0455132521523761001D34F0 /* report.html */; };
 		045798B121226961007EE5BE /* PhonenumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045798B021226961007EE5BE /* PhonenumViewController.m */; };
 		045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045930F3204511A6003F6BDC /* ServerRecordViewController.m */; };
+		045E6373215DDA6900F1C9A5 /* MessageModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E6372215DDA6900F1C9A5 /* MessageModelData.m */; };
 		045E912221475AB100B2F39C /* EditPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E912121475AB100B2F39C /* EditPasswordController.m */; };
 		04607B862149ED200033AE0A /* AccountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04607B852149ED200033AE0A /* AccountListCell.m */; };
 		04607B8A2149F84F0033AE0A /* AccountListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04607B892149F84F0033AE0A /* AccountListViewController.m */; };
@@ -707,6 +708,8 @@
 		045798B021226961007EE5BE /* PhonenumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhonenumViewController.m; sourceTree = "<group>"; };
 		045930F2204511A6003F6BDC /* ServerRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerRecordViewController.h; sourceTree = "<group>"; };
 		045930F3204511A6003F6BDC /* ServerRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServerRecordViewController.m; sourceTree = "<group>"; };
+		045E6371215DDA6900F1C9A5 /* MessageModelData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageModelData.h; sourceTree = "<group>"; };
+		045E6372215DDA6900F1C9A5 /* MessageModelData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageModelData.m; sourceTree = "<group>"; };
 		045E912021475AB100B2F39C /* EditPasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditPasswordController.h; sourceTree = "<group>"; };
 		045E912121475AB100B2F39C /* EditPasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditPasswordController.m; sourceTree = "<group>"; };
 		04607B842149ED200033AE0A /* AccountListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountListCell.h; sourceTree = "<group>"; };
@@ -909,6 +912,8 @@
 				04349F502028292F001FFEC5 /* BLERecordViewController.m */,
 				045930F2204511A6003F6BDC /* ServerRecordViewController.h */,
 				045930F3204511A6003F6BDC /* ServerRecordViewController.m */,
+				045E6371215DDA6900F1C9A5 /* MessageModelData.h */,
+				045E6372215DDA6900F1C9A5 /* MessageModelData.m */,
 				04676193215CE0FE00CE87B4 /* MessageViewController.h */,
 				04676194215CE0FE00CE87B4 /* MessageViewController.m */,
 				04118BB81FFE2BD90054BC15 /* UserHomeViewController.h */,
@@ -2191,6 +2196,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-P06A/Pods-P06A-resources.sh",
 				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Assets/JSQMessagesAssets.bundle",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Controllers/JSQMessagesViewController.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesCollectionViewCellIncoming.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesCollectionViewCellOutgoing.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesLoadEarlierHeaderView.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesToolbarContentView.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesTypingIndicatorFooterView.xib",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle",
@@ -2200,6 +2212,13 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesAssets.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesCollectionViewCellIncoming.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesCollectionViewCellOutgoing.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesLoadEarlierHeaderView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesToolbarContentView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesTypingIndicatorFooterView.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKPromptResources.bundle",
@@ -2353,6 +2372,7 @@
 				044550A6212FFF2E0087A18F /* lcode.c in Sources */,
 				043A38FA202AD66000835BDD /* AASeriesElement.m in Sources */,
 				0451F0CB2019BF310001A9D4 /* PersonalInfomationViewController.m in Sources */,
+				045E6373215DDA6900F1C9A5 /* MessageModelData.m in Sources */,
 				04455072212FFF2E0087A18F /* DBarScaler.m in Sources */,
 				04607B8A2149F84F0033AE0A /* AccountListViewController.m in Sources */,
 				04455096212FFF2E0087A18F /* BOLLLayer.m in Sources */,
