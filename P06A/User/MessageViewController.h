@@ -10,8 +10,10 @@
 #import "MessageModelData.h"
 // Import all the things
 #import "JSQMessages.h"
-@interface MessageViewController :JSQMessagesViewController
+@interface MessageViewController :JSQMessagesViewController <JSQMessagesComposerTextViewPasteDelegate>
 
 @property (strong, nonatomic)MessageModelData *messageData;
+
+@property (strong, nonatomic)NSString *hireId;
 
 @end

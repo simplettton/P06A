@@ -9,6 +9,7 @@
 #import <MJRefresh.h>
 #import "ServerRecordViewController.h"
 #import "RecordRepordViewController.h"
+#import "MessageViewController.h"
 #import "NetWorkTool.h"
 #import "TreatmentRecordCell.h"
 #import "PopoverView.h"
@@ -408,6 +409,9 @@
         vc.recordId = sender[@"recordid"];
         vc.hasImage = [sender[@"imgexist"]boolValue];
         vc.hasAlertMessage = [sender[@"warningcount"]integerValue]>0;
+    }else if([segue.identifier isEqualToString:@"ShowMessage"]){
+        MessageViewController *vc = (MessageViewController *)segue.destinationViewController;
+        vc.hireId = self.hireId;
     }
 }
 @end

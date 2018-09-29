@@ -148,7 +148,8 @@ typedef NS_ENUM(NSInteger,KCmdids) {
            forKeyPath:@"sendCharacteristic"
               options:NSKeyValueObservingOptionNew
               context:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleBLEPowerOff) name:@"BLEPoweredOffNotification" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleBLEPowerOff) name:@"BLEPoweredOffNotification"
+                                              object:nil];
 }
 -(void)handleBLEPowerOff{
     [SVProgressHUD showErrorWithStatus:@"蓝牙未打开升级连接设备"];
@@ -853,27 +854,30 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 -(void)pushNotification {
 
     // 1.创建通知内容
-    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
-    content.title = @"";
-    content.subtitle = @"";
-    content.body = @"你的便携负压设备升级成功";
-    content.badge = @1;
-
-    // 2.设置声音
-    UNNotificationSound *sound = [UNNotificationSound defaultSound];
-    content.sound = sound;
-
-    // 3.触发模式
-    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:0.05 repeats:NO];
-
-    // 4.设置UNNotificationRequest
-    NSString *requestIdentifer = @"TestRequest";
-    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifer content:content trigger:trigger];
-
-    //5.把通知加到UNUserNotificationCenter, 到指定触发点会被触发
-    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-    }];
-
+    if (@available(iOS 10.0, *)) {
+        UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+        content.title = @"";
+        content.subtitle = @"";
+        content.body = @"你的便携负压设备升级成功";
+        content.badge = @1;
+        
+        // 2.设置声音
+        UNNotificationSound *sound = [UNNotificationSound defaultSound];
+        content.sound = sound;
+        
+        // 3.触发模式
+        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:0.05 repeats:NO];
+        
+        // 4.设置UNNotificationRequest
+        NSString *requestIdentifer = @"TestRequest";
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifer content:content trigger:trigger];
+        
+        //5.把通知加到UNUserNotificationCenter, 到指定触发点会被触发
+        [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 

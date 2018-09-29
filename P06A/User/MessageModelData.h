@@ -12,6 +12,7 @@
 
 static NSString *const kAvatarIdDoctor = @"avatarIdDoctor";
 static NSString *const kAvatarIdPatient = @"avatarIdPatient";
+static NSString *const DidGetMessageModelNotification = @"DidGetMessageModelNotification";
 
 @interface MessageModelData : NSObject
 
@@ -28,4 +29,5 @@ static NSString *const kAvatarIdPatient = @"avatarIdPatient";
 //get network data
 -(void)loadMessagesWithId:(NSString *)hireId;
 
+-(instancetype)initWithId:(NSString *)hireId;
 @end
