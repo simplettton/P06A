@@ -113,7 +113,7 @@
     self.MQTTView.hidden = [mode isEqualToString:@"BLE"];
     
     self.BLETitleLabel.text = BEGetStringWithKeyFromTable(@"BLECommunication", @"P06A");
-    self.MQTTTitleLabel.text = BEGetStringWithKeyFromTable(@"MQTTCommunication", @"P06A");
+    self.MQTTTitleLabel.text = BEGetStringWithKeyFromTable(@"MQTT", @"P06A");
     self.treatRecordTitleLabel.text = BEGetStringWithKeyFromTable(@"TreatRecord", @"p06A");
 }
 

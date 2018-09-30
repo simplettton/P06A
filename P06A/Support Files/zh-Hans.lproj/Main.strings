@@ -1,0 +1,630 @@
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "0Yz-0H-aqB"; */
+"0Yz-0H-aqB.normalTitle" = "登录";
+
+/* Class = "UILabel"; text = "名字"; ObjectID = "0rf-Z3-KCB"; */
+"0rf-Z3-KCB.text" = "名字";
+
+/* Class = "UILabel"; text = "  "; ObjectID = "1Ql-TR-s2d"; */
+"1Ql-TR-s2d.text" = "  ";
+
+/* Class = "UILabel"; text = "----------------"; ObjectID = "1rT-iC-hnL"; */
+"1rT-iC-hnL.text" = "----------------";
+
+/* Class = "UILabel"; text = "治疗时间100分钟"; ObjectID = "1z4-lj-jAP"; */
+"1z4-lj-jAP.text" = "治疗时间100分钟";
+
+/* Class = "UIButton"; normalTitle = "更换手机号"; ObjectID = "204-Th-F7m"; */
+"204-Th-F7m.normalTitle" = "更换手机号";
+
+/* Class = "UILabel"; text = "2"; ObjectID = "2RM-Y1-Ij5"; */
+"2RM-Y1-Ij5.text" = "2";
+
+/* Class = "UIButton"; normalTitle = "更换手机号"; ObjectID = "2VJ-pw-6Eg"; */
+"2VJ-pw-6Eg.normalTitle" = "更换手机号";
+
+/* Class = "UILabel"; text = "其他"; ObjectID = "2ab-hi-Dse"; */
+"2ab-hi-Dse.text" = "其他";
+
+/* Class = "UILabel"; text = "+86"; ObjectID = "2xV-uh-E5e"; */
+"2xV-uh-E5e.text" = "+86";
+
+/* Class = "UILabel"; text = "广东广州"; ObjectID = "3dE-ks-zxZ"; */
+"3dE-ks-zxZ.text" = "广东广州";
+
+/* Class = "UILabel"; text = "蓝牙通信"; ObjectID = "3rt-8D-sRW"; */
+"3rt-8D-sRW.text" = "蓝牙通信";
+
+/* Class = "UILabel"; text = "暂无升级文件"; ObjectID = "46E-ne-5oN"; */
+"46E-ne-5oN.text" = "暂无升级文件";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "4ED-IU-mUa"; */
+"4ED-IU-mUa.normalTitle" = "下一步";
+
+/* Class = "UILabel"; text = "最近治疗日期"; ObjectID = "4TD-7X-sNK"; */
+"4TD-7X-sNK.text" = "最近治疗日期";
+
+/* Class = "UILabel"; text = "分配设备"; ObjectID = "4UO-w2-Au3"; */
+"4UO-w2-Au3.text" = "分配设备";
+
+/* Class = "UILabel"; text = "P06A"; ObjectID = "4e7-kL-ta5"; */
+"4e7-kL-ta5.text" = "P06A";
+
+/* Class = "UILabel"; text = "验证码"; ObjectID = "5Ao-ao-xki"; */
+"5Ao-ao-xki.text" = "验证码";
+
+/* Class = "UILabel"; text = "设备入库"; ObjectID = "5E0-6T-CM5"; */
+"5E0-6T-CM5.text" = "设备入库";
+
+/* Class = "UILabel"; text = "中文"; ObjectID = "5GC-lU-ee9"; */
+"5GC-lU-ee9.text" = "中文";
+
+/* Class = "UILabel"; text = "设备类型"; ObjectID = "5Jf-2V-BbO"; */
+"5Jf-2V-BbO.text" = "设备类型";
+
+/* Class = "UILabel"; text = "当前治疗压力:0mmHg"; ObjectID = "5YG-sL-lsa"; */
+"5YG-sL-lsa.text" = "当前治疗压力:0mmHg";
+
+/* Class = "UILabel"; text = "7"; ObjectID = "5cc-9P-tMz"; */
+"5cc-9P-tMz.text" = "7";
+
+/* Class = "UINavigationItem"; title = "治疗报告"; ObjectID = "5nm-eF-VBD"; */
+"5nm-eF-VBD.title" = "治疗报告";
+
+/* Class = "UILabel"; text = "密码"; ObjectID = "67W-hy-o3l"; */
+"67W-hy-o3l.text" = "密码";
+
+/* Class = "UILabel"; text = "客服电话"; ObjectID = "6Di-A3-Bok"; */
+"6Di-A3-Bok.text" = "客服电话";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "6Vf-aR-0Qe"; */
+"6Vf-aR-0Qe.text" = "00:00";
+
+/* Class = "UILabel"; text = "-200mmHg"; ObjectID = "6dO-9R-Y1y"; */
+"6dO-9R-Y1y.text" = "-200mmHg";
+
+/* Class = "UILabel"; text = "蓝牙通信"; ObjectID = "6j0-oY-xcl"; */
+"6j0-oY-xcl.text" = "蓝牙通信";
+
+/* Class = "UIButton"; normalTitle = "test模拟压力数据"; ObjectID = "6ys-Ib-U6T"; */
+"6ys-Ib-U6T.normalTitle" = "test模拟压力数据";
+
+/* Class = "UIButton"; normalTitle = "点击选择>"; ObjectID = "7Uo-Hu-oRn"; */
+"7Uo-Hu-oRn.normalTitle" = "点击选择>";
+
+/* Class = "UIButton"; normalTitle = "患者/家属"; ObjectID = "7kV-cc-ML8"; */
+"7kV-cc-ML8.normalTitle" = "患者/家属";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "7uF-XO-crt"; */
+"7uF-XO-crt.title" = "Title";
+
+/* Class = "UILabel"; text = "APP.bin"; ObjectID = "8MG-PZ-1Fg"; */
+"8MG-PZ-1Fg.text" = "APP.bin";
+
+/* Class = "UILabel"; text = "20min"; ObjectID = "8V9-hH-rYh"; */
+"8V9-hH-rYh.text" = "20min";
+
+/* Class = "UILabel"; text = "升级文件"; ObjectID = "8VY-wX-JBD"; */
+"8VY-wX-JBD.text" = "升级文件";
+
+/* Class = "UIButton"; normalTitle = "未连接"; ObjectID = "8rd-k8-fwd"; */
+"8rd-k8-fwd.normalTitle" = "未连接";
+
+/* Class = "UILabel"; text = "400-888-6089"; ObjectID = "943-cQ-FCc"; */
+"943-cQ-FCc.text" = "400-888-6089";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "9cu-v4-qpH"; */
+"9cu-v4-qpH.normalTitle" = "登录";
+
+/* Class = "UILabel"; text = "98:07:2D:42:4A:OC"; ObjectID = "9eO-ow-fsf"; */
+"9eO-ow-fsf.text" = "98:07:2D:42:4A:OC";
+
+/* Class = "UINavigationItem"; title = "便携负压"; ObjectID = "9lR-AD-WhT"; */
+"9lR-AD-WhT.title" = "便携负压";
+
+/* Class = "UILabel"; text = "开始治疗日期"; ObjectID = "9u4-Pu-LjW"; */
+"9u4-Pu-LjW.text" = "开始治疗日期";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "9wV-5l-mEy"; */
+"9wV-5l-mEy.text" = "1";
+
+/* Class = "UILabel"; text = "大臂"; ObjectID = "A5I-B2-Eev"; */
+"A5I-B2-Eev.text" = "大臂";
+
+/* Class = "UIButton"; normalTitle = "切换身份？"; ObjectID = "A7e-Ay-rU0"; */
+"A7e-Ay-rU0.normalTitle" = "切换身份？";
+
+/* Class = "UILabel"; text = "已经过安全检测，更换成功"; ObjectID = "AAy-C6-ujZ"; */
+"AAy-C6-ujZ.text" = "已经过安全检测，更换成功";
+
+/* Class = "UINavigationItem"; title = "设置"; ObjectID = "BLk-K6-th6"; */
+"BLk-K6-th6.title" = "设置";
+
+/* Class = "UILabel"; text = "远程通信"; ObjectID = "BXC-HA-8HG"; */
+"BXC-HA-8HG.text" = "远程通信";
+
+/* Class = "UIButton"; normalTitle = "暂停"; ObjectID = "BYe-sL-Awn"; */
+"BYe-sL-Awn.normalTitle" = "暂停";
+
+/* Class = "UILabel"; text = "远程监控"; ObjectID = "Bah-Bt-3VE"; */
+"Bah-Bt-3VE.text" = "远程监控";
+
+/* Class = "UILabel"; text = "绑定序列号"; ObjectID = "BlY-73-Tcb"; */
+"BlY-73-Tcb.text" = "绑定序列号";
+
+/* Class = "UIButton"; normalTitle = "获取验证码"; ObjectID = "Bo4-r8-ypm"; */
+"Bo4-r8-ypm.normalTitle" = "获取验证码";
+
+/* Class = "UILabel"; text = "手机号"; ObjectID = "CHw-N3-fjv"; */
+"CHw-N3-fjv.text" = "手机号";
+
+/* Class = "UILabel"; text = "连续模式"; ObjectID = "CKQ-Cu-Qc1"; */
+"CKQ-Cu-Qc1.text" = "连续模式";
+
+/* Class = "UILabel"; text = "设备名称："; ObjectID = "CcA-eT-d53"; */
+"CcA-eT-d53.text" = "设备名称：";
+
+/* Class = "UILabel"; text = "旧密码"; ObjectID = "Dub-4m-Bq4"; */
+"Dub-4m-Bq4.text" = "旧密码";
+
+/* Class = "UILabel"; text = "zhangxiaoting"; ObjectID = "E2r-JN-PBm"; */
+"E2r-JN-PBm.text" = "zhangxiaoting";
+
+/* Class = "UILabel"; text = "（小时）"; ObjectID = "EXk-1O-5MJ"; */
+"EXk-1O-5MJ.text" = "（小时）";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "Egy-Fn-hWA"; */
+"Egy-Fn-hWA.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = ">"; ObjectID = "EuK-dZ-Lp9"; */
+"EuK-dZ-Lp9.normalTitle" = ">";
+
+/* Class = "UILabel"; text = "   "; ObjectID = "FrH-lj-TEU"; */
+"FrH-lj-TEU.text" = "   ";
+
+/* Class = "UILabel"; text = "57-43-AG"; ObjectID = "Gh7-XY-bI8"; */
+"Gh7-XY-bI8.text" = "57-43-AG";
+
+/* Class = "UITextField"; placeholder = "请输入您的手机号"; ObjectID = "Gip-Oj-BKt"; */
+"Gip-Oj-BKt.placeholder" = "请输入您的手机号";
+
+/* Class = "UILabel"; text = "腹部"; ObjectID = "Gkq-qw-Hnh"; */
+"Gkq-qw-Hnh.text" = "腹部";
+
+/* Class = "UIButton"; normalTitle = "医院"; ObjectID = "HR5-vv-KRe"; */
+"HR5-vv-KRe.normalTitle" = "医院";
+
+/* Class = "UILabel"; text = "-175mmHg"; ObjectID = "HeD-vr-Gmc"; */
+"HeD-vr-Gmc.text" = "-175mmHg";
+
+/* Class = "UIButton"; normalTitle = "以后再说"; ObjectID = "I9Z-KK-kPv"; */
+"I9Z-KK-kPv.normalTitle" = "以后再说";
+
+/* Class = "UIButton"; normalTitle = "确认"; ObjectID = "IJG-1v-a2n"; */
+"IJG-1v-a2n.normalTitle" = "确认";
+
+/* Class = "UILabel"; text = "pressure"; ObjectID = "IK0-QE-6wN"; */
+"IK0-QE-6wN.text" = "pressure";
+
+/* Class = "UIBarButtonItem"; title = "保存"; ObjectID = "IRS-T5-mfH"; */
+"IRS-T5-mfH.title" = "保存";
+
+/* Class = "UIButton"; normalTitle = "下一步>"; ObjectID = "IfA-qI-xgb"; */
+"IfA-qI-xgb.normalTitle" = "下一步>";
+
+/* Class = "UILabel"; text = "密码登录"; ObjectID = "JPW-hO-Lgo"; */
+"JPW-hO-Lgo.text" = "密码登录";
+
+/* Class = "UIBarButtonItem"; title = "完成"; ObjectID = "Jbp-Pu-k5X"; */
+"Jbp-Pu-k5X.title" = "完成";
+
+/* Class = "UIButton"; normalTitle = "连续模式"; ObjectID = "Jdm-M1-Tvo"; */
+"Jdm-M1-Tvo.normalTitle" = "连续模式";
+
+/* Class = "UILabel"; text = "新密码"; ObjectID = "JrU-xP-DqT"; */
+"JrU-xP-DqT.text" = "新密码";
+
+/* Class = "UILabel"; text = "足部"; ObjectID = "KUF-KH-p9V"; */
+"KUF-KH-p9V.text" = "足部";
+
+/* Class = "UILabel"; text = "15521081414"; ObjectID = "KcM-Cm-eCw"; */
+"KcM-Cm-eCw.text" = "15521081414";
+
+/* Class = "UILabel"; text = "P06A"; ObjectID = "Kez-6D-So4"; */
+"Kez-6D-So4.text" = "P06A";
+
+/* Class = "UILabel"; text = "地址"; ObjectID = "KzL-iK-q8X"; */
+"KzL-iK-q8X.text" = "地址";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "LB6-nU-orm"; */
+"LB6-nU-orm.text" = "00:00";
+
+/* Class = "UIButton"; normalTitle = "重新获取"; ObjectID = "LBy-26-gbQ"; */
+"LBy-26-gbQ.normalTitle" = "重新获取";
+
+/* Class = "UILabel"; text = "账号类型"; ObjectID = "Lsf-Yn-J7P"; */
+"Lsf-Yn-J7P.text" = "账号类型";
+
+/* Class = "UIButton"; normalTitle = "治疗压力"; ObjectID = "MDN-EU-8yU"; */
+"MDN-EU-8yU.normalTitle" = "治疗压力";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "MS2-Ep-dIP"; */
+"MS2-Ep-dIP.text" = "30";
+
+/* Class = "UITableViewSection"; headerTitle = "通信方式"; ObjectID = "MSO-Oh-ti9"; */
+"MSO-Oh-ti9.headerTitle" = "通信方式";
+
+/* Class = "UIButton"; normalTitle = "开启"; ObjectID = "N5U-9K-gXT"; */
+"N5U-9K-gXT.normalTitle" = "开启";
+
+/* Class = "UILabel"; text = "绑定您的便携式负压产品"; ObjectID = "Ncr-Ns-URI"; */
+"Ncr-Ns-URI.text" = "绑定您的便携式负压产品";
+
+/* Class = "UITextField"; placeholder = "请输入收到的验证码"; ObjectID = "NdS-Cf-zah"; */
+"NdS-Cf-zah.placeholder" = "请输入收到的验证码";
+
+/* Class = "UINavigationItem"; title = "联系客服"; ObjectID = "ODS-Aw-vk3"; */
+"ODS-Aw-vk3.title" = "联系客服";
+
+/* Class = "UILabel"; text = " "; ObjectID = "OgQ-v7-cDp"; */
+"OgQ-v7-cDp.text" = " ";
+
+/* Class = "UINavigationItem"; title = "治疗记录"; ObjectID = "P0k-62-w3a"; */
+"P0k-62-w3a.title" = "治疗记录";
+
+/* Class = "UILabel"; text = "time"; ObjectID = "PDl-vN-wDE"; */
+"PDl-vN-wDE.text" = "time";
+
+/* Class = "UILabel"; text = "邮箱"; ObjectID = "PVf-36-hMV"; */
+"PVf-36-hMV.text" = "邮箱";
+
+/* Class = "UILabel"; text = "mac:44A6E511220D"; ObjectID = "PiT-hi-wbF"; */
+"PiT-hi-wbF.text" = "mac:44A6E511220D";
+
+/* Class = "UILabel"; text = "账号分配"; ObjectID = "Pyg-EQ-1kc"; */
+"Pyg-EQ-1kc.text" = "账号分配";
+
+/* Class = "UILabel"; text = "----------------"; ObjectID = "QNc-p4-fGC"; */
+"QNc-p4-fGC.text" = "----------------";
+
+/* Class = "UILabel"; text = "English"; ObjectID = "QlP-ya-4d7"; */
+"QlP-ya-4d7.text" = "English";
+
+/* Class = "UIBarButtonItem"; title = "完成"; ObjectID = "Qxc-dd-QIm"; */
+"Qxc-dd-QIm.title" = "完成";
+
+/* Class = "UIBarButtonItem"; title = "保存"; ObjectID = "RM3-tn-49T"; */
+"RM3-tn-49T.title" = "保存";
+
+/* Class = "UILabel"; text = "设备选择"; ObjectID = "RSp-cQ-AVX"; */
+"RSp-cQ-AVX.text" = "设备选择";
+
+/* Class = "UIButton"; normalTitle = "代理商"; ObjectID = "RVc-KK-526"; */
+"RVc-KK-526.normalTitle" = "代理商";
+
+/* Class = "UITextField"; placeholder = " 请输入旧密码"; ObjectID = "Rbh-E4-3nL"; */
+"Rbh-E4-3nL.placeholder" = " 请输入旧密码";
+
+/* Class = "UILabel"; text = "确认密码"; ObjectID = "Rf6-0z-d0a"; */
+"Rf6-0z-d0a.text" = "确认密码";
+
+/* Class = "UILabel"; text = "手部"; ObjectID = "SR8-Cs-uOJ"; */
+"SR8-Cs-uOJ.text" = "手部";
+
+/* Class = "UIButton"; normalTitle = "代理商"; ObjectID = "Sb0-m5-pWt"; */
+"Sb0-m5-pWt.normalTitle" = "代理商";
+
+/* Class = "UILabel"; text = "10 / 10"; ObjectID = "TRm-LX-at1"; */
+"TRm-LX-at1.text" = "10 / 10";
+
+/* Class = "UITextField"; placeholder = "请输入手机号码"; ObjectID = "Tpz-oT-p5O"; */
+"Tpz-oT-p5O.placeholder" = "请输入手机号码";
+
+/* Class = "UIButton"; normalTitle = "<"; ObjectID = "Uag-p7-wiK"; */
+"Uag-p7-wiK.normalTitle" = "<";
+
+/* Class = "UILabel"; text = "使用其他账号登录"; ObjectID = "UhR-1n-V4u"; */
+"UhR-1n-V4u.text" = "使用其他账号登录";
+
+/* Class = "UITableViewSection"; footerTitle = "密码必须至少6个字符，且不超过20个字符"; ObjectID = "V3F-NS-ndb"; */
+"V3F-NS-ndb.footerTitle" = "密码必须至少6个字符，且不超过20个字符";
+
+/* Class = "UILabel"; text = "动态模式"; ObjectID = "V5q-k8-EbH"; */
+"V5q-k8-EbH.text" = "动态模式";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "Vso-5g-vLx"; */
+"Vso-5g-vLx.text" = "1";
+
+/* Class = "UILabel"; text = "小臂"; ObjectID = "WCW-yX-9o9"; */
+"WCW-yX-9o9.text" = "小臂";
+
+/* Class = "UILabel"; text = "头像"; ObjectID = "XHA-1V-q4O"; */
+"XHA-1V-q4O.text" = "头像";
+
+/* Class = "UITableViewSection"; headerTitle = "语言切换"; ObjectID = "Yal-dE-oaN"; */
+"Yal-dE-oaN.headerTitle" = "语言切换";
+
+/* Class = "UILabel"; text = "P06A0000001"; ObjectID = "ZDa-OT-Rko"; */
+"ZDa-OT-Rko.text" = "P06A0000001";
+
+/* Class = "UILabel"; text = "治疗模式"; ObjectID = "ZEo-DO-1Gd"; */
+"ZEo-DO-1Gd.text" = "治疗模式";
+
+/* Class = "UITextField"; placeholder = "请再次输入新的密码"; ObjectID = "ZL3-YN-cB6"; */
+"ZL3-YN-cB6.placeholder" = "请再次输入新的密码";
+
+/* Class = "UILabel"; text = "账号信息"; ObjectID = "ZPy-9W-MeK"; */
+"ZPy-9W-MeK.text" = "账号信息";
+
+/* Class = "UILabel"; text = "序列号"; ObjectID = "a1P-VJ-dut"; */
+"a1P-VJ-dut.text" = "序列号";
+
+/* Class = "UILabel"; text = " 2017/10/19  14：20"; ObjectID = "a1Z-Ug-Nvv"; */
+"a1Z-Ug-Nvv.text" = " 2017/10/19  14：20";
+
+/* Class = "UILabel"; text = "绑定序列号"; ObjectID = "b11-NP-Lif"; */
+"b11-NP-Lif.text" = "绑定序列号";
+
+/* Class = "UILabel"; text = "角色"; ObjectID = "bAl-9M-fFj"; */
+"bAl-9M-fFj.text" = "角色";
+
+/* Class = "UIButton"; normalTitle = "锁屏"; ObjectID = "bB6-cN-bqw"; */
+"bB6-cN-bqw.normalTitle" = "锁屏";
+
+/* Class = "UIButton"; normalTitle = "用服/助理"; ObjectID = "bJM-YR-UHH"; */
+"bJM-YR-UHH.normalTitle" = "用服/助理";
+
+/* Class = "UILabel"; text = "15521081414"; ObjectID = "bQe-ia-HMc"; */
+"bQe-ia-HMc.text" = "15521081414";
+
+/* Class = "UIButton"; normalTitle = "切换身份？"; ObjectID = "bcR-ZW-xt9"; */
+"bcR-ZW-xt9.normalTitle" = "切换身份？";
+
+/* Class = "UILabel"; text = "收不到验证码短信？"; ObjectID = "bpJ-Id-qjY"; */
+"bpJ-Id-qjY.text" = "收不到验证码短信？";
+
+/* Class = "UILabel"; text = "小腿"; ObjectID = "brR-7u-1gM"; */
+"brR-7u-1gM.text" = "小腿";
+
+/* Class = "UILabel"; text = "物理地址"; ObjectID = "bxT-vW-bzy"; */
+"bxT-vW-bzy.text" = "物理地址";
+
+/* Class = "UILabel"; text = "账号类型"; ObjectID = "c3P-o8-ckt"; */
+"c3P-o8-ckt.text" = "账号类型";
+
+/* Class = "UILabel"; text = "+86 "; ObjectID = "c4N-8F-CZI"; */
+"c4N-8F-CZI.text" = "+86 ";
+
+/* Class = "UILabel"; text = "AE-AVG"; ObjectID = "cEc-Ui-DzD"; */
+"cEc-Ui-DzD.text" = "AE-AVG";
+
+/* Class = "UILabel"; text = "性别"; ObjectID = "cca-a4-gdz"; */
+"cca-a4-gdz.text" = "性别";
+
+/* Class = "UINavigationItem"; title = "便携负压"; ObjectID = "cpy-tD-Tkh"; */
+"cpy-tD-Tkh.title" = "便携负压";
+
+/* Class = "UILabel"; text = "2018-06-15 17:19"; ObjectID = "dZM-40-vek"; */
+"dZM-40-vek.text" = "2018-06-15 17:19";
+
+/* Class = "UILabel"; text = "76"; ObjectID = "dhF-Tj-QG9"; */
+"dhF-Tj-QG9.text" = "76";
+
+/* Class = "UIBarButtonItem"; title = "取消"; ObjectID = "ebt-HF-iFP"; */
+"ebt-HF-iFP.title" = "取消";
+
+/* Class = "UITextField"; placeholder = "输入密码"; ObjectID = "eo5-GC-867"; */
+"eo5-GC-867.placeholder" = "输入密码";
+
+/* Class = "UILabel"; text = "mode"; ObjectID = "epw-4X-44D"; */
+"epw-4X-44D.text" = "mode";
+
+/* Class = "UIButton"; normalTitle = "添加设备"; ObjectID = "f40-Q6-YcJ"; */
+"f40-Q6-YcJ.normalTitle" = "添加设备";
+
+/* Class = "UILabel"; text = "marketing@lifotronic.com"; ObjectID = "fC7-7p-ydz"; */
+"fC7-7p-ydz.text" = "marketing@lifotronic.com";
+
+/* Class = "UILabel"; text = "2"; ObjectID = "fNq-rj-gv3"; */
+"fNq-rj-gv3.text" = "2";
+
+/* Class = "UIButton"; normalTitle = "SKDLJFKE"; ObjectID = "ftl-XV-1oQ"; */
+"ftl-XV-1oQ.normalTitle" = "SKDLJFKE";
+
+/* Class = "UILabel"; text = "01:40:00"; ObjectID = "g4s-lI-Int"; */
+"g4s-lI-Int.text" = "01:40:00";
+
+/* Class = "UILabel"; text = "分配设备"; ObjectID = "gOb-Aw-QkK"; */
+"gOb-Aw-QkK.text" = "分配设备";
+
+/* Class = "UILabel"; text = "001"; ObjectID = "gi9-07-fZZ"; */
+"gi9-07-fZZ.text" = "001";
+
+/* Class = "UILabel"; text = "西丽人民医院"; ObjectID = "gjM-gg-R5Q"; */
+"gjM-gg-R5Q.text" = "西丽人民医院";
+
+/* Class = "UILabel"; text = "手机号"; ObjectID = "grW-cl-l33"; */
+"grW-cl-l33.text" = "手机号";
+
+/* Class = "UILabel"; text = "我们已发送 验证码 短信到您的手机： "; ObjectID = "hUJ-f1-qrf"; */
+"hUJ-f1-qrf.text" = "我们已发送 验证码 短信到您的手机： ";
+
+/* Class = "UILabel"; text = "RSSI："; ObjectID = "hUp-KH-Na3"; */
+"hUp-KH-Na3.text" = "RSSI：";
+
+/* Class = "UILabel"; text = "手部"; ObjectID = "i0k-7d-Hfy"; */
+"i0k-7d-Hfy.text" = "手部";
+
+/* Class = "UILabel"; text = "机构"; ObjectID = "iAY-7I-REs"; */
+"iAY-7I-REs.text" = "机构";
+
+/* Class = "UINavigationItem"; title = "设置密码"; ObjectID = "iHO-Qu-eDG"; */
+"iHO-Qu-eDG.title" = "设置密码";
+
+/* Class = "UILabel"; text = "完成（次）"; ObjectID = "iLr-D0-e4L"; */
+"iLr-D0-e4L.text" = "完成（次）";
+
+/* Class = "UILabel"; text = "机构"; ObjectID = "ia9-1m-VX0"; */
+"ia9-1m-VX0.text" = "机构";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "j07-BL-eqX"; */
+"j07-BL-eqX.normalTitle" = "登录";
+
+/* Class = "UIButton"; normalTitle = "手机号快捷登录"; ObjectID = "kWf-O1-ufG"; */
+"kWf-O1-ufG.normalTitle" = "手机号快捷登录";
+
+/* Class = "UILabel"; text = "所属医院"; ObjectID = "kYy-LD-89h"; */
+"kYy-LD-89h.text" = "所属医院";
+
+/* Class = "UILabel"; text = "手机号"; ObjectID = "kb2-b9-n22"; */
+"kb2-b9-n22.text" = "手机号";
+
+/* Class = "UILabel"; text = "解除绑定"; ObjectID = "knQ-XF-lej"; */
+"knQ-XF-lej.text" = "解除绑定";
+
+/* Class = "UIButton"; normalTitle = "获取验证码"; ObjectID = "l12-Rt-ebB"; */
+"l12-Rt-ebB.normalTitle" = "获取验证码";
+
+/* Class = "UIBarButtonItem"; title = "完成"; ObjectID = "lO1-Vy-9F2"; */
+"lO1-Vy-9F2.title" = "完成";
+
+/* Class = "UILabel"; text = "大腿"; ObjectID = "ljO-ql-T1u"; */
+"ljO-ql-T1u.text" = "大腿";
+
+/* Class = "UILabel"; text = "年龄"; ObjectID = "ltO-eO-fJb"; */
+"ltO-eO-fJb.text" = "年龄";
+
+/* Class = "UILabel"; text = "中国大陆"; ObjectID = "mAZ-Ot-wk1"; */
+"mAZ-Ot-wk1.text" = "中国大陆";
+
+/* Class = "UILabel"; text = "收短信大概需要30s"; ObjectID = "nBy-PK-s3Z"; */
+"nBy-PK-s3Z.text" = "收短信大概需要30s";
+
+/* Class = "UILabel"; text = "账号名"; ObjectID = "nLy-5A-MKQ"; */
+"nLy-5A-MKQ.text" = "账号名";
+
+/* Class = "UILabel"; text = "15521081414"; ObjectID = "nbh-zS-Rvc"; */
+"nbh-zS-Rvc.text" = "15521081414";
+
+/* Class = "UIButton"; normalTitle = "完成"; ObjectID = "o4p-f2-trM"; */
+"o4p-f2-trM.normalTitle" = "完成";
+
+/* Class = "UILabel"; text = "NP-100"; ObjectID = "p38-Sg-dfI"; */
+"p38-Sg-dfI.text" = "NP-100";
+
+/* Class = "UILabel"; text = "序列号"; ObjectID = "pGM-JQ-VHN"; */
+"pGM-JQ-VHN.text" = "序列号";
+
+/* Class = "UINavigationItem"; title = "治疗部位"; ObjectID = "pse-gz-Ysm"; */
+"pse-gz-Ysm.title" = "治疗部位";
+
+/* Class = "UILabel"; text = "退出当前账号"; ObjectID = "qbu-Tg-7Ne"; */
+"qbu-Tg-7Ne.text" = "退出当前账号";
+
+/* Class = "UILabel"; text = "国家和地区"; ObjectID = "rgq-Ml-w0W"; */
+"rgq-Ml-w0W.text" = "国家和地区";
+
+/* Class = "UILabel"; text = "设备机型"; ObjectID = "s5a-vc-iTI"; */
+"s5a-vc-iTI.text" = "设备机型";
+
+/* Class = "UINavigationItem"; title = "个人信息"; ObjectID = "sDl-HL-YTq"; */
+"sDl-HL-YTq.title" = "个人信息";
+
+/* Class = "UILabel"; text = "          "; ObjectID = "sY0-57-LGn"; */
+"sY0-57-LGn.text" = "          ";
+
+/* Class = "UILabel"; text = "深圳普门科技股份有限公司"; ObjectID = "ss0-Sj-TTs"; */
+"ss0-Sj-TTs.text" = "深圳普门科技股份有限公司";
+
+/* Class = "UILabel"; text = "正在进行安全检测…"; ObjectID = "tBc-Y1-eA5"; */
+"tBc-Y1-eA5.text" = "正在进行安全检测…";
+
+/* Class = "UILabel"; text = "21:11"; ObjectID = "tE0-T6-PaZ"; */
+"tE0-T6-PaZ.text" = "21:11";
+
+/* Class = "UILabel"; text = "下降时间:30min"; ObjectID = "tMq-Ii-cSP"; */
+"tMq-Ii-cSP.text" = "下降时间:30min";
+
+/* Class = "UILabel"; text = "男"; ObjectID = "tTx-e4-dLk"; */
+"tTx-e4-dLk.text" = "男";
+
+/* Class = "UITextField"; placeholder = "请输入密码"; ObjectID = "tWa-gL-P3R"; */
+"tWa-gL-P3R.placeholder" = "请输入密码";
+
+/* Class = "UILabel"; text = "mac地址"; ObjectID = "tch-gY-jFZ"; */
+"tch-gY-jFZ.text" = "mac地址";
+
+/* Class = "UILabel"; text = "设备状态:未连接 "; ObjectID = "tms-dm-Hji"; */
+"tms-dm-Hji.text" = "设备状态:未连接 ";
+
+/* Class = "UILabel"; text = "上升时间:30min"; ObjectID = "trR-Bc-haj"; */
+"trR-Bc-haj.text" = "上升时间:30min";
+
+/* Class = "UIButton"; normalTitle = "医院"; ObjectID = "trW-aX-jjb"; */
+"trW-aX-jjb.normalTitle" = "医院";
+
+/* Class = "UILabel"; text = "你累计治疗时间"; ObjectID = "u0i-4k-ACw"; */
+"u0i-4k-ACw.text" = "你累计治疗时间";
+
+/* Class = "UILabel"; text = "治疗记录"; ObjectID = "uPQ-rr-Yaz"; */
+"uPQ-rr-Yaz.text" = "治疗记录";
+
+/* Class = "UIButton"; normalTitle = "结束"; ObjectID = "uSu-vj-El4"; */
+"uSu-vj-El4.normalTitle" = "结束";
+
+/* Class = "UILabel"; text = "          "; ObjectID = "ugE-PO-zru"; */
+"ugE-PO-zru.text" = "          ";
+
+/* Class = "UILabel"; text = "设备地址："; ObjectID = "v4v-UF-2z1"; */
+"v4v-UF-2z1.text" = "设备地址：";
+
+/* Class = "UITextField"; placeholder = "请输入账号"; ObjectID = "vNX-oI-9Em"; */
+"vNX-oI-9Em.placeholder" = "请输入账号";
+
+/* Class = "UIBarButtonItem"; title = "保存"; ObjectID = "vRp-YG-WcF"; */
+"vRp-YG-WcF.title" = "保存";
+
+/* Class = "UILabel"; text = "代理商"; ObjectID = "vgq-b9-yEe"; */
+"vgq-b9-yEe.text" = "代理商";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "vlt-nN-RPg"; */
+"vlt-nN-RPg.normalTitle" = "登录";
+
+/* Class = "UILabel"; text = "治疗部位"; ObjectID = "w08-eQ-DQ9"; */
+"w08-eQ-DQ9.text" = "治疗部位";
+
+/* Class = "UITextField"; placeholder = "请输入新的密码"; ObjectID = "wJv-my-SVX"; */
+"wJv-my-SVX.placeholder" = "请输入新的密码";
+
+/* Class = "UILabel"; text = "工作时间(min)"; ObjectID = "wbX-xJ-Ie9"; */
+"wbX-xJ-Ie9.text" = "工作时间(min)";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "xNf-p2-t0Q"; */
+"xNf-p2-t0Q.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "点击选择>"; ObjectID = "xb5-xo-7ui"; */
+"xb5-xo-7ui.normalTitle" = "点击选择>";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "xgK-d0-hDx"; */
+"xgK-d0-hDx.text" = "0";
+
+/* Class = "UILabel"; text = "jasper"; ObjectID = "xjb-lA-rIA"; */
+"xjb-lA-rIA.text" = "jasper";
+
+/* Class = "UILabel"; text = "手机号码登录"; ObjectID = "xsd-Zd-Bdl"; */
+"xsd-Zd-Bdl.text" = "手机号码登录";
+
+/* Class = "UILabel"; text = "230k"; ObjectID = "ykZ-fF-bTz"; */
+"ykZ-fF-bTz.text" = "230k";
+
+/* Class = "UILabel"; text = "02月18日"; ObjectID = "yyT-Ae-SPL"; */
+"yyT-Ae-SPL.text" = "02月18日";
+
+/* Class = "UILabel"; text = "背部"; ObjectID = "z3K-mS-BJp"; */
+"z3K-mS-BJp.text" = "背部";
+
+/* Class = "UITextField"; placeholder = "输入账号"; ObjectID = "zIp-aE-em2"; */
+"zIp-aE-em2.placeholder" = "输入账号";
+
+/* Class = "UILabel"; text = "压力设置:-125mmHg"; ObjectID = "zlh-pE-vqb"; */
+"zlh-pE-vqb.text" = "压力设置:-125mmHg";
