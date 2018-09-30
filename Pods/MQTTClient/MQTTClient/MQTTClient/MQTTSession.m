@@ -478,11 +478,6 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
     return msgId;
 }
 
-
-- (void)close {
-    [self closeWithDisconnectHandler:nil];
-}
-
 - (void)closeWithDisconnectHandler:(MQTTDisconnectHandler)disconnectHandler {
     [self closeWithReturnCode:MQTTSuccess
         sessionExpiryInterval:nil
@@ -607,12 +602,12 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
 
 
 - (void)keepAlive {
-//    DDLogVerbose(@"[MQTTSession] keepAlive %@ @%.0f", self.clientId, [[NSDate date] timeIntervalSince1970]);
+    DDLogVerbose(@"[MQTTSession] keepAlive %@ @%.0f", self.clientId, [[NSDate date] timeIntervalSince1970]);
     (void)[self encode:[MQTTMessage pingreqMessage]];
 }
 
 - (void)checkDup {
-//    DDLogVerbose(@"[MQTTSession] checkDup %@ @%.0f", self.clientId, [[NSDate date] timeIntervalSince1970]);
+    DDLogVerbose(@"[MQTTSession] checkDup %@ @%.0f", self.clientId, [[NSDate date] timeIntervalSince1970]);
     [self checkTxFlows];
 }
 
@@ -634,12 +629,12 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
         }
     }
     for (id<MQTTFlow> flow in flows) {
-//        DDLogVerbose(@"[MQTTSession] %@ flow %@ %@ %@", self.clientId, flow.deadline, flow.commandType, flow.messageId);
+        DDLogVerbose(@"[MQTTSession] %@ flow %@ %@ %@", self.clientId, flow.deadline, flow.commandType, flow.messageId);
         if ([flow.deadline compare:[NSDate date]] == NSOrderedAscending) {
             switch ((flow.commandType).intValue) {
                 case 0:
                     if (windowSize <= self.persistence.maxWindowSize) {
-//                        DDLogVerbose(@"[MQTTSession] PUBLISH queued message %@", flow.messageId);
+                        DDLogVerbose(@"[MQTTSession] PUBLISH queued message %@", flow.messageId);
                         message = [MQTTMessage publishMessageWithData:flow.data
                                                               onTopic:flow.topic
                                                                   qos:(flow.qosLevel).intValue
@@ -708,10 +703,10 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
                                  @"MQTTDecoderEventConnectionClosed",
                                  @"MQTTDecoderEventConnectionError"
                                  ];
-//    DDLogVerbose(@"[MQTTSession] decoder handleEvent: %@ (%d) %@",
-//                 events[eventCode % [events count]],
-//                 eventCode,
-//                 [error description]);
+    DDLogVerbose(@"[MQTTSession] decoder handleEvent: %@ (%d) %@",
+                 events[eventCode % [events count]],
+                 eventCode,
+                 [error description]);
 
     switch (eventCode) {
         case MQTTDecoderEventConnectionClosed:
@@ -1268,7 +1263,7 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
         self.connectionHandler(eventCode);
     }
 
-    if(eventCode == MQTTSessionEventConnectionClosedByBroker && self.connectHandler) {
+    if (eventCode == MQTTSessionEventConnectionClosedByBroker && self.connectHandler) {
         error = [NSError errorWithDomain:MQTTSessionErrorDomain
                                     code:MQTTSessionErrorConnectionRefused
                                 userInfo:@{NSLocalizedDescriptionKey : @"Server has closed connection without connack."}];
@@ -1289,16 +1284,16 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
 }
 
 - (UInt16)nextMsgId {
-//    DDLogVerbose(@"nextMsgId synchronizing");
+    DDLogVerbose(@"nextMsgId synchronizing");
     @synchronized(self) {
-//        DDLogVerbose(@"nextMsgId synchronized");
+        DDLogVerbose(@"nextMsgId synchronized");
         self.txMsgId++;
         while (self.txMsgId == 0 || [self.persistence flowforClientId:self.clientId
                                                          incomingFlag:NO
                                                             messageId:self.txMsgId] != nil) {
             self.txMsgId++;
         }
-//        DDLogVerbose(@"nextMsgId synchronized done");
+        DDLogVerbose(@"nextMsgId synchronized done");
         return self.txMsgId;
     }
 }
@@ -1321,85 +1316,23 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
     }
 }
 
-/*
- * Threaded block callbacks
- */
 - (void)onConnect:(MQTTConnectHandler)connectHandler error:(NSError *)error {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:connectHandler forKey:@"Block"];
-    if (error) {
-        dict[@"Error"] = error;
-    }
-    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(onConnectExecute:) object:dict];
-    [thread start];
-}
-
-- (void)onConnectExecute:(NSDictionary *)dict {
-    MQTTConnectHandler connectHandler = dict[@"Block"];
-    NSError *error = dict[@"Error"];
     connectHandler(error);
 }
 
 - (void)onDisconnect:(MQTTDisconnectHandler)disconnectHandler error:(NSError *)error {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:disconnectHandler forKey:@"Block"];
-    if (error) {
-        dict[@"Error"] = error;
-    }
-    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(onDisconnectExecute:) object:dict];
-    [thread start];
-}
-
-- (void)onDisconnectExecute:(NSDictionary *)dict {
-    MQTTDisconnectHandler disconnectHandler = dict[@"Block"];
-    NSError *error = dict[@"Error"];
     disconnectHandler(error);
 }
 
-- (void)onSubscribe:(MQTTSubscribeHandler)subscribeHandler error:(NSError *)error gQoss:(NSArray *)gqoss{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:subscribeHandler forKey:@"Block"];
-    if (error) {
-        dict[@"Error"] = error;
-    }
-    if (gqoss) {
-        dict[@"GQoss"] = gqoss;
-    }
-    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(onSubscribeExecute:) object:dict];
-    [thread start];
-}
-
-- (void)onSubscribeExecute:(NSDictionary *)dict {
-    MQTTSubscribeHandler subscribeHandler = dict[@"Block"];
-    NSError *error = dict[@"Error"];
-    NSArray *gqoss = dict[@"GQoss"];
+- (void)onSubscribe:(MQTTSubscribeHandler)subscribeHandler error:(NSError *)error gQoss:(NSArray *)gqoss {
     subscribeHandler(error, gqoss);
 }
 
 - (void)onUnsubscribe:(MQTTUnsubscribeHandler)unsubscribeHandler error:(NSError *)error {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:unsubscribeHandler forKey:@"Block"];
-    if (error) {
-        dict[@"Error"] = error;
-    }
-    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(onUnsubscribeExecute:) object:dict];
-    [thread start];
-}
-
-- (void)onUnsubscribeExecute:(NSDictionary *)dict {
-    MQTTUnsubscribeHandler unsubscribeHandler = dict[@"Block"];
-    NSError *error = dict[@"Error"];
     unsubscribeHandler(error);
 }
 
 - (void)onPublish:(MQTTPublishHandler)publishHandler error:(NSError *)error {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:publishHandler forKey:@"Block"];
-    if (error) {
-        dict[@"Error"] = error;
-    }
-    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(onPublishExecute:) object:dict];
-    [thread start];
-}
-
-- (void)onPublishExecute:(NSDictionary *)dict {
-    MQTTPublishHandler publishHandler = dict[@"Block"];
-    NSError *error = dict[@"Error"];
     publishHandler(error);
 }
 
@@ -1641,7 +1574,7 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
                                       data:message.data];
                 }
             }
-//            DDLogVerbose(@"[MQTTSession] mqttTransport send");
+            DDLogVerbose(@"[MQTTSession] mqttTransport send");
             return [self.transport send:wireFormat];
         } else {
             DDLogError(@"[MQTTSession] trying to send message without wire format");
@@ -1655,7 +1588,7 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
 
 #pragma mark - MQTTTransport delegate
 - (void)mqttTransport:(id<MQTTTransport>)mqttTransport didReceiveMessage:(NSData *)message {
-//    DDLogVerbose(@"[MQTTSession] mqttTransport didReceiveMessage");
+    DDLogVerbose(@"[MQTTSession] mqttTransport didReceiveMessage");
 
     [self.decoder decodeMessage:message];
 

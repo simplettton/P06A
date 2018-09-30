@@ -28,7 +28,7 @@
 #import <SVProgressHUD.h>
 #import "AAGlobalMacro.h"
 #import <UserNotifications/UserNotifications.h>
-
+#import "BELanguageTool.h"
 #endif
 
 

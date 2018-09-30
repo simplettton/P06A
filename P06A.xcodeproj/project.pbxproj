@@ -269,6 +269,7 @@
 		049B57E5204E9ACA0072F7A4 /* CustomPrintPageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 049B57E4204E9ACA0072F7A4 /* CustomPrintPageRenderer.m */; };
 		049C3D4920EC7E810079F662 /* LoginWithPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C3D4820EC7E810079F662 /* LoginWithPhoneViewController.m */; };
 		049ED9BF202079BD006D9A37 /* ChooseIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */; };
+		04A055382160AC2200235298 /* BELanguageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A055372160AC2200235298 /* BELanguageTool.m */; };
 		04DA58B020E4DE7700E78816 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DA58AF20E4DE7700E78816 /* MapViewController.m */; };
 		04DAE84C2009B0A500BF4127 /* BatteryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DAE84B2009B0A500BF4127 /* BatteryView.xib */; };
 		04E1B1DB200C56B3007FC2DB /* LeftDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1B1DA200C56B3007FC2DB /* LeftDrawerViewController.m */; };
@@ -821,6 +822,12 @@
 		049C3D4820EC7E810079F662 /* LoginWithPhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginWithPhoneViewController.m; sourceTree = "<group>"; };
 		049ED9BD202079BD006D9A37 /* ChooseIdentityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentityViewController.h; sourceTree = "<group>"; };
 		049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseIdentityViewController.m; sourceTree = "<group>"; };
+		04A05530216079B500235298 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Main.strings"; sourceTree = "<group>"; };
+		04A05531216079B600235298 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		04A055362160AC2200235298 /* BELanguageTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BELanguageTool.h; sourceTree = "<group>"; };
+		04A055372160AC2200235298 /* BELanguageTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BELanguageTool.m; sourceTree = "<group>"; };
+		04A055462160D37700235298 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		04A055472160D37800235298 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		04DA58AE20E4DE7700E78816 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		04DA58AF20E4DE7700E78816 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		04DAE84B2009B0A500BF4127 /* BatteryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BatteryView.xib; sourceTree = "<group>"; };
@@ -1875,6 +1882,7 @@
 			isa = PBXGroup;
 			children = (
 				042B90B520EB5AF600579CB5 /* NetworkHelper */,
+				04A055352160ABE500235298 /* BELanguageTool */,
 				0469FEA91FFE0C75002E25C3 /* AppDelegate.h */,
 				0469FEAA1FFE0C75002E25C3 /* AppDelegate.m */,
 				043A38AC202AD3A200835BDD /* PrefixHeader.pch */,
@@ -2013,6 +2021,15 @@
 			path = Report;
 			sourceTree = "<group>";
 		};
+		04A055352160ABE500235298 /* BELanguageTool */ = {
+			isa = PBXGroup;
+			children = (
+				04A055362160AC2200235298 /* BELanguageTool.h */,
+				04A055372160AC2200235298 /* BELanguageTool.m */,
+			);
+			path = BELanguageTool;
+			sourceTree = "<group>";
+		};
 		89898D7476BA94320D070DE4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2120,6 +2137,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans-CN",
 				"zh-Hans",
 			);
 			mainGroup = 0469FE9D1FFE0C75002E25C3;
@@ -2459,6 +2477,7 @@
 				04455044212FFF2E0087A18F /* BaseLineBarChart.m in Sources */,
 				044550BB212FFF2E0087A18F /* lstrlib.c in Sources */,
 				0445507B212FFF2E0087A18F /* NSObject+FireBlock.m in Sources */,
+				04A055382160AC2200235298 /* BELanguageTool.m in Sources */,
 				04455091212FFF2E0087A18F /* KLineChart.m in Sources */,
 				043A3916202AD66000835BDD /* AATooltip.m in Sources */,
 				04787BE82110188300992FA3 /* PasswordLoginViewController.m in Sources */,
@@ -2530,6 +2549,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				0469FEB01FFE0C75002E25C3 /* Base */,
+				04A05530216079B500235298 /* zh-Hans-CN */,
+				04A055462160D37700235298 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2538,6 +2559,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				0469FEB51FFE0C75002E25C3 /* Base */,
+				04A05531216079B600235298 /* zh-Hans-CN */,
+				04A055472160D37800235298 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

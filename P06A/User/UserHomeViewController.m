@@ -15,6 +15,16 @@
 
 @interface UserHomeViewController ()
 @property (weak, nonatomic) IBOutlet UIView *BLEView;
+
+
+/**
+ * 需要中英文转换的标题
+ */
+@property (weak, nonatomic) IBOutlet UILabel *MQTTTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *BLETitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *treatRecordTitleLabel;
+
+
 @property (weak, nonatomic) IBOutlet UIView *bindDeviceView;
 @property (weak, nonatomic) IBOutlet UIView *MQTTView;
 @property (weak, nonatomic) IBOutlet UIView *treatmentRecordView;
@@ -101,6 +111,10 @@
     NSString *mode = [UserDefault objectForKey:@"COMMUNICATION_MODE"];
     self.BLEView.hidden = [mode isEqualToString:@"MQTT"];
     self.MQTTView.hidden = [mode isEqualToString:@"BLE"];
+    
+    self.BLETitleLabel.text = BEGetStringWithKeyFromTable(@"BLECommunication", @"P06A");
+    self.MQTTTitleLabel.text = BEGetStringWithKeyFromTable(@"MQTTCommunication", @"P06A");
+    self.treatRecordTitleLabel.text = BEGetStringWithKeyFromTable(@"TreatRecord", @"p06A");
 }
 
 -(void)viewWillAppear:(BOOL)animated {
