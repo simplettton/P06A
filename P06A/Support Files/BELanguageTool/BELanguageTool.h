@@ -33,6 +33,12 @@
 
 
 /**
+ *  当前语言
+ */
+-(NSString *)currentLanguage;
+
+
+/**
  *  设置新的语言
  *
  *  @param language 新语言

@@ -19,6 +19,7 @@
 		041D426B1FFF232300EEA43C /* UIView+Tap.m in Sources */ = {isa = PBXBuildFile; fileRef = 041D426A1FFF232300EEA43C /* UIView+Tap.m */; };
 		042B90BA20EB5AF600579CB5 /* HttpResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 042B90B720EB5AF600579CB5 /* HttpResponse.m */; };
 		042B90BB20EB5AF600579CB5 /* NetWorkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 042B90B920EB5AF600579CB5 /* NetWorkTool.m */; };
+		042E1383216DA6A6008499D0 /* P06A.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042E1385216DA6A6008499D0 /* P06A.strings */; };
 		042E72E92141102B003F5B9C /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E72E82141102B003F5B9C /* AccountCell.m */; };
 		042E79202137EB8900DCBA18 /* AddDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E791F2137EB8900DCBA18 /* AddDeviceViewController.m */; };
 		04349F512028292F001FFEC5 /* BLERecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04349F502028292F001FFEC5 /* BLERecordViewController.m */; };
@@ -320,6 +321,8 @@
 		042B90B720EB5AF600579CB5 /* HttpResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpResponse.m; sourceTree = "<group>"; };
 		042B90B820EB5AF600579CB5 /* NetWorkTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkTool.h; sourceTree = "<group>"; };
 		042B90B920EB5AF600579CB5 /* NetWorkTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkTool.m; sourceTree = "<group>"; };
+		042E1384216DA6A6008499D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/P06A.strings; sourceTree = "<group>"; };
+		042E1386216DA6A9008499D0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/P06A.strings"; sourceTree = "<group>"; };
 		042E72E72141102B003F5B9C /* AccountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountCell.h; sourceTree = "<group>"; };
 		042E72E82141102B003F5B9C /* AccountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
 		042E791E2137EB8900DCBA18 /* AddDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceViewController.h; sourceTree = "<group>"; };
@@ -1894,6 +1897,7 @@
 				0469FEB41FFE0C75002E25C3 /* LaunchScreen.storyboard */,
 				0469FEB71FFE0C75002E25C3 /* Info.plist */,
 				0469FEB81FFE0C75002E25C3 /* main.m */,
+				042E1385216DA6A6008499D0 /* P06A.strings */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -2136,6 +2140,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 0469FE9D1FFE0C75002E25C3;
 			productRefGroup = 0469FEA71FFE0C75002E25C3 /* Products */;
@@ -2177,6 +2182,7 @@
 				048F9C68213E776A0083C83B /* QRCodeLine@3x.png in Resources */,
 				048F9C6C213E776A0083C83B /* QRCodeTopRight@3x.png in Resources */,
 				0469FEB31FFE0C75002E25C3 /* Assets.xcassets in Resources */,
+				042E1383216DA6A6008499D0 /* P06A.strings in Resources */,
 				0469FEB11FFE0C75002E25C3 /* Main.storyboard in Resources */,
 				0453055B204659C500BC06BA /* TreatmentRecordCell.xib in Resources */,
 				048F9C64213E776A0083C83B /* QRCodeBottomLeft@3x.png in Resources */,
@@ -2542,6 +2548,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		042E1385216DA6A6008499D0 /* P06A.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				042E1384216DA6A6008499D0 /* en */,
+				042E1386216DA6A9008499D0 /* zh-Hans */,
+			);
+			name = P06A.strings;
+			sourceTree = "<group>";
+		};
 		0469FEAF1FFE0C75002E25C3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

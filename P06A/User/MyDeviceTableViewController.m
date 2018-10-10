@@ -14,13 +14,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *serialNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *hospitalLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *serialNumTitle;
+@property (weak, nonatomic) IBOutlet UILabel *macTitle;
+@property (weak, nonatomic) IBOutlet UILabel *typeTitle;
+@property (weak, nonatomic) IBOutlet UILabel *hospitalTitle;
+
 @end
 
 @implementation MyDeviceTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的设备";
+    self.title = BEGetStringWithKeyFromTable(@"我的设备", @"P06A");
     
     //默认选择第一个设备
 
@@ -37,9 +43,14 @@
     self.hospitalLabel.text = hospital;
     self.typeLabel.text = type;
     self.macStringLabel.text = macString;
+    
+    //界面标题
+    self.serialNumTitle.text = BEGetStringWithKeyFromTable(@"序列号", @"P06A");
+    self.macTitle.text = BEGetStringWithKeyFromTable(@"mac地址", @"P06A");
+    self.typeTitle.text = BEGetStringWithKeyFromTable(@"设备机型", @"P06A");
+    self.hospitalTitle.text = BEGetStringWithKeyFromTable(@"所属医院", @"P06A");
+
 }
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

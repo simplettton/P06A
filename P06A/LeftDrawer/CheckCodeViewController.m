@@ -10,6 +10,7 @@
 #import "CheckCodeResultViewController.h"
 
 @interface CheckCodeViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *checkTitle;
 @property (nonatomic,assign)BOOL isSuccess;
 @end
 
@@ -17,8 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"安全检测";
-    self.navigationItem.backBarButtonItem =[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.title = BEGetStringWithKeyFromTable(@"安全检测", @"P06A");
+    self.checkTitle.text = BEGetStringWithKeyFromTable(@"正在进行安全检测...", @"P06A");
+    self.navigationItem.backBarButtonItem =[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Users/BindingPhone_CheckAckCode"]
                                   params:@{
                                            @"id":self.codeId,

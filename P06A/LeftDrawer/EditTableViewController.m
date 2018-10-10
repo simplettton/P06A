@@ -29,7 +29,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(20 - 35, 0, 0, 0);
     
     //设置内容
-    self.title = [NSString stringWithFormat:@"设置%@",self.editKey];
+    self.title = [NSString stringWithFormat:@"%@%@",BEGetStringWithKeyFromTable(@"设置", @"P06A"),self.editKey];
+    self.navigationItem.rightBarButtonItem.title = BEGetStringWithKeyFromTable(@"保存", @"P06A");
     self.contentTextField.text = self.editValue;
     
     items = [NSArray arrayWithObjects:@"USER_ICON",@"USER_NAME",@"USER_GENDER",@"AGE",@"TREAT_AREA",@"PHONE_NUMBER",@"ADDRESS",nil];

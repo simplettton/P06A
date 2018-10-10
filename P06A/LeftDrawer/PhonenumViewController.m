@@ -12,16 +12,21 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *changePhoneNumberButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumTitle;
 @end
 
 @implementation PhonenumViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"手机号";
+    
+    self.title = BEGetStringWithKeyFromTable(@"手机号", @"P06A");
+    self.phoneNumTitle.text = BEGetStringWithKeyFromTable(@"手机号", @"P06A");
+    [self.changePhoneNumberButton setTitle:BEGetStringWithKeyFromTable(@"更换手机号", @"P06A") forState:UIControlStateNormal];
+    
     self.phoneNumberLabel.text = self.phoneNumber;
     self.changePhoneNumberButton.layer.cornerRadius = 5.0f;
-    self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"ChangePhoneNum"]) {

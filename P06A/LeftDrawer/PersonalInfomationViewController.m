@@ -19,6 +19,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *treatAreaLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *headImageTitle;
+@property (weak, nonatomic) IBOutlet UILabel *nameTitle;
+@property (weak, nonatomic) IBOutlet UILabel *genderTitle;
+@property (weak, nonatomic) IBOutlet UILabel *ageTitle;
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumTitle;
+@property (weak, nonatomic) IBOutlet UILabel *addressTitle;
 @end
 
 @implementation PersonalInfomationViewController
@@ -26,6 +32,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //界面标题
+    self.title = BEGetStringWithKeyFromTable(@"个人信息", @"P06A");
+    self.headImageTitle.text = BEGetStringWithKeyFromTable(@"头像", @"P06A");
+    self.nameTitle.text = BEGetStringWithKeyFromTable(@"名字", @"P06A");
+    self.genderTitle.text = BEGetStringWithKeyFromTable(@"性别", @"P06A");
+    self.ageTitle.text = BEGetStringWithKeyFromTable(@"年龄", @"P06A");
+    self.phoneNumTitle.text = BEGetStringWithKeyFromTable(@"手机号", @"P06A");
+    self.addressTitle.text = BEGetStringWithKeyFromTable(@"地址", @"P06A");
+    
     self.tableView.tableFooterView = [[UIView alloc]init];
     //tableview group样式 section之间的高度调整
     self.tableView.sectionHeaderHeight  = 0;
@@ -45,7 +61,11 @@
 
             if ([UserDefault objectForKey:keys[i]])
             {
-                label.text = [UserDefault objectForKey:keys[i]];
+                if ([keys[i]isEqualToString:@"USER_GENDER"]) {  //翻译男或女
+                    label.text = BEGetStringWithKeyFromTable([UserDefault objectForKey:@"USER_GENDER"], @"P06A");
+                }else{
+                    label.text = [UserDefault objectForKey:keys[i]];
+                }
             }
         }
         else if ([valueView isKindOfClass:[UIImageView class]])
@@ -64,7 +84,6 @@
     //导航栏
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.title = @"个人信息";
     
     self.navigationController.navigationBar.barTintColor = UIColorFromHex(0X65B8F3);
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
@@ -104,7 +123,7 @@
         
         
         //按钮：拍照，类型：UIAlertActionStyleDefault
-        [alert addAction:[UIAlertAction actionWithTitle:@"拍照"
+        [alert addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"拍照", @"P06A")
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action){
             /**
@@ -119,7 +138,7 @@
         }]];
         
         //按钮：从相册选择，类型：UIAlertActionStyleDefault
-        [alert addAction:[UIAlertAction actionWithTitle:@"从相册选择"
+        [alert addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"从相册选择", @"P06A")
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
             UIImagePickerController *pickerImage = [[UIImagePickerController alloc]init];
@@ -131,7 +150,7 @@
 
         
         //按钮：取消，类型：UIAlertActionStyleCancel
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
         
     }
@@ -141,20 +160,20 @@
         UILabel * label = (UILabel *)[cell viewWithTag:2];
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
             NSLog(@"点击取消");
         }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"男", @"P06A") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [UserDefault setObject:@"男" forKey:@"USER_GENDER"];
             [UserDefault synchronize];
-            label.text = @"男";
+            label.text = BEGetStringWithKeyFromTable(@"男", @"P06A");
             
         }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"女", @"P06A") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [UserDefault setObject:@"女" forKey:@"USER_GENDER"];
             [UserDefault synchronize];
-            label.text = @"女";
+            label.text = BEGetStringWithKeyFromTable(@"女", @"P06A");
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
     }

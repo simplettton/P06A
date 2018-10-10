@@ -11,6 +11,10 @@
 @interface ChangePhoneNumViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *changePhoneNumberButton;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
+
+@property (weak, nonatomic) IBOutlet UILabel *stateTitle;
+@property (weak, nonatomic) IBOutlet UILabel *StateValue;
+
 @end
 
 @implementation ChangePhoneNumViewController
@@ -20,8 +24,12 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"更换手机号";
-    self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.title = BEGetStringWithKeyFromTable(@"更换手机号", @"P06A");
+    self.stateTitle.text = BEGetStringWithKeyFromTable(@"国家和地区", @"P06A");
+    self.StateValue.text = BEGetStringWithKeyFromTable(@"中国大陆", @"P06A");
+    [self.changePhoneNumberButton setTitle:BEGetStringWithKeyFromTable(@"更换手机号", @"P06A") forState:UIControlStateNormal];
+    self.phoneNumberTextField.placeholder = BEGetStringWithKeyFromTable(@"请输入有效手机号", @"P06A");
+    self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.changePhoneNumberButton.layer.cornerRadius = 5.0f;
 }
@@ -35,7 +43,7 @@
 //        }
 
     }else{
-        [SVProgressHUD showErrorWithStatus:@"请输入有效手机号"];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"请输入有效手机号", @"P06A")];
     }
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

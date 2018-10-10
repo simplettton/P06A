@@ -9,6 +9,8 @@
 #import "ContactUSTableViewController.h"
 
 @interface ContactUSTableViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *phoneTitle;
+@property (weak, nonatomic) IBOutlet UILabel *mailBoxTitle;
 
 @end
 
@@ -17,16 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc]init];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.title = BEGetStringWithKeyFromTable(@"联系客服", @"P06A");
+    self.phoneTitle.text = BEGetStringWithKeyFromTable(@"客服电话", @"P06A");
+    self.mailBoxTitle.text = BEGetStringWithKeyFromTable(@"邮箱", @"P06A");
 }
 
 #pragma mark - Table view data source

@@ -1,0 +1,85 @@
+/* 
+  P06A.strings
+  P06A
+
+  Created by Binger Zeng on 2018/10/10.
+  Copyright © 2018年 Shenzhen Lifotronic Technology Co.,Ltd. All rights reserved.
+*/
+
+//UserHomeViewController
+"蓝牙通信"="BLECommunication";
+"治疗记录"="Treat Record";
+"远程监控"="Monitor Online";
+"便携负压"="Vacuum Extractor";
+
+"未打开蓝牙无法连接设备"="The device cannot be connected without bluetooth";
+
+//LeftDrawerViewController
+"设置"="Settings";
+"我的设备"="My Device";
+"联系我们"="Contact Us";
+"帮助"="Help";
+"退出登录"="Log Out";
+
+"在线升级"="Upgrade Onlie";
+"修改密码"="Change Password";
+
+"未打开蓝牙无法升级设备"="Unable to upgrade the device without bluetooth";
+"退出后不会删除任何历史数据，下次登录仍然可以使用本账号。"="Logout will not delete any data.You can still log in with this account.";
+"取消"="Cancel";
+
+//SettingViewController
+"通信方式"="Communication Mode";
+"语言切换"="Language";
+"保存"="Save";
+
+//MyDeviceTableViewController
+"序列号"="Serial Number";
+"mac地址"="Mac Address";
+"设备机型"="Equipment Model";
+"所属医院"="Affiliated Hospital";
+
+//DeviceListView.h
+"确认"="Ok";
+
+//ContactUSTableViewController
+"联系客服"="Contact";
+"客服电话"="Customer Service Phone";
+"邮箱"="Email Account";
+
+//PersonalInfomationViewController
+"个人信息"="My Profile";
+"头像"="Profile Photo";
+"名字"="Name";
+"性别"="Gender";
+"年龄"="Age";
+"手机号"="Phone Number";
+"地址"="Address";
+
+"拍照"="Take Photo";
+"从相册选择"="Choose from Album";
+"男"="Male";
+"女"="Female";
+
+
+//EditTableViewController
+"设置"="Set ";
+
+//ChangePhoneNumViewController
+"更换手机号"="Change Number";
+"国家和地区"="Contries and Regions";
+"中国大陆"="China";
+"请输入有效手机号"="Please enter a valid phone number";
+
+//EnterVerificationCodeViewController
+"我们已发送 验证码 短信到您的手机： "="We have send the verification code to :";
+"请获取验证码 "="Please get the verification code";
+"收短信大概需要%ds"="It takes about %d seconds to receive messages";
+"收不到验证码短信？"="No verification Code?";
+"重新获取" = "regain";
+
+"安全检测"="Security Check";
+"正在进行安全检测..."="Safety testing is under way...";
+"已经过安全检测，更换成功"="Safety testing is succeeded";
+"未通过安全检测，请稍后重试"="Safety testing is failed";
+

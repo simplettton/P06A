@@ -24,15 +24,15 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xM0-rh-XRr" userLabel="TitleView">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="所属医院" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tK5-vs-ewh">
-                                    <rect key="frame" x="193" y="11" width="62" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="所属医院" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tK5-vs-ewh">
+                                    <rect key="frame" x="149" y="15" width="143" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="设备序列号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNm-CZ-8bk">
-                                    <rect key="frame" x="63" y="11" width="77" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="设备序列号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNm-CZ-8bk">
+                                    <rect key="frame" x="8" y="15" width="140" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="textColor"/>
@@ -124,8 +124,11 @@
             <connections>
                 <outlet property="backgroundView" destination="cWL-T8-KE5" id="W0x-5C-zX9"/>
                 <outlet property="cancelButton" destination="KgO-fY-wXS" id="rz4-ry-gHZ"/>
+                <outlet property="confirmButton" destination="YFa-VQ-xb4" id="UJ6-ku-ctu"/>
                 <outlet property="contentView" destination="DV5-CT-6Ps" id="bOc-Ub-xMm"/>
                 <outlet property="footerView" destination="Ycr-Hj-mUl" id="rkg-7x-VtQ"/>
+                <outlet property="hospitalTitle" destination="tK5-vs-ewh" id="jY5-Uv-Jzl"/>
+                <outlet property="serialNumTitle" destination="bNm-CZ-8bk" id="Fkx-na-hs9"/>
                 <outlet property="tableView" destination="mGu-um-fr8" id="JjU-v8-ZIE"/>
                 <outlet property="titleView" destination="xM0-rh-XRr" id="UPz-pO-0TV"/>
             </connections>

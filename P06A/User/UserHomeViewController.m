@@ -34,7 +34,8 @@
 
 @implementation UserHomeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self addTapToViews];
     
@@ -51,7 +52,8 @@
     [self initUI];
     
 }
--(void)setUserDefault{
+-(void)setUserDefault
+{
     
     NSDictionary *defaultDic = @{
                                  @"USER_NAME":            @"游客",
@@ -60,7 +62,8 @@
                                  @"TREAT_AREA":           @"手部",
                                  @"PHONE_NUMBER":         @"--",
                                  @"ADDRESS":              @"--",
-                                 @"COMMUNICATION_MODE":   @"BLE"
+                                 @"COMMUNICATION_MODE":   @"BLE",
+                                 @"LANGUAGESET":          @"zh-Hans"
                                  };
     
     for (NSString *key in [defaultDic allKeys]) {
@@ -107,14 +110,19 @@
 }
 
 -(void)initUI{
-    
+
+    //切换MQTT模块或者蓝牙模块
     NSString *mode = [UserDefault objectForKey:@"COMMUNICATION_MODE"];
     self.BLEView.hidden = [mode isEqualToString:@"MQTT"];
     self.MQTTView.hidden = [mode isEqualToString:@"BLE"];
     
-    self.BLETitleLabel.text = BEGetStringWithKeyFromTable(@"BLECommunication", @"P06A");
-    self.MQTTTitleLabel.text = BEGetStringWithKeyFromTable(@"MQTT", @"P06A");
-    self.treatRecordTitleLabel.text = BEGetStringWithKeyFromTable(@"TreatRecord", @"p06A");
+    //初始化三个模块标题
+    self.BLETitleLabel.text = BEGetStringWithKeyFromTable(@"蓝牙通信", @"P06A");
+    self.MQTTTitleLabel.text = BEGetStringWithKeyFromTable(@"远程监控", @"P06A");
+    self.treatRecordTitleLabel.text = BEGetStringWithKeyFromTable(@"治疗记录", @"P06A");
+    
+    //导航栏标题
+    self.title = BEGetStringWithKeyFromTable(@"便携负压", @"P06A");
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -140,7 +148,7 @@
     [self.BLEView addTapBlock:^(id obj) {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         if (appDelegate.isBLEPoweredOff) {
-            [SVProgressHUD showErrorWithStatus:@"未打开蓝牙无法连接设备"];
+            [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"未打开蓝牙无法连接设备", @"P06A")];
         }else{
             [self performSegueWithIdentifier:@"ShowBLEController" sender:nil];
         }

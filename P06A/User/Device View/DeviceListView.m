@@ -11,10 +11,17 @@
 @interface DeviceListView()
 @property (nonatomic,assign)NSInteger selectedIndex;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (nonatomic,strong)NSDictionary *selectedData;
+
+@property (weak, nonatomic) IBOutlet UILabel *serialNumTitle;
+@property (weak, nonatomic) IBOutlet UILabel *hospitalTitle;
+
+
 @end
 @implementation DeviceListView
 - (IBAction)cancel:(id)sender {
@@ -36,7 +43,11 @@
     self.contentView.layer.cornerRadius = 5.0f;
     self.footerView.layer.cornerRadius = 5.0f;
     self.tableView.tableFooterView = [[UIView alloc]init];
-
+    self.serialNumTitle.text = BEGetStringWithKeyFromTable(@"序列号", @"P06A");
+    self.hospitalTitle.text = BEGetStringWithKeyFromTable(@"所属医院", @"P06A");
+    [self.cancelButton setTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") forState:UIControlStateNormal];
+    [self.confirmButton setTitle:BEGetStringWithKeyFromTable(@"确认", @"P06A") forState:UIControlStateNormal];
+    
     
     [self setNeedsLayout];
 }

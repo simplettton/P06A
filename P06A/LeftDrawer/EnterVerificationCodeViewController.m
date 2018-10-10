@@ -15,6 +15,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *regainButton;
 @property (weak, nonatomic) IBOutlet UILabel *countDownLabel;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *sendMessageTitle;
+@property (weak, nonatomic) IBOutlet UILabel *cannotGetCodeTitle;
+
 @property (strong,nonatomic)NSString *codeId;
 @property (strong,nonatomic)NSString *ackCode;
 @end
@@ -29,8 +33,12 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"更换手机号";
-    self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.title = BEGetStringWithKeyFromTable(@"更换手机号", @"P06A");
+    self.sendMessageTitle.text = BEGetStringWithKeyFromTable(@"我们已发送 验证码 短信到您的手机： ", @"P06A");
+    [self.regainButton setTitle:BEGetStringWithKeyFromTable(@"重新获取", @"P06A")forState:UIControlStateNormal];
+    self.cannotGetCodeTitle.text = BEGetStringWithKeyFromTable(@"收不到验证码短信？", @"P06A");
+    
+    self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.phoneNumberLabel.text = self.phoneNumber;
 
     [self getVerifyCode];
@@ -49,7 +57,7 @@
                 self.ackCode = text;
                 [self performSegueWithIdentifier:@"CheckCode" sender:nil];
             }else{
-                [SVProgressHUD showErrorWithStatus:@"请获取验证码"];
+                [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"请获取验证码 ", @"P06A")];
                 
             }
 
@@ -97,7 +105,7 @@
     dispatch_source_set_event_handler(_timer, ^{
         int interval = [endTime timeIntervalSinceNow];
         if (interval > 0) {     //更新倒计时
-            NSString *timeStr = [NSString stringWithFormat:@"收短信大概需要%ds", interval];
+            NSString *timeStr = [NSString stringWithFormat:BEGetStringWithKeyFromTable(@"收短信大概需要%ds", @"P06A"), interval];
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.countDownLabel.hidden = NO;
                 self.countDownLabel.text = timeStr;

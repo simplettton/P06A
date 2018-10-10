@@ -1261,9 +1261,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                        <connections>
-                                            <segue destination="KjE-zK-OyW" kind="show" id="Cjf-Nl-YEh"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="wz4-tD-Kym">
                                         <rect key="frame" x="0.0" y="159" width="375" height="44"/>
@@ -1329,7 +1326,7 @@
                             </tableViewSection>
                             <tableViewSection id="bhh-yI-cha">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZUz-t2-rzk">
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZUz-t2-rzk">
                                         <rect key="frame" x="0.0" y="283" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZUz-t2-rzk" id="utm-lg-wHE">
@@ -1359,9 +1356,13 @@
                     </tableView>
                     <connections>
                         <outlet property="hospitalLabel" destination="gjM-gg-R5Q" id="oQA-wd-qmq"/>
+                        <outlet property="hospitalTitle" destination="kYy-LD-89h" id="fhO-So-ZCV"/>
                         <outlet property="macStringLabel" destination="9eO-ow-fsf" id="GSr-VI-EDx"/>
+                        <outlet property="macTitle" destination="tch-gY-jFZ" id="G6X-Hm-T9N"/>
                         <outlet property="serialNumLabel" destination="ZDa-OT-Rko" id="cSL-3a-GB9"/>
+                        <outlet property="serialNumTitle" destination="pGM-JQ-VHN" id="H0q-2C-qSL"/>
                         <outlet property="typeLabel" destination="p38-Sg-dfI" id="ICj-KI-6fb"/>
+                        <outlet property="typeTitle" destination="s5a-vc-iTI" id="KfF-24-zHY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhl-sz-NK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1767,11 +1768,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" fixedFrame="YES" image="ble" translatesAutoresizingMaskIntoConstraints="NO" id="0bx-CJ-3SZ">
-                                        <rect key="frame" x="116" y="52" width="40.5" height="40"/>
+                                        <rect key="frame" x="116" y="64" width="40.5" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="蓝牙通信" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6j0-oY-xcl">
-                                        <rect key="frame" x="8" y="40" width="154" height="21"/>
+                                        <rect key="frame" x="9" y="40" width="154" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1785,11 +1786,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="record" translatesAutoresizingMaskIntoConstraints="NO" id="w1D-aU-Iyd">
-                                        <rect key="frame" x="20" y="49" width="40" height="40"/>
+                                        <rect key="frame" x="20" y="64" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="治疗记录" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPQ-rr-Yaz">
-                                        <rect key="frame" x="20" y="39" width="136" height="21"/>
+                                        <rect key="frame" x="20" y="40" width="136" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1803,14 +1804,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="远程监控" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bah-Bt-3VE">
-                                        <rect key="frame" x="8" y="40" width="154" height="21"/>
+                                        <rect key="frame" x="9" y="40" width="154" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" fixedFrame="YES" image="wifi" translatesAutoresizingMaskIntoConstraints="NO" id="6nj-gs-zW6">
-                                        <rect key="frame" x="116.5" y="52" width="40.5" height="40"/>
+                                        <rect key="frame" x="115" y="64" width="40.5" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -1820,7 +1821,7 @@
                         <color key="backgroundColor" red="0.92477834219999999" green="0.95608597989999999" blue="0.99979680780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Ygy-Ag-mbh"/>
                     </view>
-                    <navigationItem key="navigationItem" title="便携负压" id="9lR-AD-WhT">
+                    <navigationItem key="navigationItem" id="9lR-AD-WhT">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="xNf-p2-t0Q">
                             <connections>
                                 <action selector="showMenu:" destination="gZb-eo-vmN" id="KQP-Ie-9ub"/>
@@ -2197,7 +2198,7 @@
             </objects>
             <point key="canvasLocation" x="2213.5999999999999" y="152.47376311844079"/>
         </scene>
-        <!--联系客服-->
+        <!--ContactUS Table View Controller-->
         <scene sceneID="RU2-SV-cyl">
             <objects>
                 <tableViewController storyboardIdentifier="ContactUSTableViewController" id="yGh-ec-rwJ" customClass="ContactUSTableViewController" sceneMemberID="viewController">
@@ -2282,7 +2283,11 @@
                             <outlet property="delegate" destination="yGh-ec-rwJ" id="qsk-WE-d6b"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="联系客服" id="ODS-Aw-vk3"/>
+                    <navigationItem key="navigationItem" id="ODS-Aw-vk3"/>
+                    <connections>
+                        <outlet property="mailBoxTitle" destination="PVf-36-hMV" id="uv4-ic-fAy"/>
+                        <outlet property="phoneTitle" destination="6Di-A3-Bok" id="iCm-o3-Eik"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nzk-PD-wyB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2754,7 +2759,7 @@
             </objects>
             <point key="canvasLocation" x="8553" y="185"/>
         </scene>
-        <!--个人信息-->
+        <!--Personal Infomation View Controller-->
         <scene sceneID="xhO-j0-MLu">
             <objects>
                 <tableViewController storyboardIdentifier="PersonalInfomationViewController" id="SiQ-d1-s2m" customClass="PersonalInfomationViewController" sceneMemberID="viewController">
@@ -2773,7 +2778,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" tag="1" contentMode="left" text="头像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHA-1V-q4O">
-                                                    <rect key="frame" x="20" y="34" width="38" height="21"/>
+                                                    <rect key="frame" x="20" y="34" width="35" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2790,10 +2795,9 @@
                                                 <constraint firstItem="XHA-1V-q4O" firstAttribute="top" secondItem="6hZ-Aw-GuM" secondAttribute="top" constant="34" id="5yU-yy-weG"/>
                                                 <constraint firstItem="XTf-pe-mnJ" firstAttribute="top" secondItem="6hZ-Aw-GuM" secondAttribute="top" constant="16" id="FKI-n0-dEN"/>
                                                 <constraint firstAttribute="bottom" secondItem="XTf-pe-mnJ" secondAttribute="bottom" constant="15.5" id="HKw-kh-dnB"/>
+                                                <constraint firstItem="XTf-pe-mnJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XHA-1V-q4O" secondAttribute="trailing" constant="8" id="R2k-M1-0If"/>
                                                 <constraint firstAttribute="trailing" secondItem="XTf-pe-mnJ" secondAttribute="trailing" constant="7" id="eBN-v0-CLo"/>
-                                                <constraint firstItem="XTf-pe-mnJ" firstAttribute="leading" secondItem="XHA-1V-q4O" secondAttribute="trailing" constant="220" id="lA2-cx-WKM"/>
                                                 <constraint firstItem="XTf-pe-mnJ" firstAttribute="centerY" secondItem="6hZ-Aw-GuM" secondAttribute="centerY" id="lDW-GA-dgA"/>
-                                                <constraint firstItem="XHA-1V-q4O" firstAttribute="centerY" relation="greaterThanOrEqual" secondItem="6hZ-Aw-GuM" secondAttribute="centerY" id="nob-mh-BMF"/>
                                                 <constraint firstItem="XHA-1V-q4O" firstAttribute="leading" secondItem="6hZ-Aw-GuM" secondAttribute="leading" constant="20" symbolic="YES" id="tSZ-xD-Gxg"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -2954,9 +2958,15 @@
                             <outlet property="delegate" destination="SiQ-d1-s2m" id="Y4d-z8-8sW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="个人信息" id="sDl-HL-YTq"/>
+                    <navigationItem key="navigationItem" id="sDl-HL-YTq"/>
                     <connections>
+                        <outlet property="addressTitle" destination="KzL-iK-q8X" id="hgf-jb-7vP"/>
+                        <outlet property="ageTitle" destination="ltO-eO-fJb" id="dDC-OS-qR7"/>
+                        <outlet property="genderTitle" destination="cca-a4-gdz" id="MZR-Xd-rQi"/>
+                        <outlet property="headImageTitle" destination="XHA-1V-q4O" id="t6p-mh-3vu"/>
                         <outlet property="headImageView" destination="XTf-pe-mnJ" id="84I-hm-luc"/>
+                        <outlet property="nameTitle" destination="0rf-Z3-KCB" id="DYB-f6-uO1"/>
+                        <outlet property="phoneNumTitle" destination="kb2-b9-n22" id="BIK-co-x5e"/>
                         <outlet property="treatAreaLabel" destination="SR8-Cs-uOJ" id="2ed-ZC-KBN"/>
                         <outletCollection property="cells" destination="Mwe-rg-kvs" id="H4E-vD-jOG"/>
                         <outletCollection property="cells" destination="RJl-79-LvV" id="9RT-yF-EBE"/>
@@ -2972,7 +2982,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D16-XX-cjK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3049" y="955"/>
+            <point key="canvasLocation" x="3048.8000000000002" y="954.87256371814101"/>
         </scene>
         <!--Phonenum View Controller-->
         <scene sceneID="EBm-eS-a61">
@@ -2987,7 +2997,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grW-cl-l33">
-                                        <rect key="frame" x="19" y="14" width="52" height="21"/>
+                                        <rect key="frame" x="19" y="14" width="161" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3024,6 +3034,7 @@
                     </view>
                     <connections>
                         <outlet property="changePhoneNumberButton" destination="204-Th-F7m" id="bfr-AR-sdd"/>
+                        <outlet property="phoneNumTitle" destination="grW-cl-l33" id="rxt-c0-1GG"/>
                         <outlet property="phoneNumberLabel" destination="nbh-zS-Rvc" id="QiW-S0-ruD"/>
                     </connections>
                 </viewController>
@@ -3044,14 +3055,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="国家和地区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgq-Ml-w0W">
-                                        <rect key="frame" x="19" y="14" width="87" height="21"/>
+                                        <rect key="frame" x="19" y="14" width="212" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="中国大陆" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAZ-Ot-wk1">
-                                        <rect key="frame" x="288" y="14" width="70" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="中国大陆" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAZ-Ot-wk1">
+                                        <rect key="frame" x="250" y="14" width="108" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3102,8 +3113,10 @@
                         <viewLayoutGuide key="safeArea" id="4Fb-Ka-QB7"/>
                     </view>
                     <connections>
+                        <outlet property="StateValue" destination="mAZ-Ot-wk1" id="2VH-WM-32S"/>
                         <outlet property="changePhoneNumberButton" destination="2VJ-pw-6Eg" id="7q5-Og-iOu"/>
                         <outlet property="phoneNumberTextField" destination="Gip-Oj-BKt" id="861-KP-zdu"/>
+                        <outlet property="stateTitle" destination="rgq-Ml-w0W" id="3sw-No-u5a"/>
                         <segue destination="XW7-bd-vyq" kind="show" identifier="EnterVerificationCode" id="IsB-jZ-bty"/>
                     </connections>
                 </viewController>
@@ -3382,7 +3395,7 @@
             </objects>
             <point key="canvasLocation" x="4783" y="955"/>
         </scene>
-        <!--设置-->
+        <!--Setting View Controller-->
         <scene sceneID="4RP-Ko-cBx">
             <objects>
                 <tableViewController storyboardIdentifier="SettingViewController" id="T44-2u-0U6" customClass="SettingViewController" sceneMemberID="viewController">
@@ -3401,7 +3414,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="蓝牙通信" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rt-8D-sRW">
-                                                    <rect key="frame" x="22" y="12" width="66" height="20"/>
+                                                    <rect key="frame" x="22" y="12" width="337" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3419,7 +3432,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="远程通信" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXC-HA-8HG">
-                                                    <rect key="frame" x="23" y="11" width="66" height="20"/>
+                                                    <rect key="frame" x="23" y="11" width="336" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3498,17 +3511,22 @@
                             <outlet property="delegate" destination="T44-2u-0U6" id="j9m-AN-HcO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="设置" id="BLk-K6-th6">
+                    <navigationItem key="navigationItem" id="BLk-K6-th6">
                         <barButtonItem key="rightBarButtonItem" title="保存" id="IRS-T5-mfH">
                             <connections>
                                 <action selector="save:" destination="T44-2u-0U6" id="2zS-Qe-Xbf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="BLETitleLabel" destination="3rt-8D-sRW" id="oVz-7r-D0F"/>
+                        <outlet property="MQTTTitleLabel" destination="BXC-HA-8HG" id="6OP-Xr-Osr"/>
+                        <outlet property="logoutTitleLabel" destination="qbu-Tg-7Ne" id="ZLh-AD-AVA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ad-oc-9B6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6273" y="931"/>
+            <point key="canvasLocation" x="6272.8000000000002" y="930.58470764617698"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oAI-qP-Y0c">
@@ -3666,8 +3684,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86j-Ac-t9c">
                                 <rect key="frame" x="0.0" y="64" width="375" height="103"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我们已发送 验证码 短信到您的手机： " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-f1-qrf">
-                                        <rect key="frame" x="77" y="26" width="237" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我们已发送 验证码 短信到您的手机： " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-f1-qrf">
+                                        <rect key="frame" x="8" y="26" width="359" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3703,8 +3721,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4XH-bs-zGl">
                                 <rect key="frame" x="0.0" y="260" width="375" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="收不到验证码短信？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpJ-Id-qjY">
-                                        <rect key="frame" x="71" y="25" width="129" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="收不到验证码短信？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpJ-Id-qjY">
+                                        <rect key="frame" x="8" y="25" width="192" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3722,7 +3740,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="收短信大概需要30s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBy-PK-s3Z">
-                                        <rect key="frame" x="93" y="55" width="202" height="17"/>
+                                        <rect key="frame" x="8" y="55" width="359" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3750,9 +3768,11 @@
                         <viewLayoutGuide key="safeArea" id="C0n-H7-0zr"/>
                     </view>
                     <connections>
+                        <outlet property="cannotGetCodeTitle" destination="bpJ-Id-qjY" id="wEW-Q6-tc8"/>
                         <outlet property="countDownLabel" destination="nBy-PK-s3Z" id="36w-Mg-Re7"/>
                         <outlet property="phoneNumberLabel" destination="bQe-ia-HMc" id="fgO-KX-mqL"/>
                         <outlet property="regainButton" destination="LBy-26-gbQ" id="CIa-gQ-h2K"/>
+                        <outlet property="sendMessageTitle" destination="hUJ-f1-qrf" id="NPf-Du-bUW"/>
                         <outlet property="verCodeView" destination="zZ6-9l-E0g" id="b8J-4A-tCD"/>
                         <segue destination="jXZ-Dp-I15" kind="show" identifier="CheckCode" id="3Ql-Gc-ekY"/>
                     </connections>
@@ -3792,6 +3812,7 @@
                         <viewLayoutGuide key="safeArea" id="rq6-ea-zxD"/>
                     </view>
                     <connections>
+                        <outlet property="checkTitle" destination="tBc-Y1-eA5" id="s8I-n5-cBK"/>
                         <segue destination="4Tm-rB-29F" kind="show" identifier="ShowCheckCodeResult" id="cFN-i6-dS2"/>
                     </connections>
                 </viewController>
@@ -3812,7 +3833,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="已经过安全检测，更换成功" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAy-C6-ujZ">
-                                        <rect key="frame" x="108" y="78" width="160" height="16"/>
+                                        <rect key="frame" x="8" y="78" width="359" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3845,13 +3866,14 @@
                         <viewLayoutGuide key="safeArea" id="gCd-0b-HJr"/>
                     </view>
                     <connections>
+                        <outlet property="okButton" destination="IJG-1v-a2n" id="MNn-0x-APe"/>
                         <outlet property="resultImageView" destination="sfS-WJ-G6K" id="Srk-6E-KZO"/>
                         <outlet property="resultLabel" destination="AAy-C6-ujZ" id="Q69-c8-mOa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBr-v1-tJp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6218" y="1701"/>
+            <point key="canvasLocation" x="6216.8000000000002" y="1700.5997001499252"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="488-h5-Eb8">
@@ -4678,7 +4700,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4NG-yu-p7I"/>
-        <segue reference="a0k-zp-eQG"/>
+        <segue reference="x7Q-io-PMa"/>
         <segue reference="03c-Sn-NlB"/>
         <segue reference="KQr-yb-sI2"/>
     </inferredMetricsTieBreakers>

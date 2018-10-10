@@ -41,10 +41,25 @@
     //判断身份显示不同的界面
     if ([identity isEqualToString:@"patient"]) {
         [self.headerView.myInformationButton addTarget:self action:@selector(buttonClickListener:) forControlEvents:UIControlEventTouchUpInside];
-        self.functionArray = @[@"",@"设置",@"我的设备",@"联系我们",@"帮助",@"",@"",@"",@"退出登录"];
+        
+        self.functionArray = @[
+                               @"",
+                               BEGetStringWithKeyFromTable(@"设置", @"P06A"),
+                               BEGetStringWithKeyFromTable(@"我的设备", @"P06A"),
+                               BEGetStringWithKeyFromTable(@"联系我们", @"P06A"),
+                               BEGetStringWithKeyFromTable(@"帮助", @"P06A"),
+                               @"",@"",@"",
+                               BEGetStringWithKeyFromTable(@"退出登录", @"P06A")
+                               ];
         self.imageNameArray = @[@"",@"setting",@"star",@"service",@"help",@"",@"",@"",@""];
     }else{
-        self.functionArray = @[@"",@"在线升级",@"修改密码",@"",@"",@"",@"",@"",@"退出登录"];
+        self.functionArray = @[
+                               @"",
+                               BEGetStringWithKeyFromTable(@"在线升级", @"P06A"),
+                               BEGetStringWithKeyFromTable(@"修改密码", @"P06A"),
+                               @"",@"",@"",@"",@"",
+                               BEGetStringWithKeyFromTable(@"退出登录", @"P06A")
+                               ];
         self.imageNameArray = @[@"",@"setting",@"help",@"",@"",@"",@"",@"",@""];
     }
 
@@ -77,7 +92,7 @@
     }
     
     if (indexPath.row==8){
-        textLabel.text = @"退出登录";
+        textLabel.text = BEGetStringWithKeyFromTable(@"退出登录", @"P06A");
         [textLabel setTextColor:UIColorFromHex(0x65B8F3)];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
@@ -90,9 +105,9 @@
     __block UIViewController *showVC;
     if ([identity isEqualToString:@"patient"]) {
 
-        NSInteger settingIndex = [self.functionArray indexOfObject:@"设置"];
-        NSInteger myDeviceIndex = [self.functionArray indexOfObject:@"我的设备"];
-        NSInteger contactUSIndex = [self.functionArray indexOfObject:@"联系我们"];
+        NSInteger settingIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"设置", @"P06A")];
+        NSInteger myDeviceIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"我的设备", @"P06A")];
+        NSInteger contactUSIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"联系我们", @"P06A")];
         if (indexPath.row == myDeviceIndex) {
             
             MyDeviceTableViewController *myDeviceVC = (MyDeviceTableViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"MyDeviceViewController"];
@@ -122,12 +137,12 @@
     }else{
         //用服
         
-        NSInteger upgradeIndex = [self.functionArray indexOfObject:@"在线升级"];
-        NSInteger changePWDIndex = [self.functionArray indexOfObject:@"修改密码"];
+        NSInteger upgradeIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"在线升级", @"P06A")];
+        NSInteger changePWDIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"修改密码", @"P06A")];
         if (indexPath.row == upgradeIndex) {
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
             if (appDelegate.isBLEPoweredOff) {
-                [SVProgressHUD showErrorWithStatus:@"未打开蓝牙无法升级设备"];
+                [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"未打开蓝牙无法升级设备", @"P06A")];
             }else{
                 UpgradeOnlineViewController *upgradeVC = (UpgradeOnlineViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"UpgradeOnlineViewController"];
                 showVC = upgradeVC;
@@ -142,10 +157,10 @@
  
     if (indexPath.row==8) {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
-                                                                       message:@"退出后不会删除任何历史数据，下次登录依然可以使用本账号。"
+                                                                       message:BEGetStringWithKeyFromTable(@"退出后不会删除任何历史数据，下次登录仍然可以使用本账号。", @"P06A")
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
         
-        UIAlertAction* logoutAction = [UIAlertAction actionWithTitle:@"立即退出"
+        UIAlertAction* logoutAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"退出登录", @"P06A")
                                                                style:UIAlertActionStyleDestructive
                                                              handler:^(UIAlertAction * _Nonnull action) {
                                                                  [UserDefault setBool:NO forKey:@"IsLogined"];
@@ -172,7 +187,7 @@
                                                                  
                                                                  
                                                              }];
-        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消"
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A")
                                                                 style:UIAlertActionStyleCancel
                                                               handler:^(UIAlertAction * action) {}];
         
