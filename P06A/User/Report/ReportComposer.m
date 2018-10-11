@@ -17,8 +17,13 @@
 @implementation ReportComposer
 
 -(NSString *)renderReportWith:(NSDictionary *)dic{
-    
-    NSString *pathToReportTemplate = [[NSBundle mainBundle]pathForResource:@"report" ofType:@"html"];
+
+    NSString *pathToReportTemplate = [[NSString alloc]init];
+    if ([[[BELanguageTool sharedInstance]currentLanguage]isEqualToString:@"en"]) {
+        pathToReportTemplate = [[NSBundle mainBundle]pathForResource:@"report(en)" ofType:@"html"];
+    }else{
+        pathToReportTemplate = [[NSBundle mainBundle]pathForResource:@"report" ofType:@"html"];
+    }
     NSString *HTMLContent = [NSString stringWithContentsOfFile:pathToReportTemplate
                                                       encoding:NSUTF8StringEncoding
                                                          error:nil];
@@ -27,19 +32,19 @@
     switch (mode) {
         case DynamicMode:
         {
-            modeString = @"动态模式";
+            modeString = BEGetStringWithKeyFromTable(@"MQTT动态模式", @"P06A");
             //生成一行显示时间设置
             NSString *timeSetHtmlString = [NSString stringWithFormat:@"<tr><th>上升时间</th><th>下降时间</th></tr><tr><td>%@分钟</td><td>%@分钟</td></tr>",dic[@"uptime"],dic[@"downtime"]];
             HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER#" withString:timeSetHtmlString];
             break;
         }
         case KeepMode:
-            modeString = @"连续模式";
+            modeString = BEGetStringWithKeyFromTable(@"MQTT连续模式", @"P06A");
             HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER#" withString:@""];
             break;
         case IntervalMode:
         {
-            modeString = @"间隔模式";
+            modeString = BEGetStringWithKeyFromTable(@"MQTT间隔模式", @"P06A");
             //生成一行显示时间设置
             NSString *timeSetHtmlString = [NSString stringWithFormat:@"<tr><th>工作时间</th><th>间歇时间</th></tr><tr><td>%@分钟</td><td>%@分钟</td></tr>",dic[@"worktime"],dic[@"resttime"]];
             HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER#" withString:timeSetHtmlString];
@@ -50,7 +55,7 @@
     }
 
     NSString *pressureString = [NSString stringWithFormat:@"-%@mmHg",[dic objectForKey:@"press"]];
-    NSString *minutesString = [NSString stringWithFormat:@"%@分钟",[dic objectForKey:@"duration"]];
+    NSString *minutesString = [NSString stringWithFormat:@"%@%@",[dic objectForKey:@"duration"],BEGetStringWithKeyFromTable(@"分钟", @"P06A")];
     NSString *timeStamp = [dic objectForKey:@"time"];
     NSString *dateString = [self stringFromTimeIntervalString:timeStamp dateFormat:@"yyyy/MM/dd HH:mm"];
     NSData *imageData = [dic objectForKey:@"imageData"];
@@ -67,7 +72,7 @@
     if ([alertArray count] > 0) {
         HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#AlertMessage#" withString:[self alertStringHTML:alertArray]];
     }else{
-        HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#AlertMessage#" withString:@"无"];
+        HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#AlertMessage#" withString:BEGetStringWithKeyFromTable(@"无", @"P06A")];
     }
 
     //患者数据
@@ -76,11 +81,11 @@
     NSString *gender = [UserDefault objectForKey:@"USER_GENDER"];
     NSString *age = [UserDefault objectForKey:@"AGE"];
     
-    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#TREAT_AREA#" withString:treatArea == nil?@"未知":treatArea];
+    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#TREAT_AREA#" withString:treatArea == nil?BEGetStringWithKeyFromTable(@"未知", @"P06A"):treatArea];
     
     HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#NAME#" withString:name];
     
-    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#GENDER#" withString:gender];
+    HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#GENDER#" withString:BEGetStringWithKeyFromTable(gender, @"P06A")];
     
     HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#AGE#" withString:age];
     

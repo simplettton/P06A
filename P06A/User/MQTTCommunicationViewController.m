@@ -71,7 +71,6 @@ NSString *const MQTTPassWord = @"password";
     
     //发布数据主题
     NSString *cpuid = [UserDefault objectForKey:@"Cpuid"];
-//    self.sendTopic = @"P06A/todev/1b00080002434d5632303320e906f405";
     self.sendTopic = [NSString stringWithFormat:@"P06A/todev/%@",cpuid];
     
     [self initAll];
@@ -89,7 +88,7 @@ NSString *const MQTTPassWord = @"password";
     if (![self.isConnectedString isEqualToString:@"YES"]) {
         [SVProgressHUD setMinimumSize:CGSizeZero];
         [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
-        [SVProgressHUD showInfoWithStatus:@"下位机无响应"];
+        [SVProgressHUD showInfoWithStatus:BEGetStringWithKeyFromTable(@"设备无响应", @"P06A")];
     }
 }
 
@@ -109,6 +108,14 @@ NSString *const MQTTPassWord = @"password";
     //status
     self.statusButton.layer.cornerRadius = 15;
     self.pressureView.layer.cornerRadius = 15;
+    
+    self.currentPressureLabel.text = [NSString stringWithFormat:@"%@: 0mmHg",BEGetStringWithKeyFromTable(@"当前治疗压力", @"P06A")];
+    self.statusLabel.text = [NSString stringWithFormat:@"%@: %@",BEGetStringWithKeyFromTable(@"设备状态",@"P06A"),BEGetStringWithKeyFromTable(@"未连接", @"P06A")];
+    self.modeLabel.text = BEGetStringWithKeyFromTable(@"治疗模式", @"P06A");
+    self.pressureSetLabel.text = [NSString stringWithFormat:@"%@: 0mmhg",BEGetStringWithKeyFromTable(@"压力设置", @"P06A")];
+    self.upTimeLabel.text = [NSString stringWithFormat:@"%@: 0min",BEGetStringWithKeyFromTable(@"上升时间", @"P06A")];
+    self.downTimeLabel.text = [NSString stringWithFormat:@"%@: 0min",BEGetStringWithKeyFromTable(@"下降时间", @"P06A")];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,7 +144,7 @@ NSString *const MQTTPassWord = @"password";
 
         case MQTTSessionManagerStateClosed:
             NSLog(@"----------------------------------------closed");
-            [SVProgressHUD showErrorWithStatus:@"断开连接"];
+            [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"断开连接", @"P06A")];
             [self closeRealTime];
             [self closeTimer];
             
@@ -152,7 +159,7 @@ NSString *const MQTTPassWord = @"password";
             NSLog(@"-------------------------------------connected");
             
             [SVProgressHUD setMinimumSize:CGSizeMake(100, 40)];
-            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"设备连接成功"]];
+            [SVProgressHUD showSuccessWithStatus:BEGetStringWithKeyFromTable(@"已成功连接服务器", @"P06A")];
             
             //询问设备状态包
             [self sendDataWithCmdid:0x90 dataString:nil];
@@ -186,7 +193,7 @@ NSString *const MQTTPassWord = @"password";
     
     AAChartModel *chartModel= AAObject(AAChartModel)
     .chartTypeSet(AAChartTypeSpline)//设置图表的类型(这里以设置的为柱状图为例)
-    .titleSet(@"实时治疗压力")//设置图表标题
+    .titleSet(BEGetStringWithKeyFromTable(@"实时治疗压力", @"P06A"))//设置图表标题
     .yAxisTitleSet(@"-mmHg")//设置图表 y 轴的单位
     .xAxisVisibleSet(NO)
     .yAxisTickPositionsSet(@[
@@ -194,7 +201,7 @@ NSString *const MQTTPassWord = @"password";
                              ])
     .seriesSet(@[
                  AAObject(AASeriesElement)
-                 .nameSet(@"pressure")
+                 .nameSet(BEGetStringWithKeyFromTable(@"压力", @"P06A"))
                  .dataSet(self.array)
                  ]);
     
@@ -378,12 +385,12 @@ NSString *const MQTTPassWord = @"password";
                 Byte alertIndex = dataByte[1];
                 
                 switch (alertIndex) {
-                    case 0x00:  alertMessege = @"无异常报警";    break;
-                    case 0x01:  alertMessege = @"设备废液瓶满";  break;
-                    case 0x02:  alertMessege = @"设备压力过低";  break;
-                    case 0x03:  alertMessege = @"设备压力过高";  break;
-                    case 0x04:  alertMessege = @"设备电量异常";  break;
-                    case 0x05:  alertMessege = @"设备使用到期";  break;
+                    case 0x00:  alertMessege = BEGetStringWithKeyFromTable(@"无异常报警",@"P06A");    break;
+                    case 0x01:  alertMessege = BEGetStringWithKeyFromTable(@"设备废液瓶满",@"P06A");  break;
+                    case 0x02:  alertMessege = BEGetStringWithKeyFromTable(@"设备压力过低",@"P06A");  break;
+                    case 0x03:  alertMessege = BEGetStringWithKeyFromTable(@"设备压力过高",@"P06A");  break;
+                    case 0x04:  alertMessege = BEGetStringWithKeyFromTable(@"设备电量异常",@"P06A");  break;
+                    case 0x05:  alertMessege = BEGetStringWithKeyFromTable(@"设备使用到期",@"P06A");  break;
                     default:
                         break;
                 }
@@ -410,44 +417,44 @@ NSString *const MQTTPassWord = @"password";
     NSString *statusString;
     switch (self.runningState) {
         case 0x00:
-            statusString = [NSString stringWithFormat:@"空闲"];
+            statusString = BEGetStringWithKeyFromTable(@"空闲", @"P06A");
             self.currentPressure = 0;
             self.treatmentTime = 0;
 //            self.currentPressureLabel.text = [NSString stringWithFormat:@"当前治疗压力:0mmHg"];
 //            self.timeLabel.text = @"00:00";
             break;
         case 0X01:
-            statusString = [NSString stringWithFormat:@"治疗中"];
+            statusString = BEGetStringWithKeyFromTable(@"治疗中", @"P06A");
             break;
         case 0x02:
-            statusString = [NSString stringWithFormat:@"暂停"];
+            statusString = BEGetStringWithKeyFromTable(@"暂停", @"P06A");
         default:
             break;
     }
-    self.statusLabel.text = [NSString stringWithFormat:@"设备状态:%@",statusString];
+    self.statusLabel.text = [NSString stringWithFormat:@"%@: %@",BEGetStringWithKeyFromTable(@"设备状态", @"P06A"),statusString];
     
     //治疗模式
     
     switch (self.treatMode) {
         case 0:
             
-            self.modeLabel.text = @"连续模式";
+            self.modeLabel.text = BEGetStringWithKeyFromTable(@"MQTT连续模式", @"P06A");
             self.upTimeLabel.text = @"";
             self.downTimeLabel.text = @"";
             
             break;
         case 1:
             
-            self.modeLabel.text = @"间隔模式";
-            self.upTimeLabel.text = [NSString stringWithFormat:@"工作时间:%ldmin",self.workTime];
-            self.downTimeLabel.text = [NSString stringWithFormat:@"休息时间:%ldmin",self.restTime];
+            self.modeLabel.text = BEGetStringWithKeyFromTable(@"MQTT间隔模式", @"P06A");
+            self.upTimeLabel.text = [NSString stringWithFormat:@"%@: %ldmin",BEGetStringWithKeyFromTable(@"工作时间", @"P06A"),self.workTime];
+            self.downTimeLabel.text = [NSString stringWithFormat:@"%@: %ldmin",BEGetStringWithKeyFromTable(@"间歇时间", @"P06A"),self.restTime];
             
             break;
         case 2:
             
-            self.modeLabel.text = @"动态模式";
-            self.upTimeLabel.text = [NSString stringWithFormat:@"上升时间:%ldmin",self.upTime];
-            self.downTimeLabel.text = [NSString stringWithFormat:@"下降时间:%ldmin",self.downTime];
+            self.modeLabel.text = BEGetStringWithKeyFromTable(@"MQTT动态模式", @"P06A");
+            self.upTimeLabel.text = [NSString stringWithFormat:@"%@: %ldmin",BEGetStringWithKeyFromTable(@"上升时间", @"P06A"),self.upTime];
+            self.downTimeLabel.text = [NSString stringWithFormat:@"%@: %ldmin",BEGetStringWithKeyFromTable(@"下降时间", @"P06A"),self.downTime];
             break;
         default:
             break;
@@ -491,11 +498,12 @@ NSString *const MQTTPassWord = @"password";
     
     
     //压力设置
-    self.pressureSetLabel.text = [NSString stringWithFormat:@"压力设置:-%ldmmHg",(long)self.pressureSet];
+    self.pressureSetLabel.text = [NSString stringWithFormat:@"%@: -%ldmmHg",BEGetStringWithKeyFromTable(@"压力设置", @"P06A"),(long)self.pressureSet];
     
     //实时压力值
-    NSString *displayFormat = self.currentPressure == 0 ? @"当前治疗压力:%ldmmHg" :@"当前治疗压力:-%ldmmHg";
-    self.currentPressureLabel.text = [NSString stringWithFormat:displayFormat,self.currentPressure];
+    NSString *currentPressureString = BEGetStringWithKeyFromTable(@"当前治疗压力", @"P06A");
+    NSString *displayFormat = self.currentPressure == 0 ? @"%@: %ldmmHg" :@"%@: -%ldmmHg";
+    self.currentPressureLabel.text = [NSString stringWithFormat:displayFormat,currentPressureString,self.currentPressure];
     
     //治疗经过时间
     NSInteger hour = self.treatmentTime / 3600;

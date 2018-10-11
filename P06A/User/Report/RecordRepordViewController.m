@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.title = @"治疗报告";
+    self.title = BEGetStringWithKeyFromTable(@"治疗报告", @"P06A");
 
     
 //    shareButton
@@ -80,7 +80,7 @@
 
             float currentProgress = (float)receivedSize/(float)expectedSize;
 
-            [SVProgressHUD showProgress:currentProgress status:@"正在加载中..."];
+            [SVProgressHUD showProgress:currentProgress status:BEGetStringWithKeyFromTable(@"正在加载中...", @"P06A")];
 
         } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
 
@@ -93,7 +93,7 @@
                 self.image = image;
                 [self presentImage:image];
             }else{
-                [SVProgressHUD showErrorWithStatus:@"图片格式错误"];
+                [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"图片格式错误", @"P06A")];
             }
         }];
     }
@@ -195,7 +195,7 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     //按钮：拍照，类型：UIAlertActionStyleDefault
-    [alert addAction:[UIAlertAction actionWithTitle:@"打开相机"
+    [alert addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"拍照", @"P06A")
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action){
                                                 /**
@@ -211,7 +211,7 @@
                                             }]];
     
     //按钮：从相册选择，类型：UIAlertActionStyleDefault
-    [alert addAction:[UIAlertAction actionWithTitle:@"打开相册"
+    [alert addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"从相册选择", @"P06A")
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 UIImagePickerController *pickerImage = [[UIImagePickerController alloc]init];
@@ -224,7 +224,7 @@
     
     
     //按钮：取消，类型：UIAlertActionStyleCancel
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -256,7 +256,7 @@
         [[NetWorkTool sharedNetWorkTool]POST:api
                                        image:self.image success:^(HttpResponse *responseObject) {
                                            if ([responseObject.result intValue] == 1) {
-                                               [SVProgressHUD showSuccessWithStatus:@"治疗照片已保存"];
+                                               [SVProgressHUD showSuccessWithStatus:BEGetStringWithKeyFromTable(@"治疗照片已保存", @"P06A")];
                                            }else{
                                                [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                            }

@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *verifyButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *loginTitle;
+@property (weak, nonatomic) IBOutlet UIButton *switchIdentityButton;
 @property (strong ,nonatomic)NSString *codeId;
 
 
@@ -41,6 +43,16 @@
 }
 
 -(void)initUI {
+
+    //界面标题
+    self.phoneTextField.placeholder = BEGetStringWithKeyFromTable(@"请输入手机号", @"P06A");
+    self.verificationCodeTextField.placeholder = BEGetStringWithKeyFromTable(@"请输入验证码", @"P06A");
+    self.loginTitle.text = BEGetStringWithKeyFromTable(@"手机号登录", @"P06A");
+    [self.loginButton setTitle:BEGetStringWithKeyFromTable(@"登录", @"P06A") forState:UIControlStateNormal];
+    [self.switchIdentityButton setTitle:BEGetStringWithKeyFromTable(@"切换身份？", @"P06A") forState:UIControlStateNormal];
+    [self.verifyButton setTitle:BEGetStringWithKeyFromTable(@"发送验证码", @"P06A") forState:UIControlStateNormal];
+    self.verifyButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
     [self setBorderWithView:self.phoneNumberView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xeeeeee) borderWidth:1];
     [self setBorderWithView:self.verificationCodeView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xeeeeee) borderWidth:1];
     self.loginButton.layer.cornerRadius = 5;
@@ -96,7 +108,7 @@
     dispatch_source_set_event_handler(_timer, ^{
         int interval = [endTime timeIntervalSinceNow];
         if (interval > 0) {     //更新倒计时
-            NSString *timeStr = [NSString stringWithFormat:@"%d秒后重发", interval];
+            NSString *timeStr = [NSString stringWithFormat:BEGetStringWithKeyFromTable(@"%d秒后重发", @"P06A"), interval];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.verifyButton setTitle:timeStr forState:UIControlStateNormal];
                 [self.verifyButton setTitleColor:UIColorFromHex(0X979797) forState:UIControlStateNormal];
@@ -106,7 +118,7 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置按钮的样式
-                [self.verifyButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+                [self.verifyButton setTitle:BEGetStringWithKeyFromTable(@"发送验证码", @"P06A") forState:UIControlStateNormal];
                 [self.verifyButton setTitleColor:UIColorFromHex(0XFB8557) forState:UIControlStateNormal];
                 self.verifyButton.userInteractionEnabled = YES;
             });
@@ -132,13 +144,13 @@
                                      }
                                      failure:nil];
     }else{
-        [SVProgressHUD showErrorWithStatus:@"请输入正确的手机号"];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"请输入正确的手机号", @"P06A")];
     }
 
 }
 -(void)showLoginingIndicator{
     
-    [SVProgressHUD showWithStatus:@"正在登录中..."];
+    [SVProgressHUD showWithStatus:BEGetStringWithKeyFromTable(@"正在登录中...", @"P06A")];
 }
 - (IBAction)login:(id)sender {
     [self.phoneTextField resignFirstResponder];
@@ -147,13 +159,13 @@
     NSString *code = self.verificationCodeTextField.text;
 
     if(self.phoneTextField.text.length == 0){
-        [SVProgressHUD showErrorWithStatus:@"手机号不能为空"];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"手机号不能为空", @"P06A")];
         return;
     }else if(self.codeId == nil){
-        [SVProgressHUD showErrorWithStatus:@"请获取验证码"];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"请获取验证码", @"P06A")];
         return;
     }else if(code.length != 6){
-        [SVProgressHUD showErrorWithStatus:@"验证码为6位"];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"验证码为6位", @"P06A")];
         return;
     }
     [self showLoginingIndicator];

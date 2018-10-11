@@ -133,7 +133,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     self.rightBarButtonItemWidth = CGRectGetWidth(rightBarButtonItem.frame);
 
     [rightBarButtonItem setTranslatesAutoresizingMaskIntoConstraints:NO];
-
+//    [rightBarButtonItem.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self.rightBarButtonContainerView addSubview:rightBarButtonItem];
     [self.rightBarButtonContainerView jsq_pinAllEdgesOfSubview:rightBarButtonItem];
     [self setNeedsUpdateConstraints];

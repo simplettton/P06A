@@ -8,13 +8,12 @@
 
 #import "AlertView.h"
 @interface AlertView()
-
-
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
 @end
 @implementation AlertView
 -(void)awakeFromNib{
     [super awakeFromNib];
-
+    [self.okButton setTitle:BEGetStringWithKeyFromTable(@"确认", @"P06A") forState:UIControlStateNormal];
     self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.3];
 }
 +(void)showAboveIn:(UIViewController *)controller withData:(NSString *)data{
@@ -22,6 +21,7 @@
     view.frame = CGRectMake(0, 0, kScreenW, kScreenH);
     view.alertMessage = data;
     view.alertMessageLabel.text = data;
+    view.alertMessageLabel.adjustsFontSizeToFitWidth = YES;
     [controller.view addSubview:view];
     view.backgroundView.alpha = 0;
     [UIView animateWithDuration:0.3 delay:0.1 usingSpringWithDamping:1 initialSpringVelocity:10 options:UIViewAnimationOptionCurveLinear animations:^{

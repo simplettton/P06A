@@ -83,3 +83,113 @@
 "已经过安全检测，更换成功"="Safety testing is succeeded";
 "未通过安全检测，请稍后重试"="Safety testing is failed";
 
+
+//PhoneLoginViewController
+"登录"="Log In";
+"手机号登录"="Log In Via SMS Verification Code";
+"密码登录"="Log In Via Password";
+"请输入手机号"="Enter mobile phone number";
+"请输入验证码"="Enter verification code";
+"请输入账号"="Enter the account number";
+"请输入密码"="Enter Password";
+"切换身份？"="Change Identity?";
+
+"%d秒后重发"="Resend after %d s";
+"发送验证码"="Send";
+"请输入正确的手机号"="Please enter the correct phone number";
+"手机号不能为空"="The phone number cannot be empty";
+"请获取验证码"="Please get the verification code";
+"验证码为6位"="The verification code is 6 digits";
+
+//PasswordLoginViewController
+"密码不多于20位"="The password is no more than 20 digits";
+"密码不小于6位"="The password is not less than 6 digits";
+"用户名或密码不能为空"="The username or password cannot be empty";
+"正在登录中..."="Please Wait…";
+
+//ChooseIdentityViewController
+"用服/助理"="Assistant";
+"患者/家属"="Patient";
+"点击选择>"="Click On>";
+"下一步>"="Next Step>";
+
+//BluetoothCommuticationViewController
+"开始"="Start";
+"继续"="Continue";
+"暂停"="Pause";
+"结束"="Stop";
+"解锁"="Unlock";
+"锁屏"="Lock";
+//"连续模式"="Continunous";
+"连续模式"="  Keep  ";
+"间隔模式"="Interval";
+"动态模式"="Dynamic";
+
+"当前没有配对设备，请前往设置"="There is no matching device,please go to the Settings";
+"正在连接设备..."="Connecting device…";
+"设备无响应"="The device is not responding";
+"设备连接成功"="The device is successfully connected";
+"设备连接失败"="Device connection failed";
+
+"无异常报警"="NO abnormal alarm";
+"设备废液瓶满"="The waste liquid bottle is full";
+"设备压力过低"="The device pressure is too low";
+"设备压力过高"="The device pressure is too high";
+"设备电量异常"="Abnormal power";
+"设备使用到期"="The device has expired";
+"治疗压力"="Pressure";
+
+
+//ParameterView
+"压力设置"="Pressure";
+"工作时间"="WorkTime";
+"间歇时间"="IntervalTime";
+"上升时间"="UpTime";
+"下降时间"="DownTime";
+
+//MQTTCommunicationViewController
+"MQTT连续模式"="Keep Mode";
+"MQTT间隔模式"="Interval Mode";
+"MQTT动态模式"="Dynamic Mode";
+"MQTT压力设置"="Pressure Set";
+"断开连接"="the device is disconnected";
+"实时治疗压力"="Real-time treatment pressure";
+"当前治疗压力"="Current Pressure";
+"压力"="Pressure";
+
+"空闲"="Idel";
+"治疗中"="Under treatment";
+"暂停"="Pause";
+"设备状态"="Device State";
+"未连接"="Unconneted";
+"治疗模式"="Treat Mode";
+"已成功连接服务器"="The server has been successfully connected";
+
+
+//  ServerRecordViewController
+"你累计治疗时间"="You have treat for";
+"小时"="Hour";
+"完成（次）"="Finish(times)";
+"开始治疗日期"="Start Date";
+"最近治疗日期"="Latest Date";
+
+"治疗时间%@分钟"="Treat Time: %@min";
+
+//RecordRepordViewController
+"治疗报告"="Treatment Report";
+"正在加载中..."="Please wait…";
+"图片格式错误"="Image format error";
+"治疗照片已保存"="The photo has been saved";
+
+
+//ReportComposer
+"分钟"="min";
+"未知"="Unknown";
+"无"="none";
+
+
+//MessageViewController
+"留言列表"="Messages";
+"新信息"="New Message";
+"发送"="Send";
+

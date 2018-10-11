@@ -47,7 +47,13 @@
 + (UIButton *)defaultSendButtonItem
 {
     NSString *sendTitle = [NSBundle jsq_localizedStringForKey:@"send"];
-
+    //修改发送按钮send文字
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"LANGUAGESET"]isEqualToString:@"en"]) {
+        sendTitle = @"send";
+    }else{
+        sendTitle = @"发送";
+    }
+    
     UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [sendButton setTitle:sendTitle forState:UIControlStateNormal];
     [sendButton setTitleColor:[UIColor jsq_messageBubbleBlueColor] forState:UIControlStateNormal];

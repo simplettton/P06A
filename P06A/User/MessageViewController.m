@@ -26,13 +26,32 @@
     
     [super viewDidLoad];
     
-    self.title = @"评论列表";
+    self.title = BEGetStringWithKeyFromTable(@"留言列表", @"P06A");
+    
+//    self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
+    self.inputToolbar.contentView.textView.placeHolder = BEGetStringWithKeyFromTable(@"新信息", @"P06A");
+    self.inputToolbar.contentView.textView.accessibilityLabel = BEGetStringWithKeyFromTable(@"新信息", @"P06A");
+
+
+    
+//    [self.inputToolbar.contentView.rightBarButtonItem setTitle:BEGetStringWithKeyFromTable(@"发送", @"P06A") forState:UIControlStateNormal];
+//    self.inputToolbar.contentView.rightBarButtonItem.titleLabel.text = BEGetStringWithKeyFromTable(@"发送", @"P06A");
+    
+    //根据userdefault保存的地区设置dateFormatter
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"LANGUAGESET"]isEqualToString:@"en"]) {
+        NSLocale*usLocale=[[NSLocale alloc]initWithLocaleIdentifier:@"en_US"];
+        [[JSQMessagesTimestampFormatter sharedFormatter].dateFormatter setLocale:usLocale];
+    }else{
+        [[JSQMessagesTimestampFormatter sharedFormatter].dateFormatter setLocale:[NSLocale currentLocale]];
+    }
     
     self.senderId = kAvatarIdPatient;
     
     self.senderDisplayName = [UserDefault objectForKey:@"USER_NAME"];
     
     self.inputToolbar.contentView.textView.pasteDelegate = self;
+    
+
     
     //隐藏发送消息左边的列表
 //    self.inputToolbar.contentView.leftBarButtonItem.hidden = YES;

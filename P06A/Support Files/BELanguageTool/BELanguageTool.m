@@ -105,6 +105,6 @@ static BELanguageTool *sharedModel;
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate initRootViewController];
-    
+
 }
 @end

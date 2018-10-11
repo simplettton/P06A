@@ -180,7 +180,6 @@ JSQMessagesKeyboardControllerDelegate>
 
     self.inputToolbar.delegate = self;
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
-    NSString *test = [NSBundle jsq_localizedStringForKey:@"new_message"];
 
     self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
 

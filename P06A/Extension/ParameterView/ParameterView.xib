@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -267,11 +271,15 @@
             <connections>
                 <outlet property="backgroundView" destination="SSX-hH-4SO" id="wYT-ij-baz"/>
                 <outlet property="cancelButton" destination="Kpt-De-jH7" id="Hbt-4i-KDY"/>
+                <outlet property="dynamicModeButton" destination="NoL-E6-0AK" id="5Py-70-g3u"/>
                 <outlet property="firstTimeLabel" destination="61H-5A-HlS" id="eom-eL-RBa"/>
                 <outlet property="firstTimeStack" destination="boA-Ew-Gkd" id="WNa-m4-vxX"/>
                 <outlet property="firstTimeValueLabel" destination="eYE-TE-Guf" id="zYK-Uu-WNI"/>
+                <outlet property="intervalModeButton" destination="QG4-fQ-mVZ" id="CSS-RO-jfz"/>
+                <outlet property="keepModeButton" destination="LzU-IA-haS" id="010-rz-1lU"/>
                 <outlet property="modeView" destination="0GA-M1-Lki" id="Sgg-3S-3zb"/>
                 <outlet property="pressLabel" destination="CVb-xy-oGc" id="jP0-j1-m8a"/>
+                <outlet property="pressureSetLabel" destination="A1K-m1-Fbf" id="b65-NA-yDD"/>
                 <outlet property="saveButton" destination="Nqz-NE-w1v" id="XzG-Ha-DR5"/>
                 <outlet property="secondTimeLabel" destination="WJe-Rg-V7e" id="xhi-XP-Evz"/>
                 <outlet property="secondTimeStack" destination="CLp-0P-L2Z" id="C2n-IF-OsE"/>

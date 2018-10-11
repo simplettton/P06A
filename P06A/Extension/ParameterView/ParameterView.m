@@ -29,6 +29,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *firstTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pressureSetLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *firstTimeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondTimeValueLabel;
@@ -36,10 +37,24 @@
 @property (weak, nonatomic) IBOutlet UIStackView *firstTimeStack;
 @property (weak, nonatomic) IBOutlet UIStackView *secondTimeStack;
 
+@property (weak, nonatomic) IBOutlet UIButton *keepModeButton;
+@property (weak, nonatomic) IBOutlet UIButton *intervalModeButton;
+@property (weak, nonatomic) IBOutlet UIButton *dynamicModeButton;
+
 @end
 @implementation ParameterView
 -(void)awakeFromNib{
     [super awakeFromNib];
+    [self.cancelButton setTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") forState:UIControlStateNormal];
+    [self.saveButton setTitle:BEGetStringWithKeyFromTable(@"保存", @"P06A") forState:UIControlStateNormal];
+    [self.keepModeButton setTitle:BEGetStringWithKeyFromTable(@"连续模式", @"P06A") forState:UIControlStateNormal];
+    [self.intervalModeButton setTitle:BEGetStringWithKeyFromTable(@"间隔模式", @"P06A") forState:UIControlStateNormal];
+    [self.dynamicModeButton setTitle:BEGetStringWithKeyFromTable(@"动态模式", @"P06A") forState:UIControlStateNormal];
+    self.pressureSetLabel.text = [BEGetStringWithKeyFromTable(@"压力设置", @"P06A")stringByAppendingString:@"(-mmHg)"];
+    self.keepModeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.intervalModeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.dynamicModeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
     self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.2];
     self.backgroundView.layer.cornerRadius = 5;
 
@@ -120,8 +135,8 @@
             self.firstTimeStack.hidden = NO;
             self.secondTimeStack.hidden = NO;
             
-            self.firstTimeLabel.text = @"工作时间(min)";
-            self.secondTimeLabel.text = @"间歇时间(min)";
+            self.firstTimeLabel.text = [BEGetStringWithKeyFromTable(@"工作时间", @"P06A")stringByAppendingString:@"(min)"];
+            self.secondTimeLabel.text = [BEGetStringWithKeyFromTable(@"间歇时间", @"P06A")stringByAppendingString:@"(min)"];
             
             if ([UserDefault objectForKey:@"WorkTime"]) {
                 self.firstTimeValueLabel.text = [UserDefault objectForKey:@"WorkTime"];
@@ -137,8 +152,8 @@
             self.firstTimeStack.hidden = NO;
             self.secondTimeStack.hidden = NO;
             
-            self.firstTimeLabel.text = @"上升时间(min)";
-            self.secondTimeLabel.text = @"下降时间(min)";
+            self.firstTimeLabel.text = [BEGetStringWithKeyFromTable(@"上升时间", @"P06A")stringByAppendingString:@"(min)"];
+            self.secondTimeLabel.text = [BEGetStringWithKeyFromTable(@"下降时间", @"P06A")stringByAppendingString:@"(min)"];
             
             if ([UserDefault objectForKey:@"UpTime"]) {
                 self.firstTimeValueLabel.text = [UserDefault objectForKey:@"UpTime"];

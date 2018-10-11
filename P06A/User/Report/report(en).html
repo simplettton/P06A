@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+	<style>
+		.template{
+			max-width: 800px;
+			margin: auto;
+			padding: 30px;
+			font-size: 16px;
+			line-height: 20px;
+			color: #555;
+		}
+		.template table{
+			width:100%;
+			line-height: inherit;
+			text-align: left;
+			
+		}
+		.template table td{
+			padding: 5px;
+			vertical-align: bottom;
+		}
+		.template table tr.top table td{
+/*			padding-bottom: 20px;*/
+			font-size: 13px;
+			color: #8B8888;
+		}
+		.template table tr.top table td.title{
+			font-size: 20px;
+			line-height: 30px;
+			color: #333;
+		}
+		.template table tr.information table td{
+/*			padding-bottom: 40px;*/
+			font-size: 14px;
+		}
+		.template table tr.heading td{
+			font-size: 13px;
+			background: #eee;
+			border-bottom: 1px solid #ddd;
+			font-weight: bold;
+		}
+		.template table tr.detail table{
+			font-size: 12px;
+			font-weight: lighter;
+/*			font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";*/
+		}
+	</style>
+</head>
+
+<body>
+	<div class = "template">
+
+		<table cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr class="top">
+					<td colspan="2">
+						<table>
+							<tbody>
+								<tr>
+                                    <td class="title">
+                                        Vacuum Extractor-TreatmentReport
+                                    </td>
+                                    <td style = "text-align: right"> #DATE#</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr class="information">
+					<td colspan="2">
+						<table>
+							<tbody>
+								<tr>
+									<td> Name:#NAME# </td>
+									<td> Age:#GENDER# </td>
+									<td> gender:#AGE# </td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr class="heading">
+					<td> Treatment Data </td>
+					<td> <br> </td>
+				</tr>
+				<tr class = "detail">
+					<td colspan="2">
+					<table width="100%" border="0" cellspacing="1" cellpadding="4" align="center">
+						<tr>
+							<th>Treatment Mode</th>
+							<th>Treat Area</th>
+							<th>Pressure</th>
+							<th>Treat Time</th>
+						</tr>	
+						<tr>
+							<td>#MODE#</td>
+							<td>#TREAT_AREA#</td>
+							<td>#PRESSURE#</td>
+							<td>#DURATION#</td>
+						</tr>
+                        #OTHERPARAMETER#
+					</table>
+					</td>
+				</tr>
+				<br>
+				<tr class="heading">
+					<td> Treatment Photo </td>
+					<td> <br> </td>
+				</tr>
+				<tr>
+                    <td>
+                        <div>
+                            <img style="max-width:100%; height:auto; overflow:hidden;" src = "#TREAT_IMAGE#">
+                        </div>
+                    </td>
+				</tr>
+				<tr class="heading">
+					<td>Warning Message</td>
+					<td> <br> </td>
+				</tr>
+				<tr	 class = "detail">
+					<td>
+						<table>
+							#AlertMessage#
+						</table>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+		 
+</body>
+</html>

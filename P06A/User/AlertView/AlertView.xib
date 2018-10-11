@@ -59,8 +59,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Kyx-l4-F6s" firstAttribute="centerY" secondItem="HAi-uM-EXS" secondAttribute="centerY" id="Een-NX-NQ9"/>
+                        <constraint firstItem="8Lv-U5-v4w" firstAttribute="leading" secondItem="Kyx-l4-F6s" secondAttribute="trailing" constant="8" symbolic="YES" id="Qgt-iN-D3d"/>
                         <constraint firstAttribute="width" secondItem="HAi-uM-EXS" secondAttribute="height" multiplier="323:56" id="RYg-p0-wIc"/>
-                        <constraint firstItem="Kyx-l4-F6s" firstAttribute="leading" secondItem="Eh9-hx-tsw" secondAttribute="trailing" constant="8" id="Rqk-aG-afl"/>
+                        <constraint firstItem="Kyx-l4-F6s" firstAttribute="leading" secondItem="Eh9-hx-tsw" secondAttribute="trailing" constant="8" symbolic="YES" id="Rqk-aG-afl"/>
                         <constraint firstItem="Eh9-hx-tsw" firstAttribute="leading" secondItem="HAi-uM-EXS" secondAttribute="leading" constant="15" id="XPg-d9-8xY"/>
                         <constraint firstAttribute="trailing" secondItem="8Lv-U5-v4w" secondAttribute="trailing" constant="8" id="h06-Cd-LKO"/>
                         <constraint firstAttribute="height" constant="56" id="nAH-Co-ojB"/>
@@ -83,6 +84,7 @@
             <connections>
                 <outlet property="alertMessageLabel" destination="Kyx-l4-F6s" id="Veb-FS-dx7"/>
                 <outlet property="backgroundView" destination="HAi-uM-EXS" id="6QR-Yr-0HC"/>
+                <outlet property="okButton" destination="8Lv-U5-v4w" id="oc9-xa-geT"/>
             </connections>
             <point key="canvasLocation" x="44.5" y="59.5"/>
         </view>

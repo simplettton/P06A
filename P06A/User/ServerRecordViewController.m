@@ -37,6 +37,14 @@
 @property (strong,nonatomic)NSMutableArray *deviceArray;
 @property (strong,nonatomic)NSString *hireId;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *accumulateTimeTitle;
+@property (weak, nonatomic) IBOutlet UILabel *hourTitle;
+@property (weak, nonatomic) IBOutlet UILabel *finishTitle;
+@property (weak, nonatomic) IBOutlet UILabel *beginDateTitle;
+@property (weak, nonatomic) IBOutlet UILabel *finishDateTitle;
+
+
 @end
 
 @implementation ServerRecordViewController
@@ -47,11 +55,19 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.title = @"治疗记录";
+    self.title = BEGetStringWithKeyFromTable(@"治疗记录", @"P06A");
     [self initAll];
 }
 
 -(void)initAll{
+    
+    //界面标题
+    self.accumulateTimeTitle.text = BEGetStringWithKeyFromTable(@"你累计治疗时间", @"P06A");
+    self.hourTitle.text = [NSString stringWithFormat:@"(%@)",BEGetStringWithKeyFromTable(@"小时", @"P06A")];
+    self.finishTitle.text = BEGetStringWithKeyFromTable(@"完成（次）", @"P06A");
+    self.beginDateTitle.text = BEGetStringWithKeyFromTable(@"开始治疗日期", @"P06A");
+    self.finishDateTitle.text = BEGetStringWithKeyFromTable(@"最近治疗日期", @"P06A");
+    
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]init];
     backButton.title = @"";
     self.navigationItem.backBarButtonItem = backButton;
@@ -302,17 +318,17 @@
     switch (mode) {
             
         case DynamicMode:
-            cell.modeLabel.text = @"动态模式";
+            cell.modeLabel.text = BEGetStringWithKeyFromTable(@"动态模式", @"P06A");
             cell.modeImageView.image = [UIImage imageNamed:@"dynamic_grey"];
             break;
             
         case KeepMode:
-            cell.modeLabel.text = @"连续模式";
+            cell.modeLabel.text = BEGetStringWithKeyFromTable(@"连续模式", @"P06A");
             cell.modeImageView.image = [UIImage imageNamed:@"keep_grey"];
             break;
         
         case IntervalMode:
-            cell.modeLabel.text = @"间隔模式";
+            cell.modeLabel.text = BEGetStringWithKeyFromTable(@"间隔模式", @"P06A");
             cell.modeImageView.image = [UIImage imageNamed:@"interval_grey"];
             break;
             
@@ -326,7 +342,7 @@
     
     //duration
     NSString *minutes = [dataDic objectForKey:@"duration"];
-    cell.durationLabel.text = [NSString stringWithFormat:@"治疗时间%@分钟",minutes];
+    cell.durationLabel.text = [NSString stringWithFormat:BEGetStringWithKeyFromTable(@"治疗时间%@分钟", @"P06A"),minutes];
 //
 //    int hour = [minutes intValue]/60;
 //    int minute= [minutes intValue]%60;
@@ -343,7 +359,7 @@
 
     //timestamp
     NSString *timeStamp = [dataDic objectForKey:@"time"];
-    cell.dateLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"M月d日"];
+    cell.dateLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"M/d"];
     cell.timeLabel.text = [self stringFromTimeIntervalString:timeStamp dateFormat:@"H:mm"];
 
     //alertCount

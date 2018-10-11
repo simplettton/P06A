@@ -36,6 +36,7 @@
 
 + (NSString *)jsq_localizedStringForKey:(NSString *)key
 {
+
     return NSLocalizedStringFromTableInBundle(key, @"JSQMessages", [NSBundle jsq_messagesAssetBundle], nil);
 }
 

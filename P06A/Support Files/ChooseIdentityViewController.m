@@ -21,9 +21,13 @@
 
 - (IBAction)chooseRight:(id)sender;
 - (IBAction)chooseLeft:(id)sender;
-- (IBAction)enterNextPage:(id)sender;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *doctorButton;
 @property (weak, nonatomic) IBOutlet UIButton *patientButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextStepButton;
+@property (weak, nonatomic) IBOutlet UIButton *leftChooseButton;
+@property (weak, nonatomic) IBOutlet UIButton *rightChooseButton;
 
 @end
 
@@ -37,6 +41,19 @@
 }
 
 -(void)initAll {
+    //界面标题
+    [self.doctorButton setTitle:BEGetStringWithKeyFromTable(@"用服/助理", @"P06A") forState:UIControlStateNormal];
+    [self.patientButton setTitle:BEGetStringWithKeyFromTable(@"患者/家属", @"P06A") forState:UIControlStateNormal];
+    [self.leftChooseButton setTitle:BEGetStringWithKeyFromTable(@"点击选择>", @"P06A") forState:UIControlStateNormal];
+    [self.rightChooseButton setTitle:BEGetStringWithKeyFromTable(@"点击选择>", @"P06A") forState:UIControlStateNormal];
+    [self.nextStepButton setTitle:BEGetStringWithKeyFromTable(@"下一步>", @"P06A") forState:UIControlStateNormal];
+    self.doctorButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.patientButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.leftChooseButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.rightChooseButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.nextStepButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
+    
     userIdentity = [UserDefault objectForKey:@"Identity"];
     if ([userIdentity isEqualToString:@"patient"]) {
         self.rightView.backgroundColor = HilightedColor;

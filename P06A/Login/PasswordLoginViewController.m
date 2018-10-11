@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UIView *passwordView;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+@property (weak, nonatomic) IBOutlet UILabel *loginTitle;
+@property (weak, nonatomic) IBOutlet UIButton *switchIdentityButton;
+
 @end
 
 @implementation PasswordLoginViewController
@@ -37,6 +41,13 @@
     [self initUI];
 }
 -(void)initUI{
+    //界面标题
+    self.loginTitle.text = BEGetStringWithKeyFromTable(@"密码登录", @"P06A");
+    [self.loginButton setTitle:BEGetStringWithKeyFromTable(@"登录", @"P06A") forState:UIControlStateNormal];
+    [self.switchIdentityButton setTitle:BEGetStringWithKeyFromTable(@"切换身份？", @"P06A") forState:UIControlStateNormal];
+    self.userNameTextField.placeholder = BEGetStringWithKeyFromTable(@"请输入账号", @"P06A");
+    self.passwordTextField.placeholder = BEGetStringWithKeyFromTable(@"请输入密码", @"P06A");
+    
     [self setBorderWithView:self.nameView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xeeeeee) borderWidth:1];
     [self setBorderWithView:self.passwordView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xeeeeee) borderWidth:1];
     self.loginButton.layer.cornerRadius = 5;
@@ -54,7 +65,7 @@
 #pragma mark - login
 -(void)showLoginingIndicator{
     
-    [SVProgressHUD showWithStatus:@"正在登录中..."];
+    [SVProgressHUD showWithStatus:BEGetStringWithKeyFromTable(@"正在登录中...", @"P06A")];
 }
 - (IBAction)login:(id)sender {
     [self.userNameTextField resignFirstResponder];
@@ -63,13 +74,13 @@
     NSString *pwd = [self md5:self.passwordTextField.text];
     
     if (username.length == 0 || pwd.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@"用户名或密码不能为空"];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"用户名或密码不能为空", @"P06A")];
         return;
     }else if(self.passwordTextField.text.length <6){
-        [SVProgressHUD showErrorWithStatus:@"密码不小于6位"];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"密码不小于6位", @"P06A")];
         return;
     }else if(self.passwordTextField.text.length >20){
-        [SVProgressHUD showErrorWithStatus:@"密码不多于20位"];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"密码不多于20位", @"P06A")];
         return;
     }
     

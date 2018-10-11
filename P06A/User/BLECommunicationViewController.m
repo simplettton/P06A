@@ -103,18 +103,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"便携负压";
+    self.title = BEGetStringWithKeyFromTable(@"便携负压", @"P06A");
 
     
     //检测有没有绑定蓝牙设备
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (![userDefaults objectForKey:@"MacString"]) {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
-                                                                       message:@"当前没有配对设备，请前往设置"
+                                                                       message:BEGetStringWithKeyFromTable(@"当前没有配对设备，请前往设置", @"P06A")
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"确认", @"P06A") style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * _Nonnull action) {
                                                                   
                                                                   [self.navigationController popToRootViewControllerAnimated:YES];
@@ -126,7 +126,7 @@
         });
     }else{
         //配置svprogressHUD
-        [SVProgressHUD showWithStatus:@"正在连接设备..."];
+        [SVProgressHUD showWithStatus:BEGetStringWithKeyFromTable(@"正在连接设备...", @"P06A")];
         [self performSelector:@selector(handleConnectTimeOut) withObject:nil afterDelay:5];
     }
     
@@ -182,7 +182,7 @@
     if (!self.isConnected) {
         [SVProgressHUD setMinimumSize:CGSizeZero];
         [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
-        [SVProgressHUD showInfoWithStatus:@"下位机无响应"];
+        [SVProgressHUD showInfoWithStatus:BEGetStringWithKeyFromTable(@"设备无响应", @"P06A")];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -211,7 +211,7 @@
     }
 }
 -(void)handleBLEPowerOff{
-    [SVProgressHUD showErrorWithStatus:@"蓝牙未打开无法连接设备"];
+    [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"未打开蓝牙无法连接设备", @"P06A")];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -240,6 +240,24 @@
 
 #pragma mark - configureUI
 -(void)configureButtonUI{
+    
+    [self.startButton setTitle:BEGetStringWithKeyFromTable(@"开始", @"P06A") forState:UIControlStateNormal];
+    [self.pauseButton setTitle:BEGetStringWithKeyFromTable(@"暂停", @"P06A") forState:UIControlStateNormal];
+    [self.stopButton setTitle:BEGetStringWithKeyFromTable(@"结束", @"P06A") forState:UIControlStateNormal];
+    
+    [self.lockButton setTitle:BEGetStringWithKeyFromTable(@"锁屏", @"P06A") forState:UIControlStateNormal];
+    
+    [self configureButton:self.modeButton WithTitle:BEGetStringWithKeyFromTable(@"连续模式", @"P06A") imageName:@"keep_grey"];
+    [self configureButton:self.lockButton WithTitle:BEGetStringWithKeyFromTable(@"锁屏", @"P06A") imageName:@"lock"];
+    
+    [self.pressureButton setTitle:BEGetStringWithKeyFromTable(@"治疗压力", @"P06A") forState:UIControlStateNormal];
+    
+    
+    self.lockButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.modeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.pauseButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.stopButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
     [self.lockButton setTitleEdgeInsets:UIEdgeInsetsMake(self.lockButton.imageView.frame.size.height+20 ,-self.lockButton.imageView.frame.size.width, 0.0,0.0)];
     [self.lockButton setImageEdgeInsets:UIEdgeInsetsMake(-20, 0.0,0.0, -self.lockButton.titleLabel.bounds.size.width)];
     
@@ -298,10 +316,9 @@
             self.controllButtonView.hidden = NO;
             self.startButton.hidden = YES;
             
-            self.pauseButton.titleLabel.text = @"继续";
-            [self.pauseButton setTitle:@"继续" forState:UIControlStateNormal];
-//            self.startButton.titleLabel.text = @"继续";
-//            [self.startButton setTitle:@"继续" forState:UIControlStateNormal];
+            self.pauseButton.titleLabel.text = BEGetStringWithKeyFromTable(@"继续", @"P06A");
+            [self.pauseButton setTitle:BEGetStringWithKeyFromTable(@"继续", @"P06A") forState:UIControlStateNormal];
+
             
         }
             break;
@@ -311,16 +328,12 @@
             self.startButton.hidden = NO;
             self.timeDisplay.text = @"00:00";
             
-//            self.startButton.titleLabel.text = @"开启";
-//            [self.startButton setTitle:@"开启" forState:UIControlStateNormal];
-
-            
             break;
         case STATE_RUNNING:
             self.controllButtonView.hidden = NO;
             self.startButton.hidden = YES;
-            self.pauseButton.titleLabel.text = @"暂停";
-            [self.pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
+            self.pauseButton.titleLabel.text = BEGetStringWithKeyFromTable(@"暂停", @"P06A");
+            [self.pauseButton setTitle:BEGetStringWithKeyFromTable(@"暂停", @"P06A") forState:UIControlStateNormal];
             
             break;
             
@@ -334,17 +347,17 @@
     switch (self.treatMode) {
         case 0:
             
-            [self configureButton:self.modeButton WithTitle:@"连续模式" imageName:@"keep_grey"];
+            [self configureButton:self.modeButton WithTitle:BEGetStringWithKeyFromTable(@"连续模式", @"P06A") imageName:@"keep_grey"];
             
             break;
         case 1:
             
-            [self configureButton:self.modeButton WithTitle:@"间隔模式" imageName:@"interval_grey"];
+            [self configureButton:self.modeButton WithTitle:BEGetStringWithKeyFromTable(@"间隔模式", @"P06A") imageName:@"interval_grey"];
             
             break;
         case 2:
             
-            [self configureButton:self.modeButton WithTitle:@"动态模式" imageName:@"dynamic_grey"];
+            [self configureButton:self.modeButton WithTitle:BEGetStringWithKeyFromTable(@"动态模式", @"P06A") imageName:@"dynamic_grey"];
             
             break;
         default:
@@ -353,7 +366,7 @@
     
     //锁
     if (self.isLocked) {
-        [self configureButton:self.lockButton WithTitle:@"解锁" imageName:@"unlock"];
+        [self configureButton:self.lockButton WithTitle:BEGetStringWithKeyFromTable(@"解锁",@"P06A") imageName:@"unlock"];
         if (!self.maskLayer){
             CALayer *maskLayer = [[CALayer alloc]init];
             maskLayer.frame = self.view.bounds;
@@ -373,7 +386,7 @@
             [self.maskLayer removeFromSuperlayer];
             self.maskLayer = nil;
         }
-        [self configureButton:self.lockButton WithTitle:@"锁屏" imageName:@"lock"];
+        [self configureButton:self.lockButton WithTitle:BEGetStringWithKeyFromTable(@"锁屏", @"P06A") imageName:@"lock"];
         
         self.modeButton.enabled = YES;
         self.startButton.enabled = YES;
@@ -502,7 +515,7 @@
     }];
     
     [baby setBlockOnFailToConnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"设备连接失败"]];
+        [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"设备连接失败", @"P06A")];
         [SVProgressHUD dismissWithDelay:0.9];
 
     }];
@@ -846,12 +859,12 @@
                 self.runningState = STATE_STOP;
                 NSString *alertMessege = [[NSString alloc]init];
                 switch (dataByte) {
-                    case 0x00:  alertMessege = @"无异常报警";    break;
-                    case 0x01:  alertMessege = @"设备废液瓶满";  break;
-                    case 0x02:  alertMessege = @"设备压力过低";  break;
-                    case 0x03:  alertMessege = @"设备压力过高";  break;
-                    case 0x04:  alertMessege = @"设备电量异常";  break;
-                    case 0x05:  alertMessege = @"设备使用到期";  break;
+                    case 0x00:  alertMessege = BEGetStringWithKeyFromTable(@"无异常报警",@"P06A");    break;
+                    case 0x01:  alertMessege = BEGetStringWithKeyFromTable(@"设备废液瓶满",@"P06A");  break;
+                    case 0x02:  alertMessege = BEGetStringWithKeyFromTable(@"设备压力过低",@"P06A");  break;
+                    case 0x03:  alertMessege = BEGetStringWithKeyFromTable(@"设备压力过高",@"P06A");  break;
+                    case 0x04:  alertMessege = BEGetStringWithKeyFromTable(@"设备电量异常",@"P06A");  break;
+                    case 0x05:  alertMessege = BEGetStringWithKeyFromTable(@"设备使用到期",@"P06A");  break;
                     default:
                         break;
                 }
@@ -935,11 +948,11 @@
 - (IBAction)lock:(id)sender {
 
     if (!self.isLocked) {
-        [self configureButton:self.lockButton WithTitle:@"解锁" imageName:@"unlock"];
+        [self configureButton:self.lockButton WithTitle:BEGetStringWithKeyFromTable(@"解锁", @"P06A") imageName:@"unlock"];
         [self writeWithCmdid:CMDID_LOCK_CONTROL dataString:@"0100"];
         
     }else {
-        [self configureButton:self.lockButton WithTitle:@"锁屏" imageName:@"lock"];
+        [self configureButton:self.lockButton WithTitle:BEGetStringWithKeyFromTable(@"锁屏", @"P06A") imageName:@"lock"];
         [self writeWithCmdid:CMDID_LOCK_CONTROL dataString:@"0000"];
     }
     self.isLocked = !self.isLocked;
@@ -1149,16 +1162,20 @@
     return string;
 }
 
+
+/**
+ *  该方法废弃
+ */
 -(void)showDisconnectAlert {
     self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.HUD.mode = MBProgressHUDModeText;
-    self.HUD.label.text = @"没有检测到设备，请检查设备是否开机";
+    self.HUD.label.text = BEGetStringWithKeyFromTable(@"没有检测到设备，请检查设备是否开机", @"P06A");
     [self.HUD showAnimated:YES];
 }
 
 -(void)showConnectAlert {
 
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"设备连接成功"]];
+    [SVProgressHUD showSuccessWithStatus:BEGetStringWithKeyFromTable(@"设备连接成功", @"P06A")];
 }
 
 

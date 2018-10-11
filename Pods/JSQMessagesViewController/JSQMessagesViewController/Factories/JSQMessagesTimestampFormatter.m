@@ -47,7 +47,9 @@
     self = [super init];
     if (self) {
         _dateFormatter = [[NSDateFormatter alloc] init];
+
         [_dateFormatter setLocale:[NSLocale currentLocale]];
+        
         [_dateFormatter setDoesRelativeDateFormatting:YES];
         
         UIColor *color = [UIColor lightGrayColor];

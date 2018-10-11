@@ -204,6 +204,7 @@
 		0453324620293D8E00B63C58 /* MQTTCommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453324520293D8E00B63C58 /* MQTTCommunicationViewController.m */; };
 		0454D17A2138C96700552036 /* AddDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454D1792138C96700552036 /* AddDeviceCell.m */; };
 		0454D17D2138FC7600552036 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0454D17C2138FC7600552036 /* RoundedButton.m */; };
+		0454FFF1216F3AE000A9E587 /* report(en).html in Resources */ = {isa = PBXBuildFile; fileRef = 0454FFF0216F3ADF00A9E587 /* report(en).html */; };
 		0455132621523761001D34F0 /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 0455132521523761001D34F0 /* report.html */; };
 		045798B121226961007EE5BE /* PhonenumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045798B021226961007EE5BE /* PhonenumViewController.m */; };
 		045930F4204511A6003F6BDC /* ServerRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045930F3204511A6003F6BDC /* ServerRecordViewController.m */; };
@@ -707,6 +708,7 @@
 		0454D1792138C96700552036 /* AddDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceCell.m; sourceTree = "<group>"; };
 		0454D17B2138FC7600552036 /* RoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoundedButton.h; sourceTree = "<group>"; };
 		0454D17C2138FC7600552036 /* RoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoundedButton.m; sourceTree = "<group>"; };
+		0454FFF0216F3ADF00A9E587 /* report(en).html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "report(en).html"; sourceTree = "<group>"; };
 		0455132521523761001D34F0 /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
 		045798AF21226961007EE5BE /* PhonenumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhonenumViewController.h; sourceTree = "<group>"; };
 		045798B021226961007EE5BE /* PhonenumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhonenumViewController.m; sourceTree = "<group>"; };
@@ -2013,6 +2015,7 @@
 			isa = PBXGroup;
 			children = (
 				0455132521523761001D34F0 /* report.html */,
+				0454FFF0216F3ADF00A9E587 /* report(en).html */,
 				048E92A02043EBD2009F8532 /* RecordTableViewCell.h */,
 				048E92A12043EBD2009F8532 /* RecordTableViewCell.m */,
 				047D489A2047AB7D00DF7DF1 /* RecordRepordViewController.h */,
@@ -2181,6 +2184,7 @@
 				0455132621523761001D34F0 /* report.html in Resources */,
 				048F9C68213E776A0083C83B /* QRCodeLine@3x.png in Resources */,
 				048F9C6C213E776A0083C83B /* QRCodeTopRight@3x.png in Resources */,
+				0454FFF1216F3AE000A9E587 /* report(en).html in Resources */,
 				0469FEB31FFE0C75002E25C3 /* Assets.xcassets in Resources */,
 				042E1383216DA6A6008499D0 /* P06A.strings in Resources */,
 				0469FEB11FFE0C75002E25C3 /* Main.storyboard in Resources */,

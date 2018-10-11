@@ -746,7 +746,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="955"/>
         </scene>
-        <!--治疗报告-->
+        <!--Record Repord View Controller-->
         <scene sceneID="heg-Xf-OVA">
             <objects>
                 <viewController id="wWO-BL-0qT" customClass="RecordRepordViewController" sceneMemberID="viewController">
@@ -769,7 +769,7 @@
                         <viewLayoutGuide key="safeArea" id="vLJ-az-rfy"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="治疗报告" id="5nm-eF-VBD">
+                    <navigationItem key="navigationItem" id="5nm-eF-VBD">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="Yd3-P9-gsD">
                             <connections>
                                 <action selector="addPhoto:" destination="wWO-BL-0qT" id="xwi-h7-yLt"/>
@@ -801,7 +801,7 @@
             </objects>
             <point key="canvasLocation" x="2450" y="-1507"/>
         </scene>
-        <!--治疗记录-->
+        <!--Server Record View Controller-->
         <scene sceneID="tZT-7S-fNv">
             <objects>
                 <viewController id="R1x-wo-oOy" customClass="ServerRecordViewController" sceneMemberID="viewController">
@@ -818,7 +818,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="你累计治疗时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0i-4k-ACw">
-                                            <rect key="frame" x="8" y="8" width="102" height="21"/>
+                                            <rect key="frame" x="8" y="8" width="232" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -832,7 +832,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="完成（次）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLr-D0-e4L">
-                                            <rect key="frame" x="8" y="109" width="71" height="21"/>
+                                            <rect key="frame" x="8" y="109" width="99" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -974,7 +974,7 @@
                         <viewLayoutGuide key="safeArea" id="M7A-ka-vyk"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="治疗记录" id="P0k-62-w3a">
+                    <navigationItem key="navigationItem" id="P0k-62-w3a">
                         <barButtonItem key="rightBarButtonItem" id="KzR-mq-lta">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2TR-08-pNf">
                                 <rect key="frame" x="331" y="8" width="28" height="28"/>
@@ -990,8 +990,13 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="accumulateTimeLabel" destination="FrH-lj-TEU" id="4lK-12-G8p"/>
+                        <outlet property="accumulateTimeLabel" destination="FrH-lj-TEU" id="Y57-LQ-Aof"/>
+                        <outlet property="accumulateTimeTitle" destination="u0i-4k-ACw" id="lYL-ZH-xN2"/>
+                        <outlet property="beginDateTitle" destination="9u4-Pu-LjW" id="Fij-tR-uiZ"/>
+                        <outlet property="finishDateTitle" destination="4TD-7X-sNK" id="jhR-Ur-YVm"/>
+                        <outlet property="finishTitle" destination="iLr-D0-e4L" id="V7n-Tu-AbH"/>
                         <outlet property="firstDateLabel" destination="ugE-PO-zru" id="q2E-Bl-VQr"/>
+                        <outlet property="hourTitle" destination="EXk-1O-5MJ" id="4Sv-y8-nev"/>
                         <outlet property="lastDateLabel" destination="sY0-57-LGn" id="OdP-Pt-Vrb"/>
                         <outlet property="messageImage" destination="HTD-kM-qgM" id="KCA-Kp-2XI"/>
                         <outlet property="recordSumLabel" destination="1Ql-TR-s2d" id="MJx-Mh-CHX"/>
@@ -1477,9 +1482,12 @@
                     </view>
                     <connections>
                         <outlet property="doctorButton" destination="bJM-YR-UHH" id="yUa-qe-H4s"/>
+                        <outlet property="leftChooseButton" destination="xb5-xo-7ui" id="1Ba-aI-WO0"/>
                         <outlet property="leftImageView" destination="5CV-Uh-4Bv" id="C3j-rT-cTd"/>
                         <outlet property="leftView" destination="JXv-7w-xro" id="F1f-qM-ugO"/>
+                        <outlet property="nextStepButton" destination="IfA-qI-xgb" id="FEh-si-X7Y"/>
                         <outlet property="patientButton" destination="7kV-cc-ML8" id="A3G-RT-VVh"/>
+                        <outlet property="rightChooseButton" destination="7Uo-Hu-oRn" id="D6t-Et-ThE"/>
                         <outlet property="rightImageView" destination="ILP-w1-wgY" id="UTM-zR-mod"/>
                         <outlet property="rightView" destination="f2Z-Er-LTp" id="yEO-7j-hYN"/>
                         <segue destination="bO5-Th-c9k" kind="presentation" identifier="ShowPatientLoginVC" id="T81-4k-FPT"/>
@@ -1840,7 +1848,6 @@
                         <segue destination="8uA-dB-Rl6" kind="show" identifier="ShowMQTTController" id="4IK-Uq-ey6"/>
                         <segue destination="KjE-zK-OyW" kind="show" identifier="ShowBondDeviceController" id="KQr-yb-sI2"/>
                         <segue destination="R1x-wo-oOy" kind="show" identifier="ShowServerRecordController" id="zvz-fS-UGS"/>
-                        <segue destination="QKe-dj-mCe" kind="show" identifier="ShowMap" id="ueL-bq-lcJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k5E-WM-OX5" sceneMemberID="firstResponder"/>
@@ -1892,10 +1899,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备状态:未连接 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tms-dm-Hji">
-                                        <rect key="frame" x="8" y="466" width="176" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="176" id="NRq-rw-RG3"/>
-                                        </constraints>
+                                        <rect key="frame" x="8" y="466" width="347" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.32109060880000001" green="0.65814065929999999" blue="0.78873032330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1946,10 +1950,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="tms-dm-Hji" secondAttribute="trailing" priority="750" constant="191" id="8IG-5w-2tz"/>
                                     <constraint firstItem="8rd-k8-fwd" firstAttribute="centerX" secondItem="EeE-s4-FaU" secondAttribute="centerX" id="Fcz-FD-LYX"/>
                                     <constraint firstItem="h0K-2x-DLa" firstAttribute="centerY" secondItem="LB6-nU-orm" secondAttribute="centerY" id="TtV-Vw-FRN"/>
                                     <constraint firstItem="LB6-nU-orm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5YG-sL-lsa" secondAttribute="trailing" priority="750" constant="8" symbolic="YES" id="Z4L-ee-LUU"/>
+                                    <constraint firstAttribute="trailing" secondItem="tms-dm-Hji" secondAttribute="trailing" constant="20" symbolic="YES" id="ho7-wn-xWq"/>
                                     <constraint firstItem="LB6-nU-orm" firstAttribute="centerX" secondItem="EeE-s4-FaU" secondAttribute="centerX" constant="80" id="kBI-hx-y6b"/>
                                     <constraint firstItem="5YG-sL-lsa" firstAttribute="leading" secondItem="EeE-s4-FaU" secondAttribute="leading" constant="8" id="nWy-N9-moj"/>
                                     <constraint firstItem="tms-dm-Hji" firstAttribute="leading" secondItem="5YG-sL-lsa" secondAttribute="leading" id="oek-IP-GkE"/>
@@ -2034,7 +2038,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkx-yc-QBm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183" y="152"/>
+            <point key="canvasLocation" x="-183.19999999999999" y="151.57421289355324"/>
         </scene>
         <!--Patient Navigation-->
         <scene sceneID="qLf-2b-gou">
@@ -2305,10 +2309,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手机号码登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsd-Zd-Bdl">
-                                        <rect key="frame" x="19" y="38" width="111" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手机号码登录" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsd-Zd-Bdl">
+                                        <rect key="frame" x="19" y="38" width="255" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2327,7 +2331,7 @@
                                         <rect key="frame" x="8" y="0.0" width="359" height="53"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Tpz-oT-p5O">
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Tpz-oT-p5O">
                                                 <rect key="frame" x="8" y="7" width="359" height="38"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.42745098040000001" green="0.60784313729999995" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2342,7 +2346,7 @@
                                         <rect key="frame" x="8" y="53" width="359" height="53"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入收到的验证码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NdS-Cf-zah">
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NdS-Cf-zah">
                                                 <rect key="frame" x="8" y="7" width="202" height="38"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.42745098040000001" green="0.60784313729999995" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2353,8 +2357,8 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l12-Rt-ebB">
                                                 <rect key="frame" x="264" y="-1" width="95" height="54"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <state key="normal" title="获取验证码">
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                <state key="normal" title="发送验证码">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -2383,8 +2387,8 @@
                                             <action selector="login:" destination="bO5-Th-c9k" eventType="touchUpInside" id="Kzk-01-qIF"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcR-ZW-xt9">
-                                        <rect key="frame" x="21" y="84" width="77" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcR-ZW-xt9">
+                                        <rect key="frame" x="21" y="84" width="203" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="切换身份？">
                                             <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2402,8 +2406,10 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="9cu-v4-qpH" id="DFk-bF-b4S"/>
+                        <outlet property="loginTitle" destination="xsd-Zd-Bdl" id="cf0-EG-KgP"/>
                         <outlet property="phoneNumberView" destination="Z2G-Yq-eDo" id="l6e-Y7-unu"/>
                         <outlet property="phoneTextField" destination="Tpz-oT-p5O" id="kio-wd-1Hp"/>
+                        <outlet property="switchIdentityButton" destination="bcR-ZW-xt9" id="waL-IP-A41"/>
                         <outlet property="verificationCodeTextField" destination="NdS-Cf-zah" id="hrC-PT-pvp"/>
                         <outlet property="verificationCodeView" destination="4sm-2f-thc" id="eCI-nN-WuJ"/>
                         <outlet property="verifyButton" destination="l12-Rt-ebB" id="wf9-Gl-pyk"/>
@@ -2411,7 +2417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZ9-Ac-MI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5245.6000000000004" y="153.37331334332833"/>
+            <point key="canvasLocation" x="5245.6000000000004" y="152.47376311844079"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="aUV-cy-d5x">
@@ -3578,9 +3584,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="密码登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPW-hO-Lgo">
-                                        <rect key="frame" x="19" y="38" width="74" height="22"/>
+                                        <rect key="frame" x="19" y="38" width="259" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -3644,8 +3650,8 @@
                                             <action selector="login:" destination="Rrm-RK-V5M" eventType="touchUpInside" id="nhH-48-dEQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7e-Ay-rU0">
-                                        <rect key="frame" x="21" y="84" width="77" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7e-Ay-rU0">
+                                        <rect key="frame" x="21" y="84" width="210" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="切换身份？">
                                             <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3663,9 +3669,11 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="vlt-nN-RPg" id="vxt-NM-pAe"/>
+                        <outlet property="loginTitle" destination="JPW-hO-Lgo" id="3Ej-wP-5eI"/>
                         <outlet property="nameView" destination="fRX-W6-wHY" id="HPP-VC-pWp"/>
                         <outlet property="passwordTextField" destination="tWa-gL-P3R" id="tqq-9x-srF"/>
                         <outlet property="passwordView" destination="uzv-R8-ph1" id="q8W-Oq-sB2"/>
+                        <outlet property="switchIdentityButton" destination="A7e-Ay-rU0" id="Szd-RX-eje"/>
                         <outlet property="userNameTextField" destination="vNX-oI-9Em" id="5vV-4m-LY6"/>
                     </connections>
                 </viewController>
@@ -4700,8 +4708,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4NG-yu-p7I"/>
-        <segue reference="x7Q-io-PMa"/>
-        <segue reference="03c-Sn-NlB"/>
+        <segue reference="a0k-zp-eQG"/>
+        <segue reference="62c-FF-JI7"/>
         <segue reference="KQr-yb-sI2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
