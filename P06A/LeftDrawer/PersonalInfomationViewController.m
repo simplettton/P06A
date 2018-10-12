@@ -154,40 +154,40 @@
         [self presentViewController:alert animated:YES completion:nil];
         
     }
-    //性别
-    else if (indexPath.section == 0 && indexPath.row == 2){
-        UITableViewCell *cell = [self.cells objectAtIndex:2];
-        UILabel * label = (UILabel *)[cell viewWithTag:2];
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-            NSLog(@"点击取消");
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"男", @"P06A") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [UserDefault setObject:@"男" forKey:@"USER_GENDER"];
-            [UserDefault synchronize];
-            label.text = BEGetStringWithKeyFromTable(@"男", @"P06A");
-            
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"女", @"P06A") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [UserDefault setObject:@"女" forKey:@"USER_GENDER"];
-            [UserDefault synchronize];
-            label.text = BEGetStringWithKeyFromTable(@"女", @"P06A");
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
-    else if(indexPath.section == 0 && indexPath.row == 4){
-        [self performSegueWithIdentifier:@"EditTreatArea" sender:nil];
-    }
+//    //性别
+//    else if (indexPath.section == 0 && indexPath.row == 2){
+//        UITableViewCell *cell = [self.cells objectAtIndex:2];
+//        UILabel * label = (UILabel *)[cell viewWithTag:2];
+//
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+//        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//            NSLog(@"点击取消");
+//        }]];
+//        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"男", @"P06A") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [UserDefault setObject:@"男" forKey:@"USER_GENDER"];
+//            [UserDefault synchronize];
+//            label.text = BEGetStringWithKeyFromTable(@"男", @"P06A");
+//
+//        }]];
+//        [alertController addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"女", @"P06A") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [UserDefault setObject:@"女" forKey:@"USER_GENDER"];
+//            [UserDefault synchronize];
+//            label.text = BEGetStringWithKeyFromTable(@"女", @"P06A");
+//        }]];
+//        [self presentViewController:alertController animated:YES completion:nil];
+//    }
+//    else if(indexPath.section == 0 && indexPath.row == 4){
+//        [self performSegueWithIdentifier:@"EditTreatArea" sender:nil];
+//    }
     //手机号
     else if (indexPath.section == 1 && indexPath.row == 0){
         [self performSegueWithIdentifier:@"EditPhoneNumber" sender:indexPath];
     }
-    //其他信息
-    else {
-         [self performSegueWithIdentifier:@"EditInfomation" sender:indexPath];
-    }
+//    //其他信息
+//    else {
+//         [self performSegueWithIdentifier:@"EditInfomation" sender:indexPath];
+//    }
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage *newPhoto = [info objectForKey:@"UIImagePickerControllerEditedImage"];

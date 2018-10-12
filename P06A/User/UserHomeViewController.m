@@ -43,12 +43,13 @@
     backButton.title = @"";
     self.navigationItem.backBarButtonItem = backButton;
     
+    
+    [self setUserDefault];
     //检测有没有绑定蓝牙设备
     if (![UserDefault objectForKey:@"MacString"]) {
         [self performSegueWithIdentifier:@"GuideBindDevice" sender:nil];
     }
 
-    [self setUserDefault];
     [self initUI];
     
 }
@@ -63,7 +64,6 @@
                                  @"PHONE_NUMBER":         @"--",
                                  @"ADDRESS":              @"--",
                                  @"COMMUNICATION_MODE":   @"BLE",
-                                 @"LANGUAGESET":          @"zh-Hans"
                                  };
     
     for (NSString *key in [defaultDic allKeys]) {

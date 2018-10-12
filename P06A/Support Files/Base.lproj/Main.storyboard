@@ -2808,7 +2808,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="0rf-Z3-KCB" detailTextLabel="xjb-lA-rIA" style="IBUITableViewCellStyleValue1" id="RJl-79-LvV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="0rf-Z3-KCB" detailTextLabel="xjb-lA-rIA" style="IBUITableViewCellStyleValue1" id="RJl-79-LvV">
                                         <rect key="frame" x="0.0" y="123" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RJl-79-LvV" id="lgU-lc-aw1">
@@ -2832,7 +2832,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="cca-a4-gdz" detailTextLabel="tTx-e4-dLk" style="IBUITableViewCellStyleValue1" id="Nh2-5a-Y6U">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="cca-a4-gdz" detailTextLabel="tTx-e4-dLk" style="IBUITableViewCellStyleValue1" id="Nh2-5a-Y6U">
                                         <rect key="frame" x="0.0" y="167" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nh2-5a-Y6U" id="aKk-dn-Fey">
@@ -2856,7 +2856,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ltO-eO-fJb" detailTextLabel="5cc-9P-tMz" style="IBUITableViewCellStyleValue1" id="YXD-yR-wkD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ltO-eO-fJb" detailTextLabel="5cc-9P-tMz" style="IBUITableViewCellStyleValue1" id="YXD-yR-wkD">
                                         <rect key="frame" x="0.0" y="211" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YXD-yR-wkD" id="LTU-7N-w3f">
@@ -2932,7 +2932,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="KzL-iK-q8X" detailTextLabel="3dE-ks-zxZ" style="IBUITableViewCellStyleValue1" id="Tn3-dw-hUh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="KzL-iK-q8X" detailTextLabel="3dE-ks-zxZ" style="IBUITableViewCellStyleValue1" id="Tn3-dw-hUh">
                                         <rect key="frame" x="0.0" y="379" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tn3-dw-hUh" id="nM5-pF-AGb">
@@ -3626,7 +3626,7 @@
                                                 <color key="tintColor" red="0.42745098040000001" green="0.60784313729999995" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3802,10 +3802,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="正在进行安全检测…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBc-Y1-eA5">
-                                        <rect key="frame" x="129" y="78" width="117" height="16"/>
+                                        <rect key="frame" x="8" y="78" width="359" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkAckCode" translatesAutoresizingMaskIntoConstraints="NO" id="uZj-M3-ZZ9">
@@ -4708,7 +4708,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4NG-yu-p7I"/>
-        <segue reference="a0k-zp-eQG"/>
+        <segue reference="x7Q-io-PMa"/>
         <segue reference="62c-FF-JI7"/>
         <segue reference="KQr-yb-sI2"/>
     </inferredMetricsTieBreakers>

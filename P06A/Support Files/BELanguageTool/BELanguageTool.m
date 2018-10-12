@@ -42,13 +42,11 @@ static BELanguageTool *sharedModel;
 -(void)initLanguage
 {
     NSString *language = [self currentLanguage];
-    
     if (language.length>0) {
         NSLog(@"自设置语言:%@",language);
     }else{
-        
+        language = [self systemLanguage];
     }
-    
     
     NSString *tmp = [UserDefault objectForKey:LANGUAGE_SET];
     NSString *path;
@@ -61,6 +59,19 @@ static BELanguageTool *sharedModel;
     path = [[NSBundle mainBundle]pathForResource:self.language ofType:@"lproj"];
     self.bundle = [NSBundle bundleWithPath:path];
     
+}
+
+- (NSString *)systemLanguage{
+    NSString *languageCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"][0];
+    NSLog(@"系统语言:%@",languageCode);
+    if([languageCode hasPrefix:@"zh-Hans"]){
+        languageCode = @"zh-Hans";//简体中文
+    }else{
+        languageCode = @"en";//英语
+    }
+    [UserDefault setObject:languageCode forKey:LANGUAGE_SET];
+    [UserDefault synchronize];
+    return languageCode;
 }
 
 -(NSString *)getStringForKey:(NSString *)key withTable:(NSString *)table

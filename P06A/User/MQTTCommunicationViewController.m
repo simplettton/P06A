@@ -86,7 +86,7 @@ NSString *const MQTTPassWord = @"password";
 
 -(void)handleConnectTimeOut{
     if (![self.isConnectedString isEqualToString:@"YES"]) {
-        [SVProgressHUD setMinimumSize:CGSizeZero];
+        [SVProgressHUD setMinimumSize:CGSizeMake(100, 40)];
         [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
         [SVProgressHUD showInfoWithStatus:BEGetStringWithKeyFromTable(@"设备无响应", @"P06A")];
     }
@@ -447,7 +447,7 @@ NSString *const MQTTPassWord = @"password";
             
             self.modeLabel.text = BEGetStringWithKeyFromTable(@"MQTT间隔模式", @"P06A");
             self.upTimeLabel.text = [NSString stringWithFormat:@"%@: %ldmin",BEGetStringWithKeyFromTable(@"工作时间", @"P06A"),self.workTime];
-            self.downTimeLabel.text = [NSString stringWithFormat:@"%@: %ldmin",BEGetStringWithKeyFromTable(@"间歇时间", @"P06A"),self.restTime];
+            self.downTimeLabel.text = [NSString stringWithFormat:@"%@: %ldmin",BEGetStringWithKeyFromTable(@"间隔时间", @"P06A"),self.restTime];
             
             break;
         case 2:

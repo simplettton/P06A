@@ -193,6 +193,7 @@
 		044C526220255C4600923060 /* PressParameterSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C526120255C4600923060 /* PressParameterSetView.m */; };
 		044C526420255C6F00923060 /* PressParameterSetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044C526320255C6F00923060 /* PressParameterSetView.xib */; };
 		044E021A2124081C003B6C9D /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044E02192124081C003B6C9D /* SettingViewController.m */; };
+		04510BA4217036870057E6D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04510BA6217036870057E6D0 /* InfoPlist.strings */; };
 		0451B12D212D4C7100B2B43A /* ParameterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0451B12C212D4C7100B2B43A /* ParameterView.xib */; };
 		0451B134212D5BC100B2B43A /* ParameterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451B133212D5BC100B2B43A /* ParameterView.m */; };
 		0451F0C72019BAB80001A9D4 /* LeftHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0451F0C62019BAB80001A9D4 /* LeftHeaderView.m */; };
@@ -688,6 +689,8 @@
 		044C526320255C6F00923060 /* PressParameterSetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PressParameterSetView.xib; sourceTree = "<group>"; };
 		044E02182124081C003B6C9D /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		044E02192124081C003B6C9D /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		04510BA5217036870057E6D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04510BA72170368A0057E6D0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0451B12C212D4C7100B2B43A /* ParameterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParameterView.xib; sourceTree = "<group>"; };
 		0451B132212D5BC100B2B43A /* ParameterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParameterView.h; sourceTree = "<group>"; };
 		0451B133212D5BC100B2B43A /* ParameterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParameterView.m; sourceTree = "<group>"; };
@@ -1898,6 +1901,7 @@
 				0469FEB21FFE0C75002E25C3 /* Assets.xcassets */,
 				0469FEB41FFE0C75002E25C3 /* LaunchScreen.storyboard */,
 				0469FEB71FFE0C75002E25C3 /* Info.plist */,
+				04510BA6217036870057E6D0 /* InfoPlist.strings */,
 				0469FEB81FFE0C75002E25C3 /* main.m */,
 				042E1385216DA6A6008499D0 /* P06A.strings */,
 			);
@@ -2163,6 +2167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0445509F212FFF2E0087A18F /* IndexLuaCode.bundle in Resources */,
+				04510BA4217036870057E6D0 /* InfoPlist.strings in Resources */,
 				048F9C66213E776A0083C83B /* QRCodeBottomRight@3x.png in Resources */,
 				0451B12D212D4C7100B2B43A /* ParameterView.xib in Resources */,
 				048F9C63213E776A0083C83B /* QRCodeBottomLeft@2x.png in Resources */,
@@ -2559,6 +2564,15 @@
 				042E1386216DA6A9008499D0 /* zh-Hans */,
 			);
 			name = P06A.strings;
+			sourceTree = "<group>";
+		};
+		04510BA6217036870057E6D0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04510BA5217036870057E6D0 /* en */,
+				04510BA72170368A0057E6D0 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		0469FEAF1FFE0C75002E25C3 /* Main.storyboard */ = {

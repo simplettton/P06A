@@ -14,7 +14,7 @@
 "未打开蓝牙无法连接设备"="未打开蓝牙无法连接设备";
 
 //LeftDrawerViewController
-"设置"="设置";
+"系统设置"="设置";
 "我的设备"="我的设备";
 "联系我们"="联系我们";
 "帮助"="帮助";
@@ -136,7 +136,7 @@
 //ParameterView
 "压力设置"="压力设置";
 "工作时间"="工作时间";
-"间歇时间"="间歇时间";
+"间隔时间"="间隔时间";
 "上升时间"="上升时间";
 "下降时间"="下降时间";
 
@@ -158,3 +158,29 @@
 "未连接"="未连接";
 "治疗模式"="治疗模式";
 "已成功连接服务器"="已成功连接服务器";
+
+//MJRefresh
+"MJRefreshHeaderIdleText" = "下拉可以刷新";
+"MJRefreshHeaderPullingText" = "松开立即刷新";
+"MJRefreshHeaderRefreshingText" = "正在刷新数据中...";
+
+"MJRefreshAutoFooterIdleText" = "点击或上拉加载更多";
+"MJRefreshAutoFooterRefreshingText" = "正在加载更多的数据...";
+"MJRefreshAutoFooterNoMoreDataText" = "已经全部加载完毕";
+
+"MJRefreshBackFooterIdleText" = "上拉可以加载更多";
+"MJRefreshBackFooterPullingText" = "松开立即加载更多";
+"MJRefreshBackFooterRefreshingText" = "正在加载更多的数据...";
+"MJRefreshBackFooterNoMoreDataText" = "已经全部加载完毕";
+
+"MJRefreshHeaderLastTimeText" = "最后更新：";
+"MJRefreshHeaderDateTodayText" = "今天";
+"MJRefreshHeaderNoneLastDateText" = "无记录";
+
+//server
+"无异常报警"="无异常报警";
+"废液瓶满"="废液瓶满";
+"压力过低"="压力过低";
+"压力过高"="压力过高";
+"电量不足"="设备电量异常";
+"寿命不足"="设备使用到期";

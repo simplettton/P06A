@@ -176,8 +176,8 @@
 }
 - (IBAction)save:(id)sender {
     [UserDefault setObject:selectedCommunicationMode forKey:@"COMMUNICATION_MODE"];
-    [UserDefault setObject:selectedLanguage forKey:LANGUAGE_SET];
-    [UserDefault synchronize];
+//    [UserDefault setObject:selectedLanguage forKey:LANGUAGE_SET];
+//    [UserDefault synchronize];
     [[BELanguageTool sharedInstance]setNewLanguage:selectedLanguage];
     [self.navigationController popViewControllerAnimated:YES];
 }

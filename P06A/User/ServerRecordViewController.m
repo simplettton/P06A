@@ -111,14 +111,29 @@
     NSMutableArray *actionArray = [[NSMutableArray alloc]initWithCapacity:20];
     if ([self.deviceArray count]>0) {
         for (NSDictionary *deviceDic in self.deviceArray) {
-            NSString *title = deviceDic[@"serialnum"];
-            PopoverAction *action = [PopoverAction actionWithTitle:title handler:^(PopoverAction *action) {
-                
-                NSString *hiredId = deviceDic[@"hireid"];
-                self.hireId = hiredId;
-                [self refresh];
-            }];
-            [actionArray addObject:action];
+            NSString *date = [self stringFromTimeIntervalString:deviceDic[@"starttime"] dateFormat:@"M/d "];
+            NSString *title = @"";
+            if ([deviceDic[@"hireid"]isEqualToString:self.hireId]) {
+                //当前选中的租借设备打钩标记
+                title = [NSString stringWithFormat:@"%@%@",date,deviceDic[@"serialnum"]];
+                PopoverAction *action = [PopoverAction actionWithImage:[UIImage imageNamed:@"blueRight"] title:title handler:^(PopoverAction *action) {
+                    NSString *hiredId = deviceDic[@"hireid"];
+                    self.hireId = hiredId;
+                    [self refresh];
+                }];
+                [actionArray addObject:action];
+            }
+            else{
+                //未选中的租借设备不打钩
+                title = [NSString stringWithFormat:@"\t  %@%@",date,deviceDic[@"serialnum"]];
+                PopoverAction *action = [PopoverAction actionWithTitle:title handler:^(PopoverAction *action) {
+                    
+                    NSString *hiredId = deviceDic[@"hireid"];
+                    self.hireId = hiredId;
+                    [self refresh];
+                }];
+                [actionArray addObject:action];
+            }
         }
     }
     
@@ -237,10 +252,7 @@
 
                                              [self.tableView reloadData];
                                          }
-     
-                                         
-                                         
-                                         NSLog(@"receive : %@",responseObject.content);                               }else{
+                                     }else{
                                              [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                          }
                                  } failure:nil];

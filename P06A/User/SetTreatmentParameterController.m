@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger,KCmdids)
 }
 
 -(void)initAll {
-    self.dataKeys = @[@"工作时间",@"间歇时间",@"上升时间",@"下降时间"];
+    self.dataKeys = @[@"工作时间",@"间隔时间",@"上升时间",@"下降时间"];
     self.dataDic = [[NSMutableDictionary alloc]init];
     self.readBuf = [[NSMutableData alloc]init];
     

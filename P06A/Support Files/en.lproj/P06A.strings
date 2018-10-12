@@ -15,7 +15,7 @@
 "未打开蓝牙无法连接设备"="The device cannot be connected without bluetooth";
 
 //LeftDrawerViewController
-"设置"="Settings";
+"系统设置"="Settings";
 "我的设备"="My Device";
 "联系我们"="Contact Us";
 "帮助"="Help";
@@ -40,11 +40,11 @@
 "所属医院"="Affiliated Hospital";
 
 //DeviceListView.h
-"确认"="Ok";
+"确认"="OK";
 
 //ContactUSTableViewController
 "联系客服"="Contact";
-"客服电话"="Customer Service Phone";
+"客服电话"="Service tel";
 "邮箱"="Email Account";
 
 //PersonalInfomationViewController
@@ -67,6 +67,8 @@
 
 //ChangePhoneNumViewController
 "更换手机号"="Change Number";
+
+
 "国家和地区"="Contries and Regions";
 "中国大陆"="China";
 "请输入有效手机号"="Please enter a valid phone number";
@@ -75,7 +77,7 @@
 "我们已发送 验证码 短信到您的手机： "="We have send the verification code to :";
 "请获取验证码 "="Please get the verification code";
 "收短信大概需要%ds"="It takes about %d seconds to receive messages";
-"收不到验证码短信？"="No verification Code?";
+"收不到验证码短信？"="No Verification Code?";
 "重新获取" = "regain";
 
 "安全检测"="Security Check";
@@ -90,7 +92,7 @@
 "密码登录"="Log In Via Password";
 "请输入手机号"="Enter mobile phone number";
 "请输入验证码"="Enter verification code";
-"请输入账号"="Enter the account number";
+"请输入账号"="Enter Username";
 "请输入密码"="Enter Password";
 "切换身份？"="Change Identity?";
 
@@ -143,7 +145,7 @@
 //ParameterView
 "压力设置"="Pressure";
 "工作时间"="WorkTime";
-"间歇时间"="IntervalTime";
+"间隔时间"="IntervalTime";
 "上升时间"="UpTime";
 "下降时间"="DownTime";
 
@@ -167,8 +169,8 @@
 
 
 //  ServerRecordViewController
-"你累计治疗时间"="You have treat for";
-"小时"="Hour";
+"你累计治疗时间"="You have treated for";
+"小时"="Hours";
 "完成（次）"="Finish(times)";
 "开始治疗日期"="Start Date";
 "最近治疗日期"="Latest Date";
@@ -193,3 +195,28 @@
 "新信息"="New Message";
 "发送"="Send";
 
+//MJRefresh
+"MJRefreshHeaderIdleText" = "Pull down to refresh";
+"MJRefreshHeaderPullingText" = "Release to refresh";
+"MJRefreshHeaderRefreshingText" = "Loading...";
+
+"MJRefreshAutoFooterIdleText" = "Tap or pull up to load more";
+"MJRefreshAutoFooterRefreshingText" = "Loading...";
+"MJRefreshAutoFooterNoMoreDataText" = "No more data";
+
+"MJRefreshBackFooterIdleText" = "Pull up to load more";
+"MJRefreshBackFooterPullingText" = "Release to load more.";
+"MJRefreshBackFooterRefreshingText" = "Loading...";
+"MJRefreshBackFooterNoMoreDataText" = "No more data";
+
+"MJRefreshHeaderLastTimeText" = "Last updated: ";
+"MJRefreshHeaderDateTodayText" = "Today";
+"MJRefreshHeaderNoneLastDateText" = "No record";
+
+//server
+"无异常报警"="NO abnormal alarm";
+"废液瓶满"="The waste liquid bottle is full.";
+"压力过低"="The device pressure is too low.";
+"压力过高"="The device pressure is too high.";
+"电量不足"="Abnormal power";
+"寿命不足"="The device has expired";

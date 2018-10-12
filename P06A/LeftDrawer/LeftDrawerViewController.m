@@ -44,7 +44,7 @@
         
         self.functionArray = @[
                                @"",
-                               BEGetStringWithKeyFromTable(@"设置", @"P06A"),
+                               BEGetStringWithKeyFromTable(@"系统设置", @"P06A"),
                                BEGetStringWithKeyFromTable(@"我的设备", @"P06A"),
                                BEGetStringWithKeyFromTable(@"联系我们", @"P06A"),
                                BEGetStringWithKeyFromTable(@"帮助", @"P06A"),
@@ -105,7 +105,7 @@
     __block UIViewController *showVC;
     if ([identity isEqualToString:@"patient"]) {
 
-        NSInteger settingIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"设置", @"P06A")];
+        NSInteger settingIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"系统设置", @"P06A")];
         NSInteger myDeviceIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"我的设备", @"P06A")];
         NSInteger contactUSIndex = [self.functionArray indexOfObject:BEGetStringWithKeyFromTable(@"联系我们", @"P06A")];
         if (indexPath.row == myDeviceIndex) {

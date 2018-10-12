@@ -94,9 +94,6 @@
                                 hasToken:NO
                                  success:^(HttpResponse *responseObject) {
                                     if ([responseObject.result intValue] == 1){
-                                        NSDictionary *content = responseObject.content;
-                                        NSLog(@"receive content = %@",content);
-                                        
 
                                         NSString *role = [responseObject.content objectForKey:@"role"];
                                         
@@ -106,6 +103,8 @@
                                             NSString *nickName = [responseObject.content objectForKey:@"nickname"];
                                             [UserDefault setObject:nickName forKey:@"USER_NAME"];
                                             [UserDefault setObject:@"admin" forKey:@"Identity"];
+                                            //用服默认中文
+                                            [[BELanguageTool sharedInstance]setNewLanguage:@"zh-Hans"];
                                             
                                             [UserDefault setObject:token forKey:@"Token"];
                                             [UserDefault setBool:YES forKey:@"IsLogined"];

@@ -180,7 +180,7 @@
 }
 -(void)handleConnectTimeOut{
     if (!self.isConnected) {
-        [SVProgressHUD setMinimumSize:CGSizeZero];
+//        [SVProgressHUD setMinimumSize:CGSizeZero];
         [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
         [SVProgressHUD showInfoWithStatus:BEGetStringWithKeyFromTable(@"设备无响应", @"P06A")];
         [self.navigationController popViewControllerAnimated:YES];

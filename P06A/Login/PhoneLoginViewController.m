@@ -179,8 +179,8 @@
                                  success:^(HttpResponse *responseObject) {
                                      if ([responseObject.result integerValue]==1) {
 
-                                         NSDictionary *content = responseObject.content;
-                                         NSLog(@"receive content = %@",content);
+//                                         NSDictionary *content = responseObject.content;
+//                                         NSLog(@"receive content = %@",content);
 
                                          NSString *token = [responseObject.content objectForKey:@"token"];
 
@@ -202,15 +202,11 @@
                                          [UserDefault setObject:gender forKey:@"USER_GENDER"];
                                          [UserDefault setObject:ageString forKey:@"AGE"];
                                          [UserDefault setObject:address forKey:@"ADDRESS"];
-
                                          
                                          [UserDefault setObject:token forKey:@"Token"];
-                                         
                                          [UserDefault setObject:@"patient" forKey:@"Identity"];
                                          
                                          [UserDefault setBool:YES forKey:@"IsLogined"];
-                                         
-                                         [UserDefault synchronize];
                                          
                                          UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                                          UINavigationController *centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];

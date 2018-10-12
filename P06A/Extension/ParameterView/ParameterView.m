@@ -54,7 +54,9 @@
     self.keepModeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.intervalModeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.dynamicModeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    
+    self.secondTimeLabel.adjustsFontSizeToFitWidth = YES;
+    self.firstTimeLabel.adjustsFontSizeToFitWidth = YES;
+    self.pressureSetLabel.adjustsFontSizeToFitWidth = YES;
     self.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.2];
     self.backgroundView.layer.cornerRadius = 5;
 
@@ -136,7 +138,7 @@
             self.secondTimeStack.hidden = NO;
             
             self.firstTimeLabel.text = [BEGetStringWithKeyFromTable(@"工作时间", @"P06A")stringByAppendingString:@"(min)"];
-            self.secondTimeLabel.text = [BEGetStringWithKeyFromTable(@"间歇时间", @"P06A")stringByAppendingString:@"(min)"];
+            self.secondTimeLabel.text = [BEGetStringWithKeyFromTable(@"间隔时间", @"P06A")stringByAppendingString:@"(min)"];
             
             if ([UserDefault objectForKey:@"WorkTime"]) {
                 self.firstTimeValueLabel.text = [UserDefault objectForKey:@"WorkTime"];

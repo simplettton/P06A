@@ -46,7 +46,7 @@
         {
             modeString = BEGetStringWithKeyFromTable(@"MQTT间隔模式", @"P06A");
             //生成一行显示时间设置
-            NSString *timeSetHtmlString = [NSString stringWithFormat:@"<tr><th>工作时间</th><th>间歇时间</th></tr><tr><td>%@分钟</td><td>%@分钟</td></tr>",dic[@"worktime"],dic[@"resttime"]];
+            NSString *timeSetHtmlString = [NSString stringWithFormat:@"<tr><th>工作时间</th><th>间隔时间</th></tr><tr><td>%@分钟</td><td>%@分钟</td></tr>",dic[@"worktime"],dic[@"resttime"]];
             HTMLContent = [HTMLContent stringByReplacingOccurrencesOfString:@"#OTHERPARAMETER#" withString:timeSetHtmlString];
             break;
         }
@@ -175,7 +175,7 @@
         NSString *dateString = [self stringFromTimeIntervalString:timeStamp dateFormat:@"yyyy/MM/dd HH:mm"];
         
         //显示警告信息（模板：时间  警告信息）
-        [html appendFormat:@"<tr><td>%@    %@</td></tr>",dateString,dataDic[@"warnning"]];
+        [html appendFormat:@"<tr><td>%@    %@</td></tr>",dateString,BEGetStringWithKeyFromTable(dataDic[@"warnning"], @"P06A")];
     }
     return html;
 }
