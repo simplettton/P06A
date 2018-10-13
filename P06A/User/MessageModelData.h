@@ -18,6 +18,8 @@ static NSString *const DidGetMessageModelNotification = @"DidGetMessageModelNoti
 
 @property (strong, nonatomic) NSMutableArray *messages;
 
+@property (strong, nonatomic) NSMutableArray *pictureRecordIdArrays;
+
 @property (strong, nonatomic) NSDictionary *avatars;
 
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;

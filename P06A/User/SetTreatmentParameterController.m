@@ -79,14 +79,13 @@ typedef NS_ENUM(NSInteger,KCmdids)
             [self.dataDic setObject: [userDefaultes objectForKey:keys[i]] forKey:self.dataKeys[i]];
         }
     }
-    
-    
-    
+
     self.tableView.scrollEnabled = NO;
     self.tableView.tableFooterView = [[UIView alloc]init];
     self.tableView.sectionHeaderHeight  = 0;
     self.tableView.sectionFooterHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(20 - 35, 0, 0, 0);
+    
     
     [self babyDelegate];
     

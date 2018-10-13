@@ -80,7 +80,7 @@ NSString *const MQTTPassWord = @"password";
     [SVProgressHUD setMinimumSize:CGSizeMake(200, 100)];
     [SVProgressHUD setCornerRadius:5];
     [SVProgressHUD showWithStatus:@"Connecting"];
-    [self performSelector:@selector(handleConnectTimeOut) withObject:nil afterDelay:5];
+    [self performSelector:@selector(handleConnectTimeOut) withObject:nil afterDelay:10];
     
 }
 
@@ -384,6 +384,7 @@ NSString *const MQTTPassWord = @"password";
                 NSString *alertMessege = [[NSString alloc]init];
                 Byte alertIndex = dataByte[1];
                 
+                
                 switch (alertIndex) {
                     case 0x00:  alertMessege = BEGetStringWithKeyFromTable(@"无异常报警",@"P06A");    break;
                     case 0x01:  alertMessege = BEGetStringWithKeyFromTable(@"设备废液瓶满",@"P06A");  break;
@@ -394,7 +395,11 @@ NSString *const MQTTPassWord = @"password";
                     default:
                         break;
                 }
-                [AlertView showAboveIn:self withData:alertMessege];
+                NSLog(@"收到警告信息%@",alertMessege);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [AlertView showAboveIn:self withData:alertMessege];
+                });
+
             }
                 break;
                 

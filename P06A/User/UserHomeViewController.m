@@ -45,13 +45,23 @@
     
     
     [self setUserDefault];
-    //检测有没有绑定蓝牙设备
-    if (![UserDefault objectForKey:@"MacString"]) {
-        [self performSegueWithIdentifier:@"GuideBindDevice" sender:nil];
-    }
+//    //检测有没有绑定蓝牙设备
+//    if (![UserDefault objectForKey:@"MacString"]) {
+//        [self performSegueWithIdentifier:@"GuideBindDevice" sender:nil];
+//    }
 
     [self initUI];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:51/255.0f green:157/255.0f blue:231/255.0f alpha:1];
+    [self initUI];
+    
+    LeftDrawerViewController *drawerVC = (LeftDrawerViewController  *)self.mm_drawerController.leftDrawerViewController;
+    [drawerVC initAll];
 }
 -(void)setUserDefault
 {
@@ -125,12 +135,7 @@
     self.title = BEGetStringWithKeyFromTable(@"便携负压", @"P06A");
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:51/255.0f green:157/255.0f blue:231/255.0f alpha:1];
-    [self initUI];
-}
+
 
 
 -(void)viewDidAppear:(BOOL)animated{

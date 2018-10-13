@@ -280,7 +280,8 @@
     }];
     dispatch_async(dispatch_get_main_queue(), ^{
         //导航栏按钮改为保存按钮
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(uploadImage:)];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(uploadImage:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:BEGetStringWithKeyFromTable(@"保存", @"P06A") style:UIBarButtonItemStylePlain target:self action:@selector(uploadImage:)];
         [self presentImage:self.image];
     });
     

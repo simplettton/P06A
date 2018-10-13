@@ -47,7 +47,7 @@
 -(void)initUI{
 
     //导航栏标题
-    self.title = BEGetStringWithKeyFromTable(@"设置",@"P06A");
+    self.title = BEGetStringWithKeyFromTable(@"系统设置",@"P06A");
     //savebutton
     self.navigationItem.rightBarButtonItem.title = BEGetStringWithKeyFromTable(@"保存", @"P06A");
     
@@ -80,8 +80,6 @@
         chineseCell.accessoryType = UITableViewCellAccessoryNone;
         englishCell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    
-    
 }
 
 #pragma mark - Table view data source
@@ -113,10 +111,10 @@
     
     //退出的section
     if (indexPath.section == 2) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"退出后不会删除任何历史记录，下次登录依然可以使用本账号。" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:BEGetStringWithKeyFromTable(@"退出后不会删除任何历史数据，下次登录仍然可以使用本账号。", @"P06A") preferredStyle:UIAlertControllerStyleActionSheet];
         
         //退出登录
-        UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"立即退出" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"退出登录", @"P06A") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             [UserDefault setBool:NO forKey:@"IsLogined"];
             [UserDefault synchronize];
             
@@ -138,7 +136,7 @@
         }];
         
         //取消
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
         }];
         [alert addAction:cancelAction];
@@ -176,9 +174,10 @@
 }
 - (IBAction)save:(id)sender {
     [UserDefault setObject:selectedCommunicationMode forKey:@"COMMUNICATION_MODE"];
-//    [UserDefault setObject:selectedLanguage forKey:LANGUAGE_SET];
-//    [UserDefault synchronize];
     [[BELanguageTool sharedInstance]setNewLanguage:selectedLanguage];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self initUI];
+    [self.tableView reloadData];
+    [SVProgressHUD showSuccessWithStatus:BEGetStringWithKeyFromTable(@"保存成功", @"P06A")];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

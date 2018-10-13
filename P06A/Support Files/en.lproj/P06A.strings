@@ -32,6 +32,7 @@
 "通信方式"="Communication Mode";
 "语言切换"="Language";
 "保存"="Save";
+"保存成功"="succesfully saved";
 
 //MyDeviceTableViewController
 "序列号"="Serial Number";

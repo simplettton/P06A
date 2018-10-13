@@ -49,7 +49,7 @@
                                         NSArray *messageArray = responseObject.content;
                                         if ([messageArray count]>0) {
                                             self.messages = [[NSMutableArray alloc]initWithCapacity:100];
-                                            
+                                            self.pictureRecordIdArrays = [[NSMutableArray alloc]initWithCapacity:100];
                                             //doctor用户和patient用户显示名字
                                             NSString *patientName = [[NSString alloc]init];
                                             NSString *doctorName = [[NSString alloc]init];

@@ -179,12 +179,13 @@ static NSString * const KFilePath               = @"KFilePath";
             self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
             [UIView transitionWithView:self.window
                               duration:0.25
-                               options:UIViewAnimationOptionTransitionCrossDissolve
+                               options:UIViewAnimationOptionTransitionFlipFromRight
                             animations:^{
+
                                 self.window.rootViewController = self.drawerController;
                             }
                             completion:nil];
-            
+
             [self.window makeKeyAndVisible];
         }else{
             NSString *userIdentity = [UserDefault objectForKey:@"Identity"];
@@ -197,16 +198,16 @@ static NSString * const KFilePath               = @"KFilePath";
             
             
             UINavigationController* navigationController = [[UINavigationController alloc]initWithRootViewController:loginVC];
-            self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-            [UIView transitionWithView:self.window
-                              duration:0.25
-                               options:UIViewAnimationOptionTransitionCrossDissolve
-                            animations:^{
-                                self.window.rootViewController = navigationController;
-                            }
-                            completion:nil];
-            
-            [self.window makeKeyAndVisible];
+//            self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+//            [UIView transitionWithView:self.window
+//                              duration:0.25
+//                               options:UIViewAnimationOptionTransitionCrossDissolve
+//                            animations:^{
+//                                self.window.rootViewController = navigationController;
+//                            }
+//                            completion:nil];
+            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
+//            [self.window makeKeyAndVisible];
         }
     }
 }

@@ -28,7 +28,8 @@
 
 @implementation LeftDrawerViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -36,7 +37,11 @@
     //分割线样式
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.scrollEnabled = NO;
+    [self initAll];
     
+
+}
+-(void)initAll{
     NSString *identity = [UserDefault objectForKey:@"Identity"];
     //判断身份显示不同的界面
     if ([identity isEqualToString:@"patient"]) {
@@ -47,11 +52,10 @@
                                BEGetStringWithKeyFromTable(@"系统设置", @"P06A"),
                                BEGetStringWithKeyFromTable(@"我的设备", @"P06A"),
                                BEGetStringWithKeyFromTable(@"联系我们", @"P06A"),
-                               BEGetStringWithKeyFromTable(@"帮助", @"P06A"),
-                               @"",@"",@"",
-                               BEGetStringWithKeyFromTable(@"退出登录", @"P06A")
+                               //                               BEGetStringWithKeyFromTable(@"帮助", @"P06A"),
+                               @"",@"",@"",@"",@""
                                ];
-        self.imageNameArray = @[@"",@"setting",@"star",@"service",@"help",@"",@"",@"",@""];
+        self.imageNameArray = @[@"",@"setting",@"star",@"service",@"",@"",@"",@"",@""];
     }else{
         self.functionArray = @[
                                @"",
@@ -62,7 +66,7 @@
                                ];
         self.imageNameArray = @[@"",@"setting",@"help",@"",@"",@"",@"",@"",@""];
     }
-
+    [self.tableView reloadData];
 }
 
 #pragma mark -- UITableViewDataSource
@@ -74,7 +78,9 @@
 {
     return 9;
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     if(!cell){
@@ -92,13 +98,19 @@
     }
     
     if (indexPath.row==8){
-        textLabel.text = BEGetStringWithKeyFromTable(@"退出登录", @"P06A");
-        [textLabel setTextColor:UIColorFromHex(0x65B8F3)];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        NSString *identity = [UserDefault objectForKey:@"Identity"];
+        //判断身份显示不同的界面
+        if ([identity isEqualToString:@"admin"]) {
+            textLabel.text = BEGetStringWithKeyFromTable(@"退出登录", @"P06A");
+            [textLabel setTextColor:UIColorFromHex(0x65B8F3)];
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        }
     }
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *identity = [UserDefault objectForKey:@"Identity"];
     UIStoryboard *mainStoryborad = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -152,49 +164,48 @@
             EditPasswordController *editPasswordVC = (EditPasswordController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"EditPasswordController"];
             showVC = editPasswordVC;
             [self pushViewController:showVC];
+        }else if (indexPath.row==8) {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                           message:BEGetStringWithKeyFromTable(@"退出后不会删除任何历史数据，下次登录仍然可以使用本账号。", @"P06A")
+                                                                    preferredStyle:UIAlertControllerStyleActionSheet];
+            
+            UIAlertAction* logoutAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"退出登录", @"P06A")
+                                                                   style:UIAlertActionStyleDestructive
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                     [UserDefault setBool:NO forKey:@"IsLogined"];
+                                                                     [UserDefault synchronize];
+                                                                     
+                                                                     NSString *userIdentity = [UserDefault objectForKey:@"Identity"];
+                                                                     
+                                                                     if ([userIdentity isEqualToString:@"patient"]) {
+                                                                         
+                                                                         showVC = (PhoneLoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"PhoneLoginViewController"];
+                                                                         
+                                                                     }else{
+                                                                         showVC = (PasswordLoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"PasswordLoginViewController"];
+                                                                         
+                                                                     }
+                                                                     
+                                                                     
+                                                                     UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
+                                                                     [nav pushViewController:showVC animated:YES];
+                                                                     [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished)
+                                                                      {
+                                                                          [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+                                                                      }];
+                                                                     
+                                                                     
+                                                                 }];
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A")
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:cancelAction];
+            [alert addAction:logoutAction];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }
  
-    if (indexPath.row==8) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
-                                                                       message:BEGetStringWithKeyFromTable(@"退出后不会删除任何历史数据，下次登录仍然可以使用本账号。", @"P06A")
-                                                                preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        UIAlertAction* logoutAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"退出登录", @"P06A")
-                                                               style:UIAlertActionStyleDestructive
-                                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                                 [UserDefault setBool:NO forKey:@"IsLogined"];
-                                                                 [UserDefault synchronize];
-                                                                 
-                                                                 NSString *userIdentity = [UserDefault objectForKey:@"Identity"];
-                                                                 
-                                                                 if ([userIdentity isEqualToString:@"patient"]) {
-                                                                     
-                                                                     showVC = (PhoneLoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"PhoneLoginViewController"];
-                                                                     
-                                                                 }else{
-                                                                     showVC = (PasswordLoginViewController *)[mainStoryborad instantiateViewControllerWithIdentifier:@"PasswordLoginViewController"];
-                                                                     
-                                                                 }
-                                                                 
-                                                                 
-                                                                 UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
-                                                                 [nav pushViewController:showVC animated:YES];
-                                                                 [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished)
-                                                                  {
-                                                                      [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
-                                                                  }];
-                                                                 
-                                                                 
-                                                             }];
-        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A")
-                                                                style:UIAlertActionStyleCancel
-                                                              handler:^(UIAlertAction * action) {}];
-        
-        [alert addAction:cancelAction];
-        [alert addAction:logoutAction];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
     if (showVC)
     {
 //        UINavigationController* nav = (UINavigationController*)self.mm_drawerController.centerViewController;
@@ -205,7 +216,9 @@
          }];
     }
 }
--(void)pushViewController:(UIViewController *)viewController{
+
+-(void)pushViewController:(UIViewController *)viewController
+{
     UINavigationController *nav = (UINavigationController *)self.mm_drawerController.centerViewController;
     [nav pushViewController:viewController animated:YES];
 }

@@ -108,7 +108,7 @@ static BELanguageTool *sharedModel;
     self.language = language;
     [UserDefault setObject:language forKey:LANGUAGE_SET];
     [UserDefault synchronize];
-    [self resetRootViewController];
+//    [self resetRootViewController];
 }
 
 //重新设置
