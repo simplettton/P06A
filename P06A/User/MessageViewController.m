@@ -27,8 +27,7 @@
     [super viewDidLoad];
     
     self.title = BEGetStringWithKeyFromTable(@"留言列表", @"P06A");
-    
-//    self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
+
     self.inputToolbar.contentView.textView.placeHolder = BEGetStringWithKeyFromTable(@"新信息", @"P06A");
     self.inputToolbar.contentView.textView.accessibilityLabel = BEGetStringWithKeyFromTable(@"新信息", @"P06A");
 
@@ -59,21 +58,12 @@
     if (self.hireId) {
         self.messageData = [[MessageModelData alloc]initWithId:self.hireId];
     }
-
-    
-//    if(self.hireId){
-//
-//        [self.messageData loadMessagesWithId:self.hireId];
-//
-//    }
-
     
 //    /**
 //     *  Set up message accessory button delegate and configuration
 //     */
 //    self.collectionView.accessoryDelegate = self;
     
-
 }
 -(void)viewWillDisappear:(BOOL)animated{
     
@@ -88,11 +78,6 @@
 }
 
 #pragma mark - JSQMessages CollectionView DataSource
-
-//- (NSString *)senderId {
-//    return kAvatarIdPatient;
-//}
-
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {

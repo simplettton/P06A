@@ -32,7 +32,7 @@
 "通信方式"="Communication Mode";
 "语言切换"="Language";
 "保存"="Save";
-"保存成功"="succesfully saved";
+"保存成功"="Saved";
 
 //MyDeviceTableViewController
 "序列号"="Serial Number";
@@ -83,7 +83,7 @@
 
 "安全检测"="Security Check";
 "正在进行安全检测..."="Safety testing is under way...";
-"已经过安全检测，更换成功"="Safety testing is succeeded";
+"已经过安全检测，更换成功"="Safety testing is passed";
 "未通过安全检测，请稍后重试"="Safety testing is failed";
 
 
@@ -131,7 +131,7 @@
 "当前没有配对设备，请前往设置"="There is no matching device,please go to the Settings";
 "正在连接设备..."="Connecting device…";
 "设备无响应"="The device is not responding";
-"设备连接成功"="The device is successfully connected";
+"设备连接成功"="Connected";
 "设备连接失败"="Device connection failed";
 
 "无异常报警"="NO abnormal alarm";
@@ -166,7 +166,7 @@
 "设备状态"="Device State";
 "未连接"="Unconneted";
 "治疗模式"="Treat Mode";
-"已成功连接服务器"="The server has been successfully connected";
+"已连接服务器"="Server connected";
 
 
 //  ServerRecordViewController
@@ -182,7 +182,7 @@
 "治疗报告"="Treatment Report";
 "正在加载中..."="Please wait…";
 "图片格式错误"="Image format error";
-"治疗照片已保存"="The photo has been saved";
+"治疗照片已保存"="Saved";
 
 
 //ReportComposer
@@ -221,3 +221,9 @@
 "压力过高"="The device pressure is too high.";
 "电量不足"="Abnormal power";
 "寿命不足"="The device has expired";
+
+//NetWorkTool
+"正在存储照片中…"="Uploading…";
+"账号验证过期，即将重新登录"="Your account has expired and you should login again ...";
+"下载成功"="Downloaded";
+"正在下载中…"="Please Wait…";

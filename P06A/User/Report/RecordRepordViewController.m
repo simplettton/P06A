@@ -23,14 +23,6 @@
     self.title = BEGetStringWithKeyFromTable(@"治疗报告", @"P06A");
 
     
-//    shareButton
-//    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-//                                   target:self
-//                                   action:@selector(share)
-//    ];
-//    shareButton.tintColor = [UIColor whiteColor];
-//    self.navigationItem.rightBarButtonItems = @[shareButton];
-    
     [self.webView setBackgroundColor:[UIColor clearColor]];
     self.webView.scalesPageToFit = YES;
     [self.webView setOpaque:NO];
@@ -97,16 +89,13 @@
             }
         }];
     }
-    //take photo
-    if (!self.picker) {
-        self.picker = [[UIImagePickerController alloc]init];
-    }
+
+    //UIImagePickerController对象调用系统相机或者相册
+    self.picker = [[UIImagePickerController alloc]init];
+    self.picker.allowsEditing = YES;
     self.picker.delegate = self;
-    self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
--(void)didReceiveMemoryWarning{
-    [super didReceiveMemoryWarning];
-}
+
 -(void)previewPDFWithHTMLContent:(NSString *)HTMLContent{
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *path = [reportComposer exportHTMLContentToPDF:HTMLContent completed:nil];
@@ -198,28 +187,19 @@
     [alert addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"拍照", @"P06A")
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action){
-                                                /**
-                                                 通过相机
-                                                 */
-                                                UIImagePickerController *PickerImage = [[UIImagePickerController alloc]init];
-                                                //获取方式:通过相机
-                                                PickerImage.sourceType = UIImagePickerControllerSourceTypeCamera;
-                                                PickerImage.allowsEditing = YES;
-                                                PickerImage.delegate = self;
-                                                self.picker = PickerImage;
-                                                [self presentViewController:PickerImage animated:YES completion:nil];
+                                                self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                [self presentViewController:self.picker animated:YES completion:nil];
+                                                
                                             }]];
     
     //按钮：从相册选择，类型：UIAlertActionStyleDefault
     [alert addAction:[UIAlertAction actionWithTitle:BEGetStringWithKeyFromTable(@"从相册选择", @"P06A")
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                UIImagePickerController *pickerImage = [[UIImagePickerController alloc]init];
-                                                pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                                                pickerImage.allowsEditing = YES;
-                                                pickerImage.delegate = self;
-                                                self.picker = pickerImage;
-                                                [self presentViewController:pickerImage animated:YES completion:nil];
+
+                                                self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+                                                [self presentViewController:self.picker animated:YES completion:nil];
                                             }]];
     
     
@@ -272,7 +252,8 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     //获取图片
-    UIImage *image = [[info objectForKey:UIImagePickerControllerOriginalImage]fixOrientation];
+    //取info中编辑后的图
+    UIImage *image = [[info objectForKey:UIImagePickerControllerEditedImage]fixOrientation];
     //压缩图片为3MB=3*1024*1024*6byte
     self.image = [image compressImageWithMaxLenth:3*1024*1024*8];
     [self.picker dismissViewControllerAnimated:YES completion:^{
@@ -280,21 +261,9 @@
     }];
     dispatch_async(dispatch_get_main_queue(), ^{
         //导航栏按钮改为保存按钮
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(uploadImage:)];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:BEGetStringWithKeyFromTable(@"保存", @"P06A") style:UIBarButtonItemStylePlain target:self action:@selector(uploadImage:)];
         [self presentImage:self.image];
     });
-    
-
-//    [reportComposer exportHTMLContentToPDF:HTMLContent completed:^{
-//
-//    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
-//    NSURL *pdfURL = [NSURL fileURLWithPath:path];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:pdfURL];
-
-//    [self.webView loadRequest:request];
-//
-//    }];
 }
 
 //页面显示图片

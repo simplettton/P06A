@@ -93,7 +93,7 @@ static NetWorkTool *_instance;
                    [UserDefault setBool:NO forKey:@"IsLogined"];
                    [UserDefault synchronize];
                    dispatch_async(dispatch_get_main_queue(), ^{
-                       [SVProgressHUD showErrorWithStatus:@"账号验证过期，即将重新登录"];
+                       [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"账号验证过期，即将重新登录", @"P06A")];
                        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
                        [appDelegate performSelector:@selector(initRootViewController) withObject:nil afterDelay:1];
                    });
@@ -154,8 +154,8 @@ static NetWorkTool *_instance;
     parameters:data
       progress:^(NSProgress * _Nonnull uploadProgress) {
           
-          [SVProgressHUD showProgress:uploadProgress.fractionCompleted status:@"正在存储照片中..."];
-          NSLog(@"%f",uploadProgress.fractionCompleted);
+          [SVProgressHUD showProgress:uploadProgress.fractionCompleted status:BEGetStringWithKeyFromTable(@"正在存储照片中…", @"P06A")];
+//          NSLog(@"%f",uploadProgress.fractionCompleted);
       }
        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
            //请求结果出现后关闭风火轮
@@ -183,7 +183,7 @@ static NetWorkTool *_instance;
                    [UserDefault setBool:NO forKey:@"IsLogined"];
                    [UserDefault synchronize];
                    dispatch_async(dispatch_get_main_queue(), ^{
-                       [SVProgressHUD showErrorWithStatus:@"账号验证过期，即将重新登录"];
+                       [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"正在下载中…", @"P06A")];
                        
                        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
                        [appDelegate performSelector:@selector(initRootViewController) withObject:nil afterDelay:1];
@@ -262,7 +262,7 @@ static NetWorkTool *_instance;
      filePath:最终的文件路径
      */
     NSURLSessionDownloadTask *download = [self downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        [SVProgressHUD showProgress:(double)downloadProgress.completedUnitCount / downloadProgress.totalUnitCount status:@"正在下载中…"];
+        [SVProgressHUD showProgress:(double)downloadProgress.completedUnitCount / downloadProgress.totalUnitCount status:BEGetStringWithKeyFromTable(@"正在下载中…", @"P06A")];
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         //保存的文件路径
         NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:fileName];
@@ -274,7 +274,7 @@ static NetWorkTool *_instance;
                 failureBlock(error);
             }
         }else{
-            [SVProgressHUD showSuccessWithStatus:@"下载成功"];
+            [SVProgressHUD showSuccessWithStatus:BEGetStringWithKeyFromTable(@"下载成功", @"P06A")];
             NSLog(@"%@",filePath);
             HttpResponse *responseObject = [[HttpResponse alloc]init];
             responseObject = (HttpResponse *)response;

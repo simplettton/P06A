@@ -73,51 +73,52 @@
                                                 
                                                 if (isPhoto) {
                                                     NSString *recordId = dataDic[@"msg"];
-                                                    
-                                                    //获取记录中的图片信息
-                                                    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-                                                    NSString *token = [UserDefault objectForKey:@"Token"];
-                                                    NSString *api = [HTTPServerURLString stringByAppendingString:[NSString stringWithFormat:@"Api/Data/GetImgFromTreatRecord?token=%@&recordid=%@",token,recordId]];
-                                                    __block UIImage *downloadImage = [[UIImage alloc]init];
-                                                    [[manager imageDownloader]downloadImageWithURL:[NSURL URLWithString:api]
-                                                                                           options:0
-                                                                                          progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-                                                                                              
-                                                                                          }
-                                                                                         completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
-                                                                                             
-                                                                                             //下载完图片通知更新UI
-                                                                                             [[NSNotificationCenter defaultCenter]postNotificationName:DidGetMessageModelNotification object:nil];
-                                                                                             
-                                                                                             [SVProgressHUD dismiss];
-                                                                                             if (image) {
-                                                                                                 //下载完成照片后替换真实的照片
-
-                                                                                                 for (JSQMessage *message in self.messages) {
-                                                                                                     if ([message.date compare:date] ==  NSOrderedSame) {
-                                                                                                         
-                                                                                                 //根据日期获取要替换的记录
-                                                                                                         NSUInteger index = [self.messages indexOfObject:message];
-                                                                                                         
-                                                                                                         JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:image];
-                                                                                                         JSQMessage *photoMessage = [[JSQMessage alloc]initWithSenderId:senderId
-                                                                                                                                                      senderDisplayName:dataDic[@"author"]
-                                                                                                                                                                   date:date
-                                                                                                                                                                  media:photoItem];
-                                                                                                         [self.messages replaceObjectAtIndex:index withObject:photoMessage];
-                                                                                                         break;
+                                                    if (![self.pictureRecordIdArrays containsObject:recordId]) {
+                                                        [self.pictureRecordIdArrays addObject:recordId];
+                                                        //获取记录中的图片信息
+                                                        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                                                        NSString *token = [UserDefault objectForKey:@"Token"];
+                                                        NSString *api = [HTTPServerURLString stringByAppendingString:[NSString stringWithFormat:@"Api/Data/GetImgFromTreatRecord?token=%@&recordid=%@",token,recordId]];
+                                                        __block UIImage *downloadImage = [[UIImage alloc]init];
+                                                        [[manager imageDownloader]downloadImageWithURL:[NSURL URLWithString:api]
+                                                                                               options:0
+                                                                                              progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+                                                                                                  
+                                                                                              }
+                                                                                             completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                                                                                                 
+                                                                                                 //下载完图片通知更新UI
+                                                                                                 [[NSNotificationCenter defaultCenter]postNotificationName:DidGetMessageModelNotification object:nil];
+                                                                                                 
+                                                                                                 [SVProgressHUD dismiss];
+                                                                                                 if (image) {
+                                                                                                     //下载完成照片后替换真实的照片
+                                                                                                     
+                                                                                                     for (JSQMessage *message in self.messages) {
+                                                                                                         if ([message.date compare:date] ==  NSOrderedSame) {
+                                                                                                             
+                                                                                                             //根据日期获取要替换的记录
+                                                                                                             NSUInteger index = [self.messages indexOfObject:message];
+                                                                                                             
+                                                                                                             JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:image];
+                                                                                                             JSQMessage *photoMessage = [[JSQMessage alloc]initWithSenderId:senderId
+                                                                                                                                                          senderDisplayName:dataDic[@"author"]
+                                                                                                                                                                       date:date
+                                                                                                                                                                      media:photoItem];
+                                                                                                             [self.messages replaceObjectAtIndex:index withObject:photoMessage];
+                                                                                                             break;
+                                                                                                         }
                                                                                                      }
                                                                                                  }
-                                                                                             }
-                                                                                         }];
-
-                                                    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:downloadImage];
-                                                    JSQMessage *photoMessage = [[JSQMessage alloc]initWithSenderId:senderId
-                                                                                                 senderDisplayName:dataDic[@"author"]
-                                                                                                              date:date
-                                                                                                             media:photoItem];
-                                                    [self.messages addObject:photoMessage];
-                                                    
+                                                                                             }];
+                                                        
+                                                        JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:downloadImage];
+                                                        JSQMessage *photoMessage = [[JSQMessage alloc]initWithSenderId:senderId
+                                                                                                     senderDisplayName:dataDic[@"author"]
+                                                                                                                  date:date
+                                                                                                                 media:photoItem];
+                                                        [self.messages addObject:photoMessage];
+                                                    }
                                                 }else{
                                                     JSQMessage *message = [[JSQMessage alloc]initWithSenderId:senderId
                                                                                             senderDisplayName:dataDic[@"author"]

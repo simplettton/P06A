@@ -159,7 +159,7 @@ NSString *const MQTTPassWord = @"password";
             NSLog(@"-------------------------------------connected");
             
             [SVProgressHUD setMinimumSize:CGSizeMake(100, 40)];
-            [SVProgressHUD showSuccessWithStatus:BEGetStringWithKeyFromTable(@"已成功连接服务器", @"P06A")];
+            [SVProgressHUD showSuccessWithStatus:BEGetStringWithKeyFromTable(@"已连接服务器", @"P06A")];
             
             //询问设备状态包
             [self sendDataWithCmdid:0x90 dataString:nil];
