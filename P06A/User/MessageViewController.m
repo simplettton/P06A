@@ -58,12 +58,6 @@
     if (self.hireId) {
         self.messageData = [[MessageModelData alloc]initWithId:self.hireId];
     }
-    
-//    /**
-//     *  Set up message accessory button delegate and configuration
-//     */
-//    self.collectionView.accessoryDelegate = self;
-    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     
@@ -74,7 +68,13 @@
 }
 -(void)messageModelDidSet
 {
-    [self.collectionView reloadData];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.collectionView reloadData];
+//
+        [self scrollToBottomAnimated:NO];
+    });
 }
 
 #pragma mark - JSQMessages CollectionView DataSource

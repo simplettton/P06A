@@ -49,7 +49,7 @@
     //导航栏标题
     self.title = BEGetStringWithKeyFromTable(@"系统设置",@"P06A");
     //savebutton
-    self.navigationItem.rightBarButtonItem.title = BEGetStringWithKeyFromTable(@"保存", @"P06A");
+//    self.navigationItem.rightBarButtonItem.title = BEGetStringWithKeyFromTable(@"保存", @"P06A");
     
     //界面文字
     self.BLETitleLabel.text = BEGetStringWithKeyFromTable(@"蓝牙通信", @"P06A");
@@ -163,17 +163,23 @@
             }else{      //远程通信
                 selectedCommunicationMode = @"MQTT";
             }
+            [UserDefault setObject:selectedCommunicationMode forKey:@"COMMUNICATION_MODE"];
+            [UserDefault synchronize];
         }else if (indexPath.section == 1){
             if (indexPath.row == 0) {   //中文
                 selectedLanguage = CNS;
             }else{  //英文s
                 selectedLanguage = EN;
             }
+            [[BELanguageTool sharedInstance]setNewLanguage:selectedLanguage];
+            [self initUI];
+            [self.tableView reloadData];
         }
     }
 }
 - (IBAction)save:(id)sender {
     [UserDefault setObject:selectedCommunicationMode forKey:@"COMMUNICATION_MODE"];
+    [UserDefault synchronize];
     [[BELanguageTool sharedInstance]setNewLanguage:selectedLanguage];
     [self initUI];
     [self.tableView reloadData];

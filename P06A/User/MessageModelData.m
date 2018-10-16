@@ -113,6 +113,7 @@
                                                                                              }];
                                                         
                                                         JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:downloadImage];
+                                                        photoItem.image = nil;
                                                         JSQMessage *photoMessage = [[JSQMessage alloc]initWithSenderId:senderId
                                                                                                      senderDisplayName:dataDic[@"author"]
                                                                                                                   date:date

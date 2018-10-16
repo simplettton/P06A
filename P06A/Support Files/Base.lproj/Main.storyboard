@@ -910,7 +910,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="治疗时间100分钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1z4-lj-jAP">
-                                                    <rect key="frame" x="100" y="39" width="133" height="21"/>
+                                                    <rect key="frame" x="100" y="39" width="229" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3517,13 +3517,7 @@
                             <outlet property="delegate" destination="T44-2u-0U6" id="j9m-AN-HcO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="BLk-K6-th6">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="IRS-T5-mfH">
-                            <connections>
-                                <action selector="save:" destination="T44-2u-0U6" id="2zS-Qe-Xbf"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="BLk-K6-th6"/>
                     <connections>
                         <outlet property="BLETitleLabel" destination="3rt-8D-sRW" id="oVz-7r-D0F"/>
                         <outlet property="MQTTTitleLabel" destination="BXC-HA-8HG" id="6OP-Xr-Osr"/>

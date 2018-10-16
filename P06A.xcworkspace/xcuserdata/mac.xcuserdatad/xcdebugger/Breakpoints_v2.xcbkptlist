@@ -35,22 +35,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "P06A/User/MessageModelData.m"
-            timestampString = "561282196.061672"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "-init"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "P06A/User/ServerRecordViewController.m"
             timestampString = "561026815.596379"
             startingColumnNumber = "9223372036854775807"
@@ -68,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "P06A/User/MessageModelData.m"
-            timestampString = "561282196.061748"
+            timestampString = "561369945.0325691"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "-loadMessagesWithId:"
             landmarkType = "7">
          </BreakpointContent>
@@ -84,12 +68,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "P06A/User/MessageViewController.m"
-            timestampString = "561257471.43987"
+            timestampString = "561369945.032904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "334"
             endingLineNumber = "334"
-            landmarkName = "-didPressAccessoryButton:"
+            landmarkName = "-didPressSendButton:withMessageText:senderId:senderDisplayName:date:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
