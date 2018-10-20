@@ -65,15 +65,15 @@
     [footer setTitle:@"没有数据了~" forState:MJRefreshStateNoMoreData];
     self.tableView.mj_footer = footer;
 }
--(void)refresh{
+-(void)refresh {
     [self askForData:YES];
 }
 
--(void)loadMore{
+-(void)loadMore {
     [self askForData:NO];
 }
 
--(void)endRefresh{
+-(void)endRefresh {
     
     if (page == 0) {
         [self.tableView.mj_header endRefreshing];
@@ -93,29 +93,34 @@
                                     hasToken:YES
                                      success:^(HttpResponse *responseObject) {
                                          
-                                         if ([responseObject.result intValue] == 1) {
+                                         if ([responseObject.result intValue] == 1)
+                                         {
                                              NSString *count = responseObject.content[@"count"];
                                              
                                              //页数
                                              self->totalPage = ([count intValue]+15-1)/15;
-                                             if (self->totalPage <= 1) {
+                                             if (self->totalPage <= 1)
+                                             {
                                                  self.tableView.mj_footer.hidden = YES;
-                                             }else{
+                                             }
+                                             else
+                                             {
                                                  self.tableView.mj_footer.hidden = NO;
                                              }
-                                             if ([count intValue] >0) {
-                                                 
+                                             
+                                             if ([count intValue] >0)
+                                             {
                                                  [self getNetworkData:isRefresh];
-
-                                                 
-                                             }else{
+                                             }
+                                             else
+                                             {
                                                  [self->datas removeAllObjects];
                                                  [self endRefresh];
                                                  [self.tableView reloadData];
-
-                                                 
                                              }
-                                         }else{
+                                         }
+                                         else
+                                         {
                                              [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                          }
                                      } failure:nil];
@@ -167,7 +172,6 @@
                                      if ([responseObject.result intValue] == 1) {
                                          NSArray *content = responseObject.content;
                                          if ([content count]>0) {
-                                             NSLog(@"userlist = %@",responseObject.content);
                                              for (NSDictionary *dataDic in responseObject.content) {
                                                  if (![self->datas containsObject:dataDic]) {
                                                      [self->datas addObject:dataDic];
@@ -251,7 +255,7 @@
     cell.selectedView.image = [UIImage imageNamed:@"selected"];
     NSDictionary *dataDic = [datas objectAtIndex:indexPath.row];
     
-    self.selectedUser = [dataDic objectForKey:@"institutionstype"];
+    self.selectedUser = [dataDic objectForKey:@"id"];
 }
 #pragma mark - action
 - (IBAction)finish:(id)sender {
@@ -262,17 +266,17 @@
                                       params:@{
                                                @"serialnum":self.serialNum,
                                                @"cpuid":self.cpuid,
-                                               @"username":self.selectedUser
+                                               @"institutionsid":self.selectedUser
                                                }
                                     hasToken:YES
                                      success:^(HttpResponse *responseObject) {
                                          if ([responseObject.result intValue] == 1) {
-                                             BOOL isAddNew = [responseObject.content objectForKey:@"isaddnew"];
+                                             BOOL isAddNew = [[responseObject.content objectForKey:@"isaddnew"]boolValue];
                                              NSString *showMessage = [[NSString alloc]init];
                                              if (isAddNew) {
-                                                 showMessage = @"录入成功";
+                                                 showMessage = @"已录入设备";
                                              }else{
-                                                 showMessage = @"换绑成功";
+                                                 showMessage = @"已换绑序列号";
                                              }
                                              [SVProgressHUD showSuccessWithStatus:showMessage];
                                              [self.navigationController popViewControllerAnimated:YES];

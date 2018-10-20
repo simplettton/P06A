@@ -31,35 +31,43 @@ typedef NS_ENUM(NSInteger,KRole)
 
 @implementation AddAccountViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.title = @"新增账号";
+    self.userNameTextFileld.delegate = self;
+    self.passwordTextField.delegate= self;
+    self.institutionTextField.delegate = self;
+    
+    
     [self changeSelection:self.accountButtons[0]];
     [self setBorderWithView:self.accountTypeView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xf4f4f4) borderWidth:2.0f];
     [self setBorderWithView:self.infomationView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xf4f4f4) borderWidth:2.0f];
     
 }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
     [self hideKeyBoard];
 }
 
--(void)hideKeyBoard{
+-(void)hideKeyBoard
+{
     [self.view endEditing:YES];
 }
-- (IBAction)changeSelection:(id)sender {
+- (IBAction)changeSelection:(id)sender
+{
     for (UIButton *btn in self.accountButtons) {
         if ([btn tag] == [(UIButton *)sender tag]) {
             btn.backgroundColor = UIColorFromHex(0x5da9e9);
 
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        }else{
+        } else {
             btn.backgroundColor = UIColorFromHex(0xf8f8f8);
             
             [btn setTitleColor:UIColorFromHex(0x212121) forState:UIControlStateNormal];
         }
     }
     self.selectedRole = [NSString stringWithFormat:@"%ld",([sender tag]-1000)];
-
 }
 - (IBAction)save:(id)sender {
     NSString *username = self.userNameTextFileld.text;
@@ -96,6 +104,20 @@ typedef NS_ENUM(NSInteger,KRole)
 
                                  }
                                  failure:nil];
+}
+#pragma mark - TextField Delegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    //限制长度
+    NSUInteger length = textField.text.length - range.length + string.length;
+    if (textField == self.userNameTextFileld || textField == self.passwordTextField || textField == self.institutionTextField) {
+        if (length > 20) {
+            return NO;//限制长度
+        }
+        return YES;
+    }
+    
+    return YES;
 }
 #pragma mark - Private method
 - (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width

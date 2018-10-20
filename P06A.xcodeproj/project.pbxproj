@@ -913,6 +913,7 @@
 				04607B872149F0E70033AE0A /* AccountList */,
 				047BEC292148FFF3000ADDF5 /* AddAccountViewController.h */,
 				047BEC2A2148FFF3000ADDF5 /* AddAccountViewController.m */,
+				042E72E72141102B003F5B9C /* AccountCell.h */,
 				045E912021475AB100B2F39C /* EditPasswordController.h */,
 				045E912121475AB100B2F39C /* EditPasswordController.m */,
 			);
@@ -1925,7 +1926,6 @@
 			children = (
 				046E25E32140C79100014C1D /* DistributeEquipmentViewController.h */,
 				046E25E42140C79100014C1D /* DistributeEquipmentViewController.m */,
-				042E72E72141102B003F5B9C /* AccountCell.h */,
 				042E72E82141102B003F5B9C /* AccountCell.m */,
 			);
 			path = DistributeDevice;
@@ -2235,9 +2235,6 @@
 				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesTypingIndicatorFooterView.xib",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle",
-				"${PODS_ROOT}/UMengUShare/UShareSDK/SocialLibraries/QQ/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
-				"${PODS_ROOT}/UMengUShare/UShareSDK/SocialLibraries/Sina/SinaSDK/WeiboSDK.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -2251,9 +2248,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesTypingIndicatorFooterView.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKPromptResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TencentOpenApi_IOS_Bundle.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

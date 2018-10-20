@@ -210,22 +210,22 @@
 
 - (void)share {
     
-    WXFileObject *fileObject = [WXFileObject object];
-    
-    fileObject.fileData = [self.webView converToPDF];
-    
-    fileObject.fileExtension = @"pdf";
-
-    WXMediaMessage *message = [WXMediaMessage message];
-    message.mediaObject = fileObject;
-    message.title = @"治疗报告.pdf";
-    
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc]init];
-    req.bText = NO;
-    req.message = message;
-    req.scene = WXSceneSession;// 指定发送到会话
-    
-    [WXApi sendReq:req];
+//    WXFileObject *fileObject = [WXFileObject object];
+//
+//    fileObject.fileData = [self.webView converToPDF];
+//
+//    fileObject.fileExtension = @"pdf";
+//
+//    WXMediaMessage *message = [WXMediaMessage message];
+//    message.mediaObject = fileObject;
+//    message.title = @"治疗报告.pdf";
+//    
+//    SendMessageToWXReq *req = [[SendMessageToWXReq alloc]init];
+//    req.bText = NO;
+//    req.message = message;
+//    req.scene = WXSceneSession;// 指定发送到会话
+//    
+//    [WXApi sendReq:req];
 }
 
 - (void)uploadImage:(id)sender {

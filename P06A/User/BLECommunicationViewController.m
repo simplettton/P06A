@@ -517,7 +517,7 @@
     [baby setBlockOnFailToConnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
         [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"设备连接失败", @"P06A")];
         [SVProgressHUD dismissWithDelay:0.9];
-
+ 
     }];
     
     

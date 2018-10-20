@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 #import "AppDelegate.h"
-#import <UMSocialCore/UMSocialCore.h>
+//#import <UMSocialCore/UMSocialCore.h>
 
 @interface LoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
@@ -173,68 +173,68 @@
 
 - (IBAction)loginWithWeChat:(id)sender
 {
-    [self getAuthWithUserInfoFromWechat];
+//    [self getAuthWithUserInfoFromWechat];
     [SVProgressHUD showWithStatus:@"正在登录中..."];
 
 }
-- (void)getAuthWithUserInfoFromWechat
-{
-
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
-        if (error) {
-            
-        } else {
-
-            UMSocialUserInfoResponse *resp = result;
-            
-            // 授权信息
-            NSLog(@"Wechat uid: %@", resp.uid);
-            NSLog(@"Wechat openid: %@", resp.openid);
-            NSLog(@"Wechat unionid: %@", resp.unionId);
-            NSLog(@"Wechat accessToken: %@", resp.accessToken);
-            NSLog(@"Wechat refreshToken: %@", resp.refreshToken);
-            NSLog(@"Wechat expiration: %@", resp.expiration);
-            NSDictionary *originaldic = resp.originalResponse;
-            NSString *country = originaldic[@"country"];
-            NSString *province = originaldic[@"province"];
-            NSString *city = originaldic[@"city"];
-            
-            // 用户信息
-            NSLog(@"Wechat name: %@", resp.name);
-            NSLog(@"Wechat iconurl: %@", resp.iconurl);
-            NSLog(@"Wechat gender: %@", resp.unionGender);
-            
-            // 第三方平台SDK源数据
-            NSString *string = [NSString stringWithFormat:@"%@,%@,%@,%@,%@",resp.name,resp.unionGender,country,province,city];
-            [SVProgressHUD showSuccessWithStatus:string];
-            
-            
-            //保存第三方信息
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-
-            NSString *imageURL = resp.iconurl;
-            UIImage *userIcon=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]]];
-            NSData *imageData = UIImagePNGRepresentation(userIcon);
-            
-
-            [userDefaults setObject:imageData forKey:@"USER_ICON"];
-            [userDefaults setObject:resp.name forKey:@"USER_NAME"];
-            [userDefaults setObject:resp.unionGender forKey:@"USER_GENDER"];
-            [userDefaults setObject:@"user" forKey:@"ROLE"];
-            [userDefaults synchronize];
-            
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UINavigationController *centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];
-            [userDefaults setBool:YES forKey:@"IsLogined"];
-            //初始化drawercontroller
-
-
-            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-            [self performSelector:@selector(initDrawerWithCenterViewController:) withObject:centerNavi afterDelay:0.25];
-
-        }
-    }];
-}
+//- (void)getAuthWithUserInfoFromWechat
+//{
+//
+//    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+//        if (error) {
+//
+//        } else {
+//
+//            UMSocialUserInfoResponse *resp = result;
+//
+//            // 授权信息
+//            NSLog(@"Wechat uid: %@", resp.uid);
+//            NSLog(@"Wechat openid: %@", resp.openid);
+//            NSLog(@"Wechat unionid: %@", resp.unionId);
+//            NSLog(@"Wechat accessToken: %@", resp.accessToken);
+//            NSLog(@"Wechat refreshToken: %@", resp.refreshToken);
+//            NSLog(@"Wechat expiration: %@", resp.expiration);
+//            NSDictionary *originaldic = resp.originalResponse;
+//            NSString *country = originaldic[@"country"];
+//            NSString *province = originaldic[@"province"];
+//            NSString *city = originaldic[@"city"];
+//
+//            // 用户信息
+//            NSLog(@"Wechat name: %@", resp.name);
+//            NSLog(@"Wechat iconurl: %@", resp.iconurl);
+//            NSLog(@"Wechat gender: %@", resp.unionGender);
+//
+//            // 第三方平台SDK源数据
+//            NSString *string = [NSString stringWithFormat:@"%@,%@,%@,%@,%@",resp.name,resp.unionGender,country,province,city];
+//            [SVProgressHUD showSuccessWithStatus:string];
+//
+//
+//            //保存第三方信息
+//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//
+//            NSString *imageURL = resp.iconurl;
+//            UIImage *userIcon=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]]];
+//            NSData *imageData = UIImagePNGRepresentation(userIcon);
+//
+//
+//            [userDefaults setObject:imageData forKey:@"USER_ICON"];
+//            [userDefaults setObject:resp.name forKey:@"USER_NAME"];
+//            [userDefaults setObject:resp.unionGender forKey:@"USER_GENDER"];
+//            [userDefaults setObject:@"user" forKey:@"ROLE"];
+//            [userDefaults synchronize];
+//
+//            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            UINavigationController *centerNavi = [mainStoryboard instantiateViewControllerWithIdentifier:@"patient"];
+//            [userDefaults setBool:YES forKey:@"IsLogined"];
+//            //初始化drawercontroller
+//
+//
+//            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+//            [self performSelector:@selector(initDrawerWithCenterViewController:) withObject:centerNavi afterDelay:0.25];
+//
+//        }
+//    }];
+//}
 #pragma mark - loginWithPhone
 
 - (IBAction)loginWithPhoneNumber:(id)sender {

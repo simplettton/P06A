@@ -50,24 +50,6 @@ PODS:
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
   - SVProgressHUD (2.2.5)
-  - UMengUShare/Core (6.4.8.2):
-    - UMengUShare/Network
-  - UMengUShare/Network (6.4.8.2)
-  - UMengUShare/Social/QQ (6.4.8.2):
-    - UMengUShare/Core
-    - UMengUShare/Social/ReducedQQ
-  - UMengUShare/Social/ReducedQQ (6.4.8.2):
-    - UMengUShare/Core
-  - UMengUShare/Social/ReducedSina (6.4.8.2):
-    - UMengUShare/Core
-  - UMengUShare/Social/ReducedWeChat (6.4.8.2):
-    - UMengUShare/Core
-  - UMengUShare/Social/Sina (6.4.8.2):
-    - UMengUShare/Core
-    - UMengUShare/Social/ReducedSina
-  - UMengUShare/Social/WeChat (6.4.8.2):
-    - UMengUShare/Core
-    - UMengUShare/Social/ReducedWeChat
 
 DEPENDENCIES:
   - AFNetworking
@@ -83,9 +65,6 @@ DEPENDENCIES:
   - Popover.OC
   - SDWebImage
   - SVProgressHUD
-  - UMengUShare/Social/QQ
-  - UMengUShare/Social/Sina
-  - UMengUShare/Social/WeChat
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -104,7 +83,6 @@ SPEC REPOS:
     - Popover.OC
     - SDWebImage
     - SVProgressHUD
-    - UMengUShare
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -122,8 +100,7 @@ SPEC CHECKSUMS:
   Popover.OC: bfcce8307f77593e1e1d7cf58604077f74e114bc
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
 
-PODFILE CHECKSUM: 3beb30e613b4fe5bd93e1c99a835d8a059f407d1
+PODFILE CHECKSUM: 144adc0ba19a3ba4ddf756dff6deab91ddbfa8e8
 
 COCOAPODS: 1.5.3

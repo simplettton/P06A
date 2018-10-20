@@ -22,12 +22,14 @@
 
 @implementation AccountListViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.title = @"机构列表";
     [self initAll];
 }
--(void)initAll{
+-(void)initAll
+{
     self.tableView.tableFooterView = [[UIView alloc]init];
     datas = [[NSMutableArray alloc]initWithCapacity:20];
     self.navigationItem.backBarButtonItem =[ [UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -35,12 +37,14 @@
     [self setBorderWithView:self.buttomView top:YES left:NO bottom:NO right:NO borderColor:UIColorFromHex(0X6D9BCB) borderWidth:0.5f];
     [self initTableHeaderAndFooter];
 }
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:YES];
     [self refresh];
 }
 #pragma mark - Refresh
--(void)initTableHeaderAndFooter{
+-(void)initTableHeaderAndFooter
+{
     //下拉刷新
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
     header.lastUpdatedTimeLabel.hidden = YES;
@@ -54,16 +58,19 @@
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     [footer setTitle:@"" forState:MJRefreshStateIdle];
     [footer setTitle:@"" forState:MJRefreshStateRefreshing];
-    [footer setTitle:@"---END---" forState:MJRefreshStateNoMoreData];
+    [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
     self.tableView.mj_footer = footer;
 }
--(void)refresh{
+-(void)refresh
+{
     [self askForData:YES];
 }
--(void)loadMore{
+-(void)loadMore
+{
     [self askForData:NO];
 }
--(void)askForData:(BOOL)isRefresh{
+-(void)askForData:(BOOL)isRefresh
+{
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:20];
     [params setObject:@"3" forKey:@"institutionstype"];
@@ -72,38 +79,37 @@
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
                                      
-                                     if ([responseObject.result intValue] == 1) {
+                                     if ([responseObject.result intValue] == 1)
+                                     {
                                          NSString *count = responseObject.content[@"count"];
                                          
                                          //页数
                                          self->totalPage = ([count intValue]+7-1)/7;
                                          if (self->totalPage <= 1) {
                                              self.tableView.mj_footer.hidden = YES;
-                                         }else{
+                                         } else {
                                              self.tableView.mj_footer.hidden = NO;
                                          }
                                          if ([count intValue] >0) {
-                                             
                                              [self getNetworkData:isRefresh];
-                                             
-
-                                         }else{
+                                         } else {
                                              [self->datas removeAllObjects];
                                              [self endRefresh];
                                              [self.tableView reloadData];
                                          }
-                                     }else{
+                                     } else {
                                          [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                      }
                                  } failure:nil];
     
     
 }
--(void)getNetworkData:(BOOL)isRefresh{
+-(void)getNetworkData:(BOOL)isRefresh
+{
     
     if (isRefresh) {
         page = 0;
-    }else{
+    } else {
         page ++;
     }
     

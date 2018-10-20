@@ -109,10 +109,11 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     {
         self.noFileView.hidden = NO;
     }
+    /**
+     *  初始化升级参数
+     */
     self.sendTimes = 0;
     self.beginByte = 0;
-    
-    //创建数据缓存区
     self.readBuf = [[NSMutableData alloc] init];
     
     //这个可以查找 [FilePath getDelegateFilePath] 路径下的所有文件
@@ -151,7 +152,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleBLEPowerOff) name:@"BLEPoweredOffNotification"
                                               object:nil];
 }
--(void)handleBLEPowerOff{
+-(void)handleBLEPowerOff {
     [SVProgressHUD showErrorWithStatus:@"蓝牙未打开升级连接设备"];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -205,9 +206,25 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     
     //扫描到设备
     [baby setBlockOnDiscoverToPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
-        NSLog(@"搜索到了设备:%@",peripheral.name);
+//        NSLog(@"搜索到了设备:%@",peripheral.name);
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if ([peripheral.name hasPrefix:@"P"]) {
+        
+        NSString *peripheralName;
+        if ([advertisementData objectForKey:@"kCBAdvDataLocalName"]) {
+            peripheralName = [NSString stringWithFormat:@"%@",[advertisementData objectForKey:@"kCBAdvDataLocalName"]];
+        }else if(!([peripheral.name isEqualToString:@""] || peripheral.name == nil)) {
+            peripheralName = peripheral.name;
+        }else
+        {
+            peripheralName = [peripheral.identifier UUIDString];
+        }
+        NSLog(@"搜索到了设备:%@",peripheralName);
+        
+//        if ([peripheralName hasPrefix:@"P"]) {
+//            [weakSelf insertTableView:peripheral advertisementData:advertisementData RSSI:RSSI];
+//        }
+        peripheralName = [peripheralName stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if ([weakSelf checkSerailNum:peripheralName]) {
             [weakSelf insertTableView:peripheral advertisementData:advertisementData RSSI:RSSI];
         }
     }];
@@ -309,7 +326,17 @@ typedef NS_ENUM(NSInteger,KCmdids) {
       characteristic:characteristic
                block:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
                    NSLog(@"----------------------------------------------");
+                   
                    NSData *data = characteristic.value;
+                   Byte *byte = (Byte *)[data bytes];
+                   NSMutableArray *dataArray = [[NSMutableArray alloc]init];
+                   for (int i = 0; i<[data length]; i++) {
+                       [dataArray addObject:[NSString stringWithFormat:@"%02X",byte[i]]];
+                   }
+                   
+                   NSString *string = [dataArray componentsJoinedByString:@"---"];
+                   NSLog(@"receiveData----------%@",string);
+                   
                    if (data) {
                        //将数据存入缓存区
                        [weakSelf.readBuf appendData:data];
@@ -358,7 +385,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     if (data != nil) {
         Byte* bytes = (Byte *)[data bytes];
         Byte cmdid = bytes[0];
-        NSLog(@"receive------- %x",cmdid);
+        NSLog(@"cmdid------- %x",cmdid);
         switch (cmdid) {
             case CMDID_ARM_UPGRATE_PREPARE_COMPLETED:
             {
@@ -395,7 +422,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
                         self.HUD.mode = MBProgressHUDModeDeterminateHorizontalBar;
                         self.HUD.label.text = [NSString stringWithFormat:@"升级中...%ld%%",self.sendTimes *100 /packNumber];
                         self.HUD.progress = progress;
-                        NSLog(@"self.hud.progress = %f",self.HUD.progress);
                         
                     });
 
@@ -454,9 +480,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
             NSString *rangeStr = [NSString stringWithFormat:@"%i,%li", i,
                                   (long)BLE_SEND_MAX_LEN];
             NSData *subData = [completeData subdataWithRange:NSRangeFromString(rangeStr)];
-            
-
-            NSLog(@"i = %d",i);
             [self writeData:subData];
             [NSThread sleepForTimeInterval:0.01];
             self.sendTimes ++;
@@ -561,19 +584,12 @@ typedef NS_ENUM(NSInteger,KCmdids) {
             [self presentViewController:alert animated:YES completion:nil];
         });
 
-    }
-//    else if ([peripheral.name hasPrefix:@"P06A"]) {
-//        baby.having(self.peripheral).connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
-//
-//    }else {
-//        [self showMessageWithTitle:@"当前升级文件不支持该设备的升级" hideAfterDelay:YES];
-//    }
-    else{
+    } else {
         baby.having(self.peripheral).connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
     }
 }
 
-- (void)insertTableView:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
+- (void)insertTableView:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
     
     NSArray *peripherals = [peripheralDataArray valueForKey:@"peripheral"];
     if(![peripherals containsObject:peripheral]) {
@@ -589,7 +605,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         
         [self.tableView insertRowsAtIndexPaths:indexPaths
                               withRowAnimation:UITableViewRowAnimationAutomatic];
-    }else{
+    } else {
         NSInteger index = [peripherals indexOfObject:peripheral];
         
         NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
@@ -599,7 +615,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         [peripheralDataArray replaceObjectAtIndex:index withObject:item];
         
     }
-
 }
 
 #pragma mark - refresh
@@ -717,8 +732,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         if (self.binData)
         {
             [self sendUpgrateRequest];
-            
-//            [SVProgressHUD showSuccessWithStatus:@"正在请求进入升级模式..."];
             [self showMessageWithTitle:@"正在请求进入升级模式…" hideAfterDelay:NO];
             [self startTimer];
 
@@ -737,6 +750,10 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 
 -(void)sendUpgrateRequest
 {
+    //发送请求的时候清空先清空接收缓存
+    self.sendTimes = 0;
+    self.beginByte = 0;
+    self.readBuf = [[NSMutableData alloc] init];
     NSInteger crc32 = [self getCRC32WithData:self.binData];
     NSInteger length = [self.binData length];
     
@@ -799,8 +816,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     }
     return value ^ 0xffffffff;
 }
--(NSData *)combineData:(NSUInteger)dataLength withCrc32:(NSUInteger)crc
-{
+-(NSData *)combineData:(NSUInteger)dataLength withCrc32:(NSUInteger)crc {
     Byte b1=dataLength & 0xff;
     Byte b2=(dataLength>>8) & 0xff;
     Byte b3=(dataLength>>16) & 0xff;
@@ -835,8 +851,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     }
 }
 //时间戳字符串转化为日期或时间
-- (NSString *)stringFromTimeIntervalString:(NSString *)timeString dateFormat:(NSString*)dateFormat
-{
+- (NSString *)stringFromTimeIntervalString:(NSString *)timeString dateFormat:(NSString*)dateFormat {
     // 格式化时间
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone: [NSTimeZone timeZoneWithName:@"Asia/Beijing"]];
@@ -869,7 +884,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:0.05 repeats:NO];
         
         // 4.设置UNNotificationRequest
-        NSString *requestIdentifer = @"TestRequest";
+        NSString *requestIdentifer = @"UpgradeSuccessfullyRequest";
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifer content:content trigger:trigger];
         
         //5.把通知加到UNUserNotificationCenter, 到指定触发点会被触发
@@ -879,6 +894,11 @@ typedef NS_ENUM(NSInteger,KCmdids) {
         // Fallback on earlier versions
     }
 }
-
+- (BOOL)checkSerailNum:(NSString *)inputString {
+    if (inputString.length == 0) return NO;
+    NSString *regex =@"^[A-Z]{1}[A-Z0-9]{3}\\d{2}[A-C1-9]{1}[A-Z0-9]{1}\\d{4}$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [pred evaluateWithObject:inputString];
+}
 
 @end

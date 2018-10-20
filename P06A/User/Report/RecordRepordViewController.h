@@ -13,8 +13,8 @@
 #import "UIWebView+ConverToPDF.h"
 #import "UIImage+WLCompress.h"
 #import "ReportComposer.h"
-#import "WXApi.h"
-#import "WXApiObject.h"
+//#import "WXApi.h"
+//#import "WXApiObject.h"
 #import "JSQMessages.h"
 @interface RecordRepordViewController : UIViewController
 @property (nonatomic,strong)NSDictionary *dic;

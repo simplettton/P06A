@@ -16,7 +16,8 @@
 #define MIN_BUTTONWIDTH 75
 #define TYPE_ITEM_Height 30
 #define TYPE_ITEM_INTERVAL 40
-@interface AddDeviceViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,QRCodeReaderDelegate >
+
+@interface AddDeviceViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,QRCodeReaderDelegate,UITextFieldDelegate >
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong,nonatomic)NSMutableArray *typeArray;
 @property (strong,nonatomic)NSString *selectedType;
@@ -31,13 +32,13 @@
 
 @end
 
-@implementation AddDeviceViewController{
+@implementation AddDeviceViewController
+{
     NSMutableArray *datas;
     NSMutableArray *registerArray;
 }
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,10 +46,16 @@
     [self initAll];
 
 }
--(void)initAll{
+-(void)initAll {
 
     self.tableView.tableFooterView = [[UIView alloc]init];
     datas = [[NSMutableArray alloc]initWithCapacity:20];
+    
+    //隐藏键盘手势
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
     
     [self setBorderWithView:self.DeviceTypeView top:NO left:NO bottom:YES right:NO borderColor:UIColorFromHex(0xf4f4f4) borderWidth:2.0f];
     [self getSupportMachineType];
@@ -59,14 +66,30 @@
     self.navigationItem.rightBarButtonItem = button;
     
 }
--(void)nextStep:(id)sender{
-    if ([datas count] == 0) {
+-(void)nextStep:(id)sender {
+    if ([datas count] == 0)
+    {
         [SVProgressHUD showSuccessWithStatus:@"无可录入设备"];
-    }else {
-        if (self.cpuid!=nil && self.serialNum!=nil) {
+    }
+    else
+    {
+        if (self.cpuid!=nil && self.serialNum!=nil)
+        {
             [self performSegueWithIdentifier:@"DistributeDevice" sender:nil];
-        }else{
-            [SVProgressHUD showErrorWithStatus:@"请扫描序列号"];
+        }
+        else
+        {
+            NSArray *cells = self.tableView.visibleCells;
+            AddDeviceCell *firstCell = [cells objectAtIndex:0];
+            NSDictionary *dataDic = [datas objectAtIndex:0];
+            if ([firstCell.serialNumTextField.text length]==0) {
+                [SVProgressHUD showErrorWithStatus:@"序列号不能为空"];
+            }else{
+                self.cpuid = dataDic[@"cpuid"];
+                self.serialNum = firstCell.serialNumTextField.text;
+                [self performSegueWithIdentifier:@"DistributeDevice" sender:nil];
+                
+            }
         }
     }
 //    self.cpuid = @"1b00080002434d5632303320e906f405";
@@ -80,31 +103,39 @@
                                   params:@{@"":@""}
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
-                                     if ([responseObject.result integerValue] == 1) {
+                                     if ([responseObject.result integerValue] == 1)
+                                     {
                                          NSArray *dataArray = responseObject.content;
-                                         if ([dataArray count]>0) {
-                                             for (NSString *type in responseObject.content) {
+                                         if ([dataArray count]>0)
+                                         {
+                                             for (NSString *type in responseObject.content)
+                                             {
                                                  [self.typeArray addObject:type];
                                              }
                                          }
-                                         if ([self.typeArray count]>0) {
+                                         if ([self.typeArray count]>0)
+                                         {
                                              self.selectedType = self.typeArray[0];
                                              [self initScrollView];
                                              [self initTableHeaderAndFooter];
                                          }
 
-                                     }else{
+                                     }
+                                     else
+                                     {
                                          [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                      }
                                  }
                                  failure:nil];
 }
 -(void)initScrollView {
-    if ([self.typeArray count] > 0) {
+    if ([self.typeArray count] > 0)
+    {
         
         CGFloat contentsizeWidth = 20;
 
-        for (NSString *type in self.typeArray) {
+        for (NSString *type in self.typeArray)
+        {
             CGFloat buttonWidth = [self getButtonWidthWithTitle:type fontSize:15];
             contentsizeWidth += buttonWidth + TYPE_ITEM_INTERVAL;
         }
@@ -118,7 +149,8 @@
         CGFloat buttonYPositon = self.scrollView.bounds.size.height/2 - TYPE_ITEM_Height/2;
         CGFloat XPostion = 20.0f;
         
-        for (int i = 0 ; i < [self.typeArray count]; i++) {
+        for (int i = 0 ; i < [self.typeArray count]; i++)
+        {
             
             NSString *type = self.typeArray[i];
             CGFloat buttonWidth = [self getButtonWidthWithTitle:type fontSize:15];
@@ -143,13 +175,13 @@
 /**
  * 根据按钮title&font返回按钮长度 这里 MIN_BUTTONWIDTH 设置成75
  */
--(CGFloat)getButtonWidthWithTitle:(NSString *)title fontSize:(CGFloat)size{
+-(CGFloat)getButtonWidthWithTitle:(NSString *)title fontSize:(CGFloat)size {
     NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
     CGFloat length = [title boundingRectWithSize:CGSizeMake(552, 74) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size.width;
     CGFloat buttonWidth = MAX(length + 20, MIN_BUTTONWIDTH);
     return buttonWidth;
 }
--(void)selectDevice:(UIButton *)sender{
+-(void)selectDevice:(UIButton *)sender {
     self.selectedType = self.typeArray[([sender tag]-1000)];
     for (int i = 1000; i< 1000 + [self.typeArray count]; i++) {
         UIButton *btn = (UIButton *)[self.scrollView viewWithTag:i];
@@ -166,8 +198,23 @@
     }
     [self getNetworkData];
 }
+#pragma mark - textField delegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return YES;
+}
+#pragma mark - keyboard
+//关闭键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [self hideKeyBoard];
+}
+-(void)hideKeyBoard {
+    [self.view endEditing:YES];
+    [self.tableView endEditing:YES];
+}
+
 #pragma mark - Refresh
--(void)initTableHeaderAndFooter{
+-(void)initTableHeaderAndFooter {
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getNetworkData)];
     header.stateLabel.textColor =UIColorFromHex(0xABABAB);
     header.lastUpdatedTimeLabel.hidden = YES;
@@ -175,7 +222,7 @@
     self.tableView.mj_header = header;
     [self getNetworkData];
 }
--(void)getNetworkData{
+-(void)getNetworkData {
     datas = [[NSMutableArray alloc]initWithCapacity:20];
 
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Device/ActiveList"]
@@ -186,7 +233,6 @@
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
                                      if ([responseObject.result integerValue] == 1) {
-                                         NSLog(@"newDevice:%@",responseObject.content);
                                          if ([responseObject.content count]>0) {
                                              self.tableView.tableHeaderView.hidden = NO;
                                              
@@ -195,28 +241,30 @@
                                                      [self -> datas addObject:dataDic];
                                                  }
                                              }
-                                         }else{
+                                         } else {
                                              self.tableView.tableHeaderView.hidden = YES;
                                          }
                                          [self.tableView reloadData];
-                                     }else{
+                                     } else {
                                          [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                      }
                                  }
                                  failure:nil];
 }
--(void)endRefresh{
+-(void)endRefresh {
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
+
 #pragma mark - Tableview DataSource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [datas count];
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AddDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil) {
         cell = [[AddDeviceCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
@@ -228,13 +276,18 @@
         [cell.ringButton addTarget:self action:@selector(ring:) forControlEvents:UIControlEventTouchUpInside];
         [cell.scanButton addTarget:self action:@selector(scanAction:) forControlEvents:UIControlEventTouchUpInside];
         cell.scanButton.tag = indexPath.row;
-        
-    }else{
+
+        if (indexPath.row == 0) {
+            cell.selectedView.image = [UIImage imageNamed:@"selected"];
+        } else {
+            cell.selectedView.image = [UIImage imageNamed:@"unselected"];
+        }
+    } else {
         self.tableView.tableHeaderView.hidden = YES;
     }
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     AddDeviceCell *cell = [tableView.visibleCells objectAtIndex:indexPath.row];
@@ -248,29 +301,30 @@
 }
 
 #pragma mark - Action
--(void)ring:(UIButton *)sender{
+-(void)ring:(UIButton *)sender {
     AddDeviceCell *cell = (AddDeviceCell *)[[sender superview]superview];
     NSString *cpuid = cell.ringButton.titleLabel.text;
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Device/Beep"]
-                                  params:@{@"type":self.selectedType,
-                                           @"cpuid":cpuid
+                                  params:@{
+                                               @"type":self.selectedType,
+                                               @"cpuid":cpuid
                                            }
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
                                      if ([responseObject.result integerValue] == 1) {
-                                         
-                                     }else{
+                                     } else {
                                          [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                      }
                                  }
                                  failure:nil];
     
 }
--(void)scanAction:(UIButton *)button{
+-(void)scanAction:(UIButton *)button {
     NSString *mediaType = AVMediaTypeVideo;
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
     
-    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
+    {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"相机启用权限未开启"
                                                                        message:[NSString stringWithFormat:@"请在iPhone的“设置”-“隐私”-“相机”功能中，找到“%@”打开相机访问权限",[[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleDisplayName"]]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
@@ -304,8 +358,7 @@
 }
 
 #pragma mark - QRCodeReader Delegate Methods
-- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
-{
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result {
     [self dismissViewControllerAnimated:YES completion:^{
         if (![self checkSerailNum:result]) {
             [SVProgressHUD showErrorWithStatus:@"请扫描有效序列号"];
@@ -315,7 +368,6 @@
             AddDeviceCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
             cell.serialNumTextField.text = result;
             
-//            AddDeviceCell *cell = [self.tableView.visibleCells objectAtIndex:indexPath.row];
             for (AddDeviceCell *cell in self.tableView.visibleCells) {
                 cell.selectedView.image = [UIImage imageNamed:@"unselected"];
             }
@@ -327,8 +379,7 @@
     }];
 }
 
-- (void)readerDidCancel:(QRCodeReaderViewController *)reader
-{
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -340,8 +391,7 @@
     return [pred evaluateWithObject:inputString];
 }
 
-- (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width
-{
+- (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width {
     
     if (top) {
         CALayer *layer = [CALayer layer];
@@ -369,7 +419,7 @@
     }
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"DistributeDevice"]) {
         DistributeEquipmentViewController *vc = (DistributeEquipmentViewController *)segue.destinationViewController;
         vc.cpuid = self.cpuid;

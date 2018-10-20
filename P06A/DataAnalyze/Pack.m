@@ -11,15 +11,12 @@
 typedef void(^NewByteBlock)(NSInteger,NSInteger);
 @implementation Pack
 
-/// <summary>
-/// 通用打包函数
-/// </summary>
-/// <param name="cmdid">命令ID</param>
-/// <param name="address_enabled">存在地址byte[]高位在前</param>
-/// <param name="address">地址</param>
-/// <param name="data_enabled">存在数据byte[]</param>
-/// <param name="data">数据byte[]高位在前</param>
-/// <returns></returns>
+/**
+ *  通用打包函数
+ *  @param cmdid 命令id
+ *  @param dataEnabled  存在数据
+ *  @param pdata  数据
+ */
 
 +(NSData *)packetWithCmdid:(Byte)cmdid dataEnabled:(BOOL)dataEnabled data:(NSData *)pdata
 {

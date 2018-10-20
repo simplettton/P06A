@@ -107,7 +107,7 @@
 }
 
 
--(void)textFieldDidChange{
+-(void)textFieldDidChange {
     if (self.oldPasswordTextField.text.length == 0 || self.passwordTextField.text.length == 0 || self.confirmPassWordTextField.text.length == 0 || self.oldPasswordTextField.text.length < 6 ||
         self.confirmPassWordTextField.text.length < 6 ||self.passwordTextField.text.length < 6) {
         self.finishButton.enabled = NO;
