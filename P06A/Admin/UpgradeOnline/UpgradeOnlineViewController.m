@@ -347,7 +347,7 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     });
 }
 //处理粘包
--(void)analyzeReceivedData{
+-(void)analyzeReceivedData {
     while (self.readBuf.length >= 2) {
         
         NSData *head = [_readBuf subdataWithRange:NSMakeRange(0, 2)];//取得头部数据

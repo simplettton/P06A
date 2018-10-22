@@ -68,11 +68,10 @@
 
 //ChangePhoneNumViewController
 "更换手机号"="Change Number";
-
-
 "国家和地区"="Contries and Regions";
 "中国大陆"="China";
 "请输入有效手机号"="Please enter a valid phone number";
+"新手机号不能与旧手机号一致"="The new phone number cannot be the same as the old one";
 
 //EnterVerificationCodeViewController
 "我们已发送 验证码 短信到您的手机： "="We have send the verification code to :";

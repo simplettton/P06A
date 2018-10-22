@@ -302,7 +302,7 @@ NSString *const MQTTPassWord = @"password";
 }
 
 //定时获取实时信息timer
--(void)startTimer{
+-(void)startTimer {
     //5min发送一次请求实时信息
     self.timer = [NSTimer scheduledTimerWithTimeInterval:300
                                                   target:self
@@ -311,7 +311,7 @@ NSString *const MQTTPassWord = @"password";
                                                  repeats:YES];
 }
 
--(void)closeTimer{
+-(void)closeTimer {
     [self.timer invalidate];
     self.timer = nil;
 

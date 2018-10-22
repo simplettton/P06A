@@ -36,11 +36,11 @@
 
 - (IBAction)changePhoneNumber:(id)sender {
     if ([self isPhoneNumberValid:self.phoneNumberTextField.text]) {
-//        if([self.phoneNumberTextField.text isEqualToString:self.phoneNumber]){
-//            [SVProgressHUD showErrorWithStatus:@"新手机号不能与旧手机号一致"];
-//        }else{
+        if([self.phoneNumberTextField.text isEqualToString:self.phoneNumber]) {
+            [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"新手机号不能与旧手机号一致", @"P06A")];
+        } else {
             [self performSegueWithIdentifier:@"EnterVerificationCode" sender:nil];
-//        }
+        }
 
     }else{
         [SVProgressHUD showErrorWithStatus:BEGetStringWithKeyFromTable(@"请输入有效手机号", @"P06A")];

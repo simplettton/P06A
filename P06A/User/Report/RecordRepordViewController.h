@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+Rotate.h"
-#import "EditTreatAreaViewController.h"
 #import "UIWebView+ConverToPDF.h"
 #import "UIImage+WLCompress.h"
 #import "ReportComposer.h"

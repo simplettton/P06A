@@ -9,7 +9,6 @@
 #import "LeftDrawerViewController.h"
 #import "MyDeviceTableViewController.h"
 #import "UIViewController+MMDrawerController.h"
-#import "LoginViewController.h"
 #import "PersonalInfomationViewController.h"
 #import "ContactUSTableViewController.h"
 #import "SettingViewController.h"
@@ -38,10 +37,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.scrollEnabled = NO;
     [self initAll];
-    
-
 }
--(void)initAll{
+-(void)initAll {
     NSString *identity = [UserDefault objectForKey:@"Identity"];
     //判断身份显示不同的界面
     if ([identity isEqualToString:@"patient"]) {
@@ -52,7 +49,6 @@
                                BEGetStringWithKeyFromTable(@"系统设置", @"P06A"),
                                BEGetStringWithKeyFromTable(@"我的设备", @"P06A"),
                                BEGetStringWithKeyFromTable(@"联系我们", @"P06A"),
-                               //                               BEGetStringWithKeyFromTable(@"帮助", @"P06A"),
                                @"",@"",@"",@"",@""
                                ];
         self.imageNameArray = @[@"",@"setting",@"star",@"service",@"",@"",@"",@"",@""];

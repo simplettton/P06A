@@ -32,12 +32,6 @@
 #define KMainPageCenter CGPointMake(KScreenWidth + KScreenWidth * KMainPageScale / 2.0 - KMainPageDistance, KScreenHeight / 2);
 
 #define VClouldChaneDeckStateDistance (KScreenWidth - KMainPageDistance) / 2.0 - 40
-#define VSpeedFloat 0.7
 
-#define KLeftAlpha 0.9
-#define KLeftCenterX 30
-#define KLeftScale 0.7
-
-#define VDeckCanNoPanViewTag 344343
 
 #endif /* BaseHeader_h */

@@ -23,8 +23,8 @@
     self.navigationItem.backBarButtonItem =[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Users/BindingPhone_CheckAckCode"]
                                   params:@{
-                                           @"id":self.codeId,
-                                           @"ackcode":self.ackCode
+                                               @"id":self.codeId,
+                                               @"ackcode":self.ackCode
                                            }
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {

@@ -8,9 +8,8 @@
 
 #import "PersonalInfomationViewController.h"
 #import "EditTableViewController.h"
-#import "EditTreatAreaViewController.h"
 #import "PhonenumViewController.h"
-#import "BaseHeader.h"
+
 @interface PersonalInfomationViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     NSArray *keys;
@@ -63,7 +62,12 @@
             {
                 if ([keys[i]isEqualToString:@"USER_GENDER"]) {  //翻译男或女
                     label.text = BEGetStringWithKeyFromTable([UserDefault objectForKey:@"USER_GENDER"], @"P06A");
-                }else{
+                } else {
+                    
+                    //label支持换行
+                    label.numberOfLines = 0;
+                    label.lineBreakMode = NSLineBreakByWordWrapping;
+                    
                     label.text = [UserDefault objectForKey:keys[i]];
                 }
             }
@@ -97,6 +101,7 @@
 {
     return 2;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0)
@@ -233,18 +238,7 @@
                 label.text = newValue;
             }
         };
-    }else if ([segue.identifier isEqualToString:@"EditTreatArea"]){
-        EditTreatAreaViewController *vc = (EditTreatAreaViewController *)segue.destinationViewController;
-
-        
-          vc.treatArea = self.treatAreaLabel.text;
-        
-        vc.returnBlock = ^(NSInteger changedRow, NSString *newValue)
-        {
-
-            self.treatAreaLabel.text = newValue;
-        };
-    }else if([segue.identifier isEqualToString:@"EditPhoneNumber"]){
+    }else if([segue.identifier isEqualToString:@"EditPhoneNumber"]) {
         
         PhonenumViewController *vc = (PhonenumViewController *)segue.destinationViewController;
         
@@ -253,13 +247,12 @@
         if (index.section ==1)
         {
             cell = [self.cells objectAtIndex:index.row+index.section *5];
-        }else
-        {
+        } else {
             cell = [self.cells objectAtIndex:index.row];
         }
         UILabel *valueLabel = [cell viewWithTag:2];
         vc.phoneNumber = valueLabel.text;
-        
+
     }
 }
 #pragma mark - private method

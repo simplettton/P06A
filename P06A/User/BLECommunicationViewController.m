@@ -171,12 +171,10 @@
         self.chart = chart;
         [self.chart drawProgressChart];
         [self.view addSubview:self.chart];
-//        [self.chart startAnimationWithDuration:.5f];
     }
 }
 -(void)updatePressProgress{
     [self.chart drawProgressChart];
-//    [self.chart startAnimationWithDuration:.5f];
 }
 -(void)handleConnectTimeOut{
     if (!self.isConnected) {
