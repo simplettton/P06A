@@ -48,21 +48,10 @@
     [self.cancelButton setTitle:BEGetStringWithKeyFromTable(@"取消", @"P06A") forState:UIControlStateNormal];
     [self.confirmButton setTitle:BEGetStringWithKeyFromTable(@"确认", @"P06A") forState:UIControlStateNormal];
     
-    
     [self setNeedsLayout];
 }
-//-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    NSString *serialNum = [UserDefault objectForKey:@"SerialNum"];
-//    for (NSDictionary *dataDic in self.DeviceArray) {
-//        if ([serialNum isEqualToString:[dataDic objectForKey:@"serialnum"]]) {
-//            NSInteger cellIndex = [self.DeviceArray indexOfObject:dataDic];
-//            DeviceItemCell *cell = [[self.tableView visibleCells]objectAtIndex:cellIndex];
-//            cell.selectedView.image = [UIImage imageNamed:@"selected"];
-//        }
-//    }
-//    
-//}
+
+
 
 -(void)layoutIfNeeded{
     //设置按钮边框
@@ -75,6 +64,7 @@
     view.frame = CGRectMake(0, 0, kScreenW, kScreenH);
     view.returnEvent = returnEvent;
     view.DeviceArray = data;
+    view.selectedIndex = [view getCheckMarkIndexFromArray:data];
     [controller.view addSubview:view];
     view.backgroundView.alpha = 0;
     [UIView animateWithDuration:0.3 delay:0.1 usingSpringWithDamping:1 initialSpringVelocity:10 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -82,6 +72,18 @@
     } completion:^(BOOL finished) {
         
     }];
+}
+//计算选择项目序号
+-(NSInteger)getCheckMarkIndexFromArray:(NSMutableArray *)array {
+    NSString *savedHireId = [UserDefault objectForKey:@"HireId"];
+    NSLog(@"hireid = %@",savedHireId);
+    for (NSDictionary *dic in array) {
+        NSString *hireId = dic[@"hireid"];
+        if([hireId isEqualToString:savedHireId]){
+            return [array indexOfObject:dic];
+        }
+    }
+    return 0;
 }
 
 #pragma mark - tableView Delegate
@@ -104,27 +106,24 @@
     cell.serialNumLabel.text = [dataDic objectForKey:@"serialnum"];
     cell.hospitalLabel.text = [dataDic objectForKey:@"from"];
     
-    NSString *savedSerialNum = [UserDefault objectForKey:@"SerialNum"];
-    if ([[dataDic objectForKey:@"serialnum"]isEqualToString:savedSerialNum]) {
+    if (indexPath.row == self.selectedIndex) {
         cell.selectedView.image = [UIImage imageNamed:@"selected"];
-        NSDictionary *dataDic = [self.DeviceArray objectAtIndex:indexPath.row];
-        self.selectedData = dataDic;
     }else{
-        [UIImage imageNamed:@"selected"];
+        cell.selectedView.image = [UIImage imageNamed:@"unselected"];
     }
     
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    DeviceItemCell *cell = [tableView.visibleCells objectAtIndex:indexPath.row];
-    for (DeviceItemCell *cell in tableView.visibleCells) {
-        cell.selectedView.image = [UIImage imageNamed:@"unselected"];
-    }
-    cell.selectedView.image = [UIImage imageNamed:@"selected"];
     self.selectedIndex = indexPath.row;
+
     NSDictionary *dataDic = [self.DeviceArray objectAtIndex:indexPath.row];
     self.selectedData = dataDic;
+    
+    [tableView reloadData];
 }
 
 - (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width

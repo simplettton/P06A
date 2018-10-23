@@ -71,6 +71,7 @@
                                              if ([dataArray count]>0) {
                                                  [DeviceListView showAboveIn:self withData:dataArray returnBlock:^(NSDictionary *dataDic) {
 
+                                                     NSString *hireId = [dataDic objectForKey:@"hireid"];
                                                      NSString *cpuId = [dataDic objectForKey:@"cpuid"];
                                                      NSString *serialNum = [dataDic objectForKey:@"serialnum"];
                                                      NSString *hospital = [dataDic objectForKey:@"from"];
@@ -84,6 +85,7 @@
                                                      self.macStringLabel.text = macString;
 
                                                      //保存设备信息
+                                                     [UserDefault setObject:hireId forKey:@"HireId"];
                                                      [UserDefault setObject:treatArea forKey:@"TREAT_AREA"];
                                                      [UserDefault setObject:cpuId forKey:@"Cpuid"];
                                                      [UserDefault setObject:serialNum forKey:@"SerialNum"];

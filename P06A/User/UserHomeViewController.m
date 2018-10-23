@@ -84,7 +84,7 @@
     }
     
     //默认获取第一个设备信息
-    NSString *macString = [UserDefault objectForKey:@"MacString"];
+    NSString *macString = [UserDefault objectForKey:@"HireId"];
     if (macString == nil) {
         [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
                                       params:@{}
@@ -94,6 +94,7 @@
                                              NSMutableArray *dataArray = responseObject.content;
                                              if ([dataArray count]>0) {
                                                  NSDictionary *dataDic = [dataArray firstObject];
+                                                 NSString *hireId = [dataDic objectForKey:@"hireid"];
                                                  NSString *cpuId = [dataDic objectForKey:@"cpuid"];
                                                  NSString *serialNum = [dataDic objectForKey:@"serialnum"];
                                                  NSString *hospital = [dataDic objectForKey:@"from"];
@@ -103,6 +104,7 @@
                                                  
                                                  
                                                  //保存设备信息
+                                                 [UserDefault setObject:hireId forKey:@"HireId"];
                                                  [UserDefault setObject:treatArea forKey:@"TREAT_AREA"];
                                                  [UserDefault setObject:cpuId forKey:@"Cpuid"];
                                                  [UserDefault setObject:serialNum forKey:@"SerialNum"];

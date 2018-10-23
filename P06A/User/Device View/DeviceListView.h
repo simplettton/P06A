@@ -16,4 +16,5 @@ typedef void (^returnBlock)(NSDictionary* dataDic);
 @property (nonatomic,strong) NSMutableArray *DeviceArray;
 
 +(void)showAboveIn:(UIViewController *)controller withData:(NSMutableArray *)data returnBlock:(returnBlock)returnEvent;
+-(NSInteger)getCheckMarkIndexFromArray:(NSMutableArray *)array;
 @end

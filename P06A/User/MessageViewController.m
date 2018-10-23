@@ -192,7 +192,31 @@
     return nil;
 }
 
+#pragma mark - Responding to collection view tap events
 
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView
+                header:(JSQMessagesLoadEarlierHeaderView *)headerView didTapLoadEarlierMessagesButton:(UIButton *)sender
+{
+    NSLog(@"Load earlier messages!");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Tapped avatar!");
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSLog(@"Tapped message bubble!");
+    JSQMessage *msg = [self.messageData.messages objectAtIndex:indexPath.item];
+
+}
+
+- (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation
+{
+    NSLog(@"Tapped cell at %@!", NSStringFromCGPoint(touchLocation));
+}
 #pragma mark - UICollectionView DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

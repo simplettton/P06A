@@ -187,7 +187,7 @@
     }
 }
 
-- (NSString *) md5:(NSString *) input {
+- (NSString *)  md5:(NSString *) input {
     
     const char *cStr = [input UTF8String];
     
