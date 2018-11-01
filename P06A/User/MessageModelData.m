@@ -40,11 +40,12 @@
     return self;
 }
 -(void)loadMessagesWithId:(NSString *)hireId{
-    
+    [SVProgressHUD showWithStatus:@"正在加载中.."];
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Data/LogOfHireRecord?action=List"]
                                   params:@{@"hireid":hireId}
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
+                                     [SVProgressHUD dismiss];
                                     if ([responseObject.result integerValue] == 1) {
                                         NSArray *messageArray = responseObject.content;
                                         if ([messageArray count]>0) {
@@ -93,7 +94,6 @@
                                                                                                  [SVProgressHUD dismiss];
                                                                                                  if (image) {
                                                                                                      //下载完成照片后替换真实的照片
-                                                                                                     
                                                                                                      for (JSQMessage *message in self.messages) {
                                                                                                          if ([message.date compare:date] ==  NSOrderedSame) {
                                                                                                              
@@ -101,10 +101,8 @@
                                                                                                              NSUInteger index = [self.messages indexOfObject:message];
                                                                                                              
                                                                                                              JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:image];
-                                                                                                             JSQMessage *photoMessage = [[JSQMessage alloc]initWithSenderId:senderId
-                                                                                                                                                          senderDisplayName:dataDic[@"author"]
-                                                                                                                                                                       date:date
-                                                                                                                                                                      media:photoItem];
+
+                                                                                                             JSQMessage *photoMessage = [[JSQMessage alloc]initWithSenderId:senderId senderDisplayName:dataDic[@"author"]date:date media:photoItem];
                                                                                                              [self.messages replaceObjectAtIndex:index withObject:photoMessage];
                                                                                                              break;
                                                                                                          }
@@ -135,7 +133,9 @@
                                         }
                                     }
                                  }
-                                 failure:nil];
+                                 failure:^(NSError *error){
+                                      [SVProgressHUD dismiss];
+                                 }];
 }
 
 /**

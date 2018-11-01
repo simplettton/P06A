@@ -19,6 +19,9 @@
 
 #import "PhoneLoginViewController.h"
 #import "PasswordLoginViewController.h"
+//友盟框架
+#import <UMSocialCore/UMSocialCore.h>
+
 
 static NSString * const USHARE_APPKEY           = @"5a2a0fdeb27b0a4989000164";
 static NSString * const KOpenFileNotification   = @"KOpenFileNotification";
@@ -52,9 +55,9 @@ static NSString * const KFilePath               = @"KFilePath";
     }
     
       //注册友盟APPkey
-//    [[UMSocialManager defaultManager] openLog:YES];
-//    [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_APPKEY];
-//    [self configUSharePlatforms];
+    [[UMSocialManager defaultManager] openLog:YES];
+    [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_APPKEY];
+    [self configUSharePlatforms];
     
     [self configureSVProgress];
 
@@ -102,10 +105,10 @@ static NSString * const KFilePath               = @"KFilePath";
 //                                       appSecret:@"3eb44f6ec3446dd815100753e70decfb"
 //                                     redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
     //设置微信的appKey和appSecret
-//    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession
-//                                          appKey:@"wx0d00393a5eb1f3a9"
-//                                       appSecret:@"dab1983865bec320e78e92dfd36e80fd"
-//                                     redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession
+                                          appKey:@"wx0d00393a5eb1f3a9"
+                                       appSecret:@"dab1983865bec320e78e92dfd36e80fd"
+                                     redirectURL:@"http://mobile.umeng.com/social"];
 }
 
 
@@ -185,7 +188,6 @@ static NSString * const KFilePath               = @"KFilePath";
                                 self.window.rootViewController = self.drawerController;
                             }
                             completion:nil];
-
             [self.window makeKeyAndVisible];
         }else{
             NSString *userIdentity = [UserDefault objectForKey:@"Identity"];
@@ -206,7 +208,6 @@ static NSString * const KFilePath               = @"KFilePath";
                                 self.window.rootViewController = navigationController;
                             }
                             completion:nil];
-            [UIApplication sharedApplication].keyWindow.rootViewController = navigationController;
             [self.window makeKeyAndVisible];
         }
     }

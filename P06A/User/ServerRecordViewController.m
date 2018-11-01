@@ -15,6 +15,8 @@
 #import "PopoverView.h"
 #import "UIImage+MessageImage.h"
 #import "UIView+Tap.h"
+#import "loadingView.h"
+#import "ShadingLoadingView.h"
 
 #define DeviceId @"P06A17A00001"
 #define KeepMode 0x00
@@ -88,7 +90,7 @@
 #pragma mark - filterButton
 -(void)getDevices{
     self.deviceArray = [[NSMutableArray alloc]initWithCapacity:20];
-    
+    [ShadingLoadingView showLoadingViewInView:self.view];
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"] params:@{} hasToken:YES success:^(HttpResponse *responseObject) {
         if ([responseObject.result intValue] ==1) {
                 for (NSDictionary *dataDic in responseObject.content) {
@@ -109,14 +111,34 @@
 - (IBAction)rightButtonAction:(id)sender {
     PopoverView *popoverView = [PopoverView popoverView];
     NSMutableArray *actionArray = [[NSMutableArray alloc]initWithCapacity:20];
+    
+    //全部tab
+    if (!self.hireId) {
+        PopoverAction *allAction = [PopoverAction actionWithImage:[UIImage imageNamed:@"pickStar"] title:[NSString stringWithFormat:@"%@",@"全部"] handler:^(PopoverAction *action) {
+            NSString *hiredId = nil;
+            self.hireId = hiredId;
+            [self refresh];
+        }];
+        [actionArray addObject:allAction];
+    } else {
+        PopoverAction *allAction = [PopoverAction actionWithTitle:[NSString stringWithFormat:@"\t%@",@"全部"] handler:^(PopoverAction *action) {
+            self.hireId = nil;
+            [self refresh];
+        }];
+        
+        [actionArray addObject:allAction];
+    }
+    
+    //有序号的tab
     if ([self.deviceArray count]>0) {
         for (NSDictionary *deviceDic in self.deviceArray) {
-            NSString *date = [self stringFromTimeIntervalString:deviceDic[@"starttime"] dateFormat:@"M/d "];
+//            NSString *date = [self stringFromTimeIntervalString:deviceDic[@"starttime"] dateFormat:@"M/d "];
             NSString *title = @"";
             if ([deviceDic[@"hireid"]isEqualToString:self.hireId]) {
                 //当前选中的租借设备打钩标记
-                title = [NSString stringWithFormat:@"%@%@",date,deviceDic[@"serialnum"]];
-                PopoverAction *action = [PopoverAction actionWithImage:[UIImage imageNamed:@"blueRight"] title:title handler:^(PopoverAction *action) {
+//                title = [NSString stringWithFormat:@"%@%@",date,deviceDic[@"serialnum"]];
+                title = [NSString stringWithFormat:@"%@",deviceDic[@"serialnum"]];
+                PopoverAction *action = [PopoverAction actionWithImage:[UIImage imageNamed:@"pickStar"] title:title handler:^(PopoverAction *action) {
                     NSString *hiredId = deviceDic[@"hireid"];
                     self.hireId = hiredId;
                     [self refresh];
@@ -125,7 +147,8 @@
             }
             else{
                 //未选中的租借设备不打钩
-                title = [NSString stringWithFormat:@"\t  %@%@",date,deviceDic[@"serialnum"]];
+//                title = [NSString stringWithFormat:@"\t  %@%@",date,deviceDic[@"serialnum"]];
+                title = [NSString stringWithFormat:@"\t%@",deviceDic[@"serialnum"]];
                 PopoverAction *action = [PopoverAction actionWithTitle:title handler:^(PopoverAction *action) {
                     
                     NSString *hiredId = deviceDic[@"hireid"];
@@ -170,6 +193,9 @@
     [self askForData:NO];
 }
 -(void)askForData:(BOOL)isRefresh{
+//    [SVProgressHUD showWithStatus:@"正在加载中..."];
+//    [loadingView showLoadingViewInView:self.view];
+
     NSMutableDictionary *parameter = [[NSMutableDictionary alloc]initWithCapacity:20];
     if (self.hireId != nil) {
         [parameter setObject:self.hireId forKey:@"hireid"];
@@ -178,6 +204,7 @@
                                   params:parameter
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
+ 
                                      if ([responseObject.result integerValue] == 1) {
                                          
                                          NSNumber *count = responseObject.content[@"count"];
@@ -189,8 +216,6 @@
                                              self.tableView.mj_footer.hidden = NO;
                                          }
                                          if ([count intValue]>0) {
-                                             
-
                                              //获取列表数据
                                              [self getNetworkData:isRefresh];
                                              
@@ -209,6 +234,9 @@
                                          }else{
                                              
                                              dispatch_async(dispatch_get_main_queue(), ^{
+//                                                 [SVProgressHUD dismiss];
+//                                                 [loadingView stopAnimation];
+                                                 [ShadingLoadingView stopAnimation];
                                                  self.accumulateTimeLabel.text = @"0";
                                                  self.firstDateLabel.text = @"/";
                                                  self.lastDateLabel.text = @"/";
@@ -224,14 +252,18 @@
                                      }else{
                                              [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                          }
-                                 } failure:nil];
+                                 } failure:^(NSError *error){
+//                                     [loadingView stopAnimation];
+//                                     [SVProgressHUD dismiss];
+                                     [ShadingLoadingView stopAnimation];
+                                 }];
 }
 
--(void)endRefresh{
+-(void)endRefresh {
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
--(void)getNetworkData:(BOOL)isRefresh{
+-(void)getNetworkData:(BOOL)isRefresh {
     if (isRefresh) {
         page = 0;
     }else{
@@ -247,6 +279,9 @@
                                   params:mutableParam
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
+//                                     [SVProgressHUD dismiss];
+//                                     [loadingView stopAnimation];
+                                     [ShadingLoadingView stopAnimation];
                                      [self endRefresh];
                                      self->isRefreshing = NO;
                                      
@@ -283,11 +318,15 @@
                                          [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                      }
                                  }
-                                 failure:nil];
+                                 failure:^(NSError *error){
+//                                     [SVProgressHUD dismiss];
+//                                     [loadingView stopAnimation];
+                                     [ShadingLoadingView stopAnimation];
+                                 }];
 }
 
 #pragma mark - tableView delegate
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     TreatmentRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (cell == nil) {

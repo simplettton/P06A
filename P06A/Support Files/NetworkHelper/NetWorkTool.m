@@ -28,7 +28,7 @@ static NetWorkTool *_instance;
 
         //设置请求的超时时间
         [_instance.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-        _instance.requestSerializer.timeoutInterval = 10.f;
+        _instance.requestSerializer.timeoutInterval = 15.f;
         [_instance.requestSerializer didChangeValueForKey:@"timeoutInterval"];
         
         _instance.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];

@@ -62,7 +62,7 @@
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     [footer setTitle:@"" forState:MJRefreshStateIdle];
     [footer setTitle:@"" forState:MJRefreshStateRefreshing];
-    [footer setTitle:@"没有数据了~" forState:MJRefreshStateNoMoreData];
+    [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
     self.tableView.mj_footer = footer;
 }
 -(void)refresh {
@@ -82,8 +82,8 @@
 }
 
 -(void)askForData:(BOOL)isRefresh{
-
-        datas = [[NSMutableArray alloc]initWithCapacity:20];
+//
+//        datas = [[NSMutableArray alloc]initWithCapacity:20];
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:20];
         
         [params setObject:self.selectedRole forKey:@"institutionstype"];
@@ -98,7 +98,7 @@
                                              NSString *count = responseObject.content[@"count"];
                                              
                                              //页数
-                                             self->totalPage = ([count intValue]+15-1)/15;
+                                             self->totalPage = ([count intValue]+7-1)/7;
                                              if (self->totalPage <= 1)
                                              {
                                                  self.tableView.mj_footer.hidden = YES;
@@ -200,32 +200,7 @@
     [self refresh];
 }
 
--(void)getNetworkData {
-    datas = [[NSMutableArray alloc]initWithCapacity:20];
-    [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Users/List?action=List"]
-                                  params:@{
-                                                @"role":self.selectedRole
-                                           }
-                                hasToken:YES
-                                 success:^(HttpResponse *responseObject) {
-                                     if ([responseObject.result integerValue] == 1) {
-                                         NSArray *dataArray = responseObject.content;
-                                         if ([dataArray count]>0) {
 
-                                             NSLog(@"userlist = %@",responseObject.content);
-                                             for (NSDictionary *dataDic in responseObject.content) {
-                                                 if (![self->datas containsObject:dataDic]) {
-                                                     [self->datas addObject:dataDic];
-                                                 }
-                                             }
-                                         }
-                                         [self.tableView reloadData];
-                                     }else{
-                                         [SVProgressHUD showErrorWithStatus:responseObject.errorString];
-                                     }
-                                 }
-                                 failure:nil];
-}
 #pragma mark - Tableview DataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

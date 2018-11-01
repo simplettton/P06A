@@ -21,6 +21,8 @@
 		042E1383216DA6A6008499D0 /* P06A.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042E1385216DA6A6008499D0 /* P06A.strings */; };
 		042E72E92141102B003F5B9C /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E72E82141102B003F5B9C /* AccountCell.m */; };
 		042E79202137EB8900DCBA18 /* AddDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E791F2137EB8900DCBA18 /* AddDeviceViewController.m */; };
+		042EF6F2218B044800B070A1 /* loadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EF6F0218B044700B070A1 /* loadingView.m */; };
+		042EF6F5218B062500B070A1 /* ShadingLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EF6F3218B062400B070A1 /* ShadingLoadingView.m */; };
 		043CA1912027E93200713A3C /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 043CA1902027E93200713A3C /* UIViewController+BackButtonHandler.m */; };
 		044C526220255C4600923060 /* PressParameterSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C526120255C4600923060 /* PressParameterSetView.m */; };
 		044C526420255C6F00923060 /* PressParameterSetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044C526320255C6F00923060 /* PressParameterSetView.xib */; };
@@ -45,6 +47,7 @@
 		045E912221475AB100B2F39C /* EditPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045E912121475AB100B2F39C /* EditPasswordController.m */; };
 		04607B862149ED200033AE0A /* AccountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04607B852149ED200033AE0A /* AccountListCell.m */; };
 		04607B8A2149F84F0033AE0A /* AccountListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04607B892149F84F0033AE0A /* AccountListViewController.m */; };
+		0461297C21800E76002AE879 /* JLImageMagnification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0461297B21800E76002AE879 /* JLImageMagnification.m */; };
 		04621049215B172200CFC0E1 /* UIImage+WLCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 04621048215B172200CFC0E1 /* UIImage+WLCompress.m */; };
 		0464FC38212679090030E338 /* ChangePhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC37212679090030E338 /* ChangePhoneNumViewController.m */; };
 		0464FC3B212681BE0030E338 /* EnterVerificationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464FC3A212681BE0030E338 /* EnterVerificationCodeViewController.m */; };
@@ -322,6 +325,10 @@
 		042E72E82141102B003F5B9C /* AccountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
 		042E791E2137EB8900DCBA18 /* AddDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceViewController.h; sourceTree = "<group>"; };
 		042E791F2137EB8900DCBA18 /* AddDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceViewController.m; sourceTree = "<group>"; };
+		042EF6F0218B044700B070A1 /* loadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loadingView.m; sourceTree = "<group>"; };
+		042EF6F1218B044700B070A1 /* loadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loadingView.h; sourceTree = "<group>"; };
+		042EF6F3218B062400B070A1 /* ShadingLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadingLoadingView.m; sourceTree = "<group>"; };
+		042EF6F4218B062400B070A1 /* ShadingLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadingLoadingView.h; sourceTree = "<group>"; };
 		043A38AC202AD3A200835BDD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		043CA18F2027E93200713A3C /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		043CA1902027E93200713A3C /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
@@ -366,6 +373,8 @@
 		04607B852149ED200033AE0A /* AccountListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListCell.m; sourceTree = "<group>"; };
 		04607B882149F84F0033AE0A /* AccountListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountListViewController.h; sourceTree = "<group>"; };
 		04607B892149F84F0033AE0A /* AccountListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListViewController.m; sourceTree = "<group>"; };
+		0461297A21800E76002AE879 /* JLImageMagnification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLImageMagnification.h; sourceTree = "<group>"; };
+		0461297B21800E76002AE879 /* JLImageMagnification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLImageMagnification.m; sourceTree = "<group>"; };
 		04621047215B172200CFC0E1 /* UIImage+WLCompress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImage+WLCompress.h"; path = "P06A/Extension/UIImage+WLCompress.h"; sourceTree = SOURCE_ROOT; };
 		04621048215B172200CFC0E1 /* UIImage+WLCompress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+WLCompress.m"; path = "P06A/Extension/UIImage+WLCompress.m"; sourceTree = SOURCE_ROOT; };
 		0464FC36212679090030E338 /* ChangePhoneNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePhoneNumViewController.h; sourceTree = "<group>"; };
@@ -879,6 +888,8 @@
 				04787BE42110186F00992FA3 /* PhoneLoginViewController.m */,
 				04787BE62110188300992FA3 /* PasswordLoginViewController.h */,
 				04787BE72110188300992FA3 /* PasswordLoginViewController.m */,
+				049ED9BD202079BD006D9A37 /* ChooseIdentityViewController.h */,
+				049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1141,9 +1152,11 @@
 				04A055352160ABE500235298 /* BELanguageTool */,
 				0469FEA91FFE0C75002E25C3 /* AppDelegate.h */,
 				0469FEAA1FFE0C75002E25C3 /* AppDelegate.m */,
+				042EF6F1218B044700B070A1 /* loadingView.h */,
+				042EF6F0218B044700B070A1 /* loadingView.m */,
+				042EF6F4218B062400B070A1 /* ShadingLoadingView.h */,
+				042EF6F3218B062400B070A1 /* ShadingLoadingView.m */,
 				043A38AC202AD3A200835BDD /* PrefixHeader.pch */,
-				049ED9BD202079BD006D9A37 /* ChooseIdentityViewController.h */,
-				049ED9BE202079BD006D9A37 /* ChooseIdentityViewController.m */,
 				0469FEAF1FFE0C75002E25C3 /* Main.storyboard */,
 				04DAE84B2009B0A500BF4127 /* BatteryView.xib */,
 				0469FEB21FFE0C75002E25C3 /* Assets.xcassets */,
@@ -1208,6 +1221,8 @@
 		0494D99B217D6D7B0066A7E1 /* ThirdLibs */ = {
 			isa = PBXGroup;
 			children = (
+				0461297A21800E76002AE879 /* JLImageMagnification.h */,
+				0461297B21800E76002AE879 /* JLImageMagnification.m */,
 				0494D99C217D6D7B0066A7E1 /* AAChartKitLib */,
 				0494D9E3217D6D7C0066A7E1 /* GGChartKit */,
 				0494DB29217D6D7C0066A7E1 /* MQVerViewInputView */,
@@ -2217,6 +2232,7 @@
 				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesTypingIndicatorFooterView.xib",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -2230,6 +2246,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JSQMessagesTypingIndicatorFooterView.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKPromptResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2307,6 +2324,7 @@
 				0494DB5A217D6D7C0066A7E1 /* AALabels.m in Sources */,
 				0494DBCD217D6D7D0066A7E1 /* lbaselib.c in Sources */,
 				04607B862149ED200033AE0A /* AccountListCell.m in Sources */,
+				0461297C21800E76002AE879 /* JLImageMagnification.m in Sources */,
 				0494DBBC217D6D7D0066A7E1 /* ATRLayer.m in Sources */,
 				0494DB53217D6D7C0066A7E1 /* AAArea.m in Sources */,
 				0494DBD2217D6D7D0066A7E1 /* ldblib.c in Sources */,
@@ -2325,6 +2343,7 @@
 				04621049215B172200CFC0E1 /* UIImage+WLCompress.m in Sources */,
 				0494DBF1217D6D7D0066A7E1 /* QRCodeReader.m in Sources */,
 				0494DBC2217D6D7D0066A7E1 /* MACDLayer.m in Sources */,
+				042EF6F2218B044800B070A1 /* loadingView.m in Sources */,
 				045E912221475AB100B2F39C /* EditPasswordController.m in Sources */,
 				0494DBF3217D6D7D0066A7E1 /* QRCodeReaderMaskView.m in Sources */,
 				0494DBA6217D6D7C0066A7E1 /* GGAxisRenderer.m in Sources */,
@@ -2466,6 +2485,7 @@
 				0494DBC5217D6D7D0066A7E1 /* MIKELayer.m in Sources */,
 				0494DB7B217D6D7C0066A7E1 /* LineDataSet.m in Sources */,
 				0494DBBB217D6D7D0066A7E1 /* MinuteChart.m in Sources */,
+				042EF6F5218B062500B070A1 /* ShadingLoadingView.m in Sources */,
 				0494DBD3217D6D7D0066A7E1 /* ldebug.c in Sources */,
 				0494DBBF217D6D7D0066A7E1 /* BOLLLayer.m in Sources */,
 				0494DB75217D6D7C0066A7E1 /* BarData.m in Sources */,
@@ -2686,12 +2706,26 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A457Z9M6ER;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/common/common_ios_1.5.2/normal",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4/UMSocialUI",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/thirdparties/thirdparties_ios_1.0.5",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/umcommonlog/umcommonlog_ios_1.0.0",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/P06A/Support Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/P06A/Support Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4/SocialLibraries/Sina",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4/SocialLibraries/WeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lifotronic.P06A;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2705,12 +2739,26 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A457Z9M6ER;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/common/common_ios_1.5.2/normal",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4/UMSocialUI",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/thirdparties/thirdparties_ios_1.0.5",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/umcommonlog/umcommonlog_ios_1.0.0",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/P06A/Support Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/P06A/Support Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4/SocialLibraries/Sina",
+					"$(PROJECT_DIR)/P06A/ThirdLibs/iOS/share/share_ios_6.9.4/SocialLibraries/WeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lifotronic.P06A;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

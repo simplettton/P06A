@@ -15,6 +15,8 @@
 
 @interface UserHomeViewController ()
 @property (weak, nonatomic) IBOutlet UIView *BLEView;
+@property (weak, nonatomic) IBOutlet UIView *singleRecordView;
+@property (weak, nonatomic) IBOutlet UIView *doubleView;
 
 
 /**
@@ -54,7 +56,7 @@
     
 }
 
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:51/255.0f green:157/255.0f blue:231/255.0f alpha:1];
@@ -83,16 +85,26 @@
         }
     }
     
-    //默认获取第一个设备信息
-    NSString *macString = [UserDefault objectForKey:@"HireId"];
-    if (macString == nil) {
-        [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
-                                      params:@{}
-                                    hasToken:YES
-                                     success:^(HttpResponse *responseObject) {
-                                         if ([responseObject.result integerValue] == 1) {
-                                             NSMutableArray *dataArray = responseObject.content;
-                                             if ([dataArray count]>0) {
+
+    NSString *hireString = [UserDefault objectForKey:@"HireId"];
+
+    [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
+                                  params:@{
+                                           @"IsProcessOver":@0  //筛选正在租借的设备
+                                           }
+                                hasToken:YES
+                                 success:^(HttpResponse *responseObject) {
+                                     if ([responseObject.result integerValue] == 1) {
+                                         NSMutableArray *dataArray = responseObject.content;
+                                         if ([dataArray count]>0) {
+                                             
+                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                 self.singleRecordView.hidden = YES;
+                                                 self.doubleView.hidden = NO;
+                                             });
+                                             
+                                             if(!hireString){
+                                                 //默认获取第一个设备信息
                                                  NSDictionary *dataDic = [dataArray firstObject];
                                                  NSString *hireId = [dataDic objectForKey:@"hireid"];
                                                  NSString *cpuId = [dataDic objectForKey:@"cpuid"];
@@ -101,7 +113,6 @@
                                                  NSString *type = [dataDic objectForKey:@"type"];
                                                  NSString *macString = [dataDic objectForKey:@"mac"];
                                                  NSString *treatArea = [dataDic objectForKey:@"parts"];
-                                                 
                                                  
                                                  //保存设备信息
                                                  [UserDefault setObject:hireId forKey:@"HireId"];
@@ -112,17 +123,24 @@
                                                  [UserDefault setObject:macString forKey:@"MacString"];
                                                  [UserDefault setObject:type forKey:@"MachineType"];
                                                  [UserDefault synchronize];
-                                             }
+                                            }
                                          }else{
-                                             [SVProgressHUD showErrorWithStatus:responseObject.errorString];
+                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                 self.singleRecordView.hidden = NO;
+                                                 self.doubleView.hidden = YES;
+                                             });
                                          }
+                                     }else{
+                                         [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                      }
-                                     failure:nil];
-    }
+                                 }
+                                 failure:nil];
+
 }
 
--(void)initUI{
+-(void)initUI {
 
+    self.singleRecordView.layer.cornerRadius = 10.0f;
     //切换MQTT模块或者蓝牙模块
     NSString *mode = [UserDefault objectForKey:@"COMMUNICATION_MODE"];
     self.BLEView.hidden = [mode isEqualToString:@"MQTT"];
@@ -140,7 +158,7 @@
 
 
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
 
     //蓝牙连接断开
@@ -152,6 +170,7 @@
 }
 
 -(void)addTapToViews {
+    
     [self.BLEView addTapBlock:^(id obj) {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         if (appDelegate.isBLEPoweredOff) {
@@ -167,9 +186,9 @@
     [self.treatmentRecordView addTapBlock:^(id obj) {
         [self performSegueWithIdentifier:@"ShowServerRecordController" sender:nil];
     }];
-//    [self.moreView addTapBlock:^(id obj) {
-//        [self performSegueWithIdentifier:@"ShowMap" sender:nil];
-//    }];
+    [self.singleRecordView addTapBlock:^(id obj) {
+        [self performSegueWithIdentifier:@"ShowServerRecordController" sender:nil];
+    }];
     
 }
 

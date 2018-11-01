@@ -7,6 +7,7 @@
 //
 
 #import "MessageViewController.h"
+#import "JLImageMagnification.h"
 
 @interface MessageViewController ()
 
@@ -33,9 +34,6 @@
 
 
     
-//    [self.inputToolbar.contentView.rightBarButtonItem setTitle:BEGetStringWithKeyFromTable(@"发送", @"P06A") forState:UIControlStateNormal];
-//    self.inputToolbar.contentView.rightBarButtonItem.titleLabel.text = BEGetStringWithKeyFromTable(@"发送", @"P06A");
-    
     //根据userdefault保存的地区设置dateFormatter
     if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"LANGUAGESET"]isEqualToString:@"en"]) {
         NSLocale*usLocale=[[NSLocale alloc]initWithLocaleIdentifier:@"en_US"];
@@ -59,7 +57,7 @@
         self.messageData = [[MessageModelData alloc]initWithId:self.hireId];
     }
 }
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:YES];
     
@@ -209,8 +207,20 @@
 {
     
     NSLog(@"Tapped message bubble!");
-    JSQMessage *msg = [self.messageData.messages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self.messageData.messages objectAtIndex:indexPath.item];
+    
+    if (message.isMediaMessage) {
+        id<JSQMessageMediaData> mediaData = message.media;
+        if ([message.media isKindOfClass:[JSQPhotoMediaItem class]]) {
+            JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+            UIImageView *imageView = (UIImageView *)cell.mediaView;
 
+            JSQPhotoMediaItem *photoItem = [((JSQPhotoMediaItem *)mediaData) copy];
+            if (photoItem.image) {
+                [JLImageMagnification scanBigImageWithImageView:imageView alpha:1];
+            }
+        }
+    }
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapCellAtIndexPath:(NSIndexPath *)indexPath touchLocation:(CGPoint)touchLocation

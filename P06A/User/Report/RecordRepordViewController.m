@@ -13,12 +13,13 @@
 @property (strong,nonatomic)NSString *HTMLContent;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (strong,nonatomic)UIImage *image;
+- (IBAction)share:(id)sender;
 
 @end
 
 @implementation RecordRepordViewController
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.title = BEGetStringWithKeyFromTable(@"治疗报告", @"P06A");
 
@@ -56,7 +57,7 @@
                                          }
                                      }
                                      failure:nil];
-    }else{
+    } else {
         //加载html页面
         ReportComposer *reportComposer = [[ReportComposer alloc]init];
         NSString *HTMLContent = [reportComposer renderReportWith:self.dic];
@@ -92,11 +93,10 @@
 
     //UIImagePickerController对象调用系统相机或者相册
     self.picker = [[UIImagePickerController alloc]init];
-    self.picker.allowsEditing = YES;
     self.picker.delegate = self;
 }
 
--(void)previewPDFWithHTMLContent:(NSString *)HTMLContent{
+-(void)previewPDFWithHTMLContent:(NSString *)HTMLContent {
     ReportComposer *reportComposer = [[ReportComposer alloc]init];
     NSString *path = [reportComposer exportHTMLContentToPDF:HTMLContent completed:nil];
     NSURL *pdfURL = [NSURL fileURLWithPath:path];
@@ -104,61 +104,6 @@
     [self.webView loadRequest:request];
 }
 
-- (IBAction)test:(id)sender {
-    UIImage *image = [UIImage imageNamed:@"checkCodeSuccess"];
-    NSString *token = [UserDefault objectForKey:@"Token"];
-    NSString *api = [HTTPServerURLString stringByAppendingString:[NSString stringWithFormat:@"Api/Data/AddImageToTreatRecordAsync?token=%@&recordid=%@",token,self.recordId]];
-    
-    [[NetWorkTool sharedNetWorkTool]POST:api
-                                   image:image
-                                 success:^(HttpResponse *responseObject) {
-                                       if ([responseObject.result intValue] == 1) {
-                                           [SVProgressHUD showSuccessWithStatus:@"治疗照片已保存"];
-                                       }else{
-                                           [SVProgressHUD showErrorWithStatus:responseObject.errorString];
-                                       }
-                                       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addPhoto:)];
-                                   }
-                                 failure:nil];
-
-    
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    //接收类型不一致请替换一致text/html或别的
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
-//                                                         @"text/html",
-//                                                         @"image/jpeg",
-//                                                         @"image/png",
-//                                                         @"application/octet-stream",
-//                                                         @"text/json",
-//                                                         nil];
-//
-//    NSURLSessionDataTask *task = [manager POST:api parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
-//
-//        NSData *imageData =UIImageJPEGRepresentation(image,1);
-//
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-//        formatter.dateFormat =@"yyyyMMddHHmmss";
-//        NSString *str = [formatter stringFromDate:[NSDate date]];
-//        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
-//
-//        //上传的参数(上传图片，以文件流的格式)
-//        [formData appendPartWithFileData:imageData
-//                                    name:@"file"
-//                                fileName:fileName
-//                                mimeType:@"image/jpeg"];
-//
-//    } progress:^(NSProgress *_Nonnull uploadProgress) {
-//        //打印下上传进度
-//    } success:^(NSURLSessionDataTask *_Nonnull task,id _Nullable responseObject) {
-//
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(addPhoto:)];
-//    } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
-//        //上传失败
-//        NSLog(@"error = %@",error);
-//    }];
-//    [task resume];
-
-}
 
 - (IBAction)save:(id)sender {
     [self savePDF];
@@ -209,23 +154,24 @@
 }
 
 - (void)share {
-    
-//    WXFileObject *fileObject = [WXFileObject object];
-//
-//    fileObject.fileData = [self.webView converToPDF];
-//
-//    fileObject.fileExtension = @"pdf";
-//
-//    WXMediaMessage *message = [WXMediaMessage message];
-//    message.mediaObject = fileObject;
-//    message.title = @"治疗报告.pdf";
-//    
-//    SendMessageToWXReq *req = [[SendMessageToWXReq alloc]init];
-//    req.bText = NO;
-//    req.message = message;
-//    req.scene = WXSceneSession;// 指定发送到会话
-//    
-//    [WXApi sendReq:req];
+
+    WXFileObject *fileObject = [WXFileObject object];
+
+    fileObject.fileData = [self.webView converToPDF];
+
+    fileObject.fileExtension = @"pdf";
+
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.mediaObject = fileObject;
+    message.title = @"治疗报告.pdf";
+
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc]init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;// 指定发送到会话
+
+    [WXApi sendReq:req];
+
 }
 
 - (void)uploadImage:(id)sender {
@@ -253,7 +199,8 @@
     
     //获取图片
     //取info中编辑后的图
-    UIImage *image = [[info objectForKey:UIImagePickerControllerEditedImage]fixOrientation];
+//    UIImage *image = [[info objectForKey:UIImagePickerControllerEditedImage]fixOrientation];
+    UIImage *image = [[info objectForKey:UIImagePickerControllerOriginalImage]fixOrientation];
     //压缩图片为3MB=3*1024*1024*6byte
     self.image = [image compressImageWithMaxLenth:3*1024*1024*8];
     [self.picker dismissViewControllerAnimated:YES completion:^{
@@ -278,4 +225,7 @@
     [self.webView loadHTMLString:HTMLContent baseURL:nil];
 }
 
+- (IBAction)share:(id)sender {
+    [self share];
+}
 @end

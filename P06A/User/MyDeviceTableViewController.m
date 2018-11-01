@@ -62,46 +62,53 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     if(indexPath.section == 0){
-        [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
-                                      params:@{}
-                                    hasToken:YES
-                                     success:^(HttpResponse *responseObject) {
-                                         if ([responseObject.result integerValue] == 1) {
-                                             NSMutableArray *dataArray = responseObject.content;
-                                             if ([dataArray count]>0) {
-                                                 [DeviceListView showAboveIn:self withData:dataArray returnBlock:^(NSDictionary *dataDic) {
-
-                                                     NSString *hireId = [dataDic objectForKey:@"hireid"];
-                                                     NSString *cpuId = [dataDic objectForKey:@"cpuid"];
-                                                     NSString *serialNum = [dataDic objectForKey:@"serialnum"];
-                                                     NSString *hospital = [dataDic objectForKey:@"from"];
-                                                     NSString *type = [dataDic objectForKey:@"type"];
-                                                     NSString *macString = [dataDic objectForKey:@"mac"];
-                                                     NSString *treatArea = [dataDic objectForKey:@"parts"];
-                                                     
-                                                     self.serialNumLabel.text = serialNum;
-                                                     self.hospitalLabel.text = hospital;
-                                                     self.typeLabel.text = type;
-                                                     self.macStringLabel.text = macString;
-
-                                                     //保存设备信息
-                                                     [UserDefault setObject:hireId forKey:@"HireId"];
-                                                     [UserDefault setObject:treatArea forKey:@"TREAT_AREA"];
-                                                     [UserDefault setObject:cpuId forKey:@"Cpuid"];
-                                                     [UserDefault setObject:serialNum forKey:@"SerialNum"];
-                                                     [UserDefault setObject:hospital forKey:@"Hospital"];
-                                                     [UserDefault setObject:macString forKey:@"MacString"];
-                                                     [UserDefault setObject:type forKey:@"MachineType"];
-                                                     
-                                                     [UserDefault synchronize];
-                                                 }];
+        NSString *hireString = [UserDefault objectForKey:@"HireId"];
+        //当前有租借设备才弹出设备框
+        if (hireString) {
+            [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"]
+                                          params:@{
+                                                   @"IsProcessOver":@0      //筛选正在租借的设备
+                                                   }
+                                        hasToken:YES
+                                         success:^(HttpResponse *responseObject) {
+                                             if ([responseObject.result integerValue] == 1) {
+                                                 NSMutableArray *dataArray = responseObject.content;
+                                                 if ([dataArray count]>0) {
+                                                     [DeviceListView showAboveIn:self withData:dataArray returnBlock:^(NSDictionary *dataDic) {
+                                                         
+                                                         NSString *hireId = [dataDic objectForKey:@"hireid"];
+                                                         NSString *cpuId = [dataDic objectForKey:@"cpuid"];
+                                                         NSString *serialNum = [dataDic objectForKey:@"serialnum"];
+                                                         NSString *hospital = [dataDic objectForKey:@"from"];
+                                                         NSString *type = [dataDic objectForKey:@"type"];
+                                                         NSString *macString = [dataDic objectForKey:@"mac"];
+                                                         NSString *treatArea = [dataDic objectForKey:@"parts"];
+                                                         
+                                                         self.serialNumLabel.text = serialNum;
+                                                         self.hospitalLabel.text = hospital;
+                                                         self.typeLabel.text = type;
+                                                         self.macStringLabel.text = macString;
+                                                         
+                                                         //保存设备信息
+                                                         [UserDefault setObject:hireId forKey:@"HireId"];
+                                                         [UserDefault setObject:treatArea forKey:@"TREAT_AREA"];
+                                                         [UserDefault setObject:cpuId forKey:@"Cpuid"];
+                                                         [UserDefault setObject:serialNum forKey:@"SerialNum"];
+                                                         [UserDefault setObject:hospital forKey:@"Hospital"];
+                                                         [UserDefault setObject:macString forKey:@"MacString"];
+                                                         [UserDefault setObject:type forKey:@"MachineType"];
+                                                         
+                                                         [UserDefault synchronize];
+                                                     }];
+                                                 }
+                                             }else{
+                                                 [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                              }
-                                         }else{
-                                             [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                          }
-                                     }
-                                     failure:nil];
-        
+                                         failure:nil];
+            
+        }
+
 
     }else if (indexPath.section == 2) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

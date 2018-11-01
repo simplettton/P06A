@@ -503,11 +503,11 @@ NSString *const MQTTPassWord = @"password";
     
     
     //压力设置
-    self.pressureSetLabel.text = [NSString stringWithFormat:@"%@: -%ldmmHg",BEGetStringWithKeyFromTable(@"压力设置", @"P06A"),(long)self.pressureSet];
+    self.pressureSetLabel.text = [NSString stringWithFormat:@"%@: %ldmmHg",BEGetStringWithKeyFromTable(@"压力设置", @"P06A"),(long)self.pressureSet];
     
-    //实时压力值
+    //实时压力值（去掉负号）
     NSString *currentPressureString = BEGetStringWithKeyFromTable(@"当前治疗压力", @"P06A");
-    NSString *displayFormat = self.currentPressure == 0 ? @"%@: %ldmmHg" :@"%@: -%ldmmHg";
+    NSString *displayFormat = self.currentPressure == 0 ? @"%@: %ldmmHg" :@"%@: %ldmmHg";
     self.currentPressureLabel.text = [NSString stringWithFormat:displayFormat,currentPressureString,self.currentPressure];
     
     //治疗经过时间

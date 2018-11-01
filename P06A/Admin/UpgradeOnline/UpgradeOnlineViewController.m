@@ -547,6 +547,9 @@ typedef NS_ENUM(NSInteger,KCmdids) {
     UILabel *nameLabel      = (UILabel *)[cell.contentView viewWithTag:nameLableTag];
     UILabel *addressLabel   = (UILabel *)[cell.contentView viewWithTag:addressLabelTag];
     UILabel *RSSILabel      = (UILabel *)[cell.contentView viewWithTag:RSSILabelTag];
+    addressLabel.adjustsFontSizeToFitWidth = YES;
+    nameLabel.adjustsFontSizeToFitWidth = YES;
+    RSSILabel.adjustsFontSizeToFitWidth = YES;
     
     if(!data) {     addressLabel.text = peripheral.identifier.UUIDString;   }
         else  {     addressLabel.text = mac;                                }
