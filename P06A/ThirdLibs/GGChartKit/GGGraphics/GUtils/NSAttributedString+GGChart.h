@@ -56,7 +56,7 @@
 /**
  * 扇形事例图富文本字符串样式
  *
- * @param centerString 中心字符
+ * @param title 中心字符
  * @param subtitle 换行字符
  *
  * @return 富文本字符串

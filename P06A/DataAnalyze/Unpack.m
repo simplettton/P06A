@@ -20,7 +20,7 @@
     for (int i = 0; i<[pdata length]; i++) {
         [dataArray addObject:[NSString stringWithFormat:@"%02X",dataWithCmdIdBytes[i]]];
     }
-    NSString *string = [dataArray componentsJoinedByString:@"---"];
+//    NSString *string = [dataArray componentsJoinedByString:@"---"];
 //    NSLog(@"receive----------%@",string);
     
     

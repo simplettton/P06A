@@ -16,7 +16,6 @@
 #import "ParameterView.h"
 #import "Pack.h"
 #import "Unpack.h"
-#import "SetTreatmentParameterController.h"
 
 #define SERVICE_UUID            @"00001000-0000-1000-8000-00805f9b34fb"
 #define TX_CHARACTERISTIC_UUID  @"00001001-0000-1000-8000-00805f9b34fb"

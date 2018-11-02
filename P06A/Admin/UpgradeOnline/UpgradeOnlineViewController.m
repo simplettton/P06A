@@ -32,7 +32,6 @@ static NSString * const kFilePath = @"KFilePath";
 
 static NSInteger  const BLE_SEND_MAX_LEN = 20;
 static NSInteger  const EACH_TIME_PACKECT_NUM = 50;
-static NSInteger  const UPGRATE_TIME_INTERVAL = 0.5;
 
 #define PACKNUMBER ([self.binData length]/BLE_SEND_MAX_LEN)
 
@@ -380,7 +379,6 @@ typedef NS_ENUM(NSInteger,KCmdids) {
 
 
 - (void)handleResponseData:(NSData *)complateData {
-    __weak typeof(baby)weakBaby = baby;
     NSData *data = [Unpack unpackData:complateData];
     if (data != nil) {
         Byte* bytes = (Byte *)[data bytes];

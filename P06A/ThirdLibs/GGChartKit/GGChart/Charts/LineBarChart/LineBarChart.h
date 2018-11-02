@@ -33,7 +33,7 @@
 /**
  * 动画
  *
- * @param pieAnimationType 动画类型
+ * @param type 动画类型
  * @param duration 动画时间
  */
 - (void)startLineAnimationsWithType:(LineAnimationsType)type duration:(NSTimeInterval)duration;

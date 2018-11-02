@@ -23,7 +23,7 @@
 /**
  * 注册折线图动画类
  *
- * @param 折线抽象类
+ * @param lineDrawAbstract 折线抽象类
  */
 - (void)registerLineDrawAbstract:(id <LineDrawAbstract>)lineDrawAbstract;
 
@@ -35,8 +35,8 @@
 /**
  * 开始动画
  *
- * @param 动画时长
- * @param 动画类型
+ * @param duration 动画时长
+ * @param type 动画类型
  */
 - (void)startAnimationWithDuration:(NSTimeInterval)duration animationType:(LineAnimationsType)type;
 

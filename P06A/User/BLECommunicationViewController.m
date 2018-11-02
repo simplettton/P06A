@@ -742,7 +742,7 @@
                 self.runningState = bytes[1];
                 if (self.runningState == STATE_RUNNING) {
                     //获取系统当前的时间戳
-                    NSString *currentTimeString = [self getCurrentTime];
+//                    NSString *currentTimeString = [self getCurrentTime];
 //                    [self writeWithCmdid:CMDID_DATE dataString:currentTimeString];
                     
                     if (!_timer) {
@@ -1174,24 +1174,6 @@
 -(void)showConnectAlert {
 
     [SVProgressHUD showSuccessWithStatus:BEGetStringWithKeyFromTable(@"设备连接成功", @"P06A")];
-}
-
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"ShowSetController"]) {
-        SetTreatmentParameterController *vc = (SetTreatmentParameterController *)segue.destinationViewController;
-        vc.sendCharacteristic = self.sendCharacteristic;
-        vc.receiveCharacteristic = self.receiveCharacteristic;
-        vc.currPeripheral = self.peripheral;
-        vc ->baby = self ->baby;
-    }
-//    else if ([segue.identifier isEqualToString:@"ShowBLERecord"]){
-//        BLERecordViewController *vc = (BLERecordViewController *)segue.destinationViewController;
-//        vc.sendCharacteristic = self.sendCharacteristic;
-//        vc.receiveCharacteristic = self.receiveCharacteristic;
-//        vc.currPeripheral = self.peripheral;
-//        vc ->baby = self ->baby;
-//    }
 }
 
 -(int) lBytesToInt:(Byte[]) byte withLength:(int)length

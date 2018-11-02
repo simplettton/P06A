@@ -40,12 +40,12 @@
     return self;
 }
 -(void)loadMessagesWithId:(NSString *)hireId{
-    [SVProgressHUD showWithStatus:@"正在加载中.."];
+//    [SVProgressHUD showWithStatus:@"正在加载中.."];
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Data/LogOfHireRecord?action=List"]
                                   params:@{@"hireid":hireId}
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
-                                     [SVProgressHUD dismiss];
+//                                     [SVProgressHUD dismiss];
                                     if ([responseObject.result integerValue] == 1) {
                                         NSArray *messageArray = responseObject.content;
                                         if ([messageArray count]>0) {
@@ -91,7 +91,7 @@
                                                                                                  //下载完图片通知更新UI
                                                                                                  [[NSNotificationCenter defaultCenter]postNotificationName:DidGetMessageModelNotification object:nil];
                                                                                                  
-                                                                                                 [SVProgressHUD dismiss];
+//                                                                                                 [SVProgressHUD dismiss];
                                                                                                  if (image) {
                                                                                                      //下载完成照片后替换真实的照片
                                                                                                      for (JSQMessage *message in self.messages) {
@@ -134,7 +134,7 @@
                                     }
                                  }
                                  failure:^(NSError *error){
-                                      [SVProgressHUD dismiss];
+//                                      [SVProgressHUD dismiss];
                                  }];
 }
 
@@ -157,7 +157,7 @@
                                              //下载完图片通知更新UI
                                              [[NSNotificationCenter defaultCenter]postNotificationName:DidGetMessageModelNotification object:nil];
                                              
-                                             [SVProgressHUD dismiss];
+//                                             [SVProgressHUD dismiss];
                                                 if (image) {
                                                     NSLog(@"图片");
                                                     downloadImage = image;

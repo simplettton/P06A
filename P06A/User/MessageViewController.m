@@ -5,7 +5,7 @@
 //  Created by Binger Zeng on 2018/9/27.
 //  Copyright © 2018年 Shenzhen Lifotronic Technology Co.,Ltd. All rights reserved.
 //
-
+#import <MJRefresh.h>
 #import "MessageViewController.h"
 #import "JLImageMagnification.h"
 
@@ -27,12 +27,12 @@
     
     [super viewDidLoad];
     
+    [self initTableHeaderAndFooter];
+    
     self.title = BEGetStringWithKeyFromTable(@"留言列表", @"P06A");
 
     self.inputToolbar.contentView.textView.placeHolder = BEGetStringWithKeyFromTable(@"新信息", @"P06A");
     self.inputToolbar.contentView.textView.accessibilityLabel = BEGetStringWithKeyFromTable(@"新信息", @"P06A");
-
-
     
     //根据userdefault保存的地区设置dateFormatter
     if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"LANGUAGESET"]isEqualToString:@"en"]) {
@@ -57,6 +57,25 @@
         self.messageData = [[MessageModelData alloc]initWithId:self.hireId];
     }
 }
+#pragma mark - Refresh
+-(void)initTableHeaderAndFooter{
+    //下拉刷新
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.textColor =UIColorFromHex(0xABABAB);
+    
+    self.collectionView.mj_header = header;
+    [self refresh];
+    
+}
+
+-(void)refresh{
+    
+    if (self.hireId) {
+        self.messageData = [[MessageModelData alloc]initWithId:self.hireId];
+    }
+}
+
 -(void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:YES];

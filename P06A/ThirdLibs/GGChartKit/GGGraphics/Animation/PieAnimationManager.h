@@ -23,8 +23,8 @@
 /**
  * 开始动画
  *
- * @param 动画时长
- * @param 动画类型
+ * @param duration 动画时长
+ * @param type 动画类型
  */
 - (void)startAnimationWithDuration:(NSTimeInterval)duration animationType:(PieAnimationType)type;
 

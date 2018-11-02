@@ -7,6 +7,7 @@
 //
 
 #import "NetWorkTool.h"
+#import "BELoadingView.h"
 #import "MJRefresh.h"
 #import "AppDelegate.h"
 #import "PhoneLoginViewController.h"
@@ -51,7 +52,7 @@ static NetWorkTool *_instance;
     
     NSString *token = [userDefault objectForKey:@"Token"];
     
-
+    [BELoadingView beginAnimation];
     //通用token data模板
     if( hasToken )
     {
@@ -69,7 +70,7 @@ static NetWorkTool *_instance;
       }
        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
            //请求结果出现后关闭风火轮
-           
+           [BELoadingView stopAnimation];
            dispatch_async(dispatch_get_main_queue(), ^{
                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
            });
@@ -112,6 +113,7 @@ static NetWorkTool *_instance;
            }
        }
        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           [BELoadingView stopAnimation];
            //请求结果出现后关闭风火轮
            dispatch_async(dispatch_get_main_queue(), ^{
                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -147,6 +149,7 @@ static NetWorkTool *_instance;
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
+    [BELoadingView beginAnimation];
 
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
 //        NSData *data = UIImagePNGRepresentation(image);
@@ -158,6 +161,8 @@ static NetWorkTool *_instance;
 //          NSLog(@"%f",uploadProgress.fractionCompleted);
       }
        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+           [BELoadingView stopAnimation];
+           
            //请求结果出现后关闭风火轮
            
            dispatch_async(dispatch_get_main_queue(), ^{
@@ -204,6 +209,7 @@ static NetWorkTool *_instance;
            }
        }
        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           [BELoadingView stopAnimation];
            //请求结果出现后关闭风火轮
            dispatch_async(dispatch_get_main_queue(), ^{
                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

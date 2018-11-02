@@ -15,8 +15,8 @@
 #import "PopoverView.h"
 #import "UIImage+MessageImage.h"
 #import "UIView+Tap.h"
-#import "loadingView.h"
-#import "ShadingLoadingView.h"
+
+#import "BELoadingView.h"
 
 #define DeviceId @"P06A17A00001"
 #define KeepMode 0x00
@@ -90,7 +90,7 @@
 #pragma mark - filterButton
 -(void)getDevices{
     self.deviceArray = [[NSMutableArray alloc]initWithCapacity:20];
-    [ShadingLoadingView showLoadingViewInView:self.view];
+    [BELoadingView showLoadingViewInView:self.view];
     [[NetWorkTool sharedNetWorkTool]POST:[HTTPServerURLString stringByAppendingString:@"Api/Patient/HireMyList"] params:@{} hasToken:YES success:^(HttpResponse *responseObject) {
         if ([responseObject.result intValue] ==1) {
                 for (NSDictionary *dataDic in responseObject.content) {
@@ -234,9 +234,7 @@
                                          }else{
                                              
                                              dispatch_async(dispatch_get_main_queue(), ^{
-//                                                 [SVProgressHUD dismiss];
-//                                                 [loadingView stopAnimation];
-                                                 [ShadingLoadingView stopAnimation];
+
                                                  self.accumulateTimeLabel.text = @"0";
                                                  self.firstDateLabel.text = @"/";
                                                  self.lastDateLabel.text = @"/";
@@ -253,9 +251,6 @@
                                              [SVProgressHUD showErrorWithStatus:responseObject.errorString];
                                          }
                                  } failure:^(NSError *error){
-//                                     [loadingView stopAnimation];
-//                                     [SVProgressHUD dismiss];
-                                     [ShadingLoadingView stopAnimation];
                                  }];
 }
 
@@ -279,9 +274,7 @@
                                   params:mutableParam
                                 hasToken:YES
                                  success:^(HttpResponse *responseObject) {
-//                                     [SVProgressHUD dismiss];
-//                                     [loadingView stopAnimation];
-                                     [ShadingLoadingView stopAnimation];
+
                                      [self endRefresh];
                                      self->isRefreshing = NO;
                                      
@@ -319,9 +312,7 @@
                                      }
                                  }
                                  failure:^(NSError *error){
-//                                     [SVProgressHUD dismiss];
-//                                     [loadingView stopAnimation];
-                                     [ShadingLoadingView stopAnimation];
+
                                  }];
 }
 

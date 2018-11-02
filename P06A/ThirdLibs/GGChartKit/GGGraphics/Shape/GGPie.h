@@ -226,8 +226,8 @@ CG_EXTERN void GGPathAddPie(CGMutablePathRef ref, GGPie pie);
 /**
  * 获取进度结构体
  *
- * @param fromPie 开始pie结构体
- * @param toPie 结束pie结构体
+ * @param from 开始pie结构体
+ * @param to 结束pie结构体
  * @param progress 进度
  *
  * @return 结构体

@@ -1,9 +1,9 @@
 //
-//  ShadingLoadingView.h
+//  BELoadingView.h
 //  loadingAnimation
 //
-//  Created by 掌上先机 on 2017/6/6.
-//  Copyright © 2017年 wangchao. All rights reserved.
+//  Created by Binger Zeng on 2018/10/25.
+//  Copyright © 2018年 Shenzhen Lifotronic Technology Co.,Ltd. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,7 +15,7 @@
 
 +(void)showLoadingViewInView:(UIView *)view;
 
-+(void)hidenLoadingView:(UIView *)view;
++(void)hideLoadingView:(UIView *)view;
 
 +(void)beginAnimation;
 

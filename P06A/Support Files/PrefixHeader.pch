@@ -29,6 +29,7 @@
 #import "AAGlobalMacro.h"
 #import <UserNotifications/UserNotifications.h>
 #import "BELanguageTool.h"
+#import "BEProgressHUD.h"
 #endif
 
 

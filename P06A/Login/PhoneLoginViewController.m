@@ -189,7 +189,7 @@
                                          NSDictionary *patientInfoDic = [responseObject.content objectForKey:@"patientinfo"];
                                          
                                          NSString *name = [patientInfoDic objectForKey:@"name"];
-                                         NSString *idCart = [patientInfoDic objectForKey:@"idcard"];
+//                                         NSString *idCart = [patientInfoDic objectForKey:@"idcard"];
                                          NSString *address = [patientInfoDic objectForKey:@"address"];
                                          NSNumber *age = [patientInfoDic objectForKey:@"age"];
                                          NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];

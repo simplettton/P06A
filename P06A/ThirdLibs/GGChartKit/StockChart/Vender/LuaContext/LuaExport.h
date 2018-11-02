@@ -32,11 +32,6 @@
     - (void)removeFromSuperview;
 
     @end
-
-    @interface UIView (UIViewLuaExports) <UIViewLuaExports>
-    @end
-    @implementation UIView (UIViewLuaExports)
-    @end
  */
 @protocol LuaExport
 @end

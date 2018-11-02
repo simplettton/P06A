@@ -74,7 +74,7 @@
 /** 
  * 靠近点的数据index 
  *
- * @param 当前屏幕触碰的店
+ * @param point 当前屏幕触碰的点
  */
 - (NSUInteger)indexOfPoint:(CGPoint)point;
 

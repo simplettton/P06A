@@ -29,7 +29,7 @@ CG_EXTERN void GGPathAddKShape(CGMutablePathRef ref, GGKShape kShape)
  * 绘制k线形
  *
  * @param ref 路径元素
- * @param kShape k线形态
+ * @param kShapes k线形态
  */
 CG_EXTERN void GGPathAddKShapes(CGMutablePathRef ref, GGKShape * kShapes, size_t size)
 {

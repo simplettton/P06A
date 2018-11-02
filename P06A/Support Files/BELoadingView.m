@@ -1,9 +1,9 @@
 //
-//  ShadingLoadingView.m
+//  BELoadingView.m
 //  loadingAnimation
 //
-//  Created by 掌上先机 on 2017/6/6.
-//  Copyright © 2017年 wangchao. All rights reserved.
+//  Created by Binger Zeng on 2018/10/25.
+//  Copyright © 2018年 Shenzhen Lifotronic Technology Co.,Ltd. All rights reserved.
 //
 
 #import "BELoadingView.h"
@@ -44,7 +44,7 @@ static bool isOnloding = NO;
     
 }
 
-+(void)hidenLoadingView:(UIView *)view{
++(void)hideLoadingView:(UIView *)view{
   
     [self removeViewInnView:view];
     
@@ -123,13 +123,13 @@ static bool isOnloding = NO;
         
         CABasicAnimation *anmation1 = [self createBasic];
         
-        [_twoLable.layer addAnimation:anmation1 forKey:nil];
+        [self->_twoLable.layer addAnimation:anmation1 forKey:nil];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             CABasicAnimation *anmation2 = [self createBasic];
             
-            [_threeLable.layer addAnimation:anmation2 forKey:nil];
+            [self->_threeLable.layer addAnimation:anmation2 forKey:nil];
           
         });
     });

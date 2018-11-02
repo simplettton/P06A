@@ -68,7 +68,7 @@
 /**
  * 开启柱状图变换
  *
- * @param 动画时长
+ * @param duration 动画时长
  */
 - (void)startChangeAnimationWithDuration:(NSTimeInterval)duration
 {
@@ -96,7 +96,7 @@
 /**
  * 开启柱状图升起动画
  *
- * @param 动画时长
+ * @param duration 动画时长
  */
 - (void)startRiseAnimationsWithDuration:(NSTimeInterval)duration
 {

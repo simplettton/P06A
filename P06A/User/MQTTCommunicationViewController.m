@@ -513,7 +513,7 @@ NSString *const MQTTPassWord = @"password";
     //治疗经过时间
     NSInteger hour = self.treatmentTime / 3600;
     NSInteger min = (self.treatmentTime / 60)%60;
-    NSInteger second = self.treatmentTime % 60;
+//    NSInteger second = self.treatmentTime % 60;
     
     //治疗时间为两位数
     NSString *hourString = [NSString stringWithFormat:hour>9?@"%ld":@"0%ld",(long)hour];

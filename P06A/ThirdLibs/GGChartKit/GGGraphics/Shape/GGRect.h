@@ -41,7 +41,7 @@ CG_EXTERN void GGPathAddCGRect(CGMutablePathRef ref, CGRect rect);
  * 绘制Rect
  *
  * @param ref 路径绘制类
- * @param rect 结构体指针
+ * @param rects 结构体指针
  * @param size 结构体大小
  */
 CG_EXTERN void GGPathAddCGRects(CGMutablePathRef ref, CGRect * rects, size_t size);

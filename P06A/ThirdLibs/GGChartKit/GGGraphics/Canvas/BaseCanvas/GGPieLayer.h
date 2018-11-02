@@ -78,14 +78,14 @@
  *
  * @param duration 动画时长
  */
-- (void)startPieOutRadiusLargeWithDuration:(NSTimeInterval)duation;
+- (void)startPieOutRadiusLargeWithDuration:(NSTimeInterval)duration;
 
 /**
  * 扇形图缩小动画
  *
  * @param duration 动画时长
  */
-- (void)startPieOutRadiusSmallWithDuration:(NSTimeInterval)duation;
+- (void)startPieOutRadiusSmallWithDuration:(NSTimeInterval)duration;
 
 /**
  * 扇形图曲线动画
