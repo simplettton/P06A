@@ -7,30 +7,32 @@
 //
 
 #import "UIWebView+ConverToPDF.h"
+#import "CustomPrintPageRenderer.h"
 
 @implementation UIWebView (ConverToPDF)
-- (NSData *)converToPDF{
-    CGFloat A4PageWidth = 595.2;
+- (NSData *)converToPDF {
     
-    CGFloat A4PageHeight = 841.8;
+    CGFloat A4PageWidth = 612;
+    
+    CGFloat A4PageHeight = 792;
     
     UIViewPrintFormatter *fmt = [self viewPrintFormatter];
-    
-    UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
+
+    CustomPrintPageRenderer *render = [[CustomPrintPageRenderer alloc]init];
     
     [render addPrintFormatter:fmt startingAtPageAtIndex:0];
     
     CGRect page;
     
-    page.origin.x=0;
+    page.origin.x = 0;
     
-    page.origin.y=0;
+    page.origin.y = 0;
     
-    page.size.width=A4PageWidth;
+    page.size.width = A4PageWidth;
     
-    page.size.height=A4PageHeight;
+    page.size.height = A4PageHeight;
     
-    CGRect printable=CGRectInset( page, 10, 10 );
+    CGRect printable = CGRectInset( page, 0, 0 );
     
     [render setValue:[NSValue valueWithCGRect:page] forKey:@"paperRect"];
     
@@ -40,8 +42,7 @@
     
     UIGraphicsBeginPDFContextToData( pdfData, CGRectZero, nil );
     
-    for (NSInteger i=0; i < [render numberOfPages]; i++)
-        
+    for (NSInteger i = 0; i < [render numberOfPages]; i++)
     {
         
         UIGraphicsBeginPDFPage();

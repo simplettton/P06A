@@ -23,7 +23,6 @@
     [super viewDidLoad];
     self.title = BEGetStringWithKeyFromTable(@"治疗报告", @"P06A");
 
-    
     [self.webView setBackgroundColor:[UIColor clearColor]];
     self.webView.scalesPageToFit = YES;
     [self.webView setOpaque:NO];
@@ -109,8 +108,7 @@
     [self savePDF];
 }
 //点击保存进行调用上面的方法
-- (void)savePDF
-{
+- (void)savePDF {
     NSData *data = [_webView converToPDF];
     NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/治疗报告.pdf"]];
     BOOL result = [data writeToFile:path atomically:YES];
@@ -155,6 +153,8 @@
 
 - (void)share {
 
+    //分享PDF到微信
+    
     WXFileObject *fileObject = [WXFileObject object];
 
     fileObject.fileData = [self.webView converToPDF];
@@ -192,10 +192,10 @@
 }
 
 #pragma mark - delegate
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self.picker dismissViewControllerAnimated:YES completion:NULL];
 }
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     //获取图片
     //取info中编辑后的图
@@ -214,7 +214,7 @@
 }
 
 //页面显示图片
--(void)presentImage:(UIImage *)image{
+-(void)presentImage:(UIImage *)image {
     
     NSData *imageData = UIImagePNGRepresentation(image);
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.dic];

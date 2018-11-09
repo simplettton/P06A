@@ -9,15 +9,19 @@
 #import "CustomPrintPageRenderer.h"
 
 @implementation CustomPrintPageRenderer
--(instancetype)init{
+-(instancetype)init {
     self = [super init];
-    CGFloat A4PageWidth = 595.2;
+    CGFloat A4PageWidth = 600;
+//    CGFloat A4PageWidth = 595.2;
+    CGFloat A4PageHeight = 612;
+//    CGFloat A4PageHeight = 841.8;
+    self.footerHeight = 1;
     
-    CGFloat A4PageHeight = 841.8;
+    self.headerHeight = 0;
     
     CGRect pageFrame = CGRectMake(0, 0, A4PageWidth, A4PageHeight);
     
-     CGRect printable=CGRectInset(pageFrame, 10, 10 );
+    CGRect printable = CGRectInset(pageFrame, 0, 0 );
     
     [self setValue:[NSValue valueWithCGRect:pageFrame] forKey:@"paperRect"];
     
